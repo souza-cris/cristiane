@@ -9,6 +9,8 @@ permalink: /research/
   <p>{{ site.data.research.interests }}</p>
 </section>
 
+{% include study-callout.html variant="full" %}
+
 <section class="research-section">
   <h2>publications</h2>
   {% for pub in site.data.research.publications %}

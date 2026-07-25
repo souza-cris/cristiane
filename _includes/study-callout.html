@@ -1,0 +1,63 @@
+{%- comment -%}
+  The call for participants. One include, two variants:
+
+    {% include study-callout.html %}                    → full (research page)
+    {% include study-callout.html variant="compact" %}  → short (home page)
+
+  It gates itself: when no study record exists, or the study is not active,
+  it renders nothing at all. Callers do not need to test for that first.
+
+  Content comes from _data/study.yml. Nothing here is hardcoded.
+{%- endcomment -%}
+
+{%- assign study = site.data.study -%}
+{%- if study and study.active -%}
+{%- assign variant = include.variant | default: "full" -%}
+
+{%- comment -%} The home page prefers the short summary; the research page always uses the full description. {%- endcomment -%}
+{%- if variant == "compact" -%}
+  {%- assign body = study.summary | default: study.description -%}
+{%- else -%}
+  {%- assign body = study.description -%}
+{%- endif -%}
+
+{%- comment -%} Eligibility and what's involved belong on the research page only. {%- endcomment -%}
+{%- assign show_facts = false -%}
+{%- if variant != "compact" -%}
+  {%- if study.eligibility and study.eligibility != "" -%}{%- assign show_facts = true -%}{%- endif -%}
+  {%- if study.involves and study.involves != "" -%}{%- assign show_facts = true -%}{%- endif -%}
+{%- endif -%}
+
+<section class="study-callout study-callout--{{ variant }}" aria-labelledby="study-callout-{{ variant }}">
+  <p class="study-callout__eyebrow">call for participants</p>
+  <h2 class="study-callout__title" id="study-callout-{{ variant }}">{{ study.title }}</h2>
+
+  {% if body and body != "" %}<p class="study-callout__body">{{ body }}</p>{% endif %}
+
+  {% if show_facts %}
+  <dl class="study-callout__facts">
+    {% if study.eligibility and study.eligibility != "" %}
+    <dt>who can take part</dt>
+    <dd>{{ study.eligibility }}</dd>
+    {% endif %}
+    {% if study.involves and study.involves != "" %}
+    <dt>what's involved</dt>
+    <dd>{{ study.involves }}</dd>
+    {% endif %}
+  </dl>
+  {% endif %}
+
+  {% if study.deadline and study.deadline != "" %}
+  <p class="study-callout__deadline">closes {{ study.deadline }}</p>
+  {% endif %}
+
+  {%- comment -%}
+    action_url is used exactly as written — no scheme is inferred. Only external
+    http(s) destinations open in a new tab; mailto: opens the mail client in place.
+  {%- endcomment -%}
+  {% if study.action_url and study.action_url != "" %}
+  <a class="study-callout__action" href="{{ study.action_url }}"{% if study.action_url contains "://" %} target="_blank" rel="noopener"{% endif %}>{{ study.action_label | default: "Take part" }}</a>
+  {% endif %}
+</section>
+
+{%- endif -%}

@@ -1,0 +1,39 @@
+# The current call for participants.
+#
+# ── The switch ───────────────────────────────────────────────────────────────
+# `active` is the ONLY control that opens and closes recruitment.
+#   active: true   → the callout appears on the research page and the home page
+#   active: false  → it disappears from both, and everything below is preserved
+# Turning it off never deletes your text. Turn it back on and the same content
+# returns.
+#
+# A deadline that has already passed does NOT hide the callout by itself. This
+# site is rebuilt when you publish changes, not on a schedule, so nothing can
+# expire on its own. `active` is the reliable control.
+#
+# ── Writing the content ──────────────────────────────────────────────────────
+# Write this yourself. For human-subjects research this is normally the wording
+# your IRB approved — use it verbatim rather than paraphrasing it here.
+#
+# `action_url` must be a COMPLETE destination, including the scheme. Nothing is
+# guessed:
+#   a form   →  "https://forms.example.com/my-study"
+#   an email →  "mailto:you@example.com"
+# An address on its own, like "you@example.com", will not work as a link.
+#
+# `summary` is optional. It is the one short line shown on the home page; when
+# it is empty the home page falls back to `description`, which may be long.
+#
+# `deadline` is optional and shown exactly as you write it — "15 March 2027",
+# "end of term", "rolling until filled" all work. Leave it empty for none.
+
+active: false
+
+title: ""
+description: ""
+summary: ""
+eligibility: ""
+involves: ""
+action_label: ""
+action_url: ""
+deadline: ""
