@@ -9,15 +9,10 @@ permalink: "/stories/:year/:month/:day/:title/"
 updates_limit: 4
 url: ""
 
-email: "cristiane@example.com"
-
-social:
-  - label: "LinkedIn"
-    url: "https://www.linkedin.com/in/souzacris/"
-  - label: "Google Scholar"
-    url: "https://scholar.google.com/citations?user=Zeajh2IAAAAJ&hl=en"
-  - label: "GitHub"
-    url: "https://github.com/souza-cris"
+# Social links moved to _data/social.yml, where the footer actually reads them.
+# They sat here unused while the footer hardcoded its own copy, so editing this
+# file changed nothing on the site. Content belongs in _data/ — and unlike this
+# file, _data/ is picked up by a rebuild without restarting the local server.
 
 defaults:
   - scope:

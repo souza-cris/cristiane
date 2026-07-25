@@ -1,0 +1,24 @@
+{%- comment -%}
+  The list of section links, shared by the top navigation and the side
+  navigation. Both render from `_data/sections.yml`, so the two lists cannot
+  drift apart — adding a section is one edit to that file.
+
+  Parameters:
+    class — the class to put on the <ul> (each nav styles its own list)
+
+  Each entry decides for itself whether it is the current section, using the
+  `match` rule in the data file: `prefix` also marks child pages, so reading an
+  individual story still marks "stories".
+{%- endcomment -%}
+<ul class="{{ include.class }}">
+  {%- for section in site.data.sections %}
+  {%- assign exact_url = section.url | append: '/' -%}
+  {%- assign is_current = false -%}
+  {%- if section.match == 'prefix' -%}
+    {%- if page.url contains section.url -%}{%- assign is_current = true -%}{%- endif -%}
+  {%- else -%}
+    {%- if page.url == exact_url -%}{%- assign is_current = true -%}{%- endif -%}
+  {%- endif %}
+  <li><a href="{{ section.url | relative_url }}"{% if is_current %} aria-current="page"{% endif %}>{{ section.label }}</a></li>
+  {%- endfor %}
+</ul>

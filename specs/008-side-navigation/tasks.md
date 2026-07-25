@@ -37,8 +37,8 @@ Static Jekyll site at the repository root. Templates in `_includes/` and `_layou
 
 **Independent Test**: From the bottom of `/bookmarks/`, reach any other section without scrolling up.
 
-- [X] T003 [US1] Create `_includes/side-nav.html` — a `<nav class="side-nav" aria-label="Section navigation">` wrapping a `<ul>` of the five section links, each href through `relative_url`, per the shape in [contracts/side-nav-include.md](contracts/side-nav-include.md)
-- [X] T004 [US1] In `_includes/side-nav.html`, give each link its current-page test: exact match for journey, research and contact; `contains` for stories and bookmarks so child pages mark their section (FR-003). Emit `aria-current="page"` on the match
+- [X] T003 [US1] Create `_data/sections.yml` with a `label`, `url` and `match` per section, and `_includes/section-links.html` to render it — one `<ul>` whose class the caller supplies, per [contracts/side-nav-include.md](contracts/side-nav-include.md)
+- [X] T004 [US1] Create `_includes/side-nav.html` — a `<nav class="side-nav" aria-label="Section navigation">` wrapping `section-links.html`. Point `_includes/nav.html` at the same include so both navigations render one list (FR-008), and confirm each entry's `match` value drives `aria-current` correctly, including child pages (FR-003)
 - [X] T005 [US1] In `_layouts/default.html`, include the side nav on every page except home, placed inside `<body>` and outside `<main>`
 - [X] T006 [US1] In `assets/css/style.css`, position the menu fixed at the right edge and vertically centred, and style the links in the site's mono face
 - [X] T007 [US1] In `assets/css/style.css`, style the current link with a colour change **and** a right border, so the state is not colour-only (FR-007)
@@ -83,7 +83,25 @@ Static Jekyll site at the repository root. Templates in `_includes/` and `_layou
 - [X] T017 [P] Confirm no JavaScript was added — `search.js` remains the only script (FR-010)
 - [X] T018 [P] Update `README.md` — add the side nav to the structure block and this feature to the spec index
 - [X] T019 [P] Update `CLAUDE.md` with the include, the second breakpoint and the rule that the layout owns the home exclusion
-- [X] T020 Confirm the Constitution Check in [plan.md](plan.md) holds, including the recorded Principle II deviation and the trigger that would reverse it
+- [X] T020 Confirm the Constitution Check in [plan.md](plan.md) holds on all five principles
+
+---
+
+## Phase 7: Correction — the link list belongs in data (after implementation)
+
+This feature first shipped with its links written as markup, duplicating
+`_includes/nav.html`, and the plan recorded that as an accepted Principle II
+deviation. The owner rejected the deviation: content is data, not markup. The
+correction is recorded here rather than edited into the phases above.
+
+- [X] T021 Create `_data/sections.yml` — `label`, `url` and `match` per section, with the file's header comment explaining `exact` vs `prefix`
+- [X] T022 Create `_includes/section-links.html`, rendering the list from that data and taking the `<ul>` class as a parameter so both navigations can share it
+- [X] T023 Rewrite `_includes/side-nav.html` and `_includes/nav.html` to render through it, removing both hand-written lists
+- [X] T024 Verify the built HTML is unchanged from before the extraction — same five links in both navigations on every page, same single `aria-current`, child pages still marking their parent section, base path intact
+- [X] T025 Amend the Constitution Check in [plan.md](plan.md) to Pass, and record why the original argument was wrong
+- [X] T026 Propagate to [spec.md](spec.md) (FR-008, Key Entities), [data-model.md](data-model.md), [contracts/side-nav-include.md](contracts/side-nav-include.md) and `CLAUDE.md`
+
+**Checkpoint**: the section list exists once, in `_data/sections.yml`.
 
 ---
 

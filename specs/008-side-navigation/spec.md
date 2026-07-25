@@ -75,13 +75,13 @@ A visitor on a phone or a narrow window sees only the existing top navigation. T
 - **FR-005**: The home page MUST NOT show the side navigation at any width.
 - **FR-006**: The home page MUST NOT show a rule below the top navigation or above the footer; every other page MUST keep them.
 - **FR-007**: The navigation MUST be reachable and operable by keyboard, with a visible focus indicator, and MUST be announced as navigation to assistive technology.
-- **FR-008**: The link list MUST live in one include used by every page, so adding or renaming a section is a single edit.
+- **FR-008**: The link list MUST be stored as data and rendered from that data by every navigation that shows it, so adding or renaming a section is a single edit and no two navigations can disagree.
 - **FR-009**: Internal links MUST use the site's relative-URL filter, because the site is served from a base path.
 - **FR-010**: The feature MUST add no JavaScript and MUST deploy on the existing static hosting with no new build step.
 
 ### Key Entities
 
-- **Section link**: one entry in the side navigation — a label and a destination, with a rule for when it counts as current. Held as markup in a single include, not a data file; see the note in [research.md](research.md).
+- **Section link**: one entry in the navigation — a label, a destination, and a rule for when it counts as the visitor's current section. Held in `_data/sections.yml` and rendered by both navigations from that one list.
 
 ## Success Criteria *(mandatory)*
 

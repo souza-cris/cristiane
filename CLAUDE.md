@@ -22,10 +22,13 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 
 - **Layouts** (`_layouts/`): `default.html` (base), `page.html`, `story.html`
 - **Includes** (`_includes/`):
+  - `section-links.html` — the section link list, rendered from
+    `_data/sections.yml`. Both `nav.html` and `side-nav.html` render through
+    it, passing only a `class`. Never write a nav link directly into either
+    one; add it to the data file
   - `side-nav.html` — the vertical section menu. Unlike `study-callout.html` it
     does NOT self-gate: `default.html` decides which pages get it, because
-    "not on home" is a layout decision, not a property of the component.
-    Its link list duplicates `nav.html` on purpose — see spec 008
+    "not on home" is a layout decision, not a property of the component
   - `head.html`, `nav.html`, `footer.html`
   - `story-filters.html`, `story-list.html` — shared by `stories.md` and every page in `stories/`
   - `bookmark-filters.html`, `bookmark-list.html` — shared by `bookmarks.md` and every page in `bookmarks/`
@@ -41,6 +44,13 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
   - Bookmarks: `_data/bookmarks.yml`, filter slugs in `_data/bookmark_types.yml`
   - Story filters: `_data/story_keywords.yml`
   - Research: `_data/research.yml`
+  - Sections: `_data/sections.yml` — the navigation list, with a `match` of
+    `exact` or `prefix` per entry deciding whether child pages mark it as
+    current. Adding a section is one edit here; no template changes
+  - Social links: `_data/social.yml` — footer links. The icon *drawings* stay
+    in `footer.html`, selected by each entry's `icon` value; a drawing is not
+    content. These used to sit unread in `_config.yml` while the footer
+    hardcoded its own copy — do not put content back in `_config.yml`
   - Home updates: `_data/updates.yml` — hand-curated, rendered by
     `_includes/updates-widget.html`. It never aggregates from `_posts/` or
     bookmarks, and it reads feature 007's study record without owning it
@@ -50,7 +60,7 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
     surfaces; never copy study text anywhere else
   - Pages: `index.md`, `journey.md`, `stories.md`, `research.md`, `bookmarks.md`, `contact.md`, `404.md`
   - Filter pages: `stories/*.md` and `bookmarks/*.md` — thin wrappers over the shared includes
-- **Config**: `_config.yml` holds site metadata, social links, and the post permalink (`/stories/:year/:month/:day/:title/`)
+- **Config**: `_config.yml` holds site metadata, `updates_limit`, and the post permalink (`/stories/:year/:month/:day/:title/`). Content does not live here — Jekyll reads this file only at startup, so a rebuild will not pick up changes
 - **Styles**: Single file at `assets/css/style.css` (plain CSS, no preprocessor)
 - **Scripts**: `assets/js/search.js` — the only JavaScript on the site
 

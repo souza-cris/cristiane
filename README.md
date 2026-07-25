@@ -130,6 +130,30 @@ Two things to know:
 
 Write the content yourself — for human-subjects research, use your IRB-approved wording verbatim.
 
+### Social link in the footer
+
+Edit `_data/social.yml`. Reordering or removing is that file alone; the footer follows its order.
+
+```yaml
+- label: "LinkedIn"       # read aloud by screen readers
+  url: "https://www.linkedin.com/in/souzacris/"
+  icon: "linkedin"        # which icon to draw: linkedin, scholar, github
+```
+
+Adding a *new* service also needs its icon drawing added to `_includes/footer.html`, because the drawings are not content and do not belong in a data file.
+
+### New section in the menus
+
+Add a block to `_data/sections.yml`, then create the page. Both the top menu and the side menu pick it up — there is no template to edit.
+
+```yaml
+- label: "talks"
+  url: "/talks"      # site-rooted, no /cristiane prefix
+  match: "exact"     # or "prefix" if the section will have pages beneath it
+```
+
+`match` decides when the link highlights as the section you are in. Use `exact` for a single page, and `prefix` if it will have child pages — that is why reading one story still highlights "stories".
+
 ### New filter
 
 1. Add the `slug` and `label` to `_data/story_keywords.yml` or `_data/bookmark_types.yml`.
@@ -142,12 +166,14 @@ Both steps are needed because Jekyll cannot generate pages from data files witho
 ```
 _config.yml                # Site settings, social links, post permalink
 _layouts/                  # default, page, story
-_includes/                 # head, nav, side-nav, footer
+_includes/                 # head, nav, side-nav, section-links, footer
                            # story-filters, story-list
                            # bookmark-filters, bookmark-list
                            # search-box, journey-timeline
                            # updates-widget, study-callout
 _posts/                    # Stories (Markdown)
+_data/sections.yml         # Navigation sections, shared by both menus
+_data/social.yml           # Footer links (LinkedIn, Scholar, GitHub)
 _data/journey.yml          # Journey milestones
 _data/story_keywords.yml   # Story filter slugs
 _data/bookmarks.yml        # Bookmarks
@@ -182,7 +208,9 @@ Work on this site is specified before it is built, using [Spec Kit](https://gith
 
 The project constitution is at `.specify/memory/constitution.md`. Its five principles — simplicity, content as data, GitHub Pages compatibility, performance and accessibility, and minimal JavaScript — are checked in every feature's plan.
 
-Feature 008 was written up after it was built rather than before, and its spec says so. It also records the one place the site knowingly departs from "content as data" — five navigation links held as markup instead of a data file — along with what would justify changing that.
+Feature 008 was written up after it was built rather than before, and its spec says so.
+
+The constitution is at version 2.0.0. The jump from 1.x came from tightening "content as data" to cover repeated structure, not just prose: the navigation list now lives in `_data/sections.yml` and both menus render from it. That amendment also added a rule worth knowing about — a principle is never loosened to make existing code compliant. Either the code changes, or the principle changes on its own merits.
 
 ## Conventions
 

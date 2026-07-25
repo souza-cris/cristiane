@@ -1,0 +1,36 @@
+# The site's sections, in navigation order. This one file drives BOTH the top
+# navigation and the side navigation, so the two can never drift apart.
+#
+# label : the link text — lowercase, matching the site's voice
+# url   : site-rooted path. The /cristiane base path is added at build time,
+#         so write "/stories", never "/cristiane/stories"
+# match : how this link decides it is the visitor's current section
+#         exact  — only that page itself
+#         prefix — that page and anything beneath it, so an individual story
+#                  or a filter page still marks its section as current
+#
+# Home is deliberately absent. The "main" brand link in the top navigation
+# returns there, and the side navigation does not render on home at all.
+#
+# To add a section: add a block here, then create the page. Both navigations
+# pick it up with no template change.
+
+- label: "journey"
+  url: "/journey"
+  match: "exact"
+
+- label: "stories"
+  url: "/stories"
+  match: "prefix"
+
+- label: "research"
+  url: "/research"
+  match: "exact"
+
+- label: "bookmarks"
+  url: "/bookmarks"
+  match: "prefix"
+
+- label: "contact"
+  url: "/contact"
+  match: "exact"

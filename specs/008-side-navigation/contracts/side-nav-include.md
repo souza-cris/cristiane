@@ -29,9 +29,10 @@ The contract between `_layouts/default.html` and `_includes/side-nav.html`: what
 
 **Markup**
 
-- Emits exactly one `<nav class="side-nav" aria-label="Section navigation">` containing one `<ul>` of five `<li>` links.
+- Emits exactly one `<nav class="side-nav" aria-label="Section navigation">` wrapping `section-links.html`, which renders one `<ul class="side-nav__links">` of one `<li>` per entry in `_data/sections.yml`.
 - Emits nothing else — no wrapper, no heading, no script.
 - Every `href` passes through `relative_url`, so links are correct under the `/cristiane` base path.
+- The link list is **not** written in this include. It has no opinion about which sections exist; changing the sections means editing the data file, not this file.
 
 **Current section**
 
@@ -59,4 +60,26 @@ The contract between `_layouts/default.html` and `_includes/side-nav.html`: what
 - Calling it on the home page — it would render, because the include does not gate itself.
 - Moving the call inside `<main>` or inside the container, which would place it wrongly in the reading order.
 - Changing the 1000px breakpoint without rechecking overlap against the 44rem content column. The two numbers are related; see decision 2 in [../research.md](../research.md).
-- Adding a section to `_includes/nav.html` and not here, or the reverse. The two lists are maintained together.
+- Writing links directly into this include instead of adding them to `_data/sections.yml`. That would recreate the duplication this feature was corrected to remove, and put the two navigations back in a position to disagree.
+
+---
+
+## The shared list contract — `section-links.html`
+
+Both navigations call it the same way, differing only in the class:
+
+```liquid
+{% include section-links.html class="site-nav__links" %}
+{% include section-links.html class="side-nav__links" %}
+```
+
+**Requirements on the caller**
+
+- MUST pass `class`. Without it the `<ul>` renders unclassed and unstyled.
+- MUST provide its own `<nav>` wrapper and accessible name. This include emits the list only.
+
+**Guarantees**
+
+- One `<li>` per entry in `_data/sections.yml`, in file order.
+- At most one `aria-current="page"`, decided per entry by its `match` value.
+- No knowledge of which navigation is calling it beyond the class string, so the two can never render different links.

@@ -1,0 +1,23 @@
+# Where to find Cris elsewhere. These render as the icons in the site footer.
+#
+# label : the accessible name, read aloud by screen readers. Write it as the
+#         service is normally written — "Google Scholar", not "scholar"
+# url   : the full address, including https://
+# icon  : which icon to draw — one of: linkedin, scholar, github
+#         The drawings live in _includes/footer.html, because a drawing is not
+#         content. This field only says which one to use.
+#
+# To add a link you also need its icon drawing added to the footer include.
+# To remove or reorder, edit here alone — the footer follows this file's order.
+
+- label: "LinkedIn"
+  url: "https://www.linkedin.com/in/souzacris/"
+  icon: "linkedin"
+
+- label: "Google Scholar"
+  url: "https://scholar.google.com/citations?user=Zeajh2IAAAAJ&hl=en"
+  icon: "scholar"
+
+- label: "GitHub"
+  url: "https://github.com/souza-cris"
+  icon: "github"

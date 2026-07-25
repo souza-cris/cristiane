@@ -2,12 +2,6 @@
   {% if page.url != '/' %}<a href="{{ '/' | relative_url }}" class="site-nav__brand">main</a>{% endif %}
   <details class="site-nav__menu">
     <summary aria-label="Toggle menu"></summary>
-    <ul class="site-nav__links">
-      <li><a href="{{ '/journey' | relative_url }}"{% if page.url == '/journey/' %} aria-current="page"{% endif %}>journey</a></li>
-      <li><a href="{{ '/stories' | relative_url }}"{% if page.url contains '/stories' %} aria-current="page"{% endif %}>stories</a></li>
-      <li><a href="{{ '/research' | relative_url }}"{% if page.url == '/research/' %} aria-current="page"{% endif %}>research</a></li>
-      <li><a href="{{ '/bookmarks' | relative_url }}"{% if page.url contains '/bookmarks' %} aria-current="page"{% endif %}>bookmarks</a></li>
-      <li><a href="{{ '/contact' | relative_url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>contact</a></li>
-    </ul>
+    {% include section-links.html class="site-nav__links" %}
   </details>
 </nav>

@@ -6,7 +6,7 @@
 
 ## Summary
 
-Add a vertical section menu pinned to the right edge and vertically centred, rendered on every page except home from a single include. It repeats the top navigation's links so nothing is lost when it hides, and it hides below 1000px — the width at which it can no longer sit beside the 44rem content column without overlapping. The layout adds a body class naming the page as home or interior, which also drives dropping the rules above and below the content on home. No script, no data file, no new dependency.
+Add a vertical section menu pinned to the right edge and vertically centred, rendered on every page except home. Both it and the top navigation render the same list from `_data/sections.yml` through a shared include, so nothing is lost when the side menu hides and the two can never disagree. It hides below 1000px — the width at which it can no longer sit beside the 44rem content column without overlapping. The layout adds a body class naming the page as home or interior, which also drives dropping the rules above and below the content on home. No script, no new dependency.
 
 ## Technical Context
 
@@ -14,7 +14,7 @@ Add a vertical section menu pinned to the right edge and vertically centred, ren
 
 **Primary Dependencies**: Jekyll 4.4 (existing); no new dependencies
 
-**Storage**: None — no data file is introduced
+**Storage**: Filesystem — one new data file, `_data/sections.yml`
 
 **Testing**: `bundle exec jekyll build` for Liquid errors, HTTP checks against the local server, keyboard traversal, and manual width checks either side of the breakpoint
 
@@ -34,23 +34,23 @@ Add a vertical section menu pinned to the right edge and vertically centred, ren
 
 | Principle | Status | Evidence |
 |-----------|--------|----------|
-| I. Simplicity & Maintainability | ✅ Pass | One include, one layout line, one stylesheet section. `position: fixed` and a media query — no scroll listener, no observer, nothing to keep in sync |
-| II. Content as Data | ⚠️ Deviation | The five links are markup in the include, not a data file. Justified below |
+| I. Simplicity & Maintainability | ✅ Pass | One data file, one shared include, one layout line, one stylesheet section. `position: fixed` and a media query — no scroll listener, no observer, nothing to keep in sync |
+| II. Content as Data | ✅ Pass | The section list lives in `_data/sections.yml` and both navigations render it through `section-links.html`. The list is written once and appears twice |
 | III. GitHub Pages Compatibility | ✅ Pass | Stock Liquid and CSS; no plugins, no build step |
 | IV. Performance & Accessibility | ✅ Pass | A real `<nav>` with an accessible name and a `<ul>` of ordinary links. `aria-current="page"` marks the section, backed by a border as well as colour, so it is not colour-only. Focus ring preserved. Nothing to download |
 | V. Minimal JavaScript | ✅ Pass | None added. Position, visibility and current-page marking are all CSS or build-time Liquid |
 
-**Post-design re-check**: still passing, with the one recorded deviation. The design added no script, no dependency and no plugin.
+**Post-design re-check**: passing on all five.
 
-### Deviation: link list as markup
+### Note: the link list, and a correction
 
-Principle II asks that repeated content live in a data file. These five links are held as markup in `_includes/side-nav.html` instead.
+This feature first shipped with its five links written as markup in `_includes/side-nav.html`, duplicating the list already in `_includes/nav.html`. The plan recorded that as an accepted deviation from Principle II, arguing that a per-link "current section" rule was logic and did not belong in a data file.
 
-**Why**: the site navigation already exists as markup in `_includes/nav.html`, and a data file would have to serve both or be duplicated. More importantly the "current section" test differs per link — `/stories/` matches by prefix so a single story still marks its section, while `/research/` matches exactly — so a data file would have to encode a matching rule per entry, not just a label and a href. That is more structure than five links justify, and it would put logic in the data file, which is worse than markup in an include.
+That argument was wrong, and the owner rejected it. The per-link rule is a *value* — `exact` or `prefix` — describing how each entry behaves. Putting that value in the data file and letting one include act on it keeps the knowledge with the list, which is exactly what Principle II asks for. The list is now written once in `_data/sections.yml` and rendered twice through `section-links.html`.
 
-**Cost if this grows**: the moment a third surface needs the same list, extract `_data/sections.yml` with a `label`, `url` and `match` per entry, and drive both navigations from it. Until then this is YAGNI, and Principle I outranks the duplication here.
+The constitution was amended in the same pass (v2.0.0) to say this outright: repeated structure is covered by Principle II, a per-entry difference belongs in the data as a value, and a principle must never be loosened to make existing code compliant. That last rule exists because loosening it is what was attempted here first.
 
-*One recorded deviation — Complexity Tracking omitted as it is argued in place.*
+*No violations — Complexity Tracking omitted.*
 
 ## Project Structure
 
@@ -73,11 +73,14 @@ specs/008-side-navigation/
 ### Source
 
 ```
-_includes/side-nav.html     # NEW — the nav element and its five links
-_layouts/default.html       # body class, and the include on non-home pages
-assets/css/style.css        # side-nav section; is-home rules
+_data/sections.yml            # NEW — the section list: label, url, match
+_includes/section-links.html  # NEW — renders that list; shared by both navs
+_includes/side-nav.html       # NEW — the nav element; no links of its own
+_includes/nav.html            # top nav, now rendering the same shared list
+_layouts/default.html         # body class, and the include on non-home pages
+assets/css/style.css          # side-nav section; is-home rules
 ```
 
 ## Complexity Tracking
 
-The single deviation is argued in the Constitution Check above, with the trigger that would reverse it.
+None. The one deviation this feature originally carried — the link list as markup — was removed rather than justified; see the note in the Constitution Check above.
