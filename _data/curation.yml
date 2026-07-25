@@ -1,0 +1,11 @@
+- category: "Tools"
+  items:
+    - title: "Visual Studio Code"
+      url: "https://code.visualstudio.com"
+      note: "My go-to code editor — lightweight and extensible."
+
+- category: "Articles"
+  items:
+    - title: "A Complete Guide to Flexbox"
+      url: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+      note: "The clearest flexbox reference I've found."

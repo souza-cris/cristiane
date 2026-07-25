@@ -1,0 +1,302 @@
+/* ---- Reset & Base ---- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  line-height: 1.6;
+  color: #222;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  color: #0055aa;
+}
+
+a:hover {
+  color: #003366;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---- Container ---- */
+
+.container {
+  width: 100%;
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  flex: 1;
+}
+
+/* ---- Navigation ---- */
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #ddd;
+  max-width: 44rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.site-nav__brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: #222;
+}
+
+.site-nav__links {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.site-nav__links a {
+  text-decoration: none;
+  color: #555;
+}
+
+.site-nav__links a:hover,
+.site-nav__links a[aria-current="page"] {
+  color: #0055aa;
+}
+
+/* On wider screens, always show the links and hide the toggle */
+.site-nav__menu > summary {
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.site-nav__menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .site-nav__menu > summary {
+    display: none;
+  }
+
+  .site-nav__menu .site-nav__links {
+    display: flex;
+  }
+}
+
+@media (max-width: 599px) {
+  .site-nav__menu:not([open]) .site-nav__links {
+    display: none;
+  }
+
+  .site-nav__menu[open] .site-nav__links {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+  }
+}
+
+/* ---- Footer ---- */
+
+.site-footer {
+  border-top: 1px solid #ddd;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #777;
+  max-width: 44rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.site-footer__links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.site-footer__links a {
+  color: #777;
+}
+
+/* ---- Home ---- */
+
+.home {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.home__photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.home__tagline {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.home__links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+/* ---- Page ---- */
+
+.page h1 {
+  margin-bottom: 1.5rem;
+}
+
+.page h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.page p,
+.page ul,
+.page ol {
+  margin-bottom: 1rem;
+}
+
+/* ---- Blog post list ---- */
+
+.post-list {
+  list-style: none;
+}
+
+.post-list__item {
+  margin-bottom: 2rem;
+}
+
+.post-list__item time {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.post-list__item h2 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.post-list__item p {
+  color: #555;
+}
+
+/* ---- Blog post ---- */
+
+.post__header {
+  margin-bottom: 2rem;
+}
+
+.post__header h1 {
+  margin-bottom: 0.25rem;
+}
+
+.post__header time {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.post p,
+.post ul,
+.post ol,
+.post blockquote,
+.post pre {
+  margin-bottom: 1rem;
+}
+
+.post h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ---- Project list ---- */
+
+.project-list {
+  list-style: none;
+}
+
+.project-list__item {
+  margin-bottom: 1.5rem;
+}
+
+.project-list__item h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.project-list__item p {
+  color: #555;
+}
+
+/* ---- Project detail ---- */
+
+.project__description {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.project p,
+.project ul,
+.project ol {
+  margin-bottom: 1rem;
+}
+
+.project h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.project__images {
+  margin: 1.5rem 0;
+}
+
+.project__images img {
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.project__tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.project__tools li {
+  background: #f0f0f0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 3px;
+  font-size: 0.9rem;
+}

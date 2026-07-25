@@ -1,0 +1,40 @@
+title: "Cristiane"
+description: "Personal website — projects, blog, and things I recommend."
+baseurl: "/cristiane"
+url: ""
+
+photo: "/assets/images/profile.jpg"
+email: "cristiane@example.com"
+
+social:
+  - label: "GitHub"
+    url: "https://github.com/souza-cris"
+  - label: "LinkedIn"
+    url: "https://linkedin.com/in/cristiane"
+
+collections:
+  projects:
+    output: true
+    sort_by: date
+
+permalink: /blog/:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - specs
+  - .specify
+  - .claude
+  - CLAUDE.md

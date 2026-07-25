@@ -1,0 +1,13 @@
+<nav class="site-nav" aria-label="Main navigation">
+  <a href="{{ '/' | relative_url }}" class="site-nav__brand">{{ site.title }}</a>
+  <details class="site-nav__menu">
+    <summary aria-label="Toggle menu">Menu</summary>
+    <ul class="site-nav__links">
+      <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a></li>
+      <li><a href="{{ '/portfolio' | relative_url }}"{% if page.url == '/portfolio/' %} aria-current="page"{% endif %}>Portfolio</a></li>
+      <li><a href="{{ '/projects' | relative_url }}"{% if page.url == '/projects/' %} aria-current="page"{% endif %}>Projects</a></li>
+      <li><a href="{{ '/blog' | relative_url }}"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>Blog</a></li>
+      <li><a href="{{ '/curation' | relative_url }}"{% if page.url == '/curation/' %} aria-current="page"{% endif %}>Curation</a></li>
+    </ul>
+  </details>
+</nav>
