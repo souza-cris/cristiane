@@ -15,3 +15,5 @@ layout: default
     <li><a href="{{ '/contact' | relative_url }}">contact</a></li>
   </ul>
 </section>
+
+{% include updates-widget.html %}

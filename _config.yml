@@ -2,6 +2,11 @@ title: "Cris"
 description: "PhD student slash researcher slash tech leader slash traveler slash cat lady"
 baseurl: "/cristiane"
 permalink: "/stories/:year/:month/:day/:title/"
+
+# How many entries the home page "what's new" widget shows at once.
+# Jekyll reads this file only at startup, so restart the local server after
+# changing it — a rebuild alone will not pick it up.
+updates_limit: 4
 url: ""
 
 email: "cristiane@example.com"

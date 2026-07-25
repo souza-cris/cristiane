@@ -1,0 +1,61 @@
+{%- comment -%}
+  The "what's new" area on the home page.
+
+  Ordering pipeline: drop entries switched off → sort by date, newest first →
+  promote pinned entries → take the first `updates_limit` (default 4).
+
+  The widget renders NOTHING AT ALL — no heading, no container — when there are
+  no visible entries and no active study. Both inputs are resolved before any
+  markup is emitted, which is why the check happens up here.
+
+  The call for participants belongs to feature 007. This file reads its active
+  flag and calls its include; it never defines or copies study content.
+{%- endcomment -%}
+
+{%- assign limit = site.updates_limit | default: 4 -%}
+
+{%- comment -%} An entry shows unless it is explicitly switched off. {%- endcomment -%}
+{%- assign live = site.data.updates | where_exp: "u", "u.active != false" -%}
+{%- assign by_date = live | sort: "date" | reverse -%}
+{%- assign pinned = by_date | where: "pinned", true -%}
+{%- assign unpinned = by_date | where_exp: "u", "u.pinned != true" -%}
+{%- assign ordered = pinned | concat: unpinned -%}
+{%- assign visible = ordered | slice: 0, limit -%}
+
+{%- assign study_active = false -%}
+{%- if site.data.study and site.data.study.active -%}{%- assign study_active = true -%}{%- endif -%}
+
+{%- if visible.size > 0 or study_active -%}
+<section class="updates" aria-labelledby="updates-heading">
+  <h2 class="updates__heading" id="updates-heading">what's new</h2>
+
+  {% if visible.size > 0 %}
+  <ul class="updates__list">
+    {% for update in visible %}
+    <li class="updates__item">
+      <span class="updates__type updates__type--{{ update.type }}">{{ update.type }}</span>
+
+      <h3 class="updates__title">
+        {%- if update.link and update.link != "" -%}
+          {%- if update.link contains "://" -%}
+        <a href="{{ update.link }}" target="_blank" rel="noopener">{{ update.title }}</a>
+          {%- else -%}
+        <a href="{{ update.link | relative_url }}">{{ update.title }}</a>
+          {%- endif -%}
+        {%- else -%}
+        {{ update.title }}
+        {%- endif -%}
+      </h3>
+
+      {% if update.blurb and update.blurb != "" %}<p class="updates__blurb">{{ update.blurb }}</p>{% endif %}
+
+      <time class="updates__date" datetime="{{ update.date | date: '%Y-%m-%d' }}">{{ update.date | date: "%B %-d, %Y" }}</time>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  {%- comment -%} Self-gating: renders nothing unless a study is active. {%- endcomment -%}
+  {% include study-callout.html variant="compact" %}
+</section>
+{%- endif -%}

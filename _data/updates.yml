@@ -1,0 +1,47 @@
+# The "what's new" entries shown on the home page.
+#
+# This list is curated BY HAND. It does not read from _posts/ or from
+# _data/bookmarks.yml — featuring something here does not create it, and
+# editing a story does not update its entry here. That duplication is the
+# deliberate price of choosing exactly what the home page features.
+#
+# ── Fields ───────────────────────────────────────────────────────────────────
+# type     required  publication | story | bookmark | any other word.
+#                    The word itself is the label, so a new type just works.
+# title    required  What it is called. Becomes the link text.
+# date     required  YYYY-MM-DD. Orders the list and is shown to visitors.
+# link     optional  Internal path like "/research/" — write it site-rooted and
+#                    leave the /cristiane prefix to the site. Or a full external
+#                    URL starting with https://. Omit for plain text.
+# blurb    optional  One line of context. Omit and nothing renders.
+# active   optional  Only `active: false` does anything — it hides the entry
+#                    while keeping it here. Leave it out and the entry shows.
+# pinned   optional  `pinned: true` puts the entry first, whatever its date.
+#
+# ── How many appear ──────────────────────────────────────────────────────────
+# The four most recent are shown. Change `updates_limit` in _config.yml to
+# adjust — and restart the local server afterwards, because Jekyll only reads
+# that file at startup.
+#
+# ── Seeded entries ───────────────────────────────────────────────────────────
+# The entries below were copied from content already on this site so the widget
+# has something to show. Replace the blurbs with your own words and decide what
+# actually deserves the home page.
+
+- type: publication
+  title: "Therapy Across Borders: The Search for Cultural Safety in Digital Mental Health"
+  date: 2026-07-25
+  link: "/research/"
+  blurb: "AMCIS 2026 — accepted for presentation."
+
+- type: story
+  title: "Building this site with Jekyll"
+  date: 2026-07-25
+  link: "/stories/2026/07/25/building-this-site/"
+  blurb: "A walkthrough of how this site was built using Jekyll, Markdown, and GitHub Pages."
+
+- type: bookmark
+  title: "Attention Is All You Need"
+  date: 2026-07-20
+  link: "/bookmarks/paper/"
+  blurb: "The paper that introduced the Transformer architecture."
