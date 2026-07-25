@@ -26,7 +26,9 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
   - `story-filters.html`, `story-list.html` — shared by `stories.md` and every page in `stories/`
   - `bookmark-filters.html`, `bookmark-list.html` — shared by `bookmarks.md` and every page in `bookmarks/`
   - `search-box.html` — the search input, plus the `<script>` tag that loads `search.js`
-  - `journey-timeline.html` — the horizontal journey track
+  - `journey-timeline.html` — the journey track. Each stop is a native
+    `<details name="journey">` disclosure, so the browser handles
+    one-open-at-a-time with no script. Keep it that way.
 - **Content**:
   - Stories: `_posts/YYYY-MM-DD-title.md`, front matter carries `keywords` (a list) and `tldr`
   - Journey: `_data/journey.yml`
@@ -46,7 +48,10 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 - Only GitHub Pages-supported plugins. No custom build tools or npm. This is why filter pages are written by hand rather than generated from data.
 - Use `| relative_url` filter for all internal links (required because of `baseurl`).
 - Images are committed to the repo and sized for the web — never hotlink an external host, and resize large originals before committing.
-- The journey page deliberately shows no years.
+- The journey page deliberately shows no years on the track. A milestone's
+  optional `period` renders only inside an opened stop. Note that detail text
+  is in the HTML even while collapsed, so grepping the page for years gives
+  false matches — check the `<summary>` markup instead.
 - Explain changes in plain language — the project owner is new to web development.
 
 ## Spec Kit

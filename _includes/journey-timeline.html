@@ -1,26 +1,37 @@
-{% assign last = site.data.journey.size | minus: 1 %}
 <div class="journey" tabindex="0" role="region" aria-label="Journey timeline, scroll sideways">
   <ol class="journey__track">
     {% for milestone in site.data.journey %}
     {%- comment -%}
-      Badges grow from small to large across the track, so the journey visibly
-      builds. 26 = 2.6rem at the start, 42 = 4.2rem at the end.
+      Every stop is a native disclosure. The shared `name` groups them, so the
+      browser closes any other open stop for us — no script involved.
     {%- endcomment -%}
-    {% assign grow = forloop.index0 | times: 16 | divided_by: last %}
-    {% assign badge = grow | plus: 26 %}
-    <li class="journey__stop journey__stop--{{ milestone.category }}" style="--badge: {{ badge }}">
-      <div class="journey__badge-row">
-        <span class="journey__badge{% if milestone.logo != '' %} journey__badge--logo{% endif %}">
-          {% if milestone.logo != "" %}
-          <img src="{{ '/assets/img/logos/' | append: milestone.logo | relative_url }}" alt="{{ milestone.org }}" loading="lazy">
-          {% else %}
-          <span aria-hidden="true">{{ milestone.short }}</span>
-          {% endif %}
-        </span>
-      </div>
-      <p class="journey__flag" role="img" aria-label="{{ milestone.place }}">{{ milestone.flag }}</p>
-      <p class="journey__label">{{ milestone.label }}</p>
-      <p class="journey__org">{{ milestone.org }}</p>
+    <li class="journey__item">
+      <details class="journey__stop journey__stop--{{ milestone.category }}" name="journey">
+        <summary class="journey__summary">
+          <span class="journey__badge-row">
+            <span class="journey__badge{% if milestone.logo != '' %} journey__badge--logo{% endif %}">
+              {% if milestone.logo != "" %}
+              <img src="{{ '/assets/img/logos/' | append: milestone.logo | relative_url }}" alt="{{ milestone.org }}" loading="lazy">
+              {% else %}
+              <span aria-hidden="true">{{ milestone.short }}</span>
+              {% endif %}
+            </span>
+          </span>
+          <span class="journey__flag" role="img" aria-label="{{ milestone.place }}">{{ milestone.flag }}</span>
+          <span class="journey__label">{{ milestone.label }}</span>
+          <span class="journey__org">{{ milestone.org }}</span>
+        </summary>
+
+        <div class="journey__detail">
+          {% if milestone.title != "" %}<p class="journey__detail-title">{{ milestone.title }}</p>{% endif %}
+          <p class="journey__detail-meta">
+            <span class="journey__detail-category">{{ milestone.category }}</span>
+            <span class="journey__detail-place">{{ milestone.place }}</span>
+            {% if milestone.period != "" and milestone.period %}<span class="journey__detail-period">{{ milestone.period }}</span>{% endif %}
+          </p>
+          {% if milestone.note != "" %}<p class="journey__detail-note">{{ milestone.note }}</p>{% endif %}
+        </div>
+      </details>
     </li>
     {% endfor %}
   </ol>

@@ -9,10 +9,14 @@
 # flag     : country flag emoji
 # place    : city, country — shown under the label
 #
-# `title` and `note` are NOT displayed. They hold the longer version of each
-# milestone, ready if you ever want a detailed view.
+# `title` and `note` are shown ONLY when a visitor opens a stop. They hold the
+# longer version of each milestone.
 #
-# No years anywhere — the order on this page is the story.
+# period   : optional, e.g. "2019–2022". Also shown ONLY inside an opened stop,
+#            never on the track itself. Leave it out and nothing renders — add
+#            it to any milestone later and it appears with no code change.
+#
+# No years on the track — the order on this page is the story.
 
 - category: academia
   title: "B.S., Management and Marketing"

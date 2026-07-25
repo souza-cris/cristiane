@@ -35,6 +35,8 @@ Rename the about page to journey and fill it with a horizontal, logo-driven time
 | Principle | Status | Evidence |
 |-----------|--------|----------|
 | I. Simplicity & Maintainability | ✅ Pass | Shared includes replace the same markup copy-pasted across 13 filter pages; badge sizing is computed in Liquid from loop position rather than hand-tuned |
+
+> **Superseded**: the growing badge sizes described here were replaced by uniform badges in feature 005, on the grounds that size implied later-equals-more-important. The brightening rail remains the progression cue. See `specs/005-journey-storytelling/spec.md` User Story 5.
 | II. Content as Data | ✅ Pass | Milestones, story keywords and bookmark types all live in `_data/`; pages carry no hardcoded entries |
 | III. GitHub Pages Compatibility | ✅ Pass | No plugins, no build step; the script is a plain file served as-is |
 | IV. Performance & Accessibility | ✅ Pass | Logos committed locally so no external hosts; portrait resized 17 MB → 135 KB; flags carry `aria-label`; the scroll container is focusable and keyboard-scrollable; highlighted phrases use `<strong>` so emphasis is conveyed, not just coloured |

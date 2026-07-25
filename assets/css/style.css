@@ -172,13 +172,26 @@ time {
   }
 }
 
-/* ---- Journey Timeline (horizontal) ---- */
+/* ---- Journey Timeline ---- */
 
 .journey__tagline {
   font-family: var(--font-mono);
   font-size: 1.05rem;
   color: var(--text);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.journey__throughline {
+  color: var(--text-muted);
+  max-width: 38rem;
+  margin-bottom: 0.35rem;
+}
+
+.journey__geography {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
 }
 
 .timeline-legend {
@@ -192,24 +205,33 @@ time {
   color: var(--text-muted);
 }
 
+/* Legend swatches mirror the badge rings: colour AND line style, so the two
+   categories stay distinguishable without relying on colour. */
 .timeline-legend__item::before {
   content: "";
   display: inline-block;
-  width: 0.55rem;
-  height: 0.55rem;
+  width: 0.85rem;
+  height: 0.85rem;
   border-radius: 50%;
+  border: 2px solid var(--cat-color);
   margin-right: 0.5rem;
-  background: var(--cat-color);
+  vertical-align: -0.15rem;
 }
 
 .timeline-legend__item--academia,
 .journey__stop--academia {
   --cat-color: #58a6ff;
+  --cat-ring: solid;
 }
 
 .timeline-legend__item--industry,
 .journey__stop--industry {
   --cat-color: #3fb950;
+  --cat-ring: dashed;
+}
+
+.timeline-legend__item::before {
+  border-style: var(--cat-ring, solid);
 }
 
 .timeline-legend__scroll {
@@ -217,7 +239,11 @@ time {
   opacity: 0.7;
 }
 
-/* Scroll container. Full-bleed so the track can run past the text column. */
+/* Scroll container. Full-bleed so the track can run past the text column.
+   The four background layers are CSS scroll shadows: the two "cover" layers
+   scroll with the content (local), the two shadow layers stay pinned to the
+   container (scroll). A cover sits over its shadow only at that end of the
+   scroll, so each shadow shows exactly while content remains that way. */
 .journey {
   overflow-x: auto;
   overflow-y: hidden;
@@ -227,6 +253,14 @@ time {
   margin-right: calc(50% - 50vw);
   padding-left: max(1rem, calc(50vw - 22rem));
   padding-right: max(1rem, calc(50vw - 22rem));
+  background:
+    linear-gradient(to right, var(--bg) 30%, rgba(13, 17, 23, 0)) left center,
+    linear-gradient(to left, var(--bg) 30%, rgba(13, 17, 23, 0)) right center,
+    radial-gradient(farthest-side at 0 50%, rgba(88, 166, 255, 0.35), rgba(88, 166, 255, 0)) left center,
+    radial-gradient(farthest-side at 100% 50%, rgba(88, 166, 255, 0.35), rgba(88, 166, 255, 0)) right center;
+  background-repeat: no-repeat;
+  background-size: 3rem 100%, 3rem 100%, 0.9rem 100%, 0.9rem 100%;
+  background-attachment: local, local, scroll, scroll;
 }
 
 .journey:focus-visible {
@@ -249,36 +283,66 @@ time {
   position: absolute;
   left: 0;
   right: 0;
-  top: 2.6rem;
+  top: 1.7rem;
   height: 2px;
   background: linear-gradient(to right, var(--border), var(--accent));
 }
 
-.journey__stop {
+.journey__item {
   position: relative;
   flex: 0 0 auto;
-  width: 9.5rem;
-  text-align: center;
-  scroll-snap-align: center;
 }
 
-/* Fixed-height row keeps every badge centred on the rail as sizes grow. */
+/* Each stop is a <details>. Closed stops stay narrow; the open one widens to
+   a readable measure. Only one can be open at a time, so the track's width
+   stays predictable. */
+.journey__stop {
+  width: 9.5rem;
+  scroll-snap-align: center;
+  transition: width 0.15s ease;
+}
+
+.journey__stop[open] {
+  width: 22rem;
+}
+
+.journey__summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  list-style: none;
+}
+
+.journey__summary::-webkit-details-marker {
+  display: none;
+}
+
+.journey__summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
 .journey__badge-row {
-  height: 5.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 3.4rem;
 }
 
+/* One size for every badge. Position in the story is carried by the rail,
+   not by size, so early roles are not visually diminished. */
 .journey__badge {
-  width: calc(var(--badge) * 0.1rem);
-  height: calc(var(--badge) * 0.1rem);
+  width: 3.4rem;
+  height: 3.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   background: var(--surface);
-  border: 2px solid var(--cat-color);
+  border: 2px var(--cat-ring, solid) var(--cat-color);
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--text);
@@ -292,7 +356,7 @@ time {
   background: #f5f5f5;
 }
 
-.journey__stop:hover .journey__badge {
+.journey__summary:hover .journey__badge {
   transform: scale(1.08);
 }
 
@@ -304,11 +368,13 @@ time {
 }
 
 .journey__flag {
+  display: block;
   font-size: 1.15rem;
   line-height: 1.4;
 }
 
 .journey__label {
+  display: block;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--text);
@@ -316,9 +382,123 @@ time {
 }
 
 .journey__org {
+  display: block;
   font-size: 0.7rem;
   color: var(--text-muted);
   padding: 0 0.5rem;
+}
+
+/* ---- Journey detail (revealed on opening a stop) ---- */
+
+.journey__detail {
+  text-align: left;
+  margin-top: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+}
+
+.journey__detail-title {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+.journey__detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+/* The category in words — the text cue that backs up the ring style. */
+.journey__detail-category {
+  color: var(--cat-color);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.journey__detail-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ---- Journey on small screens: a vertical list that scrolls with the page ---- */
+
+@media (max-width: 599px) {
+  .journey {
+    overflow: visible;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    scroll-snap-type: none;
+    background: none;
+  }
+
+  .journey__track {
+    flex-direction: column;
+    align-items: stretch;
+    width: auto;
+    gap: 1.5rem;
+  }
+
+  .journey__track::before {
+    left: 1.7rem;
+    right: auto;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(to bottom, var(--border), var(--accent));
+  }
+
+  /* Width rules from the horizontal track do not apply here — an open stop
+     expands downward in normal flow instead of widening. */
+  .journey__stop,
+  .journey__stop[open] {
+    width: auto;
+  }
+
+  .journey__summary {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .journey__badge-row {
+    height: auto;
+  }
+
+  .journey__label,
+  .journey__org {
+    padding: 0;
+  }
+
+  .journey__label {
+    flex: 1 1 auto;
+  }
+
+  .journey__org {
+    flex: 1 1 100%;
+    padding-left: 4.25rem;
+  }
+
+  .journey__detail {
+    margin-left: 4.25rem;
+  }
+
+  /* The sideways-scroll hint is untrue in this layout. */
+  .timeline-legend__scroll {
+    display: none;
+  }
 }
 
 /* ---- Footer ---- */
