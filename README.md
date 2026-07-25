@@ -2,7 +2,7 @@
 
 Personal website built with [Jekyll](https://jekyllrb.com) and hosted on [GitHub Pages](https://pages.github.com).
 
-Five sections: **home**, **journey**, **stories**, **research**, **bookmarks**, **contact**.
+Six sections: **home**, **journey**, **stories**, **research**, **bookmarks**, **contact**.
 
 ## Run locally
 
@@ -77,6 +77,49 @@ Add a block to `_data/journey.yml`, positioned where it belongs in the story —
 
 Add a block to `_data/research.yml`. Set `link: ""` to render the title as plain text instead of a link.
 
+### Home page update
+
+Add an entry to `_data/updates.yml`. The four most recent appear on the home page:
+
+```yaml
+- type: publication          # also the label — any word works
+  title: "What it is called"
+  date: 2026-07-25           # orders the list, newest first
+  link: "/research/"         # site-rooted internal path, or a full https:// URL
+  blurb: "One line of context."
+  active: false              # optional — hides it without deleting it
+  pinned: true               # optional — puts it first regardless of date
+```
+
+Three things to know:
+
+- **Write internal links site-rooted** — `/stories/…`, not `/cristiane/stories/…`. The base path is added for you.
+- **This list is curated by hand.** It does not read from `_posts/` or the bookmarks, so featuring something here does not create it, and editing a story does not update its entry.
+- **The limit lives in `_config.yml`** as `updates_limit`. Change it and restart the local server — Jekyll reads that file only at startup.
+
+### Call for participants
+
+Edit `_data/study.yml`. `active` is the only switch:
+
+```yaml
+active: true                                  # false hides it everywhere, keeps the text
+title: "Study name"
+description: "What the study is about."
+summary: "One short line for the home page."  # optional, falls back to description
+eligibility: "Who can take part."
+involves: "Time, format, compensation."
+action_label: "Sign up"
+action_url: "https://forms.example.com/…"     # or "mailto:you@example.com"
+deadline: "15 March 2027"                     # optional, shown as written
+```
+
+Two things to know:
+
+- **`action_url` must be complete**, including `https://` or `mailto:`. An address on its own won't work as a link — nothing is guessed for you.
+- **A passed deadline does not hide the callout.** The site rebuilds when you push, not on a schedule, so `active: false` is the only thing that closes recruitment.
+
+Write the content yourself — for human-subjects research, use your IRB-approved wording verbatim.
+
 ### New filter
 
 1. Add the `slug` and `label` to `_data/story_keywords.yml` or `_data/bookmark_types.yml`.
@@ -93,12 +136,15 @@ _includes/                 # head, nav, footer
                            # story-filters, story-list
                            # bookmark-filters, bookmark-list
                            # search-box, journey-timeline
+                           # updates-widget, study-callout
 _posts/                    # Stories (Markdown)
 _data/journey.yml          # Journey milestones
 _data/story_keywords.yml   # Story filter slugs
 _data/bookmarks.yml        # Bookmarks
 _data/bookmark_types.yml   # Bookmark filter slugs
 _data/research.yml         # Research interests and publications
+_data/updates.yml          # Home page "what's new" entries
+_data/study.yml            # Call for participants (one study, one switch)
 stories/                   # One thin page per story filter
 bookmarks/                 # One thin page per bookmark filter
 assets/css/style.css       # All styles, plain CSS
@@ -108,6 +154,22 @@ specs/                     # Spec Kit feature specs
 .specify/                  # Spec Kit config and constitution
 .github/workflows/         # Deploy workflow
 ```
+
+## Feature specs
+
+Work on this site is specified before it is built, using [Spec Kit](https://github.com/github/spec-kit). Each feature has a spec, a plan, a data model, a contract and a quickstart under `specs/`:
+
+| | Feature |
+|---|---|
+| 001 | Personal site |
+| 002 | Dark theme redesign |
+| 003 | Content restructure |
+| 004 | Journey timeline and list search |
+| 005 | Journey storytelling and usability |
+| 006 | Home page updates widget |
+| 007 | Research page call for participants |
+
+The project constitution is at `.specify/memory/constitution.md`. Its five principles — simplicity, content as data, GitHub Pages compatibility, performance and accessibility, and minimal JavaScript — are checked in every feature's plan.
 
 ## Conventions
 

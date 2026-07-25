@@ -4,7 +4,7 @@
 
 **Created**: 2026-07-25
 
-**Status**: Draft
+**Status**: Implemented
 
 **Input**: User description: "Visual redesign of the existing personal website — dark, techy aesthetic applied via CSS and layout changes only. No structural, content, or JavaScript changes."
 

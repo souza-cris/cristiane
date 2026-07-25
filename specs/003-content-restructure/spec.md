@@ -4,7 +4,7 @@
 
 **Created**: 2026-07-25
 
-**Status**: Draft
+**Status**: Implemented
 
 **Input**: User description: "Restructure the site with new navigation (about, stories, research, bookmarks, contact), hero-only home page, stories with filter toggles, research page, annotated bookmarks with filters, and minimal contact page. Lowercase titles throughout."
 

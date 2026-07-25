@@ -4,7 +4,7 @@
 
 **Created**: 2026-07-25
 
-**Status**: Draft
+**Status**: Implemented
 
 **Input**: User description: "Build a personal website for Cristiane as a Jekyll static site hosted on GitHub Pages with five sections: Home, Portfolio/Resume, Projects, Blog, and Curation."
 

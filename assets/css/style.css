@@ -172,6 +172,209 @@ time {
   }
 }
 
+/* ---- Home: What's New ---- */
+
+.updates {
+  max-width: 34rem;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+  text-align: left;
+}
+
+.updates__heading {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem;
+}
+
+.updates__list {
+  list-style: none;
+}
+
+.updates__item {
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.updates__item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+/* The type string is its own label. Known types get a colour below; anything
+   else falls back to these base pill styles rather than failing. */
+.updates__type {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.updates__type--publication {
+  color: #58a6ff;
+  border-color: #58a6ff;
+}
+
+.updates__type--story {
+  color: #3fb950;
+  border-color: #3fb950;
+}
+
+.updates__type--bookmark {
+  color: #d29922;
+  border-color: #d29922;
+}
+
+.updates__title {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.updates__title a {
+  text-decoration: none;
+}
+
+.updates__title a:hover {
+  text-decoration: underline;
+}
+
+.updates__title a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.updates__blurb {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.updates__date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Seat feature 007's compact callout inside the widget. Spacing only — its
+   internal styling belongs to that feature. */
+.updates .study-callout--compact {
+  margin-left: 0;
+  margin-right: 0;
+  max-width: none;
+}
+
+.updates__list + .study-callout--compact {
+  margin-top: 1.5rem;
+}
+
+/* ---- Call for Participants ---- */
+
+/* Reads as an invitation, not another list item: its own surface, a left
+   accent edge, and a button-like action. */
+.study-callout {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  padding: 1.25rem 1.35rem;
+  margin: 2rem 0;
+}
+
+.study-callout__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.study-callout__title {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.study-callout__body {
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.study-callout__facts {
+  margin-bottom: 0.85rem;
+}
+
+.study-callout__facts dt {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+}
+
+.study-callout__facts dd {
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.study-callout__deadline {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+}
+
+.study-callout__action {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 0.4rem 1.1rem;
+}
+
+.study-callout__action:hover {
+  color: var(--bg);
+  background: var(--accent);
+}
+
+.study-callout__action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Compact variant for the home page (feature 006): a tighter block that sits
+   under the hero without competing with it. */
+.study-callout--compact {
+  padding: 1rem 1.15rem;
+  margin: 1.5rem auto 0;
+  max-width: 32rem;
+  text-align: left;
+}
+
+.study-callout--compact .study-callout__title {
+  font-size: 1rem;
+}
+
+.study-callout--compact .study-callout__body {
+  font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+}
+
 /* ---- Journey Timeline ---- */
 
 .journey__tagline {
@@ -618,8 +821,8 @@ time {
 /* Round portrait. The photo file is a full-length portrait; object-fit crops
    it to a circle and object-position pulls the framing up onto the face. */
 .profile-photo {
-  width: 12rem;
-  height: 12rem;
+  width: 8rem;
+  height: 8rem;
   object-fit: cover;
   object-position: 50% 12%;
   border-radius: 50%;

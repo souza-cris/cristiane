@@ -26,6 +26,8 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
   - `story-filters.html`, `story-list.html` — shared by `stories.md` and every page in `stories/`
   - `bookmark-filters.html`, `bookmark-list.html` — shared by `bookmarks.md` and every page in `bookmarks/`
   - `search-box.html` — the search input, plus the `<script>` tag that loads `search.js`
+  - `study-callout.html` — the call for participants. Self-gating: renders
+    nothing when the study is inactive or absent, so callers need no condition
   - `journey-timeline.html` — the journey track. Each stop is a native
     `<details name="journey">` disclosure, so the browser handles
     one-open-at-a-time with no script. Keep it that way.
@@ -35,6 +37,13 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
   - Bookmarks: `_data/bookmarks.yml`, filter slugs in `_data/bookmark_types.yml`
   - Story filters: `_data/story_keywords.yml`
   - Research: `_data/research.yml`
+  - Home updates: `_data/updates.yml` — hand-curated, rendered by
+    `_includes/updates-widget.html`. It never aggregates from `_posts/` or
+    bookmarks, and it reads feature 007's study record without owning it
+  - Call for participants: `_data/study.yml` — a single study record with an
+    `active` toggle, rendered by `_includes/study-callout.html` in two variants
+    (`full` on research, `compact` on home). It is the single source for both
+    surfaces; never copy study text anywhere else
   - Pages: `index.md`, `journey.md`, `stories.md`, `research.md`, `bookmarks.md`, `contact.md`, `404.md`
   - Filter pages: `stories/*.md` and `bookmarks/*.md` — thin wrappers over the shared includes
 - **Config**: `_config.yml` holds site metadata, social links, and the post permalink (`/stories/:year/:month/:day/:title/`)
@@ -52,6 +61,9 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
   optional `period` renders only inside an opened stop. Note that detail text
   is in the HTML even while collapsed, so grepping the page for years gives
   false matches — check the `<summary>` markup instead.
+- Study and recruitment content is author-supplied and MUST NOT be generated or
+  paraphrased. For human-subjects research it is IRB-approved wording. The site
+  links out to a recruitment destination and never collects participant data.
 - Explain changes in plain language — the project owner is new to web development.
 
 ## Spec Kit

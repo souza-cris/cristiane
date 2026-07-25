@@ -4,7 +4,7 @@
 
 **Created**: 2026-07-25
 
-**Status**: Draft
+**Status**: Implemented
 
 **Input**: User description: "Improve the journey page: surface the milestone notes that are currently stored but never shown, using an expandable detail view; add time back only inside that detail view while keeping the track itself year free; make the timeline usable on phones and discoverable on desktop; add a framing line that connects the industry to academia arc to the research; lean into the geography of the path; keep badges legible instead of implying importance by size; and strengthen accessibility."
 
