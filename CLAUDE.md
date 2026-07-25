@@ -22,6 +22,10 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 
 - **Layouts** (`_layouts/`): `default.html` (base), `page.html`, `story.html`
 - **Includes** (`_includes/`):
+  - `side-nav.html` — the vertical section menu. Unlike `study-callout.html` it
+    does NOT self-gate: `default.html` decides which pages get it, because
+    "not on home" is a layout decision, not a property of the component.
+    Its link list duplicates `nav.html` on purpose — see spec 008
   - `head.html`, `nav.html`, `footer.html`
   - `story-filters.html`, `story-list.html` — shared by `stories.md` and every page in `stories/`
   - `bookmark-filters.html`, `bookmark-list.html` — shared by `bookmarks.md` and every page in `bookmarks/`
@@ -69,6 +73,12 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
   organisation's site. The link sits inside the `<summary>`, which is safe:
   the anchor handles its own click, so following it does not toggle the stop.
   Do not add script to "fix" this.
+- The site has two breakpoints and they are not interchangeable. 600px is where
+  the top nav collapses; 1000px is where the side nav hides, because below that
+  it would overlap the 44rem content column. Do not consolidate them.
+- `default.html` puts `is-home` or `is-interior` on `<body>`. That class drops
+  the rules above and below the content on home; reuse it for anything else
+  that differs between home and interior pages rather than adding a new flag.
 - Study and recruitment content is author-supplied and MUST NOT be generated or
   paraphrased. For human-subjects research it is IRB-approved wording. The site
   links out to a recruitment destination and never collects participant data.

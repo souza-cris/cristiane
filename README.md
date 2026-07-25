@@ -61,17 +61,27 @@ Add an entry to `_data/bookmarks.yml`:
 
 ### Journey milestone
 
-Add a block to `_data/journey.yml`, positioned where it belongs in the story — the file's order is the page's order, oldest first. Years are deliberately not shown.
+Add a block to `_data/journey.yml`, positioned where it belongs in the story — the file's order is the page's order, oldest first.
 
 ```yaml
-- category: industry       # or: academia
+- category: industry       # or: academia — sets the badge ring colour and style
   label: "Short label"     # what shows on the track
-  org: "Organization"
+  org: "Organization"      # shown when the stop is opened
   short: "OR"              # initials, shown until a logo is set
   logo: "dell.svg"         # a file in assets/img/logos/, or "" for initials
+  url: "https://…"         # optional — makes the logo link to their site
   flag: "🇧🇷"
   place: "City, Country"
+  period: "2019–2022"      # shown on the track, and again when opened
+  title: "Full role title" # shown only when the stop is opened
+  note: "The longer story." # shown only when the stop is opened
 ```
+
+Three things to know:
+
+- **Select a stop to open it.** `title` and `note` are hidden until then, and only one stop is open at a time. That is the browser's own behaviour, not a script.
+- **The words "academia" and "industry" never appear on a stop.** The category shows as the badge's ring colour and style, explained once by the legend above the track.
+- **Logos are committed files, sized small.** Drop a new one in `assets/img/logos/` and resize it first — the badge renders it at about 42 pixels, so a 200-pixel image is already generous.
 
 ### Publication
 
@@ -132,7 +142,7 @@ Both steps are needed because Jekyll cannot generate pages from data files witho
 ```
 _config.yml                # Site settings, social links, post permalink
 _layouts/                  # default, page, story
-_includes/                 # head, nav, footer
+_includes/                 # head, nav, side-nav, footer
                            # story-filters, story-list
                            # bookmark-filters, bookmark-list
                            # search-box, journey-timeline
@@ -168,8 +178,11 @@ Work on this site is specified before it is built, using [Spec Kit](https://gith
 | 005 | Journey storytelling and usability |
 | 006 | Home page updates widget |
 | 007 | Research page call for participants |
+| 008 | Side navigation and uninterrupted home |
 
 The project constitution is at `.specify/memory/constitution.md`. Its five principles — simplicity, content as data, GitHub Pages compatibility, performance and accessibility, and minimal JavaScript — are checked in every feature's plan.
+
+Feature 008 was written up after it was built rather than before, and its spec says so. It also records the one place the site knowingly departs from "content as data" — five navigation links held as markup instead of a data file — along with what would justify changing that.
 
 ## Conventions
 

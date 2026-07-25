@@ -1,0 +1,117 @@
+# Tasks: Side Navigation and Uninterrupted Home
+
+**Feature**: [spec.md](spec.md) | **Plan**: [plan.md](plan.md)
+
+**Note**: this feature shipped before it was specified. The tasks below are
+recorded from the work as it was actually done, which is why they are all
+complete. They are written so the feature could be rebuilt from them.
+
+## Format: `[ID] [P?] [Story] Description`
+
+- **[P]** — can run in parallel with other [P] tasks (different files, no shared dependency)
+- **[Story]** — the user story this serves
+
+## Path Conventions
+
+Static Jekyll site at the repository root. Templates in `_includes/` and `_layouts/`, styles in `assets/css/style.css`.
+
+---
+
+## Phase 1: Setup
+
+- [X] T001 Confirm the content column's maximum width in `assets/css/style.css` (44rem) and derive the breakpoint at which a fixed menu can no longer sit beside it, per decision 2 in [research.md](research.md)
+
+---
+
+## Phase 2: Foundational (Blocking Prerequisites)
+
+- [X] T002 In `_layouts/default.html`, add a body class derived from `page.url` — `is-home` on the home page, `is-interior` elsewhere. Both later stories depend on this
+
+**Checkpoint**: every page names itself in its markup; nothing visible has changed yet.
+
+---
+
+## Phase 3: User Story 1 — Move between sections without returning to the top (Priority: P1) 🎯 MVP
+
+**Goal**: A persistent section menu beside the content on every page except home.
+
+**Independent Test**: From the bottom of `/bookmarks/`, reach any other section without scrolling up.
+
+- [X] T003 [US1] Create `_includes/side-nav.html` — a `<nav class="side-nav" aria-label="Section navigation">` wrapping a `<ul>` of the five section links, each href through `relative_url`, per the shape in [contracts/side-nav-include.md](contracts/side-nav-include.md)
+- [X] T004 [US1] In `_includes/side-nav.html`, give each link its current-page test: exact match for journey, research and contact; `contains` for stories and bookmarks so child pages mark their section (FR-003). Emit `aria-current="page"` on the match
+- [X] T005 [US1] In `_layouts/default.html`, include the side nav on every page except home, placed inside `<body>` and outside `<main>`
+- [X] T006 [US1] In `assets/css/style.css`, position the menu fixed at the right edge and vertically centred, and style the links in the site's mono face
+- [X] T007 [US1] In `assets/css/style.css`, style the current link with a colour change **and** a right border, so the state is not colour-only (FR-007)
+- [X] T008 [US1] In `assets/css/style.css`, keep the site's standard focus ring on the links
+- [X] T009 [US1] Run quickstart Scenarios 1 and 2
+
+**Checkpoint**: the menu works on every page including home, which is wrong — Phase 4 fixes it.
+
+---
+
+## Phase 4: User Story 2 — A home page with nothing beside it (Priority: P2)
+
+**Goal**: Home shows no menu and no rules boxing the content.
+
+**Independent Test**: Home has neither the menu markup nor the rules; every other page has both.
+
+- [X] T010 [US2] Confirm T005's condition excludes home, and that the markup is absent from the built home page rather than hidden — a hidden-but-focusable menu is an accessibility bug, per decision 4 in [research.md](research.md)
+- [X] T011 [US2] In `assets/css/style.css`, remove the rule below the top navigation and above the footer under `.is-home` only
+- [X] T012 [US2] Run quickstart Scenario 3
+
+**Checkpoint**: home reads as one uninterrupted page.
+
+---
+
+## Phase 5: User Story 3 — No second menu where there is no room (Priority: P2)
+
+**Goal**: The menu yields entirely on narrow screens.
+
+**Independent Test**: Below 1000px the menu is gone, nothing overlaps, nothing scrolls sideways.
+
+- [X] T013 [US3] In `assets/css/style.css`, hide `.side-nav` below the T001 breakpoint with `display: none`, so it is neither visible nor focusable
+- [X] T014 [US3] Sweep the width from 1100px to 900px and confirm no overlap on the way down and no horizontal scrollbar (FR-004)
+- [X] T015 [US3] Run quickstart Scenarios 4 and 5
+
+**Checkpoint**: all three stories complete.
+
+---
+
+## Phase 6: Polish & Cross-Cutting Concerns
+
+- [X] T016 [P] Regression check: all six pages render, the mobile top nav still works below 600px, and the journey track is not covered at any width
+- [X] T017 [P] Confirm no JavaScript was added — `search.js` remains the only script (FR-010)
+- [X] T018 [P] Update `README.md` — add the side nav to the structure block and this feature to the spec index
+- [X] T019 [P] Update `CLAUDE.md` with the include, the second breakpoint and the rule that the layout owns the home exclusion
+- [X] T020 Confirm the Constitution Check in [plan.md](plan.md) holds, including the recorded Principle II deviation and the trigger that would reverse it
+
+---
+
+## Dependencies & Execution Order
+
+### Phase Dependencies
+
+- **Phase 1** → **Phase 2** → everything else
+- **US1 (Phase 3)** is the MVP and blocks nothing
+- **US2 (Phase 4)** depends on T005 existing, since it constrains that condition
+- **US3 (Phase 5)** depends on T006, since it hides what that positions
+- **Polish** last
+
+### Parallel Opportunities
+
+Limited — the stylesheet and the include carry most of the work. Real opportunities:
+
+- T016, T017, T018 and T019 in Polish are four separate files
+- T003 (`_includes/side-nav.html`) and T011 (`assets/css/style.css`) touch different files once T002 is done
+
+Not parallelisable: any two tasks both editing `assets/css/style.css`.
+
+---
+
+## Implementation Strategy
+
+**MVP**: Phase 1 → Phase 2 → Phase 3. Nine tasks, and the menu works — but it also appears on home and overlaps text on narrow screens, so this is not shippable alone.
+
+**Minimum shippable**: MVP plus Phases 4 and 5. The exclusion and the breakpoint are corrections to US1's behaviour, not enhancements, so all three stories belong in the first release.
+
+**A note on the breakpoint**: this introduces the site's second breakpoint, at 1000px, alongside the existing 600px. That is deliberate — they describe different constraints — and decision 2 in [research.md](research.md) records why, so it is not later "tidied" into one number.
