@@ -1,0 +1,23 @@
+interests:
+  - "Instructional Systems Design and AI integration"
+  - "Human-centered AI in education"
+  - "Leadership in technology organizations"
+
+publications:
+  - title: "Example Publication Title"
+    authors: "Souza, C. et al."
+    venue: "Conference Name 2026"
+    year: 2026
+    status: "published"
+    link: "https://doi.org/example"
+  - title: "Work in Progress"
+    authors: "Souza, C."
+    venue: ""
+    year: 2026
+    status: "in progress"
+    link: ""
+
+methods:
+  - "Qualitative research methods"
+  - "Mixed-methods design"
+  - "Survey design and analysis"

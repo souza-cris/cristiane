@@ -2,14 +2,15 @@
 layout: default
 ---
 
-<section class="home">
-  <img src="{{ site.photo | relative_url }}" alt="Photo of {{ site.title }}" class="home__photo">
-  <h1>{{ site.title }}</h1>
-  <p class="home__tagline">{{ site.description }}</p>
+<section class="hero">
+  <p class="hero__eyebrow">Hello, my name is</p>
+  <h1 class="hero__headline">Cris</h1>
+  <p class="hero__subheadline">PhD student slash researcher slash tech leader slash traveler slash cat lady</p>
 
-  <ul class="home__links">
-    {% for link in site.social %}
-    <li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a></li>
-    {% endfor %}
+  <ul class="hero__ctas">
+    <li><a href="{{ '/stories' | relative_url }}">stories</a></li>
+    <li><a href="{{ '/research' | relative_url }}">research</a></li>
+    <li><a href="{{ '/bookmarks' | relative_url }}">bookmarks</a></li>
+    <li><a href="{{ '/contact' | relative_url }}">contact</a></li>
   </ul>
 </section>

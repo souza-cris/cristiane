@@ -1,7 +1,11 @@
 ---
-layout: post
+layout: story
 title: "Building this site with Jekyll"
 date: 2026-07-25
+length: long
+category: Leadership
+tags: [jekyll, web development, tutorial]
+tldr: "A walkthrough of how this site was built using Jekyll, Markdown, and GitHub Pages."
 ---
 
 I built this site using Jekyll, a static site generator that turns Markdown files into a website. Here's a quick look at how it works.
@@ -32,9 +36,13 @@ Each post starts with front matter — a small block of metadata:
 
 ```yaml
 ---
-layout: post
+layout: story
 title: "Your Post Title"
 date: 2026-07-25
+length: short
+category: AI
+tags: [your, tags]
+tldr: "A brief summary of the post."
 ---
 ```
 

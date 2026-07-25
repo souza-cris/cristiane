@@ -3,11 +3,11 @@
   <details class="site-nav__menu">
     <summary aria-label="Toggle menu">Menu</summary>
     <ul class="site-nav__links">
-      <li><a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a></li>
-      <li><a href="{{ '/portfolio' | relative_url }}"{% if page.url == '/portfolio/' %} aria-current="page"{% endif %}>Portfolio</a></li>
-      <li><a href="{{ '/projects' | relative_url }}"{% if page.url == '/projects/' %} aria-current="page"{% endif %}>Projects</a></li>
-      <li><a href="{{ '/blog' | relative_url }}"{% if page.url == '/blog/' %} aria-current="page"{% endif %}>Blog</a></li>
-      <li><a href="{{ '/curation' | relative_url }}"{% if page.url == '/curation/' %} aria-current="page"{% endif %}>Curation</a></li>
+      <li><a href="{{ '/about' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>about</a></li>
+      <li><a href="{{ '/stories' | relative_url }}"{% if page.url contains '/stories' %} aria-current="page"{% endif %}>stories</a></li>
+      <li><a href="{{ '/research' | relative_url }}"{% if page.url == '/research/' %} aria-current="page"{% endif %}>research</a></li>
+      <li><a href="{{ '/bookmarks' | relative_url }}"{% if page.url contains '/bookmarks' %} aria-current="page"{% endif %}>bookmarks</a></li>
+      <li><a href="{{ '/contact' | relative_url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>contact</a></li>
     </ul>
   </details>
 </nav>

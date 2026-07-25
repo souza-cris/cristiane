@@ -1,0 +1,42 @@
+- title: "Attention Is All You Need"
+  type: "paper"
+  topicTags:
+    - "AI"
+    - "NLP"
+  whyItMatters: "This paper introduced the Transformer architecture that underpins modern large language models. Understanding it is essential for anyone working with AI in education or research."
+  keyTakeaway: "Self-attention mechanisms can replace recurrence entirely, enabling more parallelizable and effective sequence models."
+  link: "https://arxiv.org/abs/1706.03762"
+  addedDate: "2026-07-20"
+  source: "arXiv"
+
+- title: "Designing for How People Learn"
+  type: "book"
+  topicTags:
+    - "ISD"
+    - "Learning Design"
+  whyItMatters: "Bridges cognitive science and instructional design in an accessible way. A foundational text for anyone designing learning experiences."
+  keyTakeaway: "Effective instruction aligns with how memory, attention, and motivation actually work — not how we assume they work."
+  link: "https://www.example.com/designing-for-learning"
+  addedDate: "2026-07-15"
+  source: "O'Reilly"
+
+- title: "AI in Education: Promises and Implications"
+  type: "talk"
+  topicTags:
+    - "AI"
+    - "Education"
+  whyItMatters: "A nuanced look at where AI genuinely helps in education and where it falls short. Useful for framing research questions."
+  keyTakeaway: "AI tools are most effective when they augment human instruction rather than replace it."
+  link: "https://www.example.com/ai-education-talk"
+  addedDate: "2026-07-10"
+
+- title: "Qualtrics"
+  type: "tool"
+  topicTags:
+    - "Research"
+    - "Survey Design"
+  whyItMatters: "Industry-standard survey platform used across academic research. Essential for mixed-methods studies."
+  keyTakeaway: "Powerful branching logic and data export capabilities make it ideal for complex research designs."
+  link: "https://www.qualtrics.com"
+  addedDate: "2026-07-05"
+  source: "Qualtrics"

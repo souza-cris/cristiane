@@ -1,35 +1,24 @@
-title: "Cristiane"
-description: "Personal website — projects, blog, and things I recommend."
+title: "Cris"
+description: "PhD student slash researcher slash tech leader slash traveler slash cat lady"
 baseurl: "/cristiane"
 url: ""
 
-photo: "/assets/images/profile.jpg"
 email: "cristiane@example.com"
 
 social:
+  - label: "LinkedIn"
+    url: "https://www.linkedin.com/in/souzacris/"
+  - label: "Google Scholar"
+    url: "https://scholar.google.com/citations?user=Zeajh2IAAAAJ&hl=en"
   - label: "GitHub"
     url: "https://github.com/souza-cris"
-  - label: "LinkedIn"
-    url: "https://linkedin.com/in/cristiane"
-
-collections:
-  projects:
-    output: true
-    sort_by: date
-
-permalink: /blog/:year/:month/:day/:title/
 
 defaults:
   - scope:
       path: ""
-      type: "projects"
-    values:
-      layout: "project"
-  - scope:
-      path: ""
       type: "posts"
     values:
-      layout: "post"
+      layout: "story"
 
 exclude:
   - Gemfile

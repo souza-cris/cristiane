@@ -1,0 +1,38 @@
+---
+layout: default
+---
+<article class="story">
+  <header class="story__header">
+    <h1>{{ page.title }}</h1>
+    <div class="story__meta">
+      <time class="story__date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+      {% if page.category %}<span class="story__category">{{ page.category }}</span>{% endif %}
+    </div>
+    {% if page.tags.size > 0 %}
+    <ul class="story__tags">
+      {% for tag in page.tags %}<li>{{ tag }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  {% if page.tldr %}
+  <div class="story__tldr">
+    <strong>TL;DR:</strong> {{ page.tldr }}
+  </div>
+  {% endif %}
+
+  {{ content }}
+
+  {% if page.citation %}
+  <footer class="story__citation">
+    <p>{{ page.citation }}</p>
+  </footer>
+  {% endif %}
+
+  {% if page.exploring_next %}
+  <section class="story__exploring">
+    <h2>what I'm exploring next</h2>
+    <p>{{ page.exploring_next }}</p>
+  </section>
+  {% endif %}
+</article>
