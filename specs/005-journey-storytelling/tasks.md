@@ -144,6 +144,24 @@ This is a static Jekyll site with no application source tree. Every task touches
 
 ---
 
+## Phase 9: Follow-on — Organisation logos and links (after implementation)
+
+Requested by the author once the feature was live. Recorded here rather than
+edited into the phases above, so the original run stays readable as history.
+
+- [X] T036 Replace the Alabama, Tetra Pak, HelloFresh, ADP, FGV, Sicredi and Getnet logo files with author-supplied artwork; resize to the rendered badge size and strip the colour profiles the source files carried. `fgv.png`→`fgv.svg`, `tetrapak.svg`→`tetrapak.png`, `alabama.svg`→`alabama.png`
+- [X] T037 Make the Tetra Pak source's white JPEG background transparent and trim its margin, so it does not show as a white square inside the dark circular badge
+- [X] T038 Add an optional `url` field to each milestone in `_data/journey.yml`, documented in the file's header comment
+- [X] T039 In `_includes/journey-timeline.html`, wrap the badge logo in a link to `url` when one is set, and the org name in the detail likewise; both `target="_blank" rel="noopener"`. Keep the no-`url` path rendering plain content
+- [X] T040 In `assets/css/style.css`, remove `.journey__category` and `.journey__detail-category` and add the badge-link and org-link rules
+- [X] T041 In `_includes/journey-timeline.html`, remove the category word from the track pill and from the detail meta line, leaving ring style and the legend as the FR-013 cues
+- [X] T042 Verify in a real browser that clicking a badge logo follows the link **without** toggling the stop, and that clicking the label still toggles without navigating — the whole design rests on this, and it must hold with no script
+- [X] T043 Record the amendments in [spec.md](spec.md), [research.md](research.md), [data-model.md](data-model.md) and [quickstart.md](quickstart.md), and update `CLAUDE.md` with the two new conventions
+
+**Checkpoint**: logos are the author's own artwork, each links to its organisation, and no stop names its category.
+
+---
+
 ## Dependencies & Execution Order
 
 ### Phase Dependencies

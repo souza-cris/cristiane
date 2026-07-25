@@ -92,9 +92,19 @@ This story ships as structure only; periods are empty by decision.
 1. Compare the first and last badges. They are the same size.
 2. Confirm the rail still brightens from oldest to newest.
 3. Confirm academia and industry stops differ by ring style, not only colour — a greyscale screenshot is the quickest test.
-4. Expand a stop and confirm its category is named in words.
+4. Confirm the legend above the track names both categories against those same ring styles. No individual stop names its category — that word appears only in the legend.
 
 **Passes when**: every logo is legible and the two categories are tellable apart with colour removed.
+
+## Scenario 8 — Organisation links on the logos
+
+1. Click a badge logo. The organisation's own site opens in a new tab.
+2. Confirm the stop did **not** open as a result of that click. A link inside a `<summary>` handles its own click, so the disclosure must not toggle — if it does, something has broken, and the fix is in the markup, never a script.
+3. Click the same stop's label. It toggles open, and no new tab appears.
+4. In the opened detail, confirm the organisation name is a link to the same destination.
+5. Remove `url` from one milestone in `_data/journey.yml`. That stop's logo and org name render as plain content, with no empty link.
+
+**Passes when**: logos and org names link out, the toggle still works from everywhere else on the stop, and a milestone with no `url` renders cleanly.
 
 ## Regression checks
 

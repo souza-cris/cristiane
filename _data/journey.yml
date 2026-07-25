@@ -6,6 +6,9 @@
 # short    : 1-3 letters shown in the circle until a logo file is added
 # logo     : optional path under /assets/img/logos/, e.g. "dell.svg".
 #            Leave as "" and the `short` initials are shown instead.
+# url      : optional link to the organisation's own site. Set it and the logo
+#            becomes clickable, opening in a new tab. Leave it out and the logo
+#            renders as plain artwork — no code change needed either way.
 # flag     : country flag emoji
 # place    : city, country — shown under the label
 #
@@ -24,6 +27,7 @@
   org: "Federal University of Rio Grande do Sul"
   short: "UF"
   logo: "ufrgs.svg"
+  url: "https://www.ufrgs.br/site/english/ufrgs/"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
   period: "2002–2006"
@@ -35,6 +39,7 @@
   org: "Chevron"
   short: "C"
   logo: "chevron.svg"
+  url: "https://www.chevron.com/who-we-are"
   flag: "🇧🇷"
   place: "Brazil"
   period: "2006–2008"
@@ -46,6 +51,7 @@
   org: "Dell"
   short: "D"
   logo: "dell.svg"
+  url: "https://www.dell.com/en-us/lp/dt/who-we-are"
   flag: "🇧🇷"
   place: "Eldorado do Sul, Brazil"
   period: "2008–2014"
@@ -56,7 +62,8 @@
   label: "M.B.A."
   org: "Getulio Vargas Foundation"
   short: "FGV"
-  logo: "fgv.png"
+  logo: "fgv.svg"
+  url: "https://portal.fgv.br/en/about-fgv"
   flag: "🇧🇷"
   place: "Brazil"
   period: "2008–2010"
@@ -68,6 +75,7 @@
   org: "Sicredi"
   short: "S"
   logo: "sicredi.svg"
+  url: "https://www.sicredi.com.br/site/sobre-nos/"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
   period: "2014–2017"
@@ -79,6 +87,7 @@
   org: "Federal University of Rio Grande do Sul"
   short: "UF"
   logo: "ufrgs.svg"
+  url: "https://www.ufrgs.br/site/english/ufrgs/"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
   period: "2016–2017"
@@ -90,6 +99,7 @@
   org: "ADP"
   short: "A"
   logo: "adp.svg"
+  url: "https://www.adp.com/about-adp.aspx"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
   period: "2018–2019"
@@ -100,7 +110,8 @@
   label: "Agile Coach"
   org: "Tetra Pak"
   short: "TP"
-  logo: "tetrapak.svg"
+  logo: "tetrapak.png"
+  url: "https://www.tetrapak.com/en-us"
   flag: "🇮🇹"
   place: "Modena, Italy"
   period: "2019–2022"
@@ -112,6 +123,7 @@
   org: "HelloFresh"
   short: "HF"
   logo: "hellofresh.png"
+  url: "https://www.hellofreshgroup.com/en/"
   flag: "🇩🇪"
   place: "Berlin, Germany"
   period: "2022–2023"
@@ -123,6 +135,7 @@
   org: "Getnet — Santander Group"
   short: "G"
   logo: "getnet.svg"
+  url: "https://www.getnet.net/en/corporate/about-us"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
   period: "2023–2025"
@@ -133,7 +146,8 @@
   label: "Ph.D. in MIS"
   org: "The University of Alabama"
   short: "UA"
-  logo: "alabama.svg"
+  logo: "alabama.png"
+  url: "https://www.ua.edu/"
   flag: "🇺🇸"
   place: "Tuscaloosa, United States"
   period: "2025–2029"

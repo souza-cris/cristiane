@@ -61,6 +61,14 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
   optional `period` renders only inside an opened stop. Note that detail text
   is in the HTML even while collapsed, so grepping the page for years gives
   false matches — check the `<summary>` markup instead.
+- A journey stop never names its category in words. `academia` / `industry` are
+  shown by the badge ring style (solid / dashed) plus the legend above the
+  track, which is the only place those words appear. This satisfies the
+  colour-independence requirement without repeating the label on every stop.
+- A milestone's optional `url` turns its badge logo into a link to that
+  organisation's site. The link sits inside the `<summary>`, which is safe:
+  the anchor handles its own click, so following it does not toggle the stop.
+  Do not add script to "fix" this.
 - Study and recruitment content is author-supplied and MUST NOT be generated or
   paraphrased. For human-subjects research it is IRB-approved wording. The site
   links out to a recruitment destination and never collects participant data.

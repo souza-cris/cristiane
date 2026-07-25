@@ -582,19 +582,11 @@ time {
   padding: 0.3rem;
 }
 
-/* Category is named in words on the track, in its own colour, so academia and
-   industry are obvious at a glance rather than inferred from a ring colour. */
-.journey__category {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--cat-color);
-  border: 1px solid var(--cat-color);
-  border-radius: 999px;
-  padding: 0.05rem 0.4rem;
-  margin-top: 0.4rem;
+/* The badge doubles as a link to the organisation's own site. It sits inside a
+   <summary>, so it must not look or behave like the rest of the toggle. */
+.journey__badge--link {
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .journey__flag {
@@ -649,11 +641,15 @@ time {
   margin-bottom: 0.5rem;
 }
 
-/* The category in words — the text cue that backs up the ring style. */
-.journey__detail-category {
+/* The organisation links out to its own site when a `url` is set. */
+a.journey__detail-org {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+a.journey__detail-org:hover {
   color: var(--cat-color);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 .journey__detail-note {

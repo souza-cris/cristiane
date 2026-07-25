@@ -56,6 +56,14 @@ Five questions had to be settled before design. All are resolved; none remain ma
 
 **Rationale**: FR-013 asks for more than colour. Ring style is visible at a glance on the collapsed track, where the distinction actually matters, and it costs one CSS declaration. The named category in the detail gives an unambiguous text answer for anyone who wants certainty, and it is read by screen readers.
 
+> **Amended (after implementation)**: the per-stop category word was removed from
+> both surfaces — the pill that had been added to the track, and the line in the
+> expanded detail. Ring style remains, and the legend above the track still names
+> both categories against matching rings. FR-013 is met by ring style plus that
+> legend; the words now appear once as a key rather than eleven times as a label.
+> This lands closer to the "text label under every stop" alternative rejected
+> below, and for the same reason: the author wanted less text per stop.
+
 **Alternatives considered**:
 
 - *Icons per category* (mortarboard, briefcase) — expressive, but every stop already carries a logo inside the circle; a second glyph competes with it. Rejected as visual noise.

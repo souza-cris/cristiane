@@ -42,6 +42,14 @@ Turn the journey track from a decorative strip into something readable. Each sto
 
 **Post-design re-check**: still passing. The design added no script, no dependency and no plugin; it removed one piece of computed styling.
 
+**Re-check after the Phase 9 follow-on**: still passing on all five. The optional
+`url` is data, not markup (II). The logo links are plain anchors — a link inside
+a `<summary>` handles its own click, so the disclosure still needs no script (V),
+verified in a browser rather than assumed. The links point outward but load
+nothing from outside; every logo is still a committed local file, now smaller
+than before (III, IV). Dropping the per-stop category word leaves FR-013 resting
+on ring style plus the legend, which is still a non-colour cue (IV).
+
 *No violations — Complexity Tracking omitted.*
 
 ## Project Structure

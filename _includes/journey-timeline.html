@@ -9,6 +9,16 @@
       <details class="journey__stop journey__stop--{{ milestone.category }}" name="journey">
         <summary class="journey__summary">
           <span class="journey__badge-row">
+            {%- comment -%}
+              When a milestone has a `url` the badge is a link. A link inside a
+              <summary> handles its own click, so following it does not also
+              toggle the stop open — still no script needed.
+            {%- endcomment -%}
+            {% if milestone.url and milestone.url != "" %}
+            <a class="journey__badge journey__badge--logo journey__badge--link" href="{{ milestone.url }}" target="_blank" rel="noopener" title="{{ milestone.org }} — opens in a new tab">
+              <img src="{{ '/assets/img/logos/' | append: milestone.logo | relative_url }}" alt="{{ milestone.org }}" loading="lazy">
+            </a>
+            {% else %}
             <span class="journey__badge{% if milestone.logo != '' %} journey__badge--logo{% endif %}">
               {% if milestone.logo != "" %}
               <img src="{{ '/assets/img/logos/' | append: milestone.logo | relative_url }}" alt="{{ milestone.org }}" loading="lazy">
@@ -16,8 +26,8 @@
               <span aria-hidden="true">{{ milestone.short }}</span>
               {% endif %}
             </span>
+            {% endif %}
           </span>
-          <span class="journey__category">{{ milestone.category }}</span>
           <span class="journey__flag" role="img" aria-label="{{ milestone.place }}">{{ milestone.flag }}</span>
           <span class="journey__label">{{ milestone.label }}</span>
           <span class="journey__org">{{ milestone.period }}</span>
@@ -26,8 +36,11 @@
         <div class="journey__detail">
           {% if milestone.title != "" %}<p class="journey__detail-title">{{ milestone.title }}</p>{% endif %}
           <p class="journey__detail-meta">
-            <span class="journey__detail-category">{{ milestone.category }}</span>
+            {% if milestone.url and milestone.url != "" %}
+            <a class="journey__detail-org" href="{{ milestone.url }}" target="_blank" rel="noopener">{{ milestone.org }}</a>
+            {% else %}
             <span class="journey__detail-org">{{ milestone.org }}</span>
+            {% endif %}
             <span class="journey__detail-place">{{ milestone.place }}</span>
             {% if milestone.period != "" and milestone.period %}<span class="journey__detail-period">{{ milestone.period }}</span>{% endif %}
           </p>

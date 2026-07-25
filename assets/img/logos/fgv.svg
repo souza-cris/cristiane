@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="248.7" height="44.49" viewBox="0 0 248.7 44.49">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_1" data-name="Retângulo 1" width="248.7" height="44.49" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="FGV" transform="translate(124.35 22.245)">
+    <g id="Grupo_2" data-name="Grupo 2" transform="translate(-124.35 -22.245)">
+      <path id="Caminho_1" data-name="Caminho 1" d="M119.8.9V43.6h11.8V28.4h20.3V18.5H131.6V11.2H154V.9Z" fill="#003a79"/>
+      <g id="Grupo_1" data-name="Grupo 1" clip-path="url(#clip-path)">
+        <path id="Caminho_2" data-name="Caminho 2" d="M181.2,44.5a25.8,25.8,0,0,1-9.3-1.6,22.1,22.1,0,0,1-7.4-4.6,21,21,0,0,1-4.9-7,22.1,22.1,0,0,1-1.8-9h0a22.1,22.1,0,0,1,6.5-15.8,21.7,21.7,0,0,1,7.3-4.7A24.3,24.3,0,0,1,180.9,0a26.3,26.3,0,0,1,9.8,1.7,26.9,26.9,0,0,1,7.5,4.6l-7,8.4a19.1,19.1,0,0,0-4.7-3,14.1,14.1,0,0,0-5.6-1,10.2,10.2,0,0,0-4.3.9,10.9,10.9,0,0,0-3.5,2.5,12.528,12.528,0,0,0-3.2,8.3h0a13,13,0,0,0,.9,4.8,10.7,10.7,0,0,0,2.4,3.8,11.4,11.4,0,0,0,3.7,2.4,12,12,0,0,0,4.7.9,12.3,12.3,0,0,0,6.9-1.8V27.3h-8.4V18.6h19.7V37.9a31.1,31.1,0,0,1-8.1,4.7,27.7,27.7,0,0,1-10.5,1.9" fill="#003a79"/>
+        <path id="Caminho_3" data-name="Caminho 3" d="M203,.9h13.2l9.7,27,9.7-27h13.1L231.3,43.6h-11Z" fill="#003a79"/>
+        <path id="Caminho_4" data-name="Caminho 4" d="M61.1,14.8,75.8,1H109L80.9,27.1Z" fill="#008ed1" fill-rule="evenodd"/>
+        <path id="Caminho_5" data-name="Caminho 5" d="M0,1H34.2L71.3,43.7H37.2Z" fill="#003a79" fill-rule="evenodd"/>
+      </g>
+    </g>
+  </g>
+</svg>

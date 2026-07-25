@@ -20,9 +20,10 @@ One stop on the journey track. A list entry in `_data/journey.yml`, ordered olde
 
 | Field | Required | Surface | Description |
 |-------|----------|---------|-------------|
-| `category` | Yes | Collapsed + detail | `academia` or `industry`. Drives ring colour **and** ring style; named in words in the detail |
+| `category` | Yes | Collapsed | `academia` or `industry`. Drives ring colour **and** ring style. Never named in words on a stop — see the amendment below |
 | `label` | Yes | Collapsed | Short line on the track — a few words |
-| `org` | Yes | Collapsed | School, company or community |
+| `org` | Yes | Detail | School, company or community. Links to `url` when one is set |
+| `url` | No | Collapsed + detail | **Later addition.** The organisation's own site. Set it and the badge logo becomes a link, as does the org name in the detail; both open in a new tab. Omit it and both render as plain content |
 | `short` | Yes | Collapsed | 1–3 letters shown in the circle when no logo is set |
 | `logo` | Yes | Collapsed | Filename under `assets/img/logos/`, or `""` for the initials fallback |
 | `flag` | Yes | Collapsed | Country flag emoji; also the source of the derived country count |
@@ -35,12 +36,15 @@ One stop on the journey track. A list entry in `_data/journey.yml`, ordered olde
 
 - `period` MUST NOT render on the collapsed surface (FR-010). It appears only inside the disclosure.
 - An empty `note`, `title` or `period` MUST render nothing at all — no empty element, no stray punctuation, no label with a blank value (FR-004).
-- `category` MUST be `academia` or `industry`; an unrecognised value gets the default ring and no category name rather than breaking the layout.
+- `category` MUST be `academia` or `industry`; an unrecognised value gets the default ring rather than breaking the layout.
+- `url`, when set, MUST be an absolute external URL and MUST NOT go through `relative_url` — it leaves the site. It opens in a new tab with `rel="noopener"`.
+- An empty or absent `url` MUST render the badge and the org name as plain content, with no empty anchor left behind.
 - Field order in the file is irrelevant; entry order is the story order and MUST be preserved.
 
 **Removed behaviour**
 
 - The per-stop badge diameter derived from list position in feature 004 is withdrawn (FR-012). Badge size becomes a single constant; the brightening rail remains the progression cue. Nothing in the data file changes as a result — the derivation lived in the include.
+- The category named in words on each stop is withdrawn. It survives only in the legend above the track. No data file change — the wording came from `category`, which is unchanged and still drives both ring cues.
 
 ### Journey framing
 
@@ -59,8 +63,9 @@ The copy above the track. Lives in the body of `journey.md`, not in a data file.
 
 ```
 _data/journey.yml  ──entry order──▶  left-to-right (or top-down) sequence on the track
-                   ──category────▶  ring colour + ring style + category name in detail
+                   ──category────▶  ring colour + ring style (never words on a stop)
                    ──logo────────▶  assets/img/logos/<file>
+                   ──url─────────▶  wraps the badge logo and the org name in a link
                    ──flag────────▶  per-stop flag  +  distinct count for the geography line
                    ──title/note/period──▶  detail content, never the collapsed surface
 ```
