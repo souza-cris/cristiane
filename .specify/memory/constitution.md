@@ -1,50 +1,103 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: 0.0.0 (template) → 1.0.0
+- Added principles:
+  - I. Simplicity & Maintainability
+  - II. Content as Data
+  - III. GitHub Pages Compatibility
+  - IV. Performance & Accessibility
+  - V. Minimal JavaScript
+- Added sections:
+  - Technology Constraints
+  - Development Workflow
+  - Governance
+- Removed sections: none (initial adoption)
+- Templates requiring updates:
+  - .specify/templates/plan-template.md — ✅ no changes needed (Constitution Check is generic)
+  - .specify/templates/spec-template.md — ✅ no changes needed
+  - .specify/templates/tasks-template.md — ✅ no changes needed
+- Follow-up TODOs: none
+-->
+
+# Cristiane Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Simplicity & Maintainability
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+- All code MUST prefer clear, conventional patterns over clever solutions.
+- Every change MUST be the simplest approach that solves the problem.
+- YAGNI: features, abstractions, and configuration MUST NOT be added
+  until there is a concrete, immediate need.
+- Rationale: this is a personal site maintained by one person; complexity
+  is the primary risk.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Content as Data
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+- All user-facing content (blog posts, project descriptions, curation
+  items) MUST live in Markdown files or Jekyll data files (`_data/`).
+- Content MUST NOT be hardcoded in HTML templates or includes.
+- Adding or editing content MUST NOT require touching layout or logic
+  files.
+- Rationale: the owner edits content frequently and must be able to do
+  so without understanding HTML or Liquid internals.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. GitHub Pages Compatibility
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+- The site MUST build and deploy with standard GitHub Pages (Jekyll).
+- Only GitHub Pages-supported plugins MUST be used unless there is an
+  explicit, justified exception with a custom build workflow.
+- No external build tools, bundlers, or CI pipelines are required for
+  the default deploy path.
+- Rationale: free hosting, zero-ops deployment, and a simple `git push`
+  workflow.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Performance & Accessibility
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+- Pages MUST be fast-loading, mobile-friendly, and meet basic
+  accessibility standards (semantic HTML, alt text, sufficient contrast).
+- Layouts MUST be responsive without relying on JavaScript for core
+  layout or navigation.
+- Images MUST be appropriately sized and use descriptive alt attributes.
+- Rationale: the site serves a broad audience on varying devices and
+  connections.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Minimal JavaScript
+
+- JavaScript MUST NOT be added unless there is a clear, documented need
+  that cannot be met with HTML and CSS alone.
+- When JavaScript is used, it MUST be small, inline or in a single file,
+  and MUST NOT require a build step or npm dependencies.
+- Rationale: every script adds maintenance burden and potential
+  accessibility or performance issues.
+
+## Technology Constraints
+
+- **Static site generator**: Jekyll (GitHub Pages default version).
+- **Hosting**: GitHub Pages (free tier).
+- **Templating**: Liquid.
+- **Styling**: Plain CSS (no preprocessor required unless complexity
+  justifies it).
+- **Content format**: Markdown (posts, pages) and YAML (`_data/` files).
+- **Local testing**: `bundle exec jekyll serve`.
+
+## Development Workflow
+
+- Always test locally with `bundle exec jekyll serve` before pushing.
+- Commits SHOULD be small and focused on a single change.
+- Explain what was changed and why in commit messages and when
+  communicating changes, using plain language — the project owner is new
+  to web development.
+- When making changes, describe the purpose and effect of each
+  modification so the owner can learn as the project evolves.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- This constitution supersedes ad-hoc decisions. All changes to the site
+  MUST be checked against these principles.
+- Amendments to this constitution require updating this file, bumping
+  the version, and noting the rationale.
+- Complexity that violates a principle MUST be justified in writing
+  before implementation.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-07-25 | **Last Amended**: 2026-07-25
