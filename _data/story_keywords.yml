@@ -1,0 +1,14 @@
+# The filter pills shown on the stories page.
+# "slug" must match what you write in a story's `keywords:` list.
+# "label" is what visitors see on the pill.
+# To add a filter: add an entry here AND create a matching file in stories/.
+- slug: short
+  label: short
+- slug: ai
+  label: AI
+- slug: leadership
+  label: leadership
+- slug: conference
+  label: conference
+- slug: isd
+  label: ISD

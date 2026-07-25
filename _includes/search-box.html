@@ -1,0 +1,11 @@
+<form class="search" role="search" hidden onsubmit="return false;">
+  <label class="visually-hidden" for="list-search">{{ include.label }}</label>
+  <input
+    class="search__input"
+    id="list-search"
+    type="search"
+    placeholder="{{ include.label }}"
+    autocomplete="off"
+    data-search-list="{{ include.target }}">
+</form>
+<script src="{{ '/assets/js/search.js' | relative_url }}" defer></script>

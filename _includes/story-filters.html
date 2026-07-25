@@ -1,0 +1,6 @@
+<ul class="filter-pills">
+  <li><a href="{{ '/stories' | relative_url }}"{% unless page.keyword %} aria-current="page"{% endunless %}>all</a></li>
+  {% for keyword in site.data.story_keywords %}
+  <li><a href="{{ '/stories/' | append: keyword.slug | relative_url }}"{% if page.keyword == keyword.slug %} aria-current="page"{% endif %}>{{ keyword.label }}</a></li>
+  {% endfor %}
+</ul>

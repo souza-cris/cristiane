@@ -2,8 +2,7 @@
 layout: story
 title: "Building this site with Jekyll"
 date: 2026-07-25
-length: long
-category: Leadership
+keywords: [leadership, isd]
 tags: [jekyll, web development, tutorial]
 tldr: "A walkthrough of how this site was built using Jekyll, Markdown, and GitHub Pages."
 ---

@@ -6,7 +6,10 @@ layout: default
     <h1>{{ page.title }}</h1>
     <div class="story__meta">
       <time class="story__date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
-      {% if page.category %}<span class="story__category">{{ page.category }}</span>{% endif %}
+      {% for keyword in page.keywords %}
+      {% assign match = site.data.story_keywords | where: "slug", keyword | first %}
+      <a class="story__category" href="{{ '/stories/' | append: keyword | relative_url }}">{{ match.label | default: keyword }}</a>
+      {% endfor %}
     </div>
     {% if page.tags.size > 0 %}
     <ul class="story__tags">

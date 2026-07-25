@@ -1,0 +1,6 @@
+<ul class="filter-pills">
+  <li><a href="{{ '/bookmarks' | relative_url }}"{% unless page.type %} aria-current="page"{% endunless %}>all</a></li>
+  {% for entry in site.data.bookmark_types %}
+  <li><a href="{{ '/bookmarks/' | append: entry.slug | relative_url }}"{% if page.type == entry.slug %} aria-current="page"{% endif %}>{{ entry.label }}</a></li>
+  {% endfor %}
+</ul>

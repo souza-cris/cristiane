@@ -1,6 +1,7 @@
 title: "Cris"
 description: "PhD student slash researcher slash tech leader slash traveler slash cat lady"
 baseurl: "/cristiane"
+permalink: "/stories/:year/:month/:day/:title/"
 url: ""
 
 email: "cristiane@example.com"

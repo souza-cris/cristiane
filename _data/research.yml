@@ -1,23 +1,27 @@
-interests:
-  - "Instructional Systems Design and AI integration"
-  - "Human-centered AI in education"
-  - "Leadership in technology organizations"
+interests: >
+  Human-computer interaction and human-AI collaboration; the human and
+  behavioral dimensions of information security; and how people adopt and work
+  with AI in information systems. Mixed-methods researcher across qualitative
+  and quantitative approaches.
 
 publications:
-  - title: "Example Publication Title"
-    authors: "Souza, C. et al."
-    venue: "Conference Name 2026"
-    year: 2026
-    status: "published"
-    link: "https://doi.org/example"
-  - title: "Work in Progress"
-    authors: "Souza, C."
-    venue: ""
-    year: 2026
-    status: "in progress"
+  - title: "Therapy Across Borders: The Search for Cultural Safety in Digital Mental Health"
+    authors: "Cris Souza"
+    venue: "AMCIS 2026 (accepted for presentation)"
     link: ""
-
-methods:
-  - "Qualitative research methods"
-  - "Mixed-methods design"
-  - "Survey design and analysis"
+  - title: "You're Right to Worry: Toward an AI Affirmation Momentum Theory of Security Non-Compliance"
+    authors: "Jenna Taer, Cris Souza, Marshia Mimm, Gabriela Mallmann, and Allen Johnston"
+    venue: "ECIS 2026 (presented)"
+    link: ""
+  - title: "The Role of Virtual Reality-Based Phishing Training in Mitigating Information Security Risks"
+    authors: "Marshia Mimm, Cris Souza"
+    venue: "ICIS 2025 (presented)"
+    link: ""
+  - title: "Analysis of the Competencies Required for the Position of IT Project Manager"
+    authors: "Cris Souza"
+    venue: "Master's research, UFRGS, 2017"
+    link: ""
+  - title: "Customer Satisfaction at the Travel and Tourism Agency Casa de Turismo"
+    authors: "Cris Souza"
+    venue: "UFRGS, 2006"
+    link: ""

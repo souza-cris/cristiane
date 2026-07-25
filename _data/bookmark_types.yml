@@ -1,0 +1,21 @@
+# The filter pills shown on the bookmarks page.
+# "slug" must match the `type:` value used in _data/bookmarks.yml.
+# "empty" is the message shown when nothing matches that filter.
+- slug: paper
+  label: paper
+  empty: "No papers yet."
+- slug: book
+  label: book
+  empty: "No books yet."
+- slug: talk
+  label: talk
+  empty: "No talks yet."
+- slug: tool
+  label: tool
+  empty: "No tools yet."
+- slug: dataset
+  label: dataset
+  empty: "No datasets yet."
+- slug: more
+  label: more
+  empty: "No items yet."
