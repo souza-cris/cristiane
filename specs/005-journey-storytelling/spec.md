@@ -142,6 +142,14 @@ Badge circles are a consistent, legible size across the track. The sense of a jo
 
 - The full title and description text already recorded for each milestone is the author's to correct and is treated as the source for the detail view; no new descriptions are invented.
 - The Chevron milestone has an intentionally empty description; the detail view is expected to handle that gracefully rather than prompt for invented content.
+> **Superseded (after implementation)**: the author subsequently chose to show a
+> year range on the always-visible track, replacing the organisation name under
+> each label. FR-010 and User Story 4 below — which confine time to the expanded
+> detail and keep the collapsed track year-free — no longer describe the built
+> page. The organisation name moved into the expanded detail so it was not lost.
+> The `period` field designed here is what carries the years; the mechanism was
+> reused rather than replaced.
+
 - **Decided**: the detail view ships first and time periods are added later. The optional period field and its slot in the detail view are built now but left empty, so no year renders anywhere until the author supplies dates. Filling them in later is a content edit, not a code change.
 - The small-screen breakpoint reuses the site's existing responsive breakpoint rather than introducing a new one.
 - The people-and-technology throughline reflects the author's stated research interests (human-computer interaction, human-AI collaboration, and the human side of information security) and is subject to the author's wording.

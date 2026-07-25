@@ -3,10 +3,11 @@
 <head>
   {% include head.html %}
 </head>
-<body>
+<body class="{% if page.url == '/' %}is-home{% else %}is-interior{% endif %}">
   <header>
     {% include nav.html %}
   </header>
+  {% unless page.url == '/' %}{% include side-nav.html %}{% endunless %}
   <main class="container">
     {{ content }}
   </main>

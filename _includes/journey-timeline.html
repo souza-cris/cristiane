@@ -17,15 +17,17 @@
               {% endif %}
             </span>
           </span>
+          <span class="journey__category">{{ milestone.category }}</span>
           <span class="journey__flag" role="img" aria-label="{{ milestone.place }}">{{ milestone.flag }}</span>
           <span class="journey__label">{{ milestone.label }}</span>
-          <span class="journey__org">{{ milestone.org }}</span>
+          <span class="journey__org">{{ milestone.period }}</span>
         </summary>
 
         <div class="journey__detail">
           {% if milestone.title != "" %}<p class="journey__detail-title">{{ milestone.title }}</p>{% endif %}
           <p class="journey__detail-meta">
             <span class="journey__detail-category">{{ milestone.category }}</span>
+            <span class="journey__detail-org">{{ milestone.org }}</span>
             <span class="journey__detail-place">{{ milestone.place }}</span>
             {% if milestone.period != "" and milestone.period %}<span class="journey__detail-period">{{ milestone.period }}</span>{% endif %}
           </p>

@@ -26,6 +26,7 @@
   logo: "ufrgs.svg"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
+  period: "2002–2006"
   note: "Started on a full tuition waiver. First research project — customer satisfaction at a travel agency — still picks up citations."
 
 - category: industry
@@ -36,6 +37,7 @@
   logo: "chevron.svg"
   flag: "🇧🇷"
   place: "Brazil"
+  period: "2006–2008"
   note: ""
 
 - category: industry
@@ -46,6 +48,7 @@
   logo: "dell.svg"
   flag: "🇧🇷"
   place: "Eldorado do Sul, Brazil"
+  period: "2008–2014"
   note: "Owned product-quality and customer-experience portfolios for Latin American markets, carrying scope, budget and schedule with C-level stakeholders. Bronze Award."
 
 - category: academia
@@ -56,6 +59,7 @@
   logo: "fgv.png"
   flag: "🇧🇷"
   place: "Brazil"
+  period: "2008–2010"
   note: "Formal grounding in management to match what the project work was already teaching."
 
 - category: industry
@@ -66,6 +70,7 @@
   logo: "sicredi.svg"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
+  period: "2014–2017"
   note: "Led an engineering team and seven project managers across a 30-project, ~$10M/year portfolio. Shipped a mobile collateral-mapping app, a credit-collection tool and a BPM system."
 
 - category: academia
@@ -76,6 +81,7 @@
   logo: "ufrgs.svg"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
+  period: "2016–2017"
   note: "Research on the competencies required of IT project managers — the first real pull toward studying how people work with technology."
 
 - category: industry
@@ -86,6 +92,7 @@
   logo: "adp.svg"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
+  period: "2018–2019"
   note: "Turned a 300-person, 35-team unit into an innovation lab and rolled out OKR with senior leadership."
 
 - category: industry
@@ -96,6 +103,7 @@
   logo: "tetrapak.svg"
   flag: "🇮🇹"
   place: "Modena, Italy"
+  period: "2019–2022"
   note: "Moved continents. Built a New Product Development process that carried products from research into production, guided a Community of Practice, and led the shift to remote for R&D teams in Italy and Sweden."
 
 - category: industry
@@ -106,6 +114,7 @@
   logo: "hellofresh.png"
   flag: "🇩🇪"
   place: "Berlin, Germany"
+  period: "2022–2023"
   note: "Built and managed a team of four across Data and Supply Chain, designed a coaching framework and a global product discovery process, and co-led the Berlin Gender Equality team."
 
 - category: industry
@@ -113,9 +122,10 @@
   label: "Head of Business Agility"
   org: "Getnet — Santander Group"
   short: "G"
-  logo: "getnet.png"
+  logo: "getnet.svg"
   flag: "🇧🇷"
   place: "Porto Alegre, Brazil"
+  period: "2023–2025"
   note: "Led a global team of 30+ including other leaders, owning hiring, coaching and performance — and orchestrated the evolution of the software development lifecycle to integrate AI."
 
 - category: academia
@@ -126,4 +136,5 @@
   logo: "alabama.svg"
   flag: "🇺🇸"
   place: "Tuscaloosa, United States"
+  period: "2025–2029"
   note: "Left industry for research at a 4.0 GPA. Teaching assistant for MBA MIS511 and MIS200, guest lecturer on IT project management and AI, and named Outstanding PhD Teaching Assistant in MIS."

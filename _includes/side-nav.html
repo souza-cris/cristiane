@@ -1,0 +1,14 @@
+{%- comment -%}
+  Vertical menu pinned to the right edge and centred on the page, shown on
+  every page except home. It repeats the top navigation, so it is hidden on
+  narrow screens where there is no room beside the content column.
+{%- endcomment -%}
+<nav class="side-nav" aria-label="Section navigation">
+  <ul class="side-nav__links">
+    <li><a href="{{ '/journey' | relative_url }}"{% if page.url == '/journey/' %} aria-current="page"{% endif %}>journey</a></li>
+    <li><a href="{{ '/stories' | relative_url }}"{% if page.url contains '/stories' %} aria-current="page"{% endif %}>stories</a></li>
+    <li><a href="{{ '/research' | relative_url }}"{% if page.url == '/research/' %} aria-current="page"{% endif %}>research</a></li>
+    <li><a href="{{ '/bookmarks' | relative_url }}"{% if page.url contains '/bookmarks' %} aria-current="page"{% endif %}>bookmarks</a></li>
+    <li><a href="{{ '/contact' | relative_url }}"{% if page.url == '/contact/' %} aria-current="page"{% endif %}>contact</a></li>
+  </ul>
+</nav>
