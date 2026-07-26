@@ -103,6 +103,14 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 - `default.html` puts `is-home` or `is-interior` on `<body>`. That class drops
   the rules above and below the content on home; reuse it for anything else
   that differs between home and interior pages rather than adding a new flag.
+- The site mark (`assets/img/logo.svg`) renders on the **home page only**,
+  centred above the content, and is decorative — empty alt, `aria-hidden`, not a
+  link. It is emitted only on home rather than hidden elsewhere with CSS. The
+  artwork is the author's, in her brand teal `#0B7E8A`; use it as supplied and
+  never redraw or recolour it. See spec 009.
+- `#0B7E8A` measures 3.93:1 on the site background — below the 4.5:1 normal text
+  needs. It is fine inside the mark, which carries no text. If teal is ever put
+  on the page proper, use `#0FA3B1` (6.21:1) instead.
 - Study and recruitment content is author-supplied and MUST NOT be generated or
   paraphrased. For human-subjects research it is IRB-approved wording. The site
   links out to a recruitment destination and never collects participant data.

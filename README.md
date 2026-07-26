@@ -185,6 +185,7 @@ stories/                   # One thin page per story filter
 bookmarks/                 # One thin page per bookmark filter
 assets/css/style.css       # All styles, plain CSS
 assets/js/search.js        # List filtering, the site's only script
+assets/img/logo.svg        # Site mark, shown on the home page only
 assets/img/                # Portrait and organization logos
 specs/                     # Spec Kit feature specs
 .specify/                  # Spec Kit config and constitution
@@ -205,10 +206,17 @@ Work on this site is specified before it is built, using [Spec Kit](https://gith
 | 006 | Home page updates widget |
 | 007 | Research page call for participants |
 | 008 | Side navigation and uninterrupted home |
+| 009 | Site icon and brand mark *(partly built)* |
 
 The project constitution is at `.specify/memory/constitution.md`. Its five principles — simplicity, content as data, GitHub Pages compatibility, performance and accessibility, and minimal JavaScript — are checked in every feature's plan.
 
 Feature 008 was written up after it was built rather than before, and its spec says so.
+
+Feature 009 is only partly built: the teal mark on the home page is live, the browser tab
+icon is specified but still needs the icon files. Its spec also records a mistake worth
+keeping — a preference about where the mark should go was written as a hard "MUST NOT", so
+changing that preference briefly put the site in breach of its own spec. The same trap as
+the journey years.
 
 The constitution is at version 2.0.0. The jump from 1.x came from tightening "content as data" to cover repeated structure, not just prose: the navigation list now lives in `_data/sections.yml` and both menus render from it. That amendment also added a rule worth knowing about — a principle is never loosened to make existing code compliant. Either the code changes, or the principle changes on its own merits.
 

@@ -8,6 +8,15 @@
     {% include nav.html %}
   </header>
   {% unless page.url == '/' %}{% include side-nav.html %}{% endunless %}
+  {%- comment -%}
+    The site mark, centred above the content on the home page only. Decorative —
+    an empty alt and hidden from screen readers, since the nav already carries
+    the link home and nothing here is information.
+
+    Emitted only on home rather than hidden with CSS elsewhere, so it is absent
+    from the other pages entirely rather than merely invisible on them.
+  {%- endcomment -%}
+  {% if page.url == '/' %}<img class="site-logo" src="{{ '/assets/img/logo.svg' | relative_url }}" alt="" aria-hidden="true" width="40" height="40">{% endif %}
   <main class="container">
     {{ content }}
   </main>
