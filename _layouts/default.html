@@ -4,9 +4,16 @@
   {% include head.html %}
 </head>
 <body class="{% if page.url == '/' %}is-home{% else %}is-interior{% endif %}">
+  {%- comment -%}
+    Home carries no top menu at all — its hero links are its navigation, and a
+    second menu above them was redundant. The nav is left out of the markup
+    rather than hidden with CSS, so home has no empty navigation landmark.
+  {%- endcomment -%}
+  {% unless page.url == '/' %}
   <header>
     {% include nav.html %}
   </header>
+  {% endunless %}
   {% unless page.url == '/' %}{% include side-nav.html %}{% endunless %}
   {%- comment -%}
     The site mark, centred above the content on the home page only. Decorative —

@@ -136,6 +136,33 @@ boxes.
 
 ---
 
+## Phase 9: Correction — home carries no top menu (after implementation)
+
+Reported by the author: home should not have a menu at the top. It was showing one
+directly above the hero's own five section links — the same five destinations twice,
+a few centimetres apart.
+
+Phase 8 had made this worse rather than better. It added an explicit carve-out keeping
+home's top list visible at every width, on the reasoning that home has no side navigation
+and would otherwise be left with nothing. That premise was wrong: home's hero links were
+already its navigation and always had been. The carve-out protected against a problem that
+did not exist, and preserved the duplication.
+
+Removing the menu also exposed that the hero links were a **third** hand-written copy of
+the section list, in `index.md` — surviving the Principle II work only because that pass
+looked at includes and never at page content.
+
+- [X] T031 In `index.md`, replace the hand-written hero list with `section-links.html`, wrapped in a labelled `<nav>` so home's navigation is a proper landmark (FR-014)
+- [X] T032 In `_layouts/default.html`, leave the header and top navigation out of home entirely, rather than hiding them, so home has no empty navigation landmark (FR-013)
+- [X] T033 In `assets/css/style.css`, drop the `.is-interior` qualifier now that no top nav exists on home, and remove the now-dead `.is-home .site-nav` border rule
+- [X] T034 Verify by rendered pixels at 1300px, 800px and 500px that home's top strip holds only the site mark, and that its five hero links still render and still reach every section
+- [X] T035 Correct FR-011's home exception, and update `CLAUDE.md`, which had recorded the carve-out as "load bearing"
+
+**Checkpoint**: the section list exists once in data and renders in three places; home has
+one set of links, not two.
+
+---
+
 ## Dependencies & Execution Order
 
 ### Phase Dependencies

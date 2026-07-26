@@ -7,13 +7,11 @@ layout: default
   <h1 class="hero__headline">Cris</h1>
   <p class="hero__subheadline">PhD student - researcher - tech leader - traveler - cat lady</p>
 
-  <ul class="hero__ctas">
-    <li><a href="{{ '/journey' | relative_url }}">journey</a></li>
-    <li><a href="{{ '/stories' | relative_url }}">stories</a></li>
-    <li><a href="{{ '/research' | relative_url }}">research</a></li>
-    <li><a href="{{ '/bookmarks' | relative_url }}">bookmarks</a></li>
-    <li><a href="{{ '/contact' | relative_url }}">contact</a></li>
-  </ul>
+  <!-- Home carries no top menu, so these ARE its navigation. Same list as every
+       other page, from _data/sections.yml — never write the sections out here. -->
+  <nav class="hero__nav" aria-label="Sections">
+    {% include section-links.html class="hero__ctas" %}
+  </nav>
 </section>
 
 {% include updates-widget.html %}

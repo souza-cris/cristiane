@@ -86,10 +86,16 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 - The site has two breakpoints and they are not interchangeable. 600px is where
   the top nav collapses; 1000px is where the side nav hides, because below that
   it would overlap the 44rem content column. Do not consolidate them.
-- Exactly one section menu is visible at a time: side nav above 1000px on
-  interior pages, top nav list from 600–999px, hamburger below 600px. Home has
-  no side nav, so it keeps its top list at every width — that carve-out is load
-  bearing; without it the desktop home page has no navigation at all.
+- Exactly one section menu is visible at a time: side nav above 1000px, top nav
+  list from 600–999px, hamburger below 600px.
+- Home has **no top navigation and no side navigation**. Its hero links are its
+  navigation, and `default.html` leaves the whole header out of home rather
+  than hiding it. Do not "restore" a menu there — a menu directly above the
+  hero links shows the same five destinations twice.
+- The section list renders in three places — top nav, side nav, and the home
+  hero — and is written in exactly one: `_data/sections.yml`. All three go
+  through `section-links.html`. The hero was a third hand-written copy until
+  spec 008 Phase 9; do not reintroduce one in page content.
 - **Do not delete `.site-nav__menu::details-content { content-visibility: visible }`.**
   It looks redundant next to the `display: flex` on the list, and it is not. The
   list sits inside a closed `<details>`, whose content browsers now hide via

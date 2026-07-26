@@ -144,7 +144,7 @@ Adding a *new* service also needs its icon drawing added to `_includes/footer.ht
 
 ### New section in the menus
 
-Add a block to `_data/sections.yml`, then create the page. Both the top menu and the side menu pick it up — there is no template to edit.
+Add a block to `_data/sections.yml`, then create the page. All three places the sections appear — the top menu, the side menu, and the links on the home page — pick it up. There is no template to edit.
 
 ```yaml
 - label: "talks"

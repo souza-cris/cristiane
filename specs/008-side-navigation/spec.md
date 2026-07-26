@@ -78,14 +78,22 @@ A visitor on a phone or a narrow window sees only the existing top navigation. T
 - **FR-008**: The link list MUST be stored as data and rendered from that data by every navigation that shows it, so adding or renaming a section is a single edit and no two navigations can disagree.
 - **FR-009**: Internal links MUST use the site's relative-URL filter, because the site is served from a base path.
 - **FR-010**: The feature MUST add no JavaScript and MUST deploy on the existing static hosting with no new build step.
-- **FR-011**: Exactly one section menu MUST be visible at any viewport width. Where the side navigation shows, the top navigation MUST NOT also list the sections; where it does not, the top navigation MUST carry them. Home, which has no side navigation, MUST keep its top list at every width.
-- **FR-012**: At every viewport width, a visitor MUST be able to reach every section by some visible means — the side list, the top list, or the menu control. No width may leave a page with no way to navigate.
+- **FR-011**: Exactly one section menu MUST be visible at any viewport width. Where the side navigation shows, the top navigation MUST NOT also list the sections; where it does not, the top navigation MUST carry them.
+- **FR-012**: At every viewport width, a visitor MUST be able to reach every section by some visible means. No width, and no page, may be left with no way to navigate.
+- **FR-013**: The home page carries no top navigation at all — its hero links are its navigation. The navigation element MUST be absent from the markup rather than hidden, so home has no empty navigation landmark.
+- **FR-014**: Every list of section links on the site — top navigation, side navigation, and the home hero — MUST render from the single section data file. The sections MUST NOT be written out in any page or include.
 
-> **Added after implementation.** FR-011 and FR-012 were not in the original spec, and the
-> gap between them is where a real defect hid. See the Phase 8 note in
+> **Added after implementation.** FR-011 to FR-014 were not in the original spec, and the
+> gap between them is where two real defects hid. See the Phase 8 and Phase 9 notes in
 > [tasks.md](tasks.md): between 600px and 999px the site had **no visible navigation at
-> all**, and the desktop home page had none either. The cause predates this feature and
-> was invisible until the side navigation drew attention to it.
+> all**; and home carried a top menu duplicating the hero links directly beneath it, with
+> those hero links written out by hand as a third copy of the section list.
+>
+> Note that FR-011's earlier wording made home an explicit exception, requiring it to
+> "keep its top list at every width". That was written to protect home from being left
+> with no navigation — but it was reasoning from the wrong premise, because home's hero
+> links were already its navigation and had been all along. FR-013 replaces the exception
+> with the simpler truth: home has no top navigation.
 
 ### Key Entities
 

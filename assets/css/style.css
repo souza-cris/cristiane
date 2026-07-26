@@ -795,21 +795,17 @@ a.journey__detail-org:hover {
    the navigation, so the top nav keeps only the "main" link and drops its list
    — otherwise both render the same five links at once.
 
-   Home is the exception: it has no side nav, so it keeps its top list at every
-   width. Without that carve-out the home page would have no navigation at all
-   on a wide screen. */
+   Home is not involved: it has no top nav at all. Its hero links are its
+   navigation, so it needs neither of these menus. */
 @media (min-width: 1000px) {
-  .is-interior .site-nav__menu .site-nav__links {
+  .site-nav__menu .site-nav__links {
     display: none;
   }
 }
 
 /* ---- Home page: no rules above or below the content ---- */
 
-.is-home .site-nav {
-  border-bottom: none;
-}
-
+/* Home has no top nav to remove a border from — it is not rendered at all. */
 .is-home .site-footer {
   border-top: none;
 }
