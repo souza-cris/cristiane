@@ -1,0 +1,34 @@
+# A bookmark. Copy everything below the line, paste it at the END of
+# _data/bookmarks.yml, and fill it in. Keep one blank line between entries.
+#
+# Every field here is required. If you want to leave something out, you cannot
+# — write something short instead. Run `ruby tools/check-data.rb` when done.
+# ---------------------------------------------------------------------------
+
+- title: "The title as its authors wrote it"
+
+  # One of: paper, book, talk, tool, dataset, more
+  # These come from _data/bookmark_types.yml. A word that is not on that list
+  # means the bookmark quietly disappears from its filter page.
+  type: "paper"
+
+  # Free-form topics. Written as indented "- " lines, two spaces in.
+  # These are not a fixed list — write what fits.
+  topicTags:
+    - "AI"
+    - "Education"
+
+  # Why someone else should spend their time on this. A sentence or two.
+  whyItMatters: "What this changes, or who it is for."
+
+  # The single thing to remember if you read nothing else.
+  keyTakeaway: "The one idea worth carrying away."
+
+  # Complete address, including https://
+  link: "https://example.com/the-thing"
+
+  # The day you added it, as YYYY-MM-DD. Orders the list, newest first.
+  addedDate: "2026-07-26"
+
+  # Where it came from — arXiv, O'Reilly, a conference, a person.
+  source: "arXiv"

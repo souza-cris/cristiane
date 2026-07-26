@@ -25,6 +25,46 @@ The site is at <https://souza-cris.github.io/cristiane/>.
 
 ## Adding content
 
+### Start from a template, then check your work
+
+Two helpers live in `tools/`. They run on your machine, are not part of the site, and need nothing installed beyond the Ruby you already have for Jekyll.
+
+**Templates** — copy one, paste it in, fill it out. Each field is explained inline.
+
+| To add | Copy | Into |
+|---|---|---|
+| a bookmark | `tools/templates/bookmark.yml` | the end of `_data/bookmarks.yml` |
+| a story | `tools/templates/story.md` | a new file in `_posts/` |
+| a journey milestone | `tools/templates/journey.yml` | the right position in `_data/journey.yml` |
+| a home page update | `tools/templates/update.yml` | `_data/updates.yml` |
+
+Paste them exactly as they are. The indentation is already correct, and YAML cares about it.
+
+**The checker** — run this before you push:
+
+```bash
+ruby tools/check-data.rb
+```
+
+It reads every content file and tells you what is wrong and how to fix it. It never edits anything.
+
+```
+_data/bookmarks.yml
+  x "Attention Is All You Need": type "papers" is not a known slug
+    -> use one of: paper, book, talk, tool, dataset, more — did you mean "paper"?
+
+_data/journey.yml
+  x "Chevron": `label` is missing
+    -> add `label:` — leaving it out is not the same as leaving it empty
+```
+
+This exists because `bundle exec jekyll build` will *not* catch these. A missing field is still valid YAML — the page just renders a blank line, and a mistyped filter slug makes an entry vanish from its filter page with no warning at all.
+
+Two habits that prevent most of it:
+
+- **Empty a field, never delete it.** `note: ""` renders nothing, cleanly. A deleted `label` renders a blank space and no error.
+- **Never leave a placeholder** like `.` or `tbd`. Those render. An empty string is the safe way to say "nothing here".
+
 ### Story
 
 Create `_posts/YYYY-MM-DD-title.md`:

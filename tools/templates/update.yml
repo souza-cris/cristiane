@@ -1,0 +1,22 @@
+# A home page update. Copy below the line into _data/updates.yml.
+# The newest few appear on the home page; how many is `updates_limit` in
+# _config.yml (changing that one needs the local server restarted).
+#
+# This list is curated by hand. Adding a story or bookmark does NOT put it
+# here, and editing one does not update its entry here.
+# ---------------------------------------------------------------------------
+
+- type: publication        # Also the visible label. Any word works.
+                           # publication, story and bookmark get their own colour.
+
+  title: "What it is called"
+
+  date: 2026-07-26         # Orders the list, newest first. No quotes needed.
+
+  link: "/research/"       # A path on this site, written WITHOUT /cristiane —
+                           # that is added for you. Or a full https:// address.
+
+  blurb: "One line of context."
+
+  # active: false          # Optional. Hides it without deleting it.
+  # pinned: true           # Optional. Puts it first regardless of date.

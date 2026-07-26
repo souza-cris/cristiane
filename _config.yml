@@ -28,3 +28,6 @@ exclude:
   - .specify
   - .claude
   - CLAUDE.md
+  # Authoring helpers — templates to copy and a checker to run. They are for
+  # writing content, not part of the site, so they must not be published.
+  - tools

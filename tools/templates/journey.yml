@@ -1,0 +1,37 @@
+# A journey milestone. Copy everything below the line and paste it into
+# _data/journey.yml, in the position it belongs — the file's order IS the
+# page's order, oldest first. Keep one blank line between entries.
+#
+# Run `ruby tools/check-data.rb` when done.
+# ---------------------------------------------------------------------------
+
+- category: industry       # industry or academia — nothing else. Sets the ring
+                           # colour and style around the badge.
+
+  label: "Short label"     # THE LINE ON THE TRACK. If you delete this field the
+                           # stop renders blank with no error anywhere. Keep it
+                           # to a few words.
+
+  org: "Organisation"      # Shown when someone opens the stop.
+
+  short: "OR"              # 1-3 letters, shown in the circle when there is no
+                           # logo file yet.
+
+  logo: "example.svg"      # A file in assets/img/logos/. Use "" for none, and
+                           # the initials above are shown instead. Resize the
+                           # image first — it renders at about 42 pixels.
+
+  url: "https://example.com"   # Optional. Makes the logo a link. Leave the
+                               # whole line out if there is nowhere to point.
+
+  flag: "🇧🇷"                # Country flag emoji.
+
+  place: "City, Country"
+
+  period: "2019-2022"      # Shown on the track and again when opened.
+
+  title: "The full role or degree title"   # Shown only when opened.
+
+  note: ""                 # The longer story. Shown only when opened.
+                           # "" renders nothing at all, which is fine.
+                           # Do NOT put "." or "tbd" here — that renders.

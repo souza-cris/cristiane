@@ -137,6 +137,24 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
   links out to a recruitment destination and never collects participant data.
 - Explain changes in plain language — the project owner is new to web development.
 
+## Authoring tools
+
+`tools/` holds helpers for writing content. It is excluded in `_config.yml`, so
+nothing there is published — keep it that way.
+
+- `tools/check-data.rb` — validates every content file: required fields, filter
+  slugs against `bookmark_types.yml` / `story_keywords.yml`, date formats,
+  complete URLs, logo files that exist, and leftover placeholders like `"."`.
+  Run `ruby tools/check-data.rb`. Exit 1 on problems, so it can back a git hook.
+  Written in Ruby on purpose: Jekyll already requires Ruby and YAML ships with
+  it, so it adds nothing to install. PyYAML is *not* available here.
+- `tools/templates/` — paste-ready entries with the fields explained inline.
+
+When adding a field to a data file, add it to the checker's required list too,
+or the next omission goes unnoticed. `jekyll build` catches none of this: a
+missing field is valid YAML and renders as a blank, and a mistyped filter slug
+silently drops the entry from its filter page.
+
 ## Spec Kit
 
 The `.specify/` directory contains Spec Kit configuration. Use slash commands (`/speckit-specify`, `/speckit-plan`, `/speckit-tasks`, `/speckit-implement`) for the feature workflow. Constitution at `.specify/memory/constitution.md`; features documented under `specs/`.
