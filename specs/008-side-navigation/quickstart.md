@@ -59,6 +59,24 @@ bundle exec jekyll build
 
 **Passes when**: every link is keyboard-operable with a visible focus indicator and the region is properly named.
 
+## Scenario 9 — One menu at a time, and never none
+
+1. On an interior page at 1300px, confirm the section links appear **only** at the right
+   edge. The top bar shows "main" and nothing else.
+2. Narrow to 900px. The side menu goes; the section links appear in the top bar instead.
+   Confirm they are actually drawn on screen, not merely present in the markup.
+3. Narrow to 500px. The top links go and the menu button appears.
+4. Repeat all three widths on the **home page**. Home has no side menu, so its top links
+   must stay visible at every width down to 600px.
+5. At no width should both menus list the sections at once, and at no width should neither.
+
+**Passes when**: exactly one menu is visible at every width on both page types.
+
+> **Check this by looking, not by measuring.** The links live inside a `<details>`, and a
+> closed `<details>` hides its content in a way that still reports element geometry. Asking
+> the page whether a link "has a box" will answer yes even when nothing is drawn. Take a
+> screenshot, or look at the screen.
+
 ## Regression checks
 
 1. `/journey/`, `/stories/`, `/research/`, `/bookmarks/` and `/contact/` all render normally with the menu present.

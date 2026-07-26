@@ -78,6 +78,14 @@ A visitor on a phone or a narrow window sees only the existing top navigation. T
 - **FR-008**: The link list MUST be stored as data and rendered from that data by every navigation that shows it, so adding or renaming a section is a single edit and no two navigations can disagree.
 - **FR-009**: Internal links MUST use the site's relative-URL filter, because the site is served from a base path.
 - **FR-010**: The feature MUST add no JavaScript and MUST deploy on the existing static hosting with no new build step.
+- **FR-011**: Exactly one section menu MUST be visible at any viewport width. Where the side navigation shows, the top navigation MUST NOT also list the sections; where it does not, the top navigation MUST carry them. Home, which has no side navigation, MUST keep its top list at every width.
+- **FR-012**: At every viewport width, a visitor MUST be able to reach every section by some visible means — the side list, the top list, or the menu control. No width may leave a page with no way to navigate.
+
+> **Added after implementation.** FR-011 and FR-012 were not in the original spec, and the
+> gap between them is where a real defect hid. See the Phase 8 note in
+> [tasks.md](tasks.md): between 600px and 999px the site had **no visible navigation at
+> all**, and the desktop home page had none either. The cause predates this feature and
+> was invisible until the side navigation drew attention to it.
 
 ### Key Entities
 

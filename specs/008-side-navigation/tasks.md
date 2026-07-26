@@ -105,6 +105,37 @@ correction is recorded here rather than edited into the phases above.
 
 ---
 
+## Phase 8: Correction — one menu at a time, and a navigation blackout (after implementation)
+
+Adding the side navigation put two menus on screen at once above 1000px, and in chasing
+that, a pre-existing defect surfaced: **the top navigation's links had stopped painting at
+any width of 600px or more.** Between 600px and 999px — where the menu button is hidden and
+the side navigation has not appeared — the site had no visible navigation at all. The
+desktop home page, which never gets a side navigation, had none either.
+
+**Cause**: `.site-nav__links` sits inside `<details class="site-nav__menu">`. Browsers now
+wrap the content of a closed `<details>` in `::details-content` with
+`content-visibility: hidden`. The existing `display: flex` on the list computes as `flex`
+and reports a layout box, but nothing paints. No code change caused this; a browser change
+did, which is why it went unnoticed.
+
+**A note on how this was nearly missed**: an early check counted link bounding boxes and
+reported the links as visible, which contradicted the screenshots and led to the concern
+being wrongly withdrawn. `getBoundingClientRect` returns non-zero boxes for
+content-visibility-hidden descendants — the parent `<ul>` measured 0×0 while its children
+claimed boxes extending past the nav's own right edge. Visibility here can only be settled
+by what is painted. The fix was verified by counting rendered pixels, not by measuring
+boxes.
+
+- [X] T027 In `assets/css/style.css`, hide the top navigation's section list above 1000px on interior pages only, so exactly one menu shows (FR-011). Home is exempt — it has no side navigation and would otherwise be left with nothing
+- [X] T028 In `assets/css/style.css`, reveal `::details-content` at 600px and above so the top navigation's links paint, closing the 600–999px blackout and restoring the desktop home navigation (FR-012)
+- [X] T029 Verify by rendered pixels, not by element geometry, at 1300px, 800px and 500px on both home and an interior page: exactly one menu visible, and never zero
+- [X] T030 Record the browser-behaviour trap in `CLAUDE.md` so the `::details-content` rule is not removed as redundant
+
+**Checkpoint**: one menu at every width, and no width without navigation.
+
+---
+
 ## Dependencies & Execution Order
 
 ### Phase Dependencies

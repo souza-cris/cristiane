@@ -154,6 +154,18 @@ time {
     display: none;
   }
 
+  /* The list lives inside a closed <details>. Browsers now wrap that content in
+     ::details-content with `content-visibility: hidden`, which `display: flex`
+     below does NOT override — the list computes as flex, reports a zero-size
+     box, and never paints. Revealing it takes this rule.
+
+     Without it there is no visible navigation at all between 600px and 999px,
+     where the hamburger is hidden and the side nav has not appeared yet. */
+  .site-nav__menu::details-content {
+    content-visibility: visible;
+    display: contents;
+  }
+
   .site-nav__menu .site-nav__links {
     display: flex;
   }
@@ -775,6 +787,19 @@ a.journey__detail-org:hover {
 
 @media (max-width: 999px) {
   .side-nav {
+    display: none;
+  }
+}
+
+/* Exactly one section menu is visible at a time. Above 1000px the side nav is
+   the navigation, so the top nav keeps only the "main" link and drops its list
+   — otherwise both render the same five links at once.
+
+   Home is the exception: it has no side nav, so it keeps its top list at every
+   width. Without that carve-out the home page would have no navigation at all
+   on a wide screen. */
+@media (min-width: 1000px) {
+  .is-interior .site-nav__menu .site-nav__links {
     display: none;
   }
 }

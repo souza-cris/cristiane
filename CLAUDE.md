@@ -86,6 +86,20 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 - The site has two breakpoints and they are not interchangeable. 600px is where
   the top nav collapses; 1000px is where the side nav hides, because below that
   it would overlap the 44rem content column. Do not consolidate them.
+- Exactly one section menu is visible at a time: side nav above 1000px on
+  interior pages, top nav list from 600–999px, hamburger below 600px. Home has
+  no side nav, so it keeps its top list at every width — that carve-out is load
+  bearing; without it the desktop home page has no navigation at all.
+- **Do not delete `.site-nav__menu::details-content { content-visibility: visible }`.**
+  It looks redundant next to the `display: flex` on the list, and it is not. The
+  list sits inside a closed `<details>`, whose content browsers now hide via
+  `::details-content`; `display` does not override that. Without this rule the
+  top nav links compute as `flex`, report a layout box, and never paint —
+  leaving no navigation at all between 600px and 999px.
+- Element geometry lies about visibility inside a closed `<details>`.
+  `getBoundingClientRect` returns non-zero boxes for content that is not
+  painted. To check whether nav links are visible, screenshot the page — do not
+  ask the DOM.
 - `default.html` puts `is-home` or `is-interior` on `<body>`. That class drops
   the rules above and below the content on home; reuse it for anything else
   that differs between home and interior pages rather than adding a new flag.
