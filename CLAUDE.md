@@ -163,4 +163,8 @@ silently drops the entry from its filter page.
 
 ## Spec Kit
 
+A spec's `Status` is `Draft`, `Implemented`, or `Backlog`. Anything marked Backlog is also
+listed in `BACKLOG.md` with what is done, what is left, and how to resume — keep the two in
+step. Do not start building a backlogged feature without being asked.
+
 The `.specify/` directory contains Spec Kit configuration. Use slash commands (`/speckit-specify`, `/speckit-plan`, `/speckit-tasks`, `/speckit-implement`) for the feature workflow. Constitution at `.specify/memory/constitution.md`; features documented under `specs/`.

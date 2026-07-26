@@ -275,6 +275,9 @@ Work on this site is specified before it is built, using [Spec Kit](https://gith
 | 007 | Research page call for participants |
 | 008 | Side navigation and uninterrupted home |
 | 009 | Site icon and brand mark *(partly built)* |
+| 010 | Search visibility and domain migration *(backlog — specified, not built)* |
+
+Work that is specified but not scheduled lives in [BACKLOG.md](BACKLOG.md), and its spec is marked **Backlog** rather than Implemented so the two cannot disagree.
 
 The project constitution is at `.specify/memory/constitution.md`. Its five principles — simplicity, content as data, GitHub Pages compatibility, performance and accessibility, and minimal JavaScript — are checked in every feature's plan.
 

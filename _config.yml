@@ -31,3 +31,7 @@ exclude:
   # Authoring helpers — templates to copy and a checker to run. They are for
   # writing content, not part of the site, so they must not be published.
   - tools
+  # Repository documentation. These are for whoever works on the site, not for
+  # visitors — without this they publish as pages and would be indexed.
+  - README.md
+  - BACKLOG.md
