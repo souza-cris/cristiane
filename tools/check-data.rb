@@ -307,13 +307,23 @@ def check_date(file, where, value, field)
       'write it as YYYY-MM-DD, for example 2026-07-26')
 end
 
+PLACEHOLDER_HOSTS = %w[example.com example.org example.net].freeze
+
 def check_link(file, where, value, field)
   return if value.nil? || value.to_s.empty?
 
-  return if value.to_s.start_with?('http://', 'https://', 'mailto:')
+  text = value.to_s
+  unless text.start_with?('http://', 'https://', 'mailto:')
+    err(file, where, "#{field} #{value.inspect} is not a complete address",
+        'external links need https:// at the front')
+    return
+  end
 
-  err(file, where, "#{field} #{value.inspect} is not a complete address",
-      'external links need https:// at the front')
+  # A link that parses fine and goes nowhere. These reach visitors.
+  return unless PLACEHOLDER_HOSTS.any? { |h| text.include?(h) }
+
+  err(file, where, "#{field} points at #{value.inspect}",
+      'example.com is a placeholder — this link is live and broken for visitors')
 end
 
 def levenshtein(a, b)
@@ -330,13 +340,30 @@ end
 
 # -------------------------------------------------------------------- run
 
-check_bookmarks
-check_journey
-check_sections
-check_social
-check_updates
-check_study
-check_posts
+# Each check knows which file it owns, so a caller can ask for a subset. The
+# git hook passes the staged files, so a problem in a file you are not touching
+# does not block a commit that has nothing to do with it.
+CHECKS = {
+  '_data/bookmarks.yml' => method(:check_bookmarks),
+  '_data/journey.yml' => method(:check_journey),
+  '_data/sections.yml' => method(:check_sections),
+  '_data/social.yml' => method(:check_social),
+  '_data/updates.yml' => method(:check_updates),
+  '_data/study.yml' => method(:check_study),
+  '_posts' => method(:check_posts)
+}.freeze
+
+requested = ARGV.reject { |a| a.start_with?('-') }
+scoped = !requested.empty?
+
+if scoped
+  ran = CHECKS.select { |owned, _| requested.any? { |f| f.include?(owned) } }
+  # A filter file changing can invalidate entries elsewhere, so widen for those.
+  ran = CHECKS if requested.any? { |f| f.include?('_keywords') || f.include?('_types') }
+  ran.each_value(&:call)
+else
+  CHECKS.each_value(&:call)
+end
 
 def report(title, items, symbol)
   return if items.empty?

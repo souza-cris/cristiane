@@ -58,6 +58,14 @@ _data/journey.yml
     -> add `label:` — leaving it out is not the same as leaving it empty
 ```
 
+**Run it automatically before every commit** — once per clone:
+
+```bash
+git config core.hooksPath tools/git-hooks
+```
+
+From then on, committing a change to `_data/` or `_posts/` runs the checker on just those files and stops the commit if something is wrong. Files you are not touching are not checked, so an unrelated problem never blocks you. To commit anyway — a half-finished draft, say — use `git commit --no-verify`.
+
 This exists because `bundle exec jekyll build` will *not* catch these. A missing field is still valid YAML — the page just renders a blank line, and a mistyped filter slug makes an entry vanish from its filter page with no warning at all.
 
 Two habits that prevent most of it:

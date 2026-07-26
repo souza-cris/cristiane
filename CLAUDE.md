@@ -149,6 +149,12 @@ nothing there is published — keep it that way.
   Written in Ruby on purpose: Jekyll already requires Ruby and YAML ships with
   it, so it adds nothing to install. PyYAML is *not* available here.
 - `tools/templates/` — paste-ready entries with the fields explained inline.
+- `tools/git-hooks/pre-commit` — runs the checker over staged `_data/*.yml` and
+  `_posts/*.md` and blocks the commit on a problem. Enabled per clone with
+  `git config core.hooksPath tools/git-hooks`; bypass with `--no-verify`. It
+  lives in `tools/` rather than `.git/hooks/` so it is versioned and survives a
+  fresh clone. Pass file paths to the checker to scope it; no arguments checks
+  everything.
 
 When adding a field to a data file, add it to the checker's required list too,
 or the next omission goes unnoticed. `jekyll build` catches none of this: a

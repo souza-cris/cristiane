@@ -1,0 +1,27 @@
+#!/bin/sh
+# Runs the content checker over the files being committed, and stops the commit
+# if any of them have a problem that would reach the page.
+#
+# Only staged files are checked, so a problem in a file you are not touching
+# does not block a commit that has nothing to do with it.
+#
+# Enable it once, per clone:
+#
+#   git config core.hooksPath tools/git-hooks
+#
+# To commit anyway — a half-finished draft, say — bypass it:
+#
+#   git commit --no-verify
+
+staged=$(git diff --cached --name-only --diff-filter=ACM \
+         | grep -E '^(_data/.*\.yml|_posts/.*\.md)$')
+
+[ -z "$staged" ] && exit 0
+
+# shellcheck disable=SC2086
+if ! ruby tools/check-data.rb $staged; then
+  echo "Commit stopped: fix the problems above, or use 'git commit --no-verify' to commit anyway."
+  exit 1
+fi
+
+exit 0
