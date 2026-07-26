@@ -3,4 +3,14 @@
 <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
 <meta name="description" content="{{ page.description | default: site.description | strip_html | truncate: 160 }}">
 <meta name="theme-color" content="#0d1117">
+{%- comment -%}
+  Site icon. Three files: modern browsers take the SVG, older ones fall through
+  to the .ico, and iOS reads the touch icon for a home-screen tile.
+
+  Every href goes through relative_url — the site is served from /cristiane, and
+  a bare path would resolve to the domain root, which is a different site.
+{%- endcomment -%}
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/img/icon.svg' | relative_url }}">
+<link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">

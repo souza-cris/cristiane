@@ -154,7 +154,24 @@ Add a block to `_data/sections.yml`, then create the page. All three places the 
 
 `match` decides when the link highlights as the section you are in. Use `exact` for a single page, and `prefix` if it will have child pages — that is why reading one story still highlights "stories".
 
-### New filter
+### Changing the site icon
+
+Replace `assets/img/icon.svg`, then regenerate the two files made from it:
+
+```bash
+rsvg-convert -w 180 -h 180 assets/img/icon.svg -o assets/img/apple-touch-icon.png
+rsvg-convert -w 256 -h 256 assets/img/icon.svg -o /tmp/_ico.png
+python3 -c "
+from PIL import Image
+Image.open('/tmp/_ico.png').convert('RGBA').save('favicon.ico', sizes=[(32,32),(16,16)])
+Image.open('assets/img/apple-touch-icon.png').convert('RGB').save('assets/img/apple-touch-icon.png', optimize=True)"
+```
+
+Three things to know:
+
+- **`favicon.ico` lives at the top of the repository**, not in `assets/`. That is what puts it at the site's own root, where browsers expect to find it.
+- **The touch icon has no transparency on purpose.** iOS puts its own rounded corners on it and fills any see-through part with black.
+- **The home page mark is a separate file** (`assets/img/logo.svg`) and will not change with the icon. That is deliberate — the icon can be adjusted for tiny sizes without touching the home page.
 
 1. Add the `slug` and `label` to `_data/story_keywords.yml` or `_data/bookmark_types.yml`.
 2. Copy an existing page in `stories/` or `bookmarks/` and change the slug in its permalink, its front matter, and its empty-state message.
@@ -185,6 +202,9 @@ stories/                   # One thin page per story filter
 bookmarks/                 # One thin page per bookmark filter
 assets/css/style.css       # All styles, plain CSS
 assets/js/search.js        # List filtering, the site's only script
+favicon.ico                # Browser tab icon (root on purpose — see below)
+assets/img/icon.svg        # Site icon source; the .ico and touch icon come from it
+assets/img/apple-touch-icon.png  # iOS home screen tile, 180x180
 assets/img/logo.svg        # Site mark, shown on the home page only
 assets/img/                # Portrait and organization logos
 specs/                     # Spec Kit feature specs

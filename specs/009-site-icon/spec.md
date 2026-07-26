@@ -4,9 +4,10 @@
 
 **Created**: 2026-07-25
 
-**Status**: Partially implemented — the home page mark (FR-013) is built and deployed. The
-browser icon itself (User Stories 1–3, FR-001 to FR-006) is specified but not yet built;
-it needs the author's icon files.
+**Status**: Implemented. The home page mark and the browser icon are both built and
+deployed. One item is verifiable only on a physical device: the iOS home-screen tile
+(User Story 2) is declared and the file is correct, but has not been confirmed on real
+hardware — see the note in [tasks.md](tasks.md).
 
 **Input**: The author supplied a set of six icon files and, on being asked, named the
 brand colour: "this is the color #0B7E8A". The artwork is an open book on a rounded
@@ -147,8 +148,15 @@ introduction. Load any other page and confirm it does not appear.
   filling its tile without clipping the book.
 - **FR-005**: The icon MUST remain distinguishable against both light and dark browser
   chrome, and MUST remain readable as a shape at the smallest size a browser renders.
-- **FR-006**: A direct request for the conventional root icon path MUST return an icon
-  rather than a 404.
+- **FR-006**: A direct request for **this site's own root** icon path
+  (`/cristiane/favicon.ico`) MUST return an icon rather than a 404.
+
+  > **Amended during planning.** This first read "the conventional root icon path", which
+  > promised something this repository cannot deliver. The path a browser probes when no
+  > icon is declared is the *domain* root, `souza-cris.github.io/favicon.ico`, which is
+  > served by the author's separate user-site repository. Measured and recorded as decision
+  > 1 in [research.md](research.md). It does not matter in practice: the icons are declared
+  > in every page's head, and a browser given a declaration never probes the root.
 - **FR-007**: All icon files MUST be committed to this repository and served from it. No
   icon may be requested from an external host.
 - **FR-008**: The icon MUST be decorative. No information, navigation, or meaning may

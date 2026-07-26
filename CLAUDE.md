@@ -109,6 +109,21 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 - `default.html` puts `is-home` or `is-interior` on `<body>`. That class drops
   the rules above and below the content on home; reuse it for anything else
   that differs between home and interior pages rather than adding a new flag.
+- The site icon is three files: `assets/img/icon.svg` (the source),
+  `favicon.ico`, and `assets/img/apple-touch-icon.png`. The two raster files are
+  **generated** from the SVG — regenerate them together, never hand-edit one.
+  Commands are in the README and spec 009's quickstart.
+- `favicon.ico` sits at the **repository root** on purpose, so it publishes to
+  `/cristiane/favicon.ico`. Moving it under `assets/` breaks the bare-root
+  request. The *domain* root (`souza-cris.github.io/favicon.ico`) belongs to a
+  different repo and is not ours to serve — that is fine, because the icons are
+  declared in `head.html` and a browser given a declaration never probes root.
+- The touch icon is deliberately opaque (RGB, no alpha). iOS composites on
+  black, so a transparent PNG shows black corners.
+- `icon.svg` and `logo.svg` hold the same artwork but are **separate files by
+  the author's decision**, so the icon can be tuned for 16px without changing
+  the home page. They do not track each other — changing the drawing means
+  changing both until they diverge.
 - The site mark (`assets/img/logo.svg`) renders on the **home page only**,
   centred above the content, and is decorative — empty alt, `aria-hidden`, not a
   link. It is emitted only on home rather than hidden elsewhere with CSS. The
