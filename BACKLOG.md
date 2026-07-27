@@ -3,19 +3,23 @@
 Work that is specified but not scheduled. Everything here is ready to pick up — the thinking
 is done and written down, so resuming does not mean starting again.
 
-Features under `specs/` are marked **Implemented** when they ship. Anything listed here is
-marked **Backlog** in its own spec, so the two never disagree.
+A spec's `Status` is `Draft`, `Backlog`, `Active` or `Implemented`, and this file is kept in
+step with it, so the two never disagree. Anything below is specified but not built.
 
 ---
 
 ## ~~010 — Search visibility and domain migration~~ — ACTIVE AGAIN
 
 **Taken off the backlog** on 27 July 2026: the author bought **crissouza.org**.
-**State**: specified and planned; the domain is bought but not yet connected. Nothing built.
+**State**: specified and planned, and now unblocked. Nothing built.
 
-The two phases have collapsed into one. Because the site has never been indexed, connecting
-the domain first means there is nothing to migrate — see the amendments in the spec, plan and
-research. The next step is DNS, which only the author can do.
+The domain is connected and serving over HTTPS — DNS points at GitHub Pages, the `CNAME` file
+is committed, the certificate is issued and HTTPS is enforced. FR-027 required that before any
+search work could be published, so the prerequisite is met.
+
+The two phases have collapsed into one. Because the site was never indexed under the old
+address, there is nothing to migrate — see the amendments in the spec, plan and research.
+**The next step is `/speckit-tasks`.**
 
 [spec](specs/010-seo-and-domain-migration/spec.md) ·
 [plan](specs/010-seo-and-domain-migration/plan.md) ·
@@ -25,43 +29,41 @@ research. The next step is DNS, which only the author can do.
 Makes the site findable in search, gives shared links a proper preview card instead of a bare
 address, and makes the later move to a custom domain a one-line change rather than a sweep.
 
-**What is done**: the full spec (5 user stories, 26 requirements), the implementation plan,
+**What is done**: the full spec (5 user stories, 29 requirements), the implementation plan,
 seven research decisions, the data model, the contracts and the verification guide. Both open
-questions were answered — the site will live at the **root** of the future domain, and the
-preview image will be built from the existing site mark.
+questions were answered — the site lives at the **root** of crissouza.org, and the preview
+image will be built from the existing site mark.
 
-**What is left**: `/speckit-tasks`, then the build. Phase 1 only — Phase 2 cannot start until
-a domain is actually bought.
+**What is left**: `/speckit-tasks`, then the build. One phase — titles and descriptions,
+canonical addresses, social preview tags, structured data, a sitemap and a robots file, and a
+1200×630 preview image generated from the site mark.
 
 **To resume**: run `/speckit-tasks`. The spec-kit pointer in `.specify/feature.json` already
 targets this feature, so nothing needs setting up first.
 
-### Two things not to lose
+### Two prerequisites, both already met
 
-These came out of research and are the reason resuming will be quicker than starting over.
+Both were raised in research as things that would bite later. Both were dealt with on 27 July
+2026, before the domain went live, and are recorded here so nobody undoes them.
 
-**The deploy workflow will silently defeat the migration if left as it is.**
-`.github/workflows/pages.yml` builds with `--baseurl "/cristiane"` on the command line, and a
-command-line flag beats `_config.yml`. Changing the base path in the config would therefore do
-nothing, and every address on the site would be wrong in a way that only shows up once the
-domain is live. Removing that flag is a Phase 1 task. See decision 2 in
+**The deploy workflow no longer forces the base path.** It used to build with
+`--baseurl "/cristiane"`, and a command-line flag beats `_config.yml` — so changing the config
+would have done nothing, and every address would have been wrong in a way only visible once the
+domain was live. The flag is gone; `_config.yml` is the only place the address is declared.
+Do not put it back. See decision 2 in
 [research.md](specs/010-seo-and-domain-migration/research.md).
 
-**Old addresses may not redirect after the move, and that is not assumed.** GitHub does not
-document what happens to `souza-cris.github.io/cristiane/…` once a custom domain is set — only
-apex-vs-`www` redirects for the same domain are covered. The plan therefore relies on the
-canonical address, which is under the site's control, and treats the redirect as something to
-verify at migration time with a recorded fallback. See decision 4.
+**The redirect question is moot.** Research decision 4 could not establish whether old
+`souza-cris.github.io/cristiane/…` addresses would redirect after a custom domain was set —
+GitHub does not document it. Connecting the domain before publishing any search work made the
+question irrelevant: nothing was ever indexed under the old address, so nothing needs to
+redirect away from it.
 
-### Worth doing before this, if the chance arises
+### Cleared beforehand
 
-Not blocking, but they make the SEO work land better:
-
-- **Two bookmarks link to `example.com`** and have done since the first build — "Designing for
-  How People Learn" and "AI in Education". They are broken for visitors today, and once the
-  site is indexed they become broken links a search engine has seen. `ruby tools/check-data.rb`
-  lists them.
-- **The "AI in Education" bookmark has no `source`**, reported by the same check.
+~~Two bookmarks linked to `example.com`, and one had no `source`.~~ **Done** — the bookmark
+list was replaced with the author's own on 27 July 2026, and `ruby tools/check-data.rb` now
+reports no problems.
 
 ---
 

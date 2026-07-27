@@ -41,7 +41,11 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 - **Content**:
   - Stories: `_posts/YYYY-MM-DD-title.md`, front matter carries `keywords` (a list) and `tldr`
   - Journey: `_data/journey.yml`
-  - Bookmarks: `_data/bookmarks.yml`, filter slugs in `_data/bookmark_types.yml`
+  - Bookmarks: `_data/bookmarks.yml`, filter slugs in `_data/bookmark_types.yml`.
+    Adding a type is TWO edits: the slug here, and a matching page in
+    `bookmarks/`. With only the slug the filter pill renders and leads to a
+    404, because Jekyll cannot generate a page from a data file without a
+    plugin. Same rule for story keywords and `stories/`
   - Story filters: `_data/story_keywords.yml`
   - Research: `_data/research.yml`
   - Sections: `_data/sections.yml` — the navigation list, with a `match` of

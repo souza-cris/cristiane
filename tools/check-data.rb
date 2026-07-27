@@ -185,7 +185,7 @@ def check_sections
     url = entry['url'].to_s
     if !url.empty? && (!url.start_with?('/') || url.start_with?('/cristiane'))
       err(file, where, "url #{url.inspect} should be site-rooted without the base path",
-          'write "/stories", not "/cristiane/stories" — the base path is added for you')
+          'write "/stories" — a leading slash, no domain and no base path')
     end
   end
 end
@@ -225,7 +225,7 @@ def check_updates
     link = entry['link'].to_s
     if link.start_with?('/cristiane')
       err(file, where, "link #{link.inspect} includes the base path",
-          'write "/research/", not "/cristiane/research/"')
+          'write "/research/" — a leading slash, no domain and no base path')
     end
   end
 end
