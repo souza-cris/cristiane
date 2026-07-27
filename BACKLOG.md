@@ -8,10 +8,14 @@ marked **Backlog** in its own spec, so the two never disagree.
 
 ---
 
-## 010 — Search visibility and domain migration
+## ~~010 — Search visibility and domain migration~~ — ACTIVE AGAIN
 
-**State**: specified and planned. Nothing built.
-**Deferred**: 26 July 2026, by the author — "let's do the SEO later".
+**Taken off the backlog** on 27 July 2026: the author bought **crissouza.org**.
+**State**: specified and planned; the domain is bought but not yet connected. Nothing built.
+
+The two phases have collapsed into one. Because the site has never been indexed, connecting
+the domain first means there is nothing to migrate — see the amendments in the spec, plan and
+research. The next step is DNS, which only the author can do.
 
 [spec](specs/010-seo-and-domain-migration/spec.md) ·
 [plan](specs/010-seo-and-domain-migration/plan.md) ·

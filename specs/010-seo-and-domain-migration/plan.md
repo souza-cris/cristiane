@@ -2,6 +2,12 @@
 
 **Branch**: `010-seo-and-domain-migration` | **Date**: 2026-07-26 | **Spec**: [spec.md](spec.md)
 
+> **Amended 27 July 2026.** The author bought **crissouza.org**, and the site has never been
+> indexed. The two phases collapse into one: connect the domain first, then do the search work
+> once against `crissouza.org`. Phase 2 and its migration are deleted, and with them decision
+> 4's unresolved redirect question — if nothing is ever indexed under the GitHub Pages host,
+> nothing has to redirect away from it. See the amendment in [research.md](research.md).
+
 **Input**: Feature specification from `specs/010-seo-and-domain-migration/spec.md`
 
 ## Summary

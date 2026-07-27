@@ -4,9 +4,14 @@
 
 **Created**: 2026-07-26
 
-**Status**: Backlog — specified and planned, not scheduled. Deferred by the author on
-26 July 2026. Nothing is built. See [BACKLOG.md](../../BACKLOG.md); resume with
-`/speckit-tasks`.
+**Status**: Active — taken out of the backlog on 27 July 2026, when the author bought
+**crissouza.org**. Nothing is built yet.
+
+**The two phases have collapsed into one.** Phase 1 (optimise on the GitHub Pages address)
+and Phase 2 (migrate to a domain) existed only because no domain existed. It does now, and
+the site has never been indexed — no sitemap, no robots file, nothing submitted. There is
+therefore nothing to migrate: connect the domain first, and every address is
+`crissouza.org` from the first crawl. See the amendment under Requirements.
 
 **Input**: The author supplied a two-phase brief: make the site discoverable now, on its
 current GitHub Pages address, and migrate cleanly to a custom domain later without losing
@@ -110,7 +115,12 @@ machine-readable data is the same one.
 
 ---
 
-### User Story 4 - Move to a custom domain without losing ground (Priority: P2)
+### User Story 4 - Move to a custom domain without losing ground (Priority: P2) — SUPERSEDED
+
+> **No longer applies.** The domain was bought before the site was ever indexed, so there is
+> nothing to move. Connecting it first (FR-027) makes this story unnecessary rather than
+> merely easier. Kept as written, because it is the reasoning that led to connecting the
+> domain first — deleting it would hide why the current sequence was chosen.
 
 Later, the author buys a domain. The site moves to it, and the standing built up in the
 meantime follows: old addresses lead to new ones, search engines are told where the site
@@ -226,7 +236,7 @@ identity, article and publication descriptions are present and error-free.
 - **FR-017**: Publications MUST be described as scholarly work, distinct from stories.
 - **FR-018**: All machine-readable descriptions MUST validate without errors.
 
-**Migration**
+**Migration — SUPERSEDED, see the amendment above. Retained, not required.**
 
 - **FR-019**: Moving to a custom domain MUST require changing the address in one place, not
   editing every page or template.
@@ -235,6 +245,30 @@ identity, article and publication descriptions are present and error-free.
 - **FR-021**: After the move, the page list and crawling instructions MUST be published at the
   new domain and name only new addresses.
 - **FR-022**: The migration MUST NOT begin until the new domain is confirmed live and secure.
+
+**Amended 27 July 2026 — the domain exists, so there is no migration**
+
+> The author bought **crissouza.org**. Measured the same day: the domain resolves to its
+> registrar's parking page (AWS addresses, not GitHub Pages' `185.199.108–111.153`), no
+> `CNAME` file exists in the repository, and the site still has no sitemap or robots file and
+> has never been submitted to a search engine.
+>
+> Because nothing is indexed, **nothing has to be migrated**. Connecting the domain before the
+> search work lands means every address is `crissouza.org` from the first crawl. This deletes
+> the second phase outright and, with it, the largest unknown in the plan — whether old
+> project addresses redirect after a custom domain is set, which GitHub does not document.
+>
+> FR-019 to FR-022 below are **superseded** and are kept only because a later change of
+> circumstance could revive them. They are not requirements of the current work.
+
+- **FR-027**: The domain MUST be connected and serving the site over HTTPS **before** any
+  search-visibility work is published, so that no address is ever advertised under the
+  GitHub Pages host.
+- **FR-028**: Until the domain serves the site, the current address MUST keep working. No
+  change may be published that takes the live site down while DNS is still pointing
+  elsewhere.
+- **FR-029**: Once connected, every address the site declares MUST name `crissouza.org` at
+  its root. No published address may contain `/cristiane` or the GitHub Pages host.
 
 **Constraints carried from the brief**
 
@@ -246,9 +280,8 @@ identity, article and publication descriptions are present and error-free.
 
 **Settled by the author**
 
-- **FR-025**: After the move, the site MUST live at the **root** of the new domain. Every
-  page's address therefore loses the `/cristiane` segment as well as changing host, which
-  makes FR-020's redirects a path change and not only a host change.
+- **FR-025**: The site MUST live at the **root** of `crissouza.org`. Every page's address
+  therefore loses the `/cristiane` segment as well as changing host.
 - **FR-026**: The default preview image MUST be built from the site's existing mark and name
   — the teal book on the site's own background, with "Cris Souza" and a short line of
   description — so it is consistent with the site and needs no new artwork. It MUST be

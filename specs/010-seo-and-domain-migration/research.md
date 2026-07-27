@@ -93,7 +93,15 @@ a search engine or another site quotes. Both read from the same two config value
 
 ---
 
-## 4. Whether old addresses will redirect after the move — unresolved, and mitigated
+## 4. Whether old addresses will redirect after the move — MOOT as of 27 July 2026
+
+> **Closed by sequencing, not by an answer.** The author bought crissouza.org before the site
+> was ever indexed. Connecting the domain before publishing any search work means no address
+> is ever advertised under the GitHub Pages host, so nothing ever needs to redirect away from
+> it. The question below is left intact because it is the reason the sequence was chosen, and
+> because it becomes live again if the domain is ever moved a second time.
+
+### The original finding, retained
 
 **The question**: FR-020 requires that addresses working before the move lead to their new
 equivalents. For a GitHub Pages *project* site given a custom domain, does

@@ -22,8 +22,12 @@ jobs:
         with:
           ruby-version: "3.3"
           bundler-cache: true
+      # The base path comes from _config.yml alone. Do not pass --baseurl here:
+      # a command-line flag overrides the config, so the site would keep building
+      # for /cristiane no matter what the config said — and that breaks silently,
+      # only showing up once the site is live at a different address.
       - name: Build site
-        run: bundle exec jekyll build --baseurl "/cristiane"
+        run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
       - uses: actions/upload-pages-artifact@v3
