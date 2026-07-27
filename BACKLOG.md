@@ -78,3 +78,26 @@ Raised while doing other work and deliberately not pursued. No spec exists for a
   bookmarks, and set aside: a form-based CMS needs a large JavaScript bundle and an
   authentication service that GitHub Pages cannot host, which conflicts with three
   constitution principles. The templates and checker in `tools/` were built instead.
+- **Comments on stories.** Asked for on 27 July 2026, after the first story was published, and
+  parked rather than built. It is not a small addition. The site is static files on GitHub Pages
+  with no server, so every option means a third-party script running on the page — the first
+  thing here that would depend on somebody else at page load. It would need the constitution
+  amended: Principle IV forbids requesting anything from an external host, and Principle V
+  forbids JavaScript without a documented need.
+
+  The options weighed, so they need not be re-derived:
+
+  - **Giscus** — comments stored as GitHub Discussions in this repo. Free, no ads, no tracking,
+    and the data stays with the author. Readers need a GitHub account, which for an academic
+    audience is a real filter. Still loads a script from a CDN. The strongest candidate if this
+    is ever built.
+  - **Utterances** — the same idea on GitHub Issues. Lighter, older, same account requirement.
+  - **A hosted service** — Commento or Hyvor take payment (~$5–10/month) and do not track;
+    Disqus is free but ad-supported and watches readers closely, which cuts against the decision
+    in feature 010 to leave analytics and trackers out.
+  - **No comments** — point readers at LinkedIn, where the audience already is. Costs nothing,
+    adds nothing, needs no moderation.
+
+  The consideration most likely to decide it is not technical: comments need moderating. Spam
+  finds static sites quickly, and an unmoderated comment section on a researcher's site ages
+  badly.
