@@ -1,18 +1,34 @@
-# The filter pills shown on the bookmarks page.
+# The filter pills shown on the bookmarks page, in this order.
 # "slug" must match the `type:` value used in _data/bookmarks.yml.
 # "empty" is the message shown when nothing matches that filter.
+#
+# Adding a type here is only half the job: Jekyll cannot generate a page from a
+# data file without a plugin, so each slug also needs a matching page in
+# bookmarks/ — copy an existing one and change the slug in three places.
 - slug: paper
   label: paper
   empty: "No papers yet."
+- slug: report
+  label: report
+  empty: "No reports yet."
+- slug: project
+  label: project
+  empty: "No projects yet."
+- slug: tool
+  label: tool
+  empty: "No tools yet."
+- slug: course
+  label: course
+  empty: "No courses yet."
+- slug: organization
+  label: organization
+  empty: "No organizations yet."
 - slug: book
   label: book
   empty: "No books yet."
 - slug: talk
   label: talk
   empty: "No talks yet."
-- slug: tool
-  label: tool
-  empty: "No tools yet."
 - slug: dataset
   label: dataset
   empty: "No datasets yet."

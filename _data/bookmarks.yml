@@ -1,42 +1,102 @@
+# Bookmarks. The pages sort on `addedDate`, newest first, so the order here is
+# for readability only.
+#
+# `type` must match a slug in _data/bookmark_types.yml, or the entry silently
+# vanishes from its filter page. Run `ruby tools/check-data.rb` after editing.
+# A paste-ready template with every field explained: tools/templates/bookmark.yml
+
+- title: "Anthropic Economic Index: AI's impact on software development"
+  type: "report"
+  topicTags:
+    - "AI"
+    - "software development"
+    - "economics"
+  whyItMatters: "Measured use, not opinion. 500k real coding conversations, split by whether the human stayed in the loop or handed the task over. It gives you a vocabulary (automation vs augmentation) for deciding how much of your own work to delegate."
+  keyTakeaway: "79% of Claude Code conversations were automation, against 49% on the chat interface. Front-end work dominates, which suggests UI-heavy roles feel the shift first."
+  link: "https://www.anthropic.com/research/impact-software-development"
+  addedDate: "2026-04-28"
+  source: "Anthropic"
+
+- title: "APEX Benchmarks"
+  type: "tool"
+  topicTags:
+    - "AI"
+    - "benchmarks"
+    - "evaluation"
+  whyItMatters: "Most benchmarks test exam questions. APEX tests paid professional work: investment banking, corporate law, consulting, medicine, software engineering, with tasks written and graded by people who do those jobs."
+  keyTakeaway: "On long multi-hour agent tasks the leaders sit near 43%. Impressive on single-turn text, nowhere near reliable on real workflows."
+  link: "https://www.mercor.com/apex/"
+  addedDate: "2026-07-26"
+  source: "Mercor"
+
+- title: "Centaur Evaluations"
+  type: "project"
+  topicTags:
+    - "AI"
+    - "benchmarks"
+    - "evaluation"
+    - "research"
+  whyItMatters: "Names the blind spot in every leaderboard: the model is scored alone, without the person who will actually use it. Measure imitation and you build for replacement by default."
+  keyTakeaway: "The unit of measurement should be the human plus AI team. Report human-only, AI-only, and centaur performance, and treat human minutes and tokens as separate inputs."
+  link: "https://digitaleconomy.stanford.edu/project/ai-centaur-benchmarks/"
+  addedDate: "2026-07-26"
+  source: "Stanford Digital Economy Lab"
+
+- title: "Anthropic Academy"
+  type: "course"
+  topicTags:
+    - "AI"
+    - "learning"
+  whyItMatters: "First-party training, free, kept current. Beats secondhand tutorials that go stale in a month."
+  keyTakeaway: "Courses run on Skilljar with certificates. AI Fluency for working practice, API and MCP and Claude Code tracks for building."
+  link: "https://www.anthropic.com/learn"
+  addedDate: "2026-07-26"
+  source: "Anthropic"
+
+- title: "METR"
+  type: "organization"
+  topicTags:
+    - "AI"
+    - "evaluation"
+    - "safety"
+  whyItMatters: "Independent evaluation by a nonprofit that takes no payment for it. A counterweight to labs grading their own homework."
+  keyTakeaway: "Their time horizon metric measures how long a task a model can finish reliably, doubling roughly every seven months. Same group ran the 2025 trial where experienced developers were 19% slower with AI while believing they were faster."
+  link: "https://metr.org/"
+  addedDate: "2026-07-26"
+  source: "METR"
+
+- title: "OpenAI Academy"
+  type: "course"
+  topicTags:
+    - "AI"
+    - "learning"
+  whyItMatters: "The ChatGPT counterpart to Anthropic Academy. Keeping both shows how each lab teaches people to use its own tools, and where the framings diverge."
+  keyTakeaway: "Three tracks by experience level: AI Foundations, Applied AI Foundations, Agents and Workflows. Live sessions with replays on top."
+  link: "https://academy.openai.com/"
+  addedDate: "2026-07-26"
+  source: "OpenAI"
+
 - title: "Attention Is All You Need"
   type: "paper"
   topicTags:
     - "AI"
-    - "NLP"
-  whyItMatters: "This paper introduced the Transformer architecture that underpins modern large language models. Understanding it is essential for anyone working with AI in education or research."
-  keyTakeaway: "Self-attention mechanisms can replace recurrence entirely, enabling more parallelizable and effective sequence models."
-  link: "https://arxiv.org/abs/1706.03762"
-  addedDate: "2026-07-20"
-  source: "arXiv"
+    - "research"
+    - "foundations"
+  whyItMatters: "The architecture under everything current. Read it once and the vocabulary in every later paper becomes legible."
+  keyTakeaway: "Vaswani et al., 2017. Drop recurrence and convolution, keep attention. Trained faster, parallelized better, beat the state of the art in translation."
+  link: "https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html"
+  addedDate: "2026-07-26"
+  source: "Vaswani et al., NeurIPS 2017"
 
-- title: "Designing for How People Learn"
-  type: "book"
-  topicTags:
-    - "ISD"
-    - "Learning Design"
-  whyItMatters: "Bridges cognitive science and instructional design in an accessible way. A foundational text for anyone designing learning experiences."
-  keyTakeaway: "Effective instruction aligns with how memory, attention, and motivation actually work — not how we assume they work."
-  link: "https://www.example.com/designing-for-learning"
-  addedDate: "2026-07-15"
-  source: "O'Reilly"
-
-- title: "AI in Education: Promises and Implications"
-  type: "talk"
+- title: "Managing Artificial Intelligence"
+  type: "paper"
   topicTags:
     - "AI"
-    - "Education"
-  whyItMatters: "A nuanced look at where AI genuinely helps in education and where it falls short. Useful for framing research questions."
-  keyTakeaway: "AI tools are most effective when they augment human instruction rather than replace it."
-  link: "https://www.example.com/ai-education-talk"
-  addedDate: "2026-07-10"
-
-- title: "Qualtrics"
-  type: "tool"
-  topicTags:
-    - "Research"
-    - "Survey Design"
-  whyItMatters: "Industry-standard survey platform used across academic research. Essential for mixed-methods studies."
-  keyTakeaway: "Powerful branching logic and data export capabilities make it ideal for complex research designs."
-  link: "https://www.qualtrics.com"
-  addedDate: "2026-07-05"
-  source: "Qualtrics"
+    - "management"
+    - "governance"
+    - "research"
+  whyItMatters: "Management framing, not technical. Useful when the question is how an organization governs AI rather than how a model works."
+  keyTakeaway: "Three interlocking properties to manage: autonomy, learning, inscrutability. The frontier keeps moving, so today's AI becomes tomorrow's ordinary software."
+  link: "https://misq.umn.edu/misq/article/45/3/1433/1890/Managing-Artificial-Intelligence1"
+  addedDate: "2026-07-26"
+  source: "Berente, Gu, Recker & Santhanam, MIS Quarterly 45(3), 2021"
