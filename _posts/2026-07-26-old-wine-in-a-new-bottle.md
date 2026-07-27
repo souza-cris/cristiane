@@ -56,7 +56,7 @@ This phase sets the principles. I typed the principles below (created with Claud
 > - Always test locally with `bundle exec jekyll serve` before pushing.
 > - I am new to this, so explain what you change and why as you go, in plain language.
 
-<aside class="tbh"><p><strong>#tbh</strong> – does it sound like something we, ex and current project managers, know very well?</p></aside>
+<aside class="tbh"><p><strong>#tbh:</strong> Does it sound like something we, ex and current project managers, know very well?</p></aside>
 
 <p class="story-command">/speckit-specify</p>
 
@@ -68,7 +68,7 @@ It created a whole spec with 5 user stories. Each one with priority and acceptan
   <img src="{{ '/assets/img/stories/old-wine/first-user-story.png' | relative_url }}" alt="The generated spec showing User Story 1, Home Page and Site Navigation, with its priority, independent test and four acceptance scenarios." width="1200" height="684" loading="lazy">
 </figure>
 
-<aside class="tbh"><p><strong>#tbh</strong> – the user story format is not exactly what I am used to, but it is not bad, considering that people don’t really follow the user story “traditional” format anyway…</p></aside>
+<aside class="tbh"><p><strong>#tbh:</strong> The user story format is not exactly what I am used to, but it is not bad, considering that people don’t really follow the user story “traditional” format anyway…</p></aside>
 
 Besides that, the spec also included edge cases, requirements, and success criteria.
 
@@ -83,7 +83,7 @@ Claude told me: “Next is the planning step, where the AI decides the technical
   <figcaption>“Big milestone: Claude Code built the entire site, all five sections, with the correct structure.”</figcaption>
 </figure>
 
-<aside class="tbh"><p><strong>#tbh</strong> – here is when I got lost. I am not an engineer and if this was something more critical, I wouldn’t know what to do. Is this the correct structure? I had to trust Claude on this…</p></aside>
+<aside class="tbh"><p><strong>#tbh:</strong> Here is when I got lost. I am not an engineer and if this was something more critical, I wouldn’t know what to do. Is this the correct structure? I had to trust Claude on this…</p></aside>
 
 <p class="story-command">/speckit-implement</p>
 
@@ -91,7 +91,7 @@ It validates against the spec.
 
 After implementing the first feature, I decided to move to VS Code, so the other features were all created through VS Code with Claude Code CLI.
 
-<aside class="tbh"><p><strong>#tbh</strong> – following the spec-kit was kinda hard for me, not because I couldn’t understand, but I thought it was too rigid. I also felt like it was limiting my creativity. Of course, this example does not reflect a real-world use case. There is no impact, no dependency with other teams or legacy systems, no risk.</p></aside>
+<aside class="tbh"><p><strong>#tbh:</strong> Following the spec-kit was kinda hard for me, not because I couldn’t understand, but I thought it was too rigid. I also felt like it was limiting my creativity. Of course, this example does not reflect a real-world use case. There is no impact, no dependency with other teams or legacy systems, no risk.</p></aside>
 
 ## Discussion
 
