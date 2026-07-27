@@ -11,7 +11,7 @@ permalink: /journey/
 
 <p class="journey__tagline">from industry to academia. continuously improving.</p>
 
-<p class="journey__throughline">Two decades of helping people and teams work well with technology — and now the subject of my research: how people and AI actually collaborate, and what makes them trust, resist, or work around the systems they are given.</p>
+<p class="journey__throughline">Project management, transformation, agile, information systems development. Four countries, seven companies, industries from packaging to banking. Over a decade leading teams and leaders. A bachelor's, an MBA, a master's, and now a PhD. Why take a career off the shelf when I can build my own?</p>
 
 {% comment %}
   The country count is derived from the distinct flags in the milestone data,

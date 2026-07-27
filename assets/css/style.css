@@ -601,10 +601,13 @@ time {
   text-decoration: none;
 }
 
+/* The flag is the one glance-level cue for where a milestone happened, so it is
+   deliberately larger than the label beneath it. */
 .journey__flag {
   display: block;
-  font-size: 0.95rem;
-  line-height: 1.3;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin-top: 0.15rem;
 }
 
 .journey__label {
