@@ -1257,6 +1257,75 @@ a.journey__detail-org:hover {
   color: var(--accent);
 }
 
+/* ---- The four-phase process ----
+
+   An ordered list, not a table: it is a sequence, and a screen reader should
+   read it as one.
+
+   The column counts are explicit rather than auto-fit. Four steps in a 44rem
+   column, left to fit themselves, land on three-across with a single orphan
+   underneath — which reads as a mistake. Going 1 -> 2 -> 4 keeps every row
+   whole at every width. */
+
+.process {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 1.5rem 0 2rem;
+  padding: 0;
+}
+
+@media (min-width: 30rem) {
+  .process {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 48rem) {
+  .process {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+  }
+}
+
+.process__step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--accent);
+  border-radius: 0.5rem;
+  padding: 1rem 0.9rem 1.1rem;
+}
+
+.process__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin-bottom: 0.55rem;
+}
+
+.process__name {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+}
+
+.process__desc {
+  display: block;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
 /* The Spec Kit command that each step of the walkthrough is about. */
 .story-command {
   font-family: var(--font-mono);

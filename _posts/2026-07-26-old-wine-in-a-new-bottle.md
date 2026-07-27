@@ -1,9 +1,9 @@
 ---
 layout: story
-title: "Old wine in a new bottle? Learning about spec-driven development"
+title: "Old wine in a new bottle? Playing with spec-driven development"
 date: 2026-07-26
 keywords: [leadership, isd]
-tags: [spec-driven development, spec kit, claude code, jekyll, ai]
+tags: [spec-driven development, spec kit, claude code, ai, github]
 tldr: "I built this site with spec-driven development using Spec Kit and Claude Code. The structure and documentation impressed me, the rigidity did not, and a lot of it felt familiar to anyone who has managed a project."
 ---
 
@@ -99,9 +99,28 @@ I like how structured the artifacts are now with my 10 features. How it always g
 
 Basically, this is the process:
 
-| 1. Specify | 2. Plan | 3. Tasks | 4. Implement |
-| --- | --- | --- | --- |
-| The what and the why | The how, technically | The work, step by step | Build it, check the spec |
+<ol class="process">
+  <li class="process__step">
+    <span class="process__num">1</span>
+    <span class="process__name">Specify</span>
+    <span class="process__desc">The what and the why</span>
+  </li>
+  <li class="process__step">
+    <span class="process__num">2</span>
+    <span class="process__name">Plan</span>
+    <span class="process__desc">The how, technically</span>
+  </li>
+  <li class="process__step">
+    <span class="process__num">3</span>
+    <span class="process__name">Tasks</span>
+    <span class="process__desc">The work, step by step</span>
+  </li>
+  <li class="process__step">
+    <span class="process__num">4</span>
+    <span class="process__name">Implement</span>
+    <span class="process__desc">Build it, check the spec</span>
+  </li>
+</ol>
 
 So, what is really new?
 
