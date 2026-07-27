@@ -100,6 +100,22 @@ A visitor navigates to the about page and sees a blank placeholder (just the pag
 - What happens when a visitor accesses a URL that does not exist? The existing custom 404 page is shown.
 - What happens on mobile with the filter toggles? Filters stack vertically and remain usable on small screens.
 
+
+> **Amended 27 July 2026 — story presentation.** Publishing the first real story
+> (with screenshots) added three presentation pieces this spec did not anticipate,
+> all styling only, no change to how stories are authored or stored:
+>
+> - `figure.story-figure` — a bordered card for screenshots, with an optional
+>   caption. A `--light` variant seats artwork drawn on white on its own panel,
+>   so a light image reads as deliberate rather than as a hole in a dark page.
+> - `aside.tbh` — the author's recurring "#tbh" remark, given its own voice. It
+>   must be authored as HTML: in Markdown a leading `#` becomes a heading.
+> - `p.story-command` — the Spec Kit command a walkthrough step is about.
+>
+> Story front matter is unchanged. Pictures are committed under
+> `assets/img/stories/<slug>/`, resized before committing, per the existing rule
+> that images are never hotlinked and never shipped at full size.
+
 ## Requirements *(mandatory)*
 
 ### Functional Requirements

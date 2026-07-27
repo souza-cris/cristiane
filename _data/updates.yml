@@ -23,11 +23,6 @@
 # adjust — and restart the local server afterwards, because Jekyll only reads
 # that file at startup.
 #
-# ── Seeded entries ───────────────────────────────────────────────────────────
-# The entries below were copied from content already on this site so the widget
-# has something to show. Replace the blurbs with your own words and decide what
-# actually deserves the home page.
-
 - type: publication
   title: "Therapy Across Borders: The Search for Cultural Safety in Digital Mental Health"
   date: 2026-07-25
@@ -35,13 +30,13 @@
   blurb: "AMCIS 2026 — accepted for presentation."
 
 - type: story
-  title: "Building this site with Jekyll"
-  date: 2026-07-25
-  link: "/stories/2026/07/25/building-this-site/"
-  blurb: "A walkthrough of how this site was built using Jekyll, Markdown, and GitHub Pages."
+  title: "Old wine in a new bottle? Learning about spec-driven development"
+  date: 2026-07-26
+  link: "/stories/2026/07/26/old-wine-in-a-new-bottle/"
+  blurb: "Building this site with Spec Kit and Claude Code — what impressed me, and what did not."
 
 - type: bookmark
-  title: "Attention Is All You Need"
-  date: 2026-07-20
-  link: "/bookmarks/paper/"
-  blurb: "The paper that introduced the Transformer architecture."
+  title: "Anthropic Economic Index: AI's impact on software development"
+  date: 2026-04-28
+  link: "/bookmarks/report/"
+  blurb: "Measured use, not opinion — 500k real coding conversations."

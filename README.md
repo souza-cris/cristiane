@@ -13,7 +13,7 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Open [http://localhost:4000/cristiane/](http://localhost:4000/cristiane/) in your browser.
+Open [http://localhost:4000/](http://localhost:4000/) in your browser.
 
 `Gemfile.lock` is committed, so `bundle install` gives you gem versions known to work. If a build ever fails with `undefined method 'tainted?'`, the `liquid` gem is too old for your Ruby — run `bundle update liquid`.
 
@@ -21,7 +21,7 @@ Open [http://localhost:4000/cristiane/](http://localhost:4000/cristiane/) in you
 
 Pushing to `main` triggers [.github/workflows/pages.yml](.github/workflows/pages.yml), which builds the site and deploys it. The workflow pins Ruby 3.3.
 
-The site is at <https://souza-cris.github.io/cristiane/>.
+The site is at <https://crissouza.org>.
 
 ## Adding content
 
@@ -92,6 +92,27 @@ Write your story here in Markdown.
 
 `keywords` decides which filters the story appears under, and a story can carry several. Valid slugs live in `_data/story_keywords.yml`.
 
+**Adding pictures.** Put them in `assets/img/stories/<story-slug>/`, resized to about 1200 pixels wide before committing. Then in the story:
+
+```html
+<figure class="story-figure">
+  <img src="{{ '/assets/img/stories/my-story/screenshot.png' | relative_url }}"
+       alt="What the picture shows, for someone who cannot see it."
+       width="1200" height="573" loading="lazy">
+  <figcaption>An optional caption.</figcaption>
+</figure>
+```
+
+Add `story-figure--light` for artwork drawn on a white background, so it sits on a white panel instead of glaring against the dark page.
+
+**An aside to the reader.** For a remark that steps out of the flow:
+
+```html
+<aside class="tbh"><p><strong>#tbh</strong> – what you really think.</p></aside>
+```
+
+Write it as HTML, not Markdown. A line starting with `#` in Markdown becomes a giant heading, which is not what `#tbh` means.
+
 ### Bookmark
 
 Add an entry to `_data/bookmarks.yml`:
@@ -151,7 +172,7 @@ Add an entry to `_data/updates.yml`. The four most recent appear on the home pag
 
 Three things to know:
 
-- **Write internal links site-rooted** — `/stories/…`, not `/cristiane/stories/…`. The base path is added for you.
+- **Write internal links site-rooted** — `/stories/…`, with a leading slash and no domain.
 - **This list is curated by hand.** It does not read from `_posts/` or the bookmarks, so featuring something here does not create it, and editing a story does not update its entry.
 - **The limit lives in `_config.yml`** as `updates_limit`. Change it and restart the local server — Jekyll reads that file only at startup.
 
@@ -196,7 +217,7 @@ Add a block to `_data/sections.yml`, then create the page. All three places the 
 
 ```yaml
 - label: "talks"
-  url: "/talks"      # site-rooted, no /cristiane prefix
+  url: "/talks"      # site-rooted, leading slash, no domain
   match: "exact"     # or "prefix" if the section will have pages beneath it
 ```
 
@@ -294,6 +315,6 @@ The constitution is at version 2.0.0. The jump from 1.x came from tightening "co
 ## Conventions
 
 - Content lives in Markdown and YAML, never hardcoded in templates.
-- Internal links use the `| relative_url` filter — required because `baseurl` is `/cristiane`.
+- Internal links use the `| relative_url` filter. The site now sits at the root of crissouza.org, so `baseurl` is empty — but the filter stays, because it is what makes moving the site a one-line change.
 - JavaScript is avoided. The one exception is the list search, justified in [specs/004-journey-and-search/plan.md](specs/004-journey-and-search/plan.md); the mobile nav is CSS-only.
 - Images are committed to the repo — no external hosts.

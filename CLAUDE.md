@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal website for Cristiane — a Jekyll static site hosted on GitHub Pages. Sections: Home, Journey, Stories, Research, Bookmarks, Contact. This is a **project repo** (not a user site), so `baseurl` is set to `/cristiane` in `_config.yml`.
+Personal website for Cristiane — a Jekyll static site hosted on GitHub Pages. Sections: Home, Journey, Stories, Research, Bookmarks, Contact. Served at **https://crissouza.org**, at the domain root, so `baseurl` is `""` in `_config.yml`. It is still a project repo, so the custom domain is held by the `CNAME` file — do not delete it, and never pass `--baseurl` in the deploy workflow (a flag overrides the config, invisibly).
 
 ## Build & Test
 
 ```bash
 bundle install            # Install dependencies
-bundle exec jekyll serve  # Local server at http://localhost:4000/cristiane/
+bundle exec jekyll serve  # Local server at http://localhost:4000/
 bundle exec jekyll build  # Build only — use this to check for Liquid errors
 ```
 
@@ -109,12 +109,20 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 - `default.html` puts `is-home` or `is-interior` on `<body>`. That class drops
   the rules above and below the content on home; reuse it for anything else
   that differs between home and interior pages rather than adding a new flag.
+- Story pictures live in `assets/img/stories/<story-slug>/`, resized to ~1200px
+  before committing, and are wrapped in `<figure class="story-figure">` with
+  real `alt` text. `story-figure--light` puts artwork drawn on white onto a
+  white panel so it does not glare against the dark page.
+- `#tbh` asides are the author's recurring device — an honest aside stepping out
+  of the walkthrough — styled by `.tbh`. They MUST be written as HTML, not
+  Markdown: a line beginning `#` becomes an `<h1>`, which is emphatically not
+  what `#tbh` means. Preserve her wording exactly; it is her voice.
 - The site icon is three files: `assets/img/icon.svg` (the source),
   `favicon.ico`, and `assets/img/apple-touch-icon.png`. The two raster files are
   **generated** from the SVG — regenerate them together, never hand-edit one.
   Commands are in the README and spec 009's quickstart.
 - `favicon.ico` sits at the **repository root** on purpose, so it publishes to
-  `/cristiane/favicon.ico`. Moving it under `assets/` breaks the bare-root
+  `/favicon.ico` at the domain root. Moving it under `assets/` breaks the bare-root
   request. The *domain* root (`souza-cris.github.io/favicon.ico`) belongs to a
   different repo and is not ours to serve — that is fine, because the icons are
   declared in `head.html` and a browser given a declaration never probes root.
