@@ -1,0 +1,56 @@
+---
+layout: null
+permalink: /feed.xml
+sitemap: false
+---
+{%- comment -%}
+  The stories feed, hand-written.
+
+  Jekyll has a plugin for this (jekyll-feed) and GitHub Pages even allows it,
+  but every plugin is one more thing that can change under the site without a
+  commit. This is thirty lines of Liquid over site.posts, so it is written out.
+
+  Every address uses absolute_url — a feed is read somewhere else entirely, so a
+  relative path in it points at the reader's own host, not this site.
+
+  Dates are ISO 8601 via date_to_xmlschema, which is what Atom requires.
+
+  `updated` on the feed is the newest story's date rather than the build time,
+  so rebuilding the site does not tell every subscriber something changed.
+
+  This file is excluded from sitemap.xml by the `sitemap: false` above — a feed
+  is for readers, not something a search engine should list as a page.
+{%- endcomment -%}
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ site.title }}</title>
+  <subtitle>{{ site.description }}</subtitle>
+  <id>{{ "/feed.xml" | absolute_url }}</id>
+  <link rel="alternate" type="text/html" href="{{ "/" | absolute_url }}"/>
+  <link rel="self" type="application/atom+xml" href="{{ "/feed.xml" | absolute_url }}"/>
+  {%- if site.posts.size > 0 %}
+  <updated>{{ site.posts.first.date | date_to_xmlschema }}</updated>
+  {%- endif %}
+  <author>
+    <name>{{ site.data.profile.name }}</name>
+    <uri>{{ "/" | absolute_url }}</uri>
+  </author>
+  <rights>© {{ site.time | date: "%Y" }} {{ site.data.profile.name }}</rights>
+  {%- for post in site.posts %}
+  {%- assign post_summary = post.description | default: post.tldr | strip_html | normalize_whitespace %}
+  <entry>
+    <title>{{ post.title | xml_escape }}</title>
+    <id>{{ post.url | absolute_url }}</id>
+    <link rel="alternate" type="text/html" href="{{ post.url | absolute_url }}"/>
+    <published>{{ post.date | date_to_xmlschema }}</published>
+    <updated>{{ post.updated | default: post.date | date_to_xmlschema }}</updated>
+    <author>
+      <name>{{ site.data.profile.name }}</name>
+    </author>
+    <summary>{{ post_summary | xml_escape }}</summary>
+    {%- for keyword in post.keywords %}
+    <category term="{{ keyword | xml_escape }}"/>
+    {%- endfor %}
+  </entry>
+  {%- endfor %}
+</feed>

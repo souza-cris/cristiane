@@ -6,50 +6,125 @@
   Every address here is the `page_url` head.html already computed, so a
   structured statement can never name a different address from the canonical.
 
-  Three shapes:
+  Four shapes:
     home      → a Person, so a search engine can tell whose site this is
-    a story   → a BlogPosting, with its title and date
+    /journey  → a ProfilePage about that same Person, with her education and
+                employment derived from _data/journey.yml
+    a story   → a BlogPosting, with its title, dates and image
     /research → a list of ScholarlyArticles. Publications are entries in
                 _data/research.yml, not pages, so each names its own external
                 record rather than an address on this site.
 
+  Both Person entities read _data/profile.yml and _data/social.yml, so they
+  cannot drift apart and describe two different people.
+
+  A BreadcrumbList is added at the end for anything below the top level.
+
   This is data, not a script. Nothing here runs, and nothing is fetched.
 {%- endcomment -%}
+
+{%- comment -%}
+  Everywhere that is also her, in one list: the footer links plus the ORCID.
+  Built once here so the home Person and the journey Person quote the same one.
+{%- endcomment -%}
+{%- capture same_as -%}
+{%- for link in site.data.social %}{{ link.url | jsonify }},{% endfor -%}
+{{ site.data.profile.orcid | jsonify }}
+{%- endcapture -%}
 
 {%- if page.url == '/' -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Cris Souza",
+  "name": {{ site.data.profile.name | jsonify }},
   "url": {{ page_url | jsonify }},
   "description": {{ site.description | jsonify }},
-  "jobTitle": "PhD student in Management Information Systems",
+  "jobTitle": {{ site.data.profile.job_title | jsonify }},
   "affiliation": {
     "@type": "CollegeOrUniversity",
-    "name": "The University of Alabama"
+    "name": {{ site.data.profile.affiliation | jsonify }}
   },
-  "sameAs": [
-    {%- for link in site.data.social %}
-    {{ link.url | jsonify }}{% unless forloop.last %},{% endunless %}
-    {%- endfor %}
-  ]
+  "sameAs": [{{ same_as }}]
+}
+</script>
+{%- elsif page.url == '/journey/' -%}
+{%- comment -%}
+  The journey page is a profile, so it says so. Everything below is DERIVED from
+  _data/journey.yml rather than restated: the schools are the `academia` stops
+  and the current affiliation is the most recent one. Add a milestone to the
+  track and this updates with it, which is the point — a claim here can never
+  contradict the page a visitor is looking at.
+
+  Organizations are de-duplicated by name, because two degrees from the same
+  university are two stops on the track but one alumniOf.
+
+  The `industry` stops are deliberately NOT emitted. The task asked for
+  employment, and schema.org's only field for it is `worksFor`, which means
+  where a person works NOW — it has no past-employer equivalent. Deriving it
+  from the track would have told a search engine she currently works at seven
+  companies at once, all of which she has left. A tidy-looking claim that is
+  false is worse than no claim, so the industry half of the track stays
+  visible on the page and out of the markup.
+{%- endcomment -%}
+{%- assign academia = site.data.journey | where: 'category', 'academia' -%}
+{%- assign schools = academia | map: 'org' | uniq -%}
+{%- assign current = academia | last -%}
+{%- assign profile_updated = page.updated | default: site.time -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "url": {{ page_url | jsonify }},
+  "name": {{ page_title | jsonify }},
+  "dateModified": {{ profile_updated | date_to_xmlschema | jsonify }},
+  "mainEntity": {
+    "@type": "Person",
+    "name": {{ site.data.profile.name | jsonify }},
+    "url": {{ "/" | absolute_url | jsonify }},
+    "description": {{ page_description | jsonify }},
+    "image": {{ "/assets/img/cris.jpg" | absolute_url | jsonify }},
+    "jobTitle": {{ site.data.profile.job_title | jsonify }},
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": {{ current.org | jsonify }}
+    },
+    "alumniOf": [
+      {%- for school in schools %}
+      {
+        "@type": "CollegeOrUniversity",
+        "name": {{ school | jsonify }}
+      }{% unless forloop.last %},{% endunless %}
+      {%- endfor %}
+    ],
+    "sameAs": [{{ same_as }}]
+  }
 }
 </script>
 {%- elsif page.layout == 'story' -%}
+{%- comment -%}
+  dateModified falls back to the publication date, so a story that has not been
+  revised says so honestly rather than claiming today.
+{%- endcomment -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "headline": {{ page.title | jsonify }},
   "description": {{ page_description | jsonify }},
-  "datePublished": {{ page.date | date: "%Y-%m-%d" | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.updated | default: page.date | date_to_xmlschema | jsonify }},
   "url": {{ page_url | jsonify }},
   "mainEntityOfPage": {{ page_url | jsonify }},
   "image": {{ page_image | jsonify }},
   "author": {
     "@type": "Person",
-    "name": "Cris Souza",
+    "name": {{ site.data.profile.name | jsonify }},
+    "url": {{ "/" | absolute_url | jsonify }}
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": {{ site.data.profile.name | jsonify }},
     "url": {{ "/" | absolute_url | jsonify }}
   }
 }
@@ -75,3 +150,51 @@
 }
 </script>
 {%- endif -%}
+
+{%- comment -%}
+  Breadcrumbs, for anything that is not the home page. Home is excluded because
+  a trail of one item states nothing.
+
+  A story sits under Stories; every other page sits directly under Home. Each
+  address is built with absolute_url from the same values the navigation uses,
+  so a breadcrumb cannot point somewhere the site does not serve.
+
+  The 404 gets none: it is not a location in the site's structure.
+{%- endcomment -%}
+{%- unless page.url == '/' or page.url contains '404' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": {{ "/" | absolute_url | jsonify }}
+    },
+    {%- if page.layout == 'story' %}
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "stories",
+      "item": {{ "/stories/" | absolute_url | jsonify }}
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": {{ page.title | jsonify }},
+      "item": {{ page_url | jsonify }}
+    }
+    {%- else %}
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ page.title | jsonify }},
+      "item": {{ page_url | jsonify }}
+    }
+    {%- endif %}
+  ]
+}
+</script>
+{%- endunless -%}

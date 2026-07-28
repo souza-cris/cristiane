@@ -1,0 +1,23 @@
+# Who the site is about, stated once.
+#
+# Two pages make machine-readable claims about Cris — the home page and the
+# journey page — and a search engine only merges them into one person if they
+# agree exactly. They used to agree because the same words were typed twice,
+# which lasts until one of them is edited. Now both read this file.
+#
+# Nothing here renders as visible text. It is the structured-data source only;
+# what a visitor reads lives in the pages themselves.
+#
+# name        : the name to be known by, spelled as everywhere else on the site
+# job_title   : current role, in words a stranger would understand
+# affiliation : the institution she is currently at
+# orcid       : the full https:// address of the ORCID record, not the bare
+#               digits. It joins the social links in `sameAs`, which is the list
+#               of other places that are also her. Deliberately NOT in
+#               social.yml — everything there draws an icon in the footer, and
+#               this identifier belongs to search engines, not to the footer.
+
+name: "Cris Souza"
+job_title: "PhD student in Management Information Systems"
+affiliation: "The University of Alabama"
+orcid: "https://orcid.org/0009-0004-0716-4507"
