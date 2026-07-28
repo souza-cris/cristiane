@@ -2,8 +2,10 @@
 # navigation and the side navigation, so the two can never drift apart.
 #
 # label : the link text — lowercase, matching the site's voice
-# url   : site-rooted path. The /cristiane base path is added at build time,
-#         so write "/stories", never "/cristiane/stories"
+# url   : the page's canonical address, WITH its trailing slash. This must match
+#         the permalink exactly — writing "/stories" makes every click on that
+#         link cost a 301 redirect. section-links.html compares this to page.url
+#         directly and must NOT append a slash of its own.
 # match : how this link decides it is the visitor's current section
 #         exact  — only that page itself
 #         prefix — that page and anything beneath it, so an individual story
@@ -16,21 +18,21 @@
 # pick it up with no template change.
 
 - label: "journey"
-  url: "/journey"
+  url: "/journey/"
   match: "exact"
 
 - label: "stories"
-  url: "/stories"
+  url: "/stories/"
   match: "prefix"
 
 - label: "research"
-  url: "/research"
+  url: "/research/"
   match: "exact"
 
 - label: "bookmarks"
-  url: "/bookmarks"
+  url: "/bookmarks/"
   match: "prefix"
 
 - label: "contact"
-  url: "/contact"
+  url: "/contact/"
   match: "exact"

@@ -20,7 +20,7 @@ to the site root.
 
 ## Phase 1: Setup
 
-- [ ] T001 Record a baseline before changing anything: crawl every internal href in `_site` and save the status codes, and measure LCP on `/journey/` and the story page. Several tasks below are verified as "no worse than before", which needs a before
+- [X] T001 Record a baseline before changing anything: crawl every internal href in `_site` and save the status codes, and measure LCP on `/journey/` and the story page. Several tasks below are verified as "no worse than before", which needs a before
 
 ---
 
@@ -42,12 +42,12 @@ to the site root.
 > `append` produces `/journey//`, which matches no page — every page renders correctly and no
 > section is ever marked current, with no error anywhere. See research decision 1.
 
-- [ ] T003 [US2] In `_data/sections.yml`, change each `url` to its canonical form with a trailing slash — `/journey/`, `/stories/`, `/research/`, `/bookmarks/`, `/contact/`
-- [ ] T004 [US2] In `_includes/section-links.html`, delete the `append: '/'` and compare `page.url` to `section.url` directly, for both the `exact` and `prefix` cases
-- [ ] T005 [P] [US2] In `_includes/bookmark-filters.html`, append a trailing slash to the filter href so it emits `/bookmarks/paper/` rather than `/bookmarks/paper`
-- [ ] T006 [P] [US2] In `_includes/story-filters.html`, the same for story keyword links
-- [ ] T007 [US2] Verify zero redirects across every internal href, **and** verify the current-section marking still works on `/journey/`, `/stories/` and `/stories/ai/` — the second check is what catches the trap in T003/T004
-- [ ] T008 [US2] Run quickstart Scenario 1
+- [X] T003 [US2] In `_data/sections.yml`, change each `url` to its canonical form with a trailing slash — `/journey/`, `/stories/`, `/research/`, `/bookmarks/`, `/contact/`
+- [X] T004 [US2] In `_includes/section-links.html`, delete the `append: '/'` and compare `page.url` to `section.url` directly, for both the `exact` and `prefix` cases
+- [X] T005 [P] [US2] In `_includes/bookmark-filters.html`, append a trailing slash to the filter href so it emits `/bookmarks/paper/` rather than `/bookmarks/paper`
+- [X] T006 [P] [US2] In `_includes/story-filters.html`, the same for story keyword links — **and in `_layouts/story.html`**, which renders a story's own keyword links and was not in the original task list; it was the last two bare links
+- [X] T007 [US2] Verify zero redirects across every internal href, **and** verify the current-section marking still works on `/journey/`, `/stories/` and `/stories/ai/` — the second check is what catches the trap in T003/T004
+- [X] T008 [US2] Run quickstart Scenario 1
 
 **Checkpoint**: 100% of internal navigation resolves directly. Shippable alone, and the cheapest win in this feature.
 

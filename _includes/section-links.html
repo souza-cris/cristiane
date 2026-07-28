@@ -9,15 +9,19 @@
   Each entry decides for itself whether it is the current section, using the
   `match` rule in the data file: `prefix` also marks child pages, so reading an
   individual story still marks "stories".
+
+  The urls in _data/sections.yml are already canonical, with their trailing
+  slash, so this compares them to page.url DIRECTLY. Do not append a slash here:
+  that produces "/journey//", which matches no page, and every section silently
+  stops being marked current with no error anywhere.
 {%- endcomment -%}
 <ul class="{{ include.class }}">
   {%- for section in site.data.sections %}
-  {%- assign exact_url = section.url | append: '/' -%}
   {%- assign is_current = false -%}
   {%- if section.match == 'prefix' -%}
     {%- if page.url contains section.url -%}{%- assign is_current = true -%}{%- endif -%}
   {%- else -%}
-    {%- if page.url == exact_url -%}{%- assign is_current = true -%}{%- endif -%}
+    {%- if page.url == section.url -%}{%- assign is_current = true -%}{%- endif -%}
   {%- endif %}
   <li><a href="{{ section.url | relative_url }}"{% if is_current %} aria-current="page"{% endif %}>{{ section.label }}</a></li>
   {%- endfor %}

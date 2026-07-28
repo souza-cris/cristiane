@@ -8,7 +8,7 @@ layout: default
       <time class="story__date" datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
       {% for keyword in page.keywords %}
       {% assign match = site.data.story_keywords | where: "slug", keyword | first %}
-      <a class="story__category" href="{{ '/stories/' | append: keyword | relative_url }}">{{ match.label | default: keyword }}</a>
+      <a class="story__category" href="{{ '/stories/' | append: keyword | append: '/' | relative_url }}">{{ match.label | default: keyword }}</a>
       {% endfor %}
     </div>
     {% if page.tags.size > 0 %}

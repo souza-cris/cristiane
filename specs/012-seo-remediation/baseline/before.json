@@ -1,0 +1,32 @@
+{
+  "recorded": "2026-07-28",
+  "distinct_internal_hrefs": 28,
+  "hrefs_without_trailing_slash": [
+    "/bookmarks",
+    "/bookmarks/book",
+    "/bookmarks/course",
+    "/bookmarks/dataset",
+    "/bookmarks/more",
+    "/bookmarks/organization",
+    "/bookmarks/paper",
+    "/bookmarks/project",
+    "/bookmarks/report",
+    "/bookmarks/talk",
+    "/bookmarks/tool",
+    "/contact",
+    "/journey",
+    "/research",
+    "/stories",
+    "/stories/ai",
+    "/stories/conference",
+    "/stories/isd",
+    "/stories/leadership",
+    "/stories/short"
+  ],
+  "duplicate_titles": {
+    "stories | Cris Souza": 6,
+    "bookmarks | Cris Souza": 11
+  },
+  "duplicate_descriptions_count": 1,
+  "pages_on_site_default_description": 22
+}
