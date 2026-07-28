@@ -35,6 +35,15 @@
 {%- assign page_description = page.description | default: page.tldr | default: derived_description | default: site.description | strip_html | normalize_whitespace | truncate: 160 -%}
 {%- assign page_url = page.url | absolute_url -%}
 {%- assign page_image = page.image | default: '/assets/og/default.png' | absolute_url -%}
+{%- comment -%}
+  The share image's own alt text and pixel size. A page that sets `image` sets
+  these beside it; anything else falls back to the site default card, whose
+  dimensions are fixed. Stating the size lets a service reserve the right space
+  before the file arrives, and the alt text is read aloud where the preview is.
+{%- endcomment -%}
+{%- assign page_image_alt = page.image_alt | default: page_description -%}
+{%- assign page_image_width = page.image_width | default: 1200 -%}
+{%- assign page_image_height = page.image_height | default: 630 -%}
 
 {%- comment -%}
   Whether this page should be indexed. Computed once here so the rule lives in
@@ -65,7 +74,9 @@
 
 {%- comment -%}
   One authoritative address per page. The 404 gets none: it is not a page anyone
-  should reach deliberately, and a canonical would invite indexing it.
+  should reach deliberately, and a canonical would invite indexing it. For the
+  same reason it emits no og:url — that tag names the address a preview should
+  point at, and /404.html is not an address worth sharing.
 {%- endcomment -%}
 {%- unless page.url contains '404' %}
 <link rel="canonical" href="{{ page_url }}">
@@ -82,12 +93,18 @@
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:title" content="{{ page_title }}">
 <meta property="og:description" content="{{ page_description }}">
+{%- unless page.url contains '404' %}
 <meta property="og:url" content="{{ page_url }}">
+{%- endunless %}
 <meta property="og:image" content="{{ page_image }}">
+<meta property="og:image:alt" content="{{ page_image_alt }}">
+<meta property="og:image:width" content="{{ page_image_width }}">
+<meta property="og:image:height" content="{{ page_image_height }}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page_title }}">
 <meta name="twitter:description" content="{{ page_description }}">
 <meta name="twitter:image" content="{{ page_image }}">
+<meta name="twitter:image:alt" content="{{ page_image_alt }}">
 
 {% include structured-data.html page_url=page_url page_title=page_title page_description=page_description page_image=page_image %}
 
@@ -102,3 +119,10 @@
 <link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
 <link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+{%- comment -%}
+  The stories feed, advertised on every page so a reader's app can find it
+  without being told the address. absolute_url, because a feed reader fetches
+  it from somewhere else.
+{%- endcomment -%}
+<link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">

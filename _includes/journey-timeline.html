@@ -14,6 +14,13 @@
               <summary> handles its own click, so following it does not also
               toggle the stop open — still no script needed.
             {%- endcomment -%}
+            {%- comment -%}
+              These two images carry no width/height, unlike every other image on
+              the site, and deliberately: the badge reserves its own space at a
+              fixed 2.6rem and the logo is sized to 100% of it, so no logo can
+              shift the layout while it loads. Intrinsic sizes also differ per
+              file, so one pair of numbers here would be wrong for most of them.
+            {%- endcomment -%}
             {% if milestone.url and milestone.url != "" %}
             <a class="journey__badge journey__badge--logo journey__badge--link" href="{{ milestone.url }}" target="_blank" rel="noopener" title="{{ milestone.org }} — opens in a new tab">
               <img src="{{ '/assets/img/logos/' | append: milestone.logo | relative_url }}" alt="{{ milestone.org }}" loading="lazy">

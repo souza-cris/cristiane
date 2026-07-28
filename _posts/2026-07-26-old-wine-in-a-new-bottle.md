@@ -6,11 +6,14 @@ keywords: [leadership, isd]
 tags: [spec-driven development, spec kit, claude code, ai, github]
 description: "I built this site with spec-driven development, using Spec Kit and Claude Code. The structure and documentation impressed me. The rigidity did not."
 image: "/assets/img/stories/old-wine/old-new-bottle.jpg"
+image_alt: "A bottle labeled OLD pouring its contents into a bottle labeled NEW."
+image_width: 547
+image_height: 775
 tldr: "I built this site with spec-driven development using Spec Kit and Claude Code. The structure and documentation impressed me, the rigidity did not, and a lot of it felt familiar to anyone who has managed a project."
 ---
 
 <figure class="story-figure story-figure--light">
-  <img src="{{ '/assets/img/stories/old-wine/old-new-bottle.jpg' | relative_url }}" alt="A bottle labeled OLD pouring its contents into a bottle labeled NEW." width="547" height="775" loading="lazy">
+  <img src="{{ '/assets/img/stories/old-wine/old-new-bottle.jpg' | relative_url }}" alt="A bottle labeled OLD pouring its contents into a bottle labeled NEW." width="547" height="775" fetchpriority="high">
 </figure>
 
 It was in my backlog for the summer: create a personal website. I wanted to learn about spec-driven development (SDD), so I built it (yeah, this site) with SDD.

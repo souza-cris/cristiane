@@ -218,7 +218,7 @@ time {
   margin-bottom: 0;
 }
 
-/* The type string is its own label. Known types get a colour below; anything
+/* The type string is its own label. Known types get a color below; anything
    else falls back to these base pill styles rather than failing. */
 .updates__type {
   display: inline-block;
@@ -421,8 +421,8 @@ time {
   color: var(--text-muted);
 }
 
-/* Legend swatches mirror the badge rings: colour AND line style, so the two
-   categories stay distinguishable without relying on colour. */
+/* Legend swatches mirror the badge rings: color AND line style, so the two
+   categories stay distinguishable without relying on color. */
 .timeline-legend__item::before {
   content: "";
   display: inline-block;
@@ -573,7 +573,7 @@ time {
   background: #f5f5f5;
 }
 
-/* A faint tint of the category colour behind each badge, so the two groups
+/* A faint tint of the category color behind each badge, so the two groups
    read as groups even before the labels are noticed. */
 .journey__stop--academia .journey__badge {
   box-shadow: 0 0 0 5px rgba(88, 166, 255, 0.12);
@@ -594,7 +594,7 @@ time {
   padding: 0.3rem;
 }
 
-/* The badge doubles as a link to the organisation's own site. It sits inside a
+/* The badge doubles as a link to the organization's own site. It sits inside a
    <summary>, so it must not look or behave like the rest of the toggle. */
 .journey__badge--link {
   cursor: pointer;
@@ -619,7 +619,7 @@ time {
   padding: 0 0.25rem;
 }
 
-/* The track shows the period here; the organisation moved into the detail. */
+/* The track shows the period here; the organization moved into the detail. */
 .journey__org {
   display: block;
   font-family: var(--font-mono);
@@ -656,7 +656,7 @@ time {
   margin-bottom: 0.5rem;
 }
 
-/* The organisation links out to its own site when a `url` is set. */
+/* The organization links out to its own site when a `url` is set. */
 a.journey__detail-org {
   color: inherit;
   text-decoration: underline;
@@ -747,7 +747,7 @@ a.journey__detail-org:hover {
 
 /* ---- Side navigation (every page except home) ---- */
 
-/* Pinned to the right edge, vertically centred. Hidden below 1000px, where
+/* Pinned to the right edge, vertically centered. Hidden below 1000px, where
    there is no room beside the 44rem content column — the top nav covers it. */
 .side-nav {
   position: fixed;
