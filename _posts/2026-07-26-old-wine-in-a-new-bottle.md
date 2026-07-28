@@ -4,6 +4,8 @@ title: "Old wine in a new bottle? Playing with spec-driven development"
 date: 2026-07-26
 keywords: [leadership, isd]
 tags: [spec-driven development, spec kit, claude code, ai, github]
+description: "I built this site with spec-driven development, using Spec Kit and Claude Code. The structure and documentation impressed me. The rigidity did not."
+image: "/assets/img/stories/old-wine/old-new-bottle.jpg"
 tldr: "I built this site with spec-driven development using Spec Kit and Claude Code. The structure and documentation impressed me, the rigidity did not, and a lot of it felt familiar to anyone who has managed a project."
 ---
 
