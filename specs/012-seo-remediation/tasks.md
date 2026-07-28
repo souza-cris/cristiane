@@ -26,7 +26,7 @@ to the site root.
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-- [ ] T002 In `_includes/head.html`, add a `page_robots` value computed once alongside the existing title and description, so later stories emit a robots directive from one place rather than three. Empty filter page or 404 → `noindex, follow`; everything else → nothing emitted
+- [X] T002 In `_includes/head.html`, add a `page_robots` value computed once alongside the existing title and description, so later stories emit a robots directive from one place rather than three. Empty filter page or 404 → `noindex, follow`; everything else → nothing emitted
 
 **Checkpoint**: the head has somewhere to put a robots directive. No page behaves differently yet.
 
@@ -59,13 +59,13 @@ to the site root.
 
 **Independent Test**: No sitemap URL renders an empty state; adding the first item to a term moves it in on the next build with no source edit.
 
-- [ ] T009 [US4] In `sitemap.xml`, exclude a filter page whose item count is zero, counting `_data/bookmarks.yml` by `page.type` and `site.posts` by `page.keyword`. No hand-maintained term list (FR-006)
-- [ ] T010 [US4] In `_includes/head.html`, feed the same count into T002's `page_robots` so an empty filter page emits `noindex, follow` — `follow` because its links still lead to real content
-- [ ] T011 [US4] In `sitemap.xml`, exclude `feed.xml` and confirm the 404 is still excluded
-- [ ] T012 [US4] Verify the seven currently-empty terms are absent from the sitemap and carry `noindex`: `/bookmarks/{book,dataset,more,talk}/` and `/stories/{ai,conference,short}/`
-- [ ] T013 [US4] Verify each still loads and still shows its empty-state line for a human following a filter (FR-004)
-- [ ] T014 [US4] Add one bookmark of type `talk`, rebuild, confirm `/bookmarks/talk/` is now in the sitemap and no longer `noindex`; remove it, rebuild, confirm it drops back out. This is the FR-006 test and it must pass in both directions
-- [ ] T015 [US4] Run quickstart Scenario 2
+- [X] T009 [US4] In `sitemap.xml`, exclude a filter page whose item count is zero, counting `_data/bookmarks.yml` by `page.type` and `site.posts` by `page.keyword`. No hand-maintained term list (FR-006)
+- [X] T010 [US4] In `_includes/head.html`, feed the same count into T002's `page_robots` so an empty filter page emits `noindex, follow` — `follow` because its links still lead to real content
+- [X] T011 [US4] In `sitemap.xml`, exclude `feed.xml` and confirm the 404 is still excluded
+- [X] T012 [US4] Verify the seven currently-empty terms are absent from the sitemap and carry `noindex`: `/bookmarks/{book,dataset,more,talk}/` and `/stories/{ai,conference,short}/`
+- [X] T013 [US4] Verify each still loads and still shows its empty-state line for a human following a filter (FR-004)
+- [X] T014 [US4] Add one bookmark of type `talk`, rebuild, confirm `/bookmarks/talk/` is now in the sitemap and no longer `noindex`; remove it, rebuild, confirm it drops back out. This is the FR-006 test and it must pass in both directions
+- [X] T015 [US4] Run quickstart Scenario 2
 
 **Checkpoint**: the sitemap contains only pages with something on them, permanently.
 
