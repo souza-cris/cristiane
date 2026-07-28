@@ -2,6 +2,7 @@
 layout: page
 title: "bookmarks"
 permalink: /bookmarks/
+description: "Papers, reports, tools and courses Cris Souza has found worth keeping, each with a note on why it matters and what to take from it."
 ---
 
 <div class="list-controls">

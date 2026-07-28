@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "stories"
+title: "short stories"
 permalink: /stories/short/
 keyword: short
 ---

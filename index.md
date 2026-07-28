@@ -1,5 +1,7 @@
 ---
 layout: default
+title: "Cris Souza — PhD student and AI researcher"
+description: "Cris Souza — PhD student in Management Information Systems at the University of Alabama, researching how people and AI actually work together."
 ---
 
 <section class="hero">

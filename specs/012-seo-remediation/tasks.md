@@ -77,12 +77,12 @@ to the site root.
 
 **Independent Test**: Crawl every indexable page; duplicate titles and duplicate descriptions both count zero.
 
-- [ ] T016 [US3] In `_includes/head.html`, derive a filter page's description from its term — one composed sentence per page, unique by construction (FR-A05). No authoring step, and a new term arrives already described
-- [ ] T017 [P] [US3] In the ten `bookmarks/*.md` files, change `title` from `"bookmarks"` to the term — "papers", "reports", "courses", "organisations", "projects", "tools", "books", "talks", "datasets", "more". This changes the visible `<h1>` too, which is intended: a page headed "bookmarks" that lists only papers misleads a reader as much as a crawler
-- [ ] T018 [P] [US3] In the five `stories/*.md` files, the same — "AI stories", "conference stories", and so on
-- [ ] T019 [US3] In `index.md` or `_config.yml`, give the home page title a role descriptor beyond the bare name (FR-012)
-- [ ] T020 [US3] Verify zero duplicate titles and zero duplicate descriptions across every indexable page, and that no page still carries the site-default description except where it is genuinely the right fallback
-- [ ] T021 [US3] Run quickstart Scenario 3
+- [X] T016 [US3] In `_includes/head.html`, derive a filter page's description from its term — one composed sentence per page, unique by construction (FR-A05). No authoring step, and a new term arrives already described
+- [X] T017 [P] [US3] In the ten `bookmarks/*.md` files, change `title` from `"bookmarks"` to the term — "papers", "reports", "courses", "organisations", "projects", "tools", "books", "talks", "datasets", "more". This changes the visible `<h1>` too, which is intended: a page headed "bookmarks" that lists only papers misleads a reader as much as a crawler
+- [X] T018 [P] [US3] In the five `stories/*.md` files, the same — "AI stories", "conference stories", and so on
+- [X] T019 [US3] In `index.md` or `_config.yml`, give the home page title a role descriptor beyond the bare name (FR-012)
+- [X] T020 [US3] Verify zero duplicate titles and zero duplicate descriptions across every indexable page — confirmed, 15 indexable pages, no duplicates of either, and none left on the site default. **Six section-page descriptions were drafted rather than author-written** (index, journey, stories, research, bookmarks, contact); they are factual rather than voiced and are the author's to edit
+- [X] T021 [US3] Run quickstart Scenario 3
 
 **Checkpoint**: seventeen pages stop being indistinguishable.
 

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "bookmarks"
+title: "tools"
 permalink: /bookmarks/tool/
 type: tool
 ---

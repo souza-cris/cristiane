@@ -16,11 +16,23 @@
   the site default. It is never blank.
 {%- endcomment -%}
 {%- if page.url == '/' -%}
-  {%- assign page_title = site.title -%}
+  {%- assign page_title = page.title | default: site.title -%}
 {%- else -%}
   {%- assign page_title = page.title | append: ' | ' | append: site.title -%}
 {%- endif -%}
-{%- assign page_description = page.description | default: page.tldr | default: site.description | strip_html | normalize_whitespace | truncate: 160 -%}
+{%- comment -%}
+  A filter page's description is composed from its term rather than written by
+  hand. Fifteen of them would otherwise need fifteen sentences kept current, and
+  a newly added term would arrive describing nothing. Derived, they are unique
+  by construction and correct the day the term appears.
+{%- endcomment -%}
+{%- assign derived_description = nil -%}
+{%- if page.type -%}
+  {%- assign derived_description = page.title | append: ' bookmarked by Cris Souza, each with a note on why it matters and what to take from it.' -%}
+{%- elsif page.keyword -%}
+  {%- assign derived_description = 'Stories by Cris Souza tagged ' | append: page.title | append: ' — writing on research, technology and how people work with it.' -%}
+{%- endif -%}
+{%- assign page_description = page.description | default: page.tldr | default: derived_description | default: site.description | strip_html | normalize_whitespace | truncate: 160 -%}
 {%- assign page_url = page.url | absolute_url -%}
 {%- assign page_image = page.image | default: '/assets/og/default.png' | absolute_url -%}
 

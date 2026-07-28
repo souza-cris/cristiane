@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "stories"
+title: "conference stories"
 permalink: /stories/conference/
 keyword: conference
 ---

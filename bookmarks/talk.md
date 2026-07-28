@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "bookmarks"
+title: "talks"
 permalink: /bookmarks/talk/
 type: talk
 ---

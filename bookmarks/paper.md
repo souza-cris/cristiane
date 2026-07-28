@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "bookmarks"
+title: "papers"
 permalink: /bookmarks/paper/
 type: paper
 ---

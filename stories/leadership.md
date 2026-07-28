@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "stories"
+title: "leadership stories"
 permalink: /stories/leadership/
 keyword: leadership
 ---

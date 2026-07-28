@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "stories"
+title: "AI stories"
 permalink: /stories/ai/
 keyword: ai
 ---

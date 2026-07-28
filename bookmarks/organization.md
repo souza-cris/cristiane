@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "bookmarks"
+title: "organizations"
 permalink: /bookmarks/organization/
 type: organization
 ---

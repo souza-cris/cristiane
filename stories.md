@@ -2,6 +2,7 @@
 layout: page
 title: "stories"
 permalink: /stories/
+description: "Writing by Cris Souza on research, technology, and what actually happens when people and AI work together."
 ---
 
 <div class="list-controls">

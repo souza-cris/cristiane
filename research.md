@@ -2,6 +2,7 @@
 layout: page
 title: "research"
 permalink: /research/
+description: "Research by Cris Souza on human-AI collaboration, the human side of information security, and how people adopt AI at work. Publications and current studies."
 ---
 
 <section class="research-section">

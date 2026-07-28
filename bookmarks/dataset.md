@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "bookmarks"
+title: "datasets"
 permalink: /bookmarks/dataset/
 type: dataset
 ---

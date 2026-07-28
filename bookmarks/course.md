@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "bookmarks"
+title: "courses"
 permalink: /bookmarks/course/
 type: course
 ---

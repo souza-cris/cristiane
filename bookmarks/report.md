@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "bookmarks"
+title: "reports"
 permalink: /bookmarks/report/
 type: report
 ---

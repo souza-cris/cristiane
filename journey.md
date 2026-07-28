@@ -2,6 +2,7 @@
 layout: page
 title: "journey"
 permalink: /journey/
+description: "Two decades from project management to a PhD: four countries, seven companies, and the path from industry into information systems research."
 ---
 
 <div class="profile">
