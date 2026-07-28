@@ -1,12 +1,12 @@
 # The journey timeline, oldest first — the page renders them left to right.
 #
-# category : academia | industry  (sets the dot colour)
+# category : academia | industry  (sets the dot color)
 # label    : the short line shown on the track — keep it to a few words
 # org      : school, company or community
 # short    : 1-3 letters shown in the circle until a logo file is added
 # logo     : optional path under /assets/img/logos/, e.g. "dell.svg".
 #            Leave as "" and the `short` initials are shown instead.
-# url      : optional link to the organisation's own site. Set it and the logo
+# url      : optional link to the organization's own site. Set it and the logo
 #            becomes clickable, opening in a new tab. Leave it out and the logo
 #            renders as plain artwork — no code change needed either way.
 # flag     : country flag emoji

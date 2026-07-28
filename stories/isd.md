@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "information systems stories"
+title: "ISD stories"
 permalink: /stories/isd/
 keyword: isd
 ---

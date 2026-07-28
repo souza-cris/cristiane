@@ -161,6 +161,10 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 - Study and recruitment content is author-supplied and MUST NOT be generated or
   paraphrased. For human-subjects research it is IRB-approved wording. The site
   links out to a recruitment destination and never collects participant data.
+- **American spelling throughout** — color, organization, labeled, optimization,
+  behavior. This covers page content, data-file comments, alt text and the specs.
+  The one exception is `aria-labelledby`, which is an HTML attribute name and
+  must keep its spelling or it stops working.
 - Explain changes in plain language — the project owner is new to web development.
 
 ## Authoring tools

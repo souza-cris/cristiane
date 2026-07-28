@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "more bookmarks"
+title: "more"
 permalink: /bookmarks/more/
 type: more
 ---

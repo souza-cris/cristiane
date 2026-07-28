@@ -10,7 +10,7 @@ tldr: "I built this site with spec-driven development using Spec Kit and Claude 
 ---
 
 <figure class="story-figure story-figure--light">
-  <img src="{{ '/assets/img/stories/old-wine/old-new-bottle.jpg' | relative_url }}" alt="A bottle labelled OLD pouring its contents into a bottle labelled NEW." width="547" height="775" loading="lazy">
+  <img src="{{ '/assets/img/stories/old-wine/old-new-bottle.jpg' | relative_url }}" alt="A bottle labeled OLD pouring its contents into a bottle labeled NEW." width="547" height="775" loading="lazy">
 </figure>
 
 It was in my backlog for the summer: create a personal website. I wanted to learn about spec-driven development (SDD), so I built it (yeah, this site) with SDD.
