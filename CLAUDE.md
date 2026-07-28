@@ -167,6 +167,12 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
   must keep its spelling or it stops working.
 - Explain changes in plain language — the project owner is new to web development.
 
+Source documents (the Word files a story or a bookmark list is drafted in) live
+in `_drafts/_doc/`. Jekyll ignores any directory whose name starts with `_`, so
+nothing there is published. Do NOT leave a `.docx` in `bookmarks/`, `stories/`
+or any other content directory — Jekyll copies unrecognised files through
+verbatim, so the draft becomes a public download at its own URL.
+
 ## Authoring tools
 
 `tools/` holds helpers for writing content. It is excluded in `_config.yml`, so
