@@ -1,5 +1,9 @@
-title: "Cris"
-description: "PhD student slash researcher slash tech leader slash traveler slash cat lady"
+# The site's name and its default description. `title` is what a search result
+# is attributed to and what the browser tab reads; `description` is the fallback
+# for any page that does not supply its own. Lead with the words that matter —
+# search engines cut it around 160 characters and preview cards cut it sooner.
+title: "Cris Souza"
+description: "PhD student, AI and IS researcher, tech leader, traveler. Stories, publications, and projects by Cris Souza."
 # The site now lives at the root of crissouza.org, so there is no base path.
 # These two values are the ONLY place the address is declared — every absolute
 # URL is built from them. Do not add --baseurl to the deploy workflow: a

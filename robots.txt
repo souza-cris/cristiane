@@ -1,0 +1,10 @@
+---
+layout: null
+sitemap: false
+---
+# Everything here is meant to be found, except the 404 — which is simply absent
+# from the sitemap rather than blocked here.
+User-agent: *
+Allow: /
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}

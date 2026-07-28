@@ -1,0 +1,77 @@
+{%- comment -%}
+  Machine-readable statements about what this page is. Kept out of head.html
+  because it is a different kind of thing — a block of statements rather than a
+  list of tags — and mixing them makes both harder to read.
+
+  Every address here is the `page_url` head.html already computed, so a
+  structured statement can never name a different address from the canonical.
+
+  Three shapes:
+    home      → a Person, so a search engine can tell whose site this is
+    a story   → a BlogPosting, with its title and date
+    /research → a list of ScholarlyArticles. Publications are entries in
+                _data/research.yml, not pages, so each names its own external
+                record rather than an address on this site.
+
+  This is data, not a script. Nothing here runs, and nothing is fetched.
+{%- endcomment -%}
+
+{%- if page.url == '/' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Cris Souza",
+  "url": {{ page_url | jsonify }},
+  "description": {{ site.description | jsonify }},
+  "jobTitle": "PhD student in Management Information Systems",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "The University of Alabama"
+  },
+  "sameAs": [
+    {%- for link in site.data.social %}
+    {{ link.url | jsonify }}{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>
+{%- elsif page.layout == 'story' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page_description | jsonify }},
+  "datePublished": {{ page.date | date: "%Y-%m-%d" | jsonify }},
+  "url": {{ page_url | jsonify }},
+  "mainEntityOfPage": {{ page_url | jsonify }},
+  "image": {{ page_image | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": "Cris Souza",
+    "url": {{ "/" | absolute_url | jsonify }}
+  }
+}
+</script>
+{%- elsif page.url == '/research/' and site.data.research.publications -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "url": {{ page_url | jsonify }},
+  "name": {{ page_title | jsonify }},
+  "hasPart": [
+    {%- for pub in site.data.research.publications %}
+    {
+      "@type": "ScholarlyArticle",
+      "headline": {{ pub.title | jsonify }},
+      "author": {{ pub.authors | jsonify }},
+      "publication": {{ pub.venue | jsonify }}{% if pub.link and pub.link != "" %},
+      "url": {{ pub.link | jsonify }}{% endif %}
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>
+{%- endif -%}

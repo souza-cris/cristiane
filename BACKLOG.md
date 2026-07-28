@@ -6,66 +6,11 @@ is done and written down, so resuming does not mean starting again.
 A spec's `Status` is `Draft`, `Backlog`, `Active` or `Implemented`, and this file is kept in
 step with it, so the two never disagree. Anything below is specified but not built.
 
----
-
-## ~~010 — Search visibility and domain migration~~ — ACTIVE AGAIN
-
-**Taken off the backlog** on 27 July 2026: the author bought **crissouza.org**.
-**State**: specified and planned, and now unblocked. Nothing built.
-
-The domain is connected and serving over HTTPS — DNS points at GitHub Pages, the `CNAME` file
-is committed, the certificate is issued and HTTPS is enforced. FR-027 required that before any
-search work could be published, so the prerequisite is met.
-
-The two phases have collapsed into one. Because the site was never indexed under the old
-address, there is nothing to migrate — see the amendments in the spec, plan and research.
-**The next step is `/speckit-tasks`.**
-
-[spec](specs/010-seo-and-domain-migration/spec.md) ·
-[plan](specs/010-seo-and-domain-migration/plan.md) ·
-[research](specs/010-seo-and-domain-migration/research.md) ·
-[quickstart](specs/010-seo-and-domain-migration/quickstart.md)
-
-Makes the site findable in search, gives shared links a proper preview card instead of a bare
-address, and makes the later move to a custom domain a one-line change rather than a sweep.
-
-**What is done**: the full spec (5 user stories, 29 requirements), the implementation plan,
-seven research decisions, the data model, the contracts and the verification guide. Both open
-questions were answered — the site lives at the **root** of crissouza.org, and the preview
-image will be built from the existing site mark.
-
-**What is left**: `/speckit-tasks`, then the build. One phase — titles and descriptions,
-canonical addresses, social preview tags, structured data, a sitemap and a robots file, and a
-1200×630 preview image generated from the site mark.
-
-**To resume**: run `/speckit-tasks`. The spec-kit pointer in `.specify/feature.json` already
-targets this feature, so nothing needs setting up first.
-
-### Two prerequisites, both already met
-
-Both were raised in research as things that would bite later. Both were dealt with on 27 July
-2026, before the domain went live, and are recorded here so nobody undoes them.
-
-**The deploy workflow no longer forces the base path.** It used to build with
-`--baseurl "/cristiane"`, and a command-line flag beats `_config.yml` — so changing the config
-would have done nothing, and every address would have been wrong in a way only visible once the
-domain was live. The flag is gone; `_config.yml` is the only place the address is declared.
-Do not put it back. See decision 2 in
-[research.md](specs/010-seo-and-domain-migration/research.md).
-
-**The redirect question is moot.** Research decision 4 could not establish whether old
-`souza-cris.github.io/cristiane/…` addresses would redirect after a custom domain was set —
-GitHub does not document it. Connecting the domain before publishing any search work made the
-question irrelevant: nothing was ever indexed under the old address, so nothing needs to
-redirect away from it.
-
-### Cleared beforehand
-
-~~Two bookmarks linked to `example.com`, and one had no `source`.~~ **Done** — the bookmark
-list was replaced with the author's own on 27 July 2026, and `ruby tools/check-data.rb` now
-reports no problems.
+**Nothing is currently backlogged.** Feature 010 was the last entry and shipped on 27 July
+2026. What remains below are ideas with no spec.
 
 ---
+
 
 ## Ideas noted but not specified
 

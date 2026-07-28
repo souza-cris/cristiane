@@ -92,6 +92,15 @@ Write your story here in Markdown.
 
 `keywords` decides which filters the story appears under, and a story can carry several. Valid slugs live in `_data/story_keywords.yml`.
 
+**Two optional fields, on any page or story:**
+
+```yaml
+description: "One sentence, 140-160 characters, plain text."
+image: "/assets/og/something.png"
+```
+
+`description` is what a search engine shows and what a shared link's preview card says. Leave it out and a story falls back to its `tldr`, and anything else to the site description — so it is never blank, and no existing story needs editing. `image` overrides the default preview picture for that page.
+
 **Adding pictures.** Put them in `assets/img/stories/<story-slug>/`, resized to about 1200 pixels wide before committing. Then in the story:
 
 ```html
@@ -300,7 +309,7 @@ Work on this site is specified before it is built, using [Spec Kit](https://gith
 | 007 | Research page call for participants |
 | 008 | Side navigation and uninterrupted home |
 | 009 | Site icon and brand mark |
-| 010 | Search visibility *(specified and planned, not built)* |
+| 010 | Search visibility |
 
 Work that is specified but not scheduled lives in [BACKLOG.md](BACKLOG.md), and its spec is marked **Backlog** rather than Implemented so the two cannot disagree.
 
@@ -308,8 +317,7 @@ The project constitution is at `.specify/memory/constitution.md`. Its five princ
 
 Feature 008 was written up after it was built rather than before, and its spec says so.
 
-Feature 010 is specified and planned but not built. The domain is connected and HTTPS is on,
-so it is unblocked — see [BACKLOG.md](BACKLOG.md) for what is left.
+Nothing is currently backlogged — [BACKLOG.md](BACKLOG.md) holds only unspecified ideas.
 
 The constitution is at version 2.0.0. The jump from 1.x came from tightening "content as data" to cover repeated structure, not just prose: the navigation list now lives in `_data/sections.yml` and both menus render from it. That amendment also added a rule worth knowing about — a principle is never loosened to make existing code compliant. Either the code changes, or the principle changes on its own merits.
 

@@ -4,8 +4,14 @@
 
 **Created**: 2026-07-26
 
-**Status**: Active — taken out of the backlog on 27 July 2026, when the author bought
-**crissouza.org**. Nothing is built yet.
+**Status**: Implemented — 27 July 2026. Every page now carries a title, a description, one
+canonical address and preview information; the sitemap and robots file are published, and the
+structured data validates. One task remains and it is the author's: registering the site in
+Search Console and submitting the sitemap, which needs her account.
+
+**The migration half was never needed.** Because the domain was bought and connected before
+the site was ever indexed, there was nothing to move. User Story 4 and FR-019 to FR-022 stand
+superseded rather than delivered.
 
 **The two phases have collapsed into one.** Phase 1 (optimise on the GitHub Pages address)
 and Phase 2 (migrate to a domain) existed only because no domain existed. It does now, and

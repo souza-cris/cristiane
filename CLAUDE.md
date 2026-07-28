@@ -144,6 +144,20 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 - `#0B7E8A` measures 3.93:1 on the site background — below the 4.5:1 normal text
   needs. It is fine inside the mark, which carries no text. If teal is ever put
   on the page proper, use `#0FA3B1` (6.21:1) instead.
+- The site's address lives in exactly two `_config.yml` values, `url` and
+  `baseurl`. Every canonical, preview and structured-data address is built from
+  them with `absolute_url`, which is what makes moving the site one edit. Never
+  write an absolute address into a template, and never pass `--baseurl` on the
+  build — a flag overrides the config invisibly.
+- `relative_url` for internal links and assets; `absolute_url` only for
+  addresses another site or a search engine quotes. Both read the same config.
+- `_includes/head.html` computes the title, description, canonical and preview
+  address ONCE and reuses them. They must stay one expression: if the canonical
+  and the preview address are ever produced separately they will drift, and a
+  search engine then has to guess which page it is looking at.
+- The 404 is the one page with no canonical and the one page excluded from
+  `sitemap.xml`. The exclusion is visible in the sitemap template on purpose,
+  rather than hidden in the page's front matter.
 - Study and recruitment content is author-supplied and MUST NOT be generated or
   paraphrased. For human-subjects research it is IRB-approved wording. The site
   links out to a recruitment destination and never collects participant data.
