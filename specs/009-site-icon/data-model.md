@@ -36,7 +36,7 @@ assets, listed here so the set is documented in one place.
   see decision 1 in [research.md](research.md).
 - The touch icon MUST be fully opaque and fill its square. iOS applies its own rounding and
   does not honour transparency; a transparent PNG renders on black.
-- No file may carry an embedded colour profile. The source artwork is plain hex fills, so
+- No file may carry an embedded color profile. The source artwork is plain hex fills, so
   this is a matter of not introducing one during generation.
 - Every file MUST be committed. Nothing is fetched or generated at deploy time.
 

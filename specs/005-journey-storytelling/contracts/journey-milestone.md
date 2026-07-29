@@ -39,8 +39,8 @@ The journey page has no API. Its external interface is the **authoring contract*
 
 **Category**
 
-- `academia` and `industry` each get a distinct ring colour **and** a distinct ring style, and the category is named in words inside the detail. A visitor who cannot distinguish the colours can still tell them apart.
-- An unrecognised value renders with the default ring and no category name. It does not break the layout.
+- `academia` and `industry` each get a distinct ring color **and** a distinct ring style, and the category is named in words inside the detail. A visitor who cannot distinguish the colors can still tell them apart.
+- An unrecognized value renders with the default ring and no category name. It does not break the layout.
 
 **Badges**
 

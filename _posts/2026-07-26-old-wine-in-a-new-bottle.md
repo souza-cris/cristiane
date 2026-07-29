@@ -38,7 +38,7 @@ It is not my first time developing a website (it is the second hehehe). I used G
 I started with the Spec Kit on the console, using Claude Code, but I got bored of it and moved to VS Code, still with Claude Code.
 
 <figure class="story-figure">
-  <img src="{{ '/assets/img/stories/old-wine/spec-kit-ready.png' | relative_url }}" alt="Claude Code confirming Spec Kit initialised cleanly, with every step green and the speckit command names listed." width="1200" height="284" loading="lazy">
+  <img src="{{ '/assets/img/stories/old-wine/spec-kit-ready.png' | relative_url }}" alt="Claude Code confirming Spec Kit initialized cleanly, with every step green and the speckit command names listed." width="1200" height="284" loading="lazy">
 </figure>
 
 <aside class="tbh"><p><strong>#tbh:</strong> Why Claude? In the beginning I had ChatGPT for free, then I tested Gemini, Copilot, and Claude. The free version was not enough for me, so I started paying for ChatGPT. But then I stopped and moved to Claude. Ok, it feels like Groundhog Day. I am not going to pay for a thousand AIs like I pay for Netflix, Apple, Prime Video, etc. This is why I use Claude.</p></aside>

@@ -13,7 +13,7 @@ bundle exec jekyll serve
 
 The journey page is at <http://localhost:4000/cristiane/journey/>.
 
-Reference: the record shape and its guarantees are in [contracts/journey-milestone.md](contracts/journey-milestone.md); field-by-field behaviour is in [data-model.md](data-model.md).
+Reference: the record shape and its guarantees are in [contracts/journey-milestone.md](contracts/journey-milestone.md); field-by-field behavior is in [data-model.md](data-model.md).
 
 ## Build check
 
@@ -87,21 +87,21 @@ This story ships as structure only; periods are empty by decision.
 
 > **Checking for years:** detail content is present in the HTML even while collapsed, so grepping the whole page will match text that no visitor sees. Check the summary markup or check visually.
 
-## Scenario 7 — Legible badges and non-colour category cue (User Story 5, FR-013)
+## Scenario 7 — Legible badges and non-color category cue (User Story 5, FR-013)
 
 1. Compare the first and last badges. They are the same size.
 2. Confirm the rail still brightens from oldest to newest.
-3. Confirm academia and industry stops differ by ring style, not only colour — a greyscale screenshot is the quickest test.
+3. Confirm academia and industry stops differ by ring style, not only color — a greyscale screenshot is the quickest test.
 4. Confirm the legend above the track names both categories against those same ring styles. No individual stop names its category — that word appears only in the legend.
 
-**Passes when**: every logo is legible and the two categories are tellable apart with colour removed.
+**Passes when**: every logo is legible and the two categories are tellable apart with color removed.
 
-## Scenario 8 — Organisation links on the logos
+## Scenario 8 — Organization links on the logos
 
-1. Click a badge logo. The organisation's own site opens in a new tab.
+1. Click a badge logo. The organization's own site opens in a new tab.
 2. Confirm the stop did **not** open as a result of that click. A link inside a `<summary>` handles its own click, so the disclosure must not toggle — if it does, something has broken, and the fix is in the markup, never a script.
 3. Click the same stop's label. It toggles open, and no new tab appears.
-4. In the opened detail, confirm the organisation name is a link to the same destination.
+4. In the opened detail, confirm the organization name is a link to the same destination.
 5. Remove `url` from one milestone in `_data/journey.yml`. That stop's logo and org name render as plain content, with no empty link.
 
 **Passes when**: logos and org names link out, the toggle still works from everywhere else on the stop, and a milestone with no `url` renders cleanly.

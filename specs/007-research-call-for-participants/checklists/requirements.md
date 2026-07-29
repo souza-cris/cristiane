@@ -38,7 +38,7 @@
 - FR-009 named the mechanism ("a reusable include"). Rewritten as "defined once and reusable in both places it appears", leaving the mechanism to `/speckit-plan`.
 - FR-011 and an Assumption named GitHub Pages. Rewritten as "the site's existing static hosting" — the constraint is real and carried from the constitution, but the vendor name is not what the requirement depends on.
 - SC-005 named the toolchain (`bundle exec jekyll serve`, "Liquid errors"). Rewritten as "builds without errors and loads successfully when previewed locally".
-- The deadline edge case explained the limitation in terms of GitHub Pages' rebuild trigger. Rewritten as "the site is rebuilt when the author publishes changes rather than on a schedule" — same constraint, stated as behaviour.
+- The deadline edge case explained the limitation in terms of GitHub Pages' rebuild trigger. Rewritten as "the site is rebuilt when the author publishes changes rather than on a schedule" — same constraint, stated as behavior.
 
 **Iteration 2 — the author chose real content over placeholders:**
 

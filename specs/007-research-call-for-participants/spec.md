@@ -80,7 +80,7 @@ The study is defined once. The research page shows the full call for participant
 - **FR-007**: The study MUST be the single source of truth, readable by both the research page and the home widget (feature 006), with no duplicated study content elsewhere.
 - **FR-008**: The callout MUST render without requiring scripting, per the Minimal JavaScript principle.
 - **FR-009**: All study content MUST live in the shared study record, and the callout MUST be defined once and reusable in both places it appears, per the Content as Data principle.
-- **FR-010**: The callout MUST be responsive and accessible, using semantic markup (for example a labelled region or aside) and a clearly described action, with sufficient contrast.
+- **FR-010**: The callout MUST be responsive and accessible, using semantic markup (for example a labeled region or aside) and a clearly described action, with sufficient contrast.
 - **FR-011**: The feature MUST deploy on the site's existing static hosting with no additional build step and no assets requested from external hosts.
 
 ### Key Entities

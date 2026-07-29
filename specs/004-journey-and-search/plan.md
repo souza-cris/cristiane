@@ -39,7 +39,7 @@ Rename the about page to journey and fill it with a horizontal, logo-driven time
 > **Superseded**: the growing badge sizes described here were replaced by uniform badges in feature 005, on the grounds that size implied later-equals-more-important. The brightening rail remains the progression cue. See `specs/005-journey-storytelling/spec.md` User Story 5.
 | II. Content as Data | ✅ Pass | Milestones, story keywords and bookmark types all live in `_data/`; pages carry no hardcoded entries |
 | III. GitHub Pages Compatibility | ✅ Pass | No plugins, no build step; the script is a plain file served as-is |
-| IV. Performance & Accessibility | ✅ Pass | Logos committed locally so no external hosts; portrait resized 17 MB → 135 KB; flags carry `aria-label`; the scroll container is focusable and keyboard-scrollable; highlighted phrases use `<strong>` so emphasis is conveyed, not just coloured |
+| IV. Performance & Accessibility | ✅ Pass | Logos committed locally so no external hosts; portrait resized 17 MB → 135 KB; flags carry `aria-label`; the scroll container is focusable and keyboard-scrollable; highlighted phrases use `<strong>` so emphasis is conveyed, not just colored |
 | V. Minimal JavaScript | ⚠️ Justified | See "Complexity Tracking" — live text search cannot be expressed in HTML or CSS |
 
 ## Complexity Tracking

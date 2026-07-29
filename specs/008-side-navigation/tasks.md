@@ -40,8 +40,8 @@ Static Jekyll site at the repository root. Templates in `_includes/` and `_layou
 - [X] T003 [US1] Create `_data/sections.yml` with a `label`, `url` and `match` per section, and `_includes/section-links.html` to render it — one `<ul>` whose class the caller supplies, per [contracts/side-nav-include.md](contracts/side-nav-include.md)
 - [X] T004 [US1] Create `_includes/side-nav.html` — a `<nav class="side-nav" aria-label="Section navigation">` wrapping `section-links.html`. Point `_includes/nav.html` at the same include so both navigations render one list (FR-008), and confirm each entry's `match` value drives `aria-current` correctly, including child pages (FR-003)
 - [X] T005 [US1] In `_layouts/default.html`, include the side nav on every page except home, placed inside `<body>` and outside `<main>`
-- [X] T006 [US1] In `assets/css/style.css`, position the menu fixed at the right edge and vertically centred, and style the links in the site's mono face
-- [X] T007 [US1] In `assets/css/style.css`, style the current link with a colour change **and** a right border, so the state is not colour-only (FR-007)
+- [X] T006 [US1] In `assets/css/style.css`, position the menu fixed at the right edge and vertically centered, and style the links in the site's mono face
+- [X] T007 [US1] In `assets/css/style.css`, style the current link with a color change **and** a right border, so the state is not color-only (FR-007)
 - [X] T008 [US1] In `assets/css/style.css`, keep the site's standard focus ring on the links
 - [X] T009 [US1] Run quickstart Scenarios 1 and 2
 
@@ -130,7 +130,7 @@ boxes.
 - [X] T027 In `assets/css/style.css`, hide the top navigation's section list above 1000px on interior pages only, so exactly one menu shows (FR-011). Home is exempt — it has no side navigation and would otherwise be left with nothing
 - [X] T028 In `assets/css/style.css`, reveal `::details-content` at 600px and above so the top navigation's links paint, closing the 600–999px blackout and restoring the desktop home navigation (FR-012)
 - [X] T029 Verify by rendered pixels, not by element geometry, at 1300px, 800px and 500px on both home and an interior page: exactly one menu visible, and never zero
-- [X] T030 Record the browser-behaviour trap in `CLAUDE.md` so the `::details-content` rule is not removed as redundant
+- [X] T030 Record the browser-behavior trap in `CLAUDE.md` so the `::details-content` rule is not removed as redundant
 
 **Checkpoint**: one menu at every width, and no width without navigation.
 
@@ -152,7 +152,7 @@ Removing the menu also exposed that the hero links were a **third** hand-written
 the section list, in `index.md` — surviving the Principle II work only because that pass
 looked at includes and never at page content.
 
-- [X] T031 In `index.md`, replace the hand-written hero list with `section-links.html`, wrapped in a labelled `<nav>` so home's navigation is a proper landmark (FR-014)
+- [X] T031 In `index.md`, replace the hand-written hero list with `section-links.html`, wrapped in a labeled `<nav>` so home's navigation is a proper landmark (FR-014)
 - [X] T032 In `_layouts/default.html`, leave the header and top navigation out of home entirely, rather than hiding them, so home has no empty navigation landmark (FR-013)
 - [X] T033 In `assets/css/style.css`, drop the `.is-interior` qualifier now that no top nav exists on home, and remove the now-dead `.is-home .site-nav` border rule
 - [X] T034 Verify by rendered pixels at 1300px, 800px and 500px that home's top strip holds only the site mark, and that its five hero links still render and still reach every section
@@ -188,6 +188,6 @@ Not parallelisable: any two tasks both editing `assets/css/style.css`.
 
 **MVP**: Phase 1 → Phase 2 → Phase 3. Nine tasks, and the menu works — but it also appears on home and overlaps text on narrow screens, so this is not shippable alone.
 
-**Minimum shippable**: MVP plus Phases 4 and 5. The exclusion and the breakpoint are corrections to US1's behaviour, not enhancements, so all three stories belong in the first release.
+**Minimum shippable**: MVP plus Phases 4 and 5. The exclusion and the breakpoint are corrections to US1's behavior, not enhancements, so all three stories belong in the first release.
 
 **A note on the breakpoint**: this introduces the site's second breakpoint, at 1000px, alongside the existing 600px. That is deliberate — they describe different constraints — and decision 2 in [research.md](research.md) records why, so it is not later "tidied" into one number.

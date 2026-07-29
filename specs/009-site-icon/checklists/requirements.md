@@ -36,7 +36,7 @@
 Both [NEEDS CLARIFICATION] markers were resolved before planning:
 
 1. Where the mark appears. First answered "browser only", then revised by the author to the
-   home page, centred (FR-013). User Story 4 and SC-009/SC-010 were added to cover it, since
+   home page, centered (FR-013). User Story 4 and SC-009/SC-010 were added to cover it, since
    the original three stories were all about the browser icon and left FR-013 with no
    acceptance criteria.
 2. The blue accent stays; teal lives in the mark alone (FR-014, FR-015).
@@ -48,11 +48,11 @@ added a rule about exactly this in v2.0.0, after the journey-years episode, and 
 applied here. Both FR-013 and FR-014 are now written as decisions. The spec's *Resolved
 Questions* section records the correction rather than hiding it.
 
-**On naming colours in a spec.** FR-012 cites two hex values, which normally counts as an
+**On naming colors in a spec.** FR-012 cites two hex values, which normally counts as an
 implementation detail. They are kept because the contrast ratios attached to them are the
 requirement: `#0B7E8A` measures 3.93:1 against the site background, under the 4.5:1 that
 normal text needs, while `#0FA3B1` measures 6.21:1. Writing that as "use an accessible
-teal" would lose the specific fact that the author's stated brand colour is the one that
+teal" would lose the specific fact that the author's stated brand color is the one that
 fails. The constraint is what matters; the numbers are how it gets checked.
 
 Note that FR-013 and FR-014 close this risk by scope — under the agreed design, teal never

@@ -109,7 +109,7 @@ Static Jekyll site, no application source tree. Tasks touch these files:
 ## Phase 6: Polish & Cross-Cutting Concerns
 
 - [X] T023 Run quickstart Scenario 5 — every entry off and the study inactive produces **no** updates area at all, no heading and no empty container; then entries off with study on, and entries on with study off; plus an entry with no link and an entry with no blurb
-- [X] T024 Run quickstart Scenario 6 — narrow to phone width and confirm the widget stacks cleanly without pushing the page sideways; tab through and confirm focus indicators and link text; confirm the area is announced as a named region and that type labels do not rely on colour alone
+- [X] T024 Run quickstart Scenario 6 — narrow to phone width and confirm the widget stacks cleanly without pushing the page sideways; tab through and confirm focus indicators and link text; confirm the area is announced as a named region and that type labels do not rely on color alone
 - [X] T025 [P] In `README.md`, document `_data/updates.yml` under "Adding content": the fields, that internal links are written as site-root paths, that `active: false` hides an entry, that `pinned` promotes one, and where the limit lives
 - [X] T026 [P] In `CLAUDE.md`, note that the updates widget is hand-curated and never aggregates from `_posts/` or bookmarks, and that it reads feature 007's study record without owning it
 - [X] T027 [P] Regression check: the hero — eyebrow, headline, subheadline and all five links — is unchanged against the T002 baseline, and `/journey/`, `/stories/`, `/research/`, `/bookmarks/` and `/contact/` still return 200 with the research page's own callout behaving as feature 007 left it

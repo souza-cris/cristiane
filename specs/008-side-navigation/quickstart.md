@@ -15,7 +15,7 @@ bundle exec jekyll build
 ## Scenario 1 — The menu is there and it stays there (User Story 1, FR-001)
 
 1. Open `/bookmarks/` in a window at least 1100px wide.
-2. Confirm a vertical list of five links sits at the right edge, vertically centred.
+2. Confirm a vertical list of five links sits at the right edge, vertically centered.
 3. Scroll to the bottom of the page. The menu has not moved.
 4. Confirm the content column has not shifted left or narrowed compared with the home page.
 
@@ -23,14 +23,14 @@ bundle exec jekyll build
 
 ## Scenario 2 — The current section is marked (FR-003, FR-007)
 
-1. On `/bookmarks/`, confirm "bookmarks" is marked as current — a colour change **and** a border on the right edge of the link.
+1. On `/bookmarks/`, confirm "bookmarks" is marked as current — a color change **and** a border on the right edge of the link.
 2. Open a bookmark filter page, such as `/bookmarks/papers/`. Confirm "bookmarks" is still marked.
 3. Open an individual story from `/stories/`. Confirm "stories" is marked, not "journey" or anything else.
 4. Open `/contact/`. Confirm "contact" is marked and "stories" is not.
 
 **Passes when**: exactly one link is marked on each page, and section pages mark their parent section.
 
-> **Why the border matters**: a visitor who cannot distinguish the two colours must still be able to tell which section they are in. Check by taking a greyscale screenshot — the marked link should still be obvious.
+> **Why the border matters**: a visitor who cannot distinguish the two colors must still be able to tell which section they are in. Check by taking a greyscale screenshot — the marked link should still be obvious.
 
 ## Scenario 3 — Home is clean (User Story 2, FR-005, FR-006)
 

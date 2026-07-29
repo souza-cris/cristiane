@@ -4,8 +4,8 @@
 
 **Created**: 2026-07-28
 
-**Status**: Draft — ready for planning. The analytics conflict is resolved: consent gates the
-tag (see below), so US9 is amended and feature 011 stands.
+**Status**: Implemented — with User Story 9 excluded. See the implementation note below for what
+shipped, what did not, and why. Feature 011 still waits on the same constitution amendment.
 
 **Input**: The author supplied a completed audit of the live site ("SEO has been implemented on
 crissouza.org. Audit the live site and specify everything still missing or wrong"), written as
@@ -76,6 +76,20 @@ US9's own wording — "The tag loads on every production page view without a con
 a deliberate decision by the site owner" — is **superseded**, not deleted. It is left in
 [audit.md](audit.md) because it is the position that was argued against, and removing it would
 hide that the question was ever open.
+
+## Implementation note
+
+Shipped without User Story 9. US9 covers analytics, which cannot be added while
+the constitution's privacy and no-JavaScript principles stand as written — that
+is the same blocker feature 011 waits on, and it is a decision to be made in the
+open rather than worked around. US9 is excluded, not deferred quietly.
+
+One further deviation, recorded per the constitution's *Recording a deviation*:
+FR-020 asked for employment on the ProfilePage. It is not emitted. Schema.org's
+only employment field is `worksFor`, which means where a person works *now*;
+deriving it from the journey track would have told search engines she currently
+works at seven companies she has left. The education half of FR-020 ships as
+specified.
 
 ## Clarifications
 
@@ -239,7 +253,7 @@ Two are already met or partly met, and are recorded so they are not re-done:
 - Changing any existing URL.
 - Visual redesign of any page.
 - Server-side or log-based analytics.
-- Varying behaviour by inferred visitor location.
+- Varying behavior by inferred visitor location.
 - Custom event design beyond site search, should analytics proceed.
 
 ## Resolved Question

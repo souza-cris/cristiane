@@ -6,13 +6,13 @@
 # ---------------------------------------------------------------------------
 
 - category: industry       # industry or academia — nothing else. Sets the ring
-                           # colour and style around the badge.
+                           # color and style around the badge.
 
   label: "Short label"     # THE LINE ON THE TRACK. If you delete this field the
                            # stop renders blank with no error anywhere. Keep it
                            # to a few words.
 
-  org: "Organisation"      # Shown when someone opens the stop.
+  org: "Organization"      # Shown when someone opens the stop.
 
   short: "OR"              # 1-3 letters, shown in the circle when there is no
                            # logo file yet.

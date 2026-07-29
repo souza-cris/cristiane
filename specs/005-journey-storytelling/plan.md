@@ -6,7 +6,7 @@
 
 ## Summary
 
-Turn the journey track from a decorative strip into something readable. Each stop becomes a native disclosure that expands to show the full title and description already recorded for that milestone, using `<details name="...">` so only one opens at a time with no script. The track becomes responsive — vertical and page-scrolled on phones, horizontal with CSS scroll shadows on wide screens. Badges become a uniform size, category gains a non-colour cue, and framing copy above the track names the throughline and derives the country count from the milestone data so it cannot drift.
+Turn the journey track from a decorative strip into something readable. Each stop becomes a native disclosure that expands to show the full title and description already recorded for that milestone, using `<details name="...">` so only one opens at a time with no script. The track becomes responsive — vertical and page-scrolled on phones, horizontal with CSS scroll shadows on wide screens. Badges become a uniform size, category gains a non-color cue, and framing copy above the track names the throughline and derives the country count from the milestone data so it cannot drift.
 
 ## Technical Context
 
@@ -37,8 +37,8 @@ Turn the journey track from a decorative strip into something readable. Each sto
 | I. Simplicity & Maintainability | ✅ Pass | Uses a native HTML element for the accordion instead of building one. Removes the per-stop badge-size interpolation from feature 004, so the include gets simpler, not more complex |
 | II. Content as Data | ✅ Pass | The optional period joins the existing milestone record in `_data/`; framing copy lives in the page's content, and the country count is derived from the data rather than typed |
 | III. GitHub Pages Compatibility | ✅ Pass | No plugins, no build step; everything is stock Liquid, HTML and CSS |
-| IV. Performance & Accessibility | ✅ Pass | `<details>`/`<summary>` is keyboard and screen-reader native. Category stops relying on colour alone (FR-013). Layout adapts without script (FR-005), satisfying "responsive without relying on JavaScript" |
-| V. Minimal JavaScript | ✅ Pass | No JavaScript added. The disclosure, the exclusive-open behaviour and the scroll affordance are all native or CSS |
+| IV. Performance & Accessibility | ✅ Pass | `<details>`/`<summary>` is keyboard and screen-reader native. Category stops relying on color alone (FR-013). Layout adapts without script (FR-005), satisfying "responsive without relying on JavaScript" |
+| V. Minimal JavaScript | ✅ Pass | No JavaScript added. The disclosure, the exclusive-open behavior and the scroll affordance are all native or CSS |
 
 **Post-design re-check**: still passing. The design added no script, no dependency and no plugin; it removed one piece of computed styling.
 
@@ -48,7 +48,7 @@ a `<summary>` handles its own click, so the disclosure still needs no script (V)
 verified in a browser rather than assumed. The links point outward but load
 nothing from outside; every logo is still a committed local file, now smaller
 than before (III, IV). Dropping the per-stop category word leaves FR-013 resting
-on ring style plus the legend, which is still a non-colour cue (IV).
+on ring style plus the legend, which is still a non-color cue (IV).
 
 *No violations — Complexity Tracking omitted.*
 
@@ -89,7 +89,7 @@ See [research.md](research.md). Five questions were open; all are resolved:
 1. How to expand a stop with one-open-at-a-time and no script → `<details name="journey">`
 2. How to signal that the track continues past the edge, and stop signalling at the end → CSS scroll shadows via `background-attachment: local`
 3. How an expanded stop should occupy space in a horizontal track → the open stop's column widens to a readable measure
-4. How to distinguish category without colour → ring style plus the category named in the detail
+4. How to distinguish category without color → ring style plus the category named in the detail
 5. Where the framing copy lives and how to keep the country count honest → page content, count derived from the data
 
 ## Phase 1: Design

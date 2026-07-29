@@ -9,11 +9,11 @@ Sync Impact Report
 - Modified principles (no renames):
   - II. Content as Data — extended to repeated structure; a per-entry rule now
     belongs in the data file as a value, not as branching in a template
-  - IV. Performance & Accessibility — meaning must not rest on colour alone;
+  - IV. Performance & Accessibility — meaning must not rest on color alone;
     visually hidden content must be hidden from assistive technology too;
     assets must be self-hosted
   - V. Minimal JavaScript — prefer native elements over scripted equivalents;
-    verify native behaviour in a real browser rather than assuming it
+    verify native behavior in a real browser rather than assuming it
 - Added sections:
   - Governance → Specifying before building
   - Governance → Amending a shipped decision
@@ -94,8 +94,8 @@ Sync Impact Report
 - Layouts MUST be responsive without relying on JavaScript for core
   layout or navigation.
 - Images MUST be appropriately sized and use descriptive alt attributes.
-- Meaning MUST NOT be carried by colour alone. Any state or category
-  distinguished by colour MUST also be distinguishable without it — by
+- Meaning MUST NOT be carried by color alone. Any state or category
+  distinguished by color MUST also be distinguishable without it — by
   shape, border, position, or text.
 - Content that is visually hidden MUST also be hidden from assistive
   technology and removed from the tab order, unless it is deliberately
@@ -113,10 +113,10 @@ Sync Impact Report
   that cannot be met with HTML and CSS alone.
 - When JavaScript is used, it MUST be small, inline or in a single file,
   and MUST NOT require a build step or npm dependencies.
-- Where a native HTML element already provides the behaviour, that element
+- Where a native HTML element already provides the behavior, that element
   MUST be used rather than a scripted equivalent.
-- When a feature depends on native browser behaviour that is not obvious
-  from the markup, that behaviour MUST be verified in a real browser
+- When a feature depends on native browser behavior that is not obvious
+  from the markup, that behavior MUST be verified in a real browser
   before the feature is considered complete. Reasoning about the
   specification is not sufficient evidence.
 - Rationale: every script adds maintenance burden and potential
@@ -170,7 +170,7 @@ Sync Impact Report
   original requirement MUST be left in place and marked superseded or
   amended, with a pointer to what replaced it and why.
 - Superseded requirements MUST NOT be silently edited to match current
-  behaviour, and completed task lists MUST NOT be rewritten. Follow-on
+  behavior, and completed task lists MUST NOT be rewritten. Follow-on
   work is appended.
 - Rationale: the value of these documents is the reasoning, not the
   description. A spec quietly edited to agree with the code records no

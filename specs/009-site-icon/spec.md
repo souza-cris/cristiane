@@ -10,14 +10,14 @@ deployed. One item is verifiable only on a physical device: the iOS home-screen 
 hardware — see the note in [tasks.md](tasks.md).
 
 **Input**: The author supplied a set of six icon files and, on being asked, named the
-brand colour: "this is the color #0B7E8A". The artwork is an open book on a rounded
+brand color: "this is the color #0B7E8A". The artwork is an open book on a rounded
 square tile, supplied in two teals — the brand `#0B7E8A` and a brighter `#0FA3B1` — with
 light and reversed variants. One file carries the accessible label "CRIS app icon". The
 author holds the original files and supplies them at implementation.
 
 ## User Scenarios & Testing *(mandatory)*
 
-### User Story 1 - Recognise the site among many open tabs (Priority: P1)
+### User Story 1 - Recognize the site among many open tabs (Priority: P1)
 
 A visitor has a dozen tabs open. The site's tab currently shows the browser's blank
 placeholder, identical to every other site with no icon. With the mark in place, the tab
@@ -67,7 +67,7 @@ shows the mark, filling its tile with no unexpected border or transparency.
 
 ### User Story 3 - Stay legible wherever it is shown (Priority: P3)
 
-The mark remains recognisable at the smallest size a browser displays it, and holds up
+The mark remains recognizable at the smallest size a browser displays it, and holds up
 against both light and dark browser chrome, so it never disappears into the toolbar it
 sits in.
 
@@ -85,13 +85,13 @@ and a dark-themed browser and confirm it is distinguishable in both.
 2. **Given** a browser with dark chrome, **When** the tab renders, **Then** the mark is
    still distinguishable.
 3. **Given** the icon at its smallest rendered size, **When** a visitor glances at it,
-   **Then** the open-book shape is still readable as a shape, not a coloured blob.
+   **Then** the open-book shape is still readable as a shape, not a colored blob.
 
 ---
 
 ### User Story 4 - See the mark on arriving at the site (Priority: P2)
 
-A visitor landing on the home page sees the mark, small and centred, above the
+A visitor landing on the home page sees the mark, small and centered, above the
 introduction. It gives the page an identity of its own before any text is read, and ties
 the site to the icon in the browser tab. Interior pages stay as they are — the mark does
 not repeat down every page.
@@ -100,13 +100,13 @@ not repeat down every page.
 which is why it sits below the tab icon. It ranks above legibility tuning because it is
 the one part of this feature a visitor meets head-on.
 
-**Independent Test**: Load the home page and confirm the mark appears, centred, above the
+**Independent Test**: Load the home page and confirm the mark appears, centered, above the
 introduction. Load any other page and confirm it does not appear.
 
 **Acceptance Scenarios**:
 
 1. **Given** a visitor opens the home page, **When** it renders, **Then** the mark appears
-   centred above the content, at a size that does not compete with the introduction.
+   centered above the content, at a size that does not compete with the introduction.
 2. **Given** a visitor opens any other page, **When** it renders, **Then** no mark appears
    and the page is unchanged.
 3. **Given** a visitor using a screen reader, **When** the home page is read aloud,
@@ -125,11 +125,11 @@ introduction. Load any other page and confirm it does not appear.
   that path returns 404. After this feature it MUST return an icon rather than an error.
 - **A visitor with images disabled, or using a screen reader**: the icon is decoration; its
   absence MUST NOT remove any information or navigation.
-- **The mark shown against a background close to its own colour**: covered by User Story 3
+- **The mark shown against a background close to its own color**: covered by User Story 3
   — the chosen variant MUST carry its own edge rather than relying on the surface behind it.
 - **A device that masks the icon into a circle**: covered by User Story 2 — the book must
   survive the crop.
-- **The brand colour used where it cannot be read**: `#0B7E8A` measures 3.93:1 against the
+- **The brand color used where it cannot be read**: `#0B7E8A` measures 3.93:1 against the
   site's background, below the 4.5:1 that normal text requires. FR-013 and FR-014 keep it
   out of every position where that would matter, so the risk is closed by scope rather than
   managed. If a later feature puts teal on the page, this measurement applies again.
@@ -141,7 +141,7 @@ introduction. Load any other page and confirm it does not appear.
 - **FR-001**: Every page of the site MUST offer an icon to the browser for use in tabs,
   bookmarks, history, and anywhere else the browser identifies a site.
 - **FR-002**: The icon MUST be the artwork the author supplied. It MUST NOT be redrawn,
-  recoloured, cropped, or otherwise altered beyond producing the sizes and formats that
+  recolored, cropped, or otherwise altered beyond producing the sizes and formats that
   browsers require.
 - **FR-003**: The same mark MUST identify every page; the icon MUST NOT vary by section.
 - **FR-004**: The site MUST offer an icon suitable for a phone or tablet home screen,
@@ -165,23 +165,23 @@ introduction. Load any other page and confirm it does not appear.
   existing practice of committing web-sized images rather than large originals.
 - **FR-010**: The feature MUST deploy on the site's existing static hosting with no
   additional build step and no new dependency.
-- **FR-011**: The colour the site declares for surrounding browser interface MUST match
+- **FR-011**: The color the site declares for surrounding browser interface MUST match
   what the visitor actually sees, so the browser's furniture and the page do not
   contradict each other.
 - **FR-012**: Any future use of `#0B7E8A` that carries text or an interface edge MUST meet
   the contrast the site already holds itself to. Where it cannot, the brighter `#0FA3B1`
-  (6.21:1 against the site background) MUST be used instead, or the colour MUST not be used
+  (6.21:1 against the site background) MUST be used instead, or the color MUST not be used
   in that position at all. This feature creates no such use — see FR-015.
-- **FR-013**: The mark appears on the **home page only**, centred above the content, at a
+- **FR-013**: The mark appears on the **home page only**, centered above the content, at a
   small size. It is decorative: it carries an empty alt text, is hidden from assistive
   technology, and is not a link — the navigation already carries the way home. It is not
   emitted at all on other pages, rather than emitted and hidden.
-- **FR-014**: The site's existing accent colour remains unchanged. Links, headings, focus
+- **FR-014**: The site's existing accent color remains unchanged. Links, headings, focus
   outlines, journey rings, and every other accented element keep `#58a6ff`. Teal is not
   introduced into the page's palette beyond the mark itself.
 - **FR-015**: Because teal never carries text or an interface edge under FR-013 and
   FR-014, the brand `#0B7E8A` MAY be used as supplied wherever it appears — inside the
-  artwork, and as the colour the site declares for surrounding browser interface. Its
+  artwork, and as the color the site declares for surrounding browser interface. Its
   3.93:1 measurement constrains text and interface edges only, and this feature creates
   none.
 
@@ -190,7 +190,7 @@ introduction. Load any other page and confirm it does not appear.
 - **Site icon**: the author's artwork, held as a small set of committed files covering the
   variants browsers and devices ask for. Attributes: the artwork itself, the background
   treatment (solid tile or transparent), and the size or sizes each file serves.
-- **Brand colour**: `#0B7E8A`, the author's stated colour, with the brighter `#0FA3B1`
+- **Brand color**: `#0B7E8A`, the author's stated color, with the brighter `#0FA3B1`
   available where contrast demands it.
 
 ## Success Criteria *(mandatory)*
@@ -203,10 +203,10 @@ introduction. Load any other page and confirm it does not appear.
   reading any tab titles.
 - **SC-003**: The icon is present on 100% of the site's pages, including the 404 page.
 - **SC-004**: A request to the conventional root icon path returns an icon, not an error.
-- **SC-005**: The icon is recognisable as an open book at the smallest size any target
+- **SC-005**: The icon is recognizable as an open book at the smallest size any target
   browser renders it.
 - **SC-006**: The site makes no request to any external host — unchanged from today.
-- **SC-007**: Every colour pairing introduced by this feature meets at least 4.5:1 for
+- **SC-007**: Every color pairing introduced by this feature meets at least 4.5:1 for
   normal text and 3:1 for large text and interface edges.
 - **SC-008**: Added page weight stays small enough not to be perceptible; the icon must not
   become the largest asset on a text page.
@@ -218,7 +218,7 @@ introduction. Load any other page and confirm it does not appear.
 ## Assumptions
 
 - **The artwork is final.** It is the author's own and is treated the way study wording and
-  organisation logos already are: used as supplied, never regenerated or "improved". Any
+  organization logos already are: used as supplied, never regenerated or "improved". Any
   change to the drawing is the author's to make.
 - **The author supplies the files.** She has the originals. This feature does not recreate,
   trace, or re-export them from any copy.
@@ -229,10 +229,10 @@ introduction. Load any other page and confirm it does not appear.
   and so satisfies FR-005 against light and dark chrome alike, whereas a transparent mark
   depends on whatever sits behind it. The reversed and transparent variants are held for
   contexts where a tile would be wrong.
-- **`#0B7E8A` is the brand colour**, as stated by the author. It is used as supplied inside
+- **`#0B7E8A` is the brand color**, as stated by the author. It is used as supplied inside
   the artwork. FR-012 governs it only where it would carry text or an interface edge.
 - **No text changes.** The home page gains the mark above its content (FR-013); no wording,
-  navigation, or colour changes anywhere. Nothing a visitor *reads* is different.
+  navigation, or color changes anywhere. Nothing a visitor *reads* is different.
 
 ## Dependencies
 
@@ -243,16 +243,16 @@ introduction. Load any other page and confirm it does not appear.
 
 - The mark on any page other than home — no logo in the navigation, header, or interior
   pages. See FR-013.
-- Any change to the site's colours. The blue accent stays; see FR-014.
+- Any change to the site's colors. The blue accent stays; see FR-014.
 - A full visual rebrand: the dark background, type and layout are untouched.
 - A wordmark or logotype. The supplied artwork is a symbol only.
-- Any installable-app behaviour beyond the home screen icon itself — no offline support,
+- Any installable-app behavior beyond the home screen icon itself — no offline support,
   no splash screen, no install prompt.
 
 ## Resolved Questions
 
 1. **Does the mark appear on the site itself?** Asked before planning and answered "browser
-   only"; the author then revised it to "on the home page, small and centred", and then
+   only"; the author then revised it to "on the home page, small and centered", and then
    narrowed it from every page to home alone. FR-013 records where it landed.
 2. **Does teal replace the site's blue accent?** No — the mark is teal, the site stays blue.
    This sidesteps the contrast problem: `#0B7E8A` fails text contrast at 3.93:1, but it

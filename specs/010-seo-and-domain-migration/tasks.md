@@ -34,7 +34,7 @@ Static Jekyll site at the repository root. Metadata in `_includes/head.html`; `s
 ## Phase 2: Foundational (Blocking Prerequisites)
 
 - [X] T003 Generate `assets/og/default.png` at 1200×630 from `assets/img/icon.svg` plus the site name and a short line of description, using the same local tooling as the site icons. Commit it; nothing is generated at deploy time (FR-013, FR-026)
-- [X] T004 Verify the preview image is legible at the size a preview card actually renders, and that it carries no colour profile bloat
+- [X] T004 Verify the preview image is legible at the size a preview card actually renders, and that it carries no color profile bloat
 
 **Checkpoint**: the default preview image exists. No page references it yet.
 
@@ -112,7 +112,7 @@ Static Jekyll site at the repository root. Metadata in `_includes/head.html`; `s
 - [X] T028 [P] Add `description:` to the story's front matter if its `tldr` reads poorly as a search result; optional, never required
 - [X] T029 [P] Update `README.md` with the optional `description:` and `image:` front matter now available on any page
 - [X] T030 [P] Update `CLAUDE.md`: the address base lives only in `_config.yml`, every quoted address uses `absolute_url` while internal links keep `relative_url`, and the 404 is the one page excluded from the sitemap
-- [X] T031 Run an automated site audit and confirm it scores at least 95 on search optimisation (SC-008)
+- [X] T031 Run an automated site audit and confirm it scores at least 95 on search optimization (SC-008)
 - [ ] T032 *(the author's to do — needs her Google account)* Register the site in Search Console and submit the sitemap — the author's to do; it needs her account (spec Dependencies)
 - [X] T033 Mark spec 010 Implemented, move it out of `BACKLOG.md`, and record in the spec that the migration half was never needed
 - [X] T034 Run the full [quickstart.md](quickstart.md) end to end, including the build check and every regression check

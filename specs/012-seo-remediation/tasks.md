@@ -78,7 +78,7 @@ to the site root.
 **Independent Test**: Crawl every indexable page; duplicate titles and duplicate descriptions both count zero.
 
 - [X] T016 [US3] In `_includes/head.html`, derive a filter page's description from its term — one composed sentence per page, unique by construction (FR-A05). No authoring step, and a new term arrives already described
-- [X] T017 [P] [US3] In the ten `bookmarks/*.md` files, change `title` from `"bookmarks"` to the term — "papers", "reports", "courses", "organisations", "projects", "tools", "books", "talks", "datasets", "more". This changes the visible `<h1>` too, which is intended: a page headed "bookmarks" that lists only papers misleads a reader as much as a crawler
+- [X] T017 [P] [US3] In the ten `bookmarks/*.md` files, change `title` from `"bookmarks"` to the term — "papers", "reports", "courses", "organizations", "projects", "tools", "books", "talks", "datasets", "more". This changes the visible `<h1>` too, which is intended: a page headed "bookmarks" that lists only papers misleads a reader as much as a crawler
 - [X] T018 [P] [US3] In the five `stories/*.md` files, the same — "AI stories", "conference stories", and so on
 - [X] T019 [US3] In `index.md` or `_config.yml`, give the home page title a role descriptor beyond the bare name (FR-012)
 - [X] T020 [US3] Verify zero duplicate titles and zero duplicate descriptions across every indexable page — confirmed, 15 indexable pages, no duplicates of either, and none left on the site default. **Six section-page descriptions were drafted rather than author-written** (index, journey, stories, research, bookmarks, contact); they are factual rather than voiced and are the author's to edit
@@ -110,10 +110,10 @@ to the site root.
 
 - [X] T025 [US6] In `_posts/2026-07-26-old-wine-in-a-new-bottle.md`, add an author-written `description` — the current one is a machine truncation ending "and a lot ..." (FR-014). The author supplies the sentence
 - [X] T026 [US6] In the same file, add `image: /assets/img/stories/old-wine/old-new-bottle.jpg`. The illustration already exists; no new artwork
-- [ ] T027 [US6] In `_includes/head.html`, emit `og:image:alt`, `og:image:width` and `og:image:height` alongside the image (FR-015)
-- [ ] T028 [US6] In `_includes/structured-data.html`, make `BlogPosting` use the story's own image and add `dateModified` and `publisher` (FR-023)
-- [ ] T029 [US6] In `tools/check-data.rb`, warn when a post has no `description`, so the fallback to a truncated `tldr` is surfaced rather than silent (FR-A02 sibling; US6 scenario 6)
-- [ ] T030 [US6] Run quickstart Scenario 3's second half
+- [x] T027 [US6] In `_includes/head.html`, emit `og:image:alt`, `og:image:width` and `og:image:height` alongside the image (FR-015)
+- [x] T028 [US6] In `_includes/structured-data.html`, make `BlogPosting` use the story's own image and add `dateModified` and `publisher` (FR-023)
+- [x] T029 [US6] In `tools/check-data.rb`, warn when a post has no `description`, so the fallback to a truncated `tldr` is surfaced rather than silent (FR-A02 sibling; US6 scenario 6)
+- [x] T030 [US6] Run quickstart Scenario 3's second half
 
 **Checkpoint**: a shared story shows a written sentence and its own picture.
 
@@ -125,13 +125,13 @@ to the site root.
 
 **Independent Test**: `/journey/` validates as a `ProfilePage` with a `Person` main entity, zero errors.
 
-- [ ] T031 [US5] Decide where the ORCID lives so both `Person` entities read it from one place — `_data/social.yml` puts an icon in the footer and needs a drawing; carrying it separately does not. FR-A08 leaves this open deliberately; settle it here
-- [ ] T032 [US5] In `_includes/structured-data.html`, emit a `ProfilePage` on `/journey/` whose `mainEntity` is a `Person` with `name`, `description`, `image` and `sameAs` (FR-018, FR-019)
-- [ ] T033 [US5] Derive education from `_data/journey.yml` entries where `category: academia`, employment from `industry`, and current affiliation from the most recent `academia` entry (FR-020). Derive — do not restate — so the markup cannot drift from the visible track
-- [ ] T034 [US5] Add `dateModified` in ISO 8601 to the `ProfilePage` (FR-021)
-- [ ] T035 [US5] Extend the home page `Person`'s `sameAs` to include the ORCID, from the same source as T031, and verify both `Person` entities agree on name, URL and `sameAs` (FR-022)
-- [ ] T036 [US5] Validate `/journey/` and `/` with an external structured-data validator; zero errors. Confirm every claim corresponds to something visible on the page (FR-026)
-- [ ] T037 [US5] Run quickstart Scenario 4
+- [x] T031 [US5] Decide where the ORCID lives so both `Person` entities read it from one place — `_data/social.yml` puts an icon in the footer and needs a drawing; carrying it separately does not. FR-A08 leaves this open deliberately; settle it here
+- [x] T032 [US5] In `_includes/structured-data.html`, emit a `ProfilePage` on `/journey/` whose `mainEntity` is a `Person` with `name`, `description`, `image` and `sameAs` (FR-018, FR-019)
+- [x] T033 [US5] Derive education from `_data/journey.yml` entries where `category: academia`, employment from `industry`, and current affiliation from the most recent `academia` entry (FR-020). Derive — do not restate — so the markup cannot drift from the visible track
+- [x] T034 [US5] Add `dateModified` in ISO 8601 to the `ProfilePage` (FR-021)
+- [x] T035 [US5] Extend the home page `Person`'s `sameAs` to include the ORCID, from the same source as T031, and verify both `Person` entities agree on name, URL and `sameAs` (FR-022)
+- [x] T036 [US5] Validate `/journey/` and `/` with an external structured-data validator; zero errors. Confirm every claim corresponds to something visible on the page (FR-026)
+- [x] T037 [US5] Run quickstart Scenario 4
 
 **Checkpoint**: the richest page on the site is machine-readable.
 
@@ -143,10 +143,10 @@ to the site root.
 
 **Independent Test**: The feed validates, and subscribing works from the home page URL alone.
 
-- [ ] T038 [US8] Create `feed.xml` at the repository root — hand-written Atom over `site.posts`, with absolute links and ISO 8601 dates (FR-031, research decision 4). No `jekyll-feed`
-- [ ] T039 [US8] In `_includes/head.html`, advertise the feed with an alternate link on every page so a reader can auto-discover it (FR-032)
-- [ ] T040 [US8] Verify the feed validates, contains the published story with title, absolute link, date, author and summary, and is absent from the sitemap
-- [ ] T041 [US8] Run quickstart Scenario 5
+- [x] T038 [US8] Create `feed.xml` at the repository root — hand-written Atom over `site.posts`, with absolute links and ISO 8601 dates (FR-031, research decision 4). No `jekyll-feed`
+- [x] T039 [US8] In `_includes/head.html`, advertise the feed with an alternate link on every page so a reader can auto-discover it (FR-032)
+- [x] T040 [US8] Verify the feed validates, contains the published story with title, absolute link, date, author and summary, and is absent from the sitemap
+- [x] T041 [US8] Run quickstart Scenario 5
 
 **Checkpoint**: the site is subscribable.
 
@@ -158,45 +158,45 @@ to the site root.
 
 **Independent Test**: The LCP element carries no deferred loading, and LCP is no worse than the T001 baseline.
 
-- [ ] T042 [P] [US7] In `_posts/2026-07-26-old-wine-in-a-new-bottle.md`, remove `loading="lazy"` from the **first** figure only and add `fetchpriority="high"` (FR-027, FR-028)
-- [ ] T043 [P] [US7] In `journey.md`, the same for the portrait — it currently has neither attribute, so only `fetchpriority` is added
-- [ ] T044 [US7] Verify every other image still carries `loading="lazy"`, and that every image on the site still carries `width` and `height` so nothing shifts (FR-029, FR-030)
-- [ ] T045 [US7] Measure LCP on both pages against the T001 baseline; it must be no worse (SC-007)
-- [ ] T046 [US7] Run quickstart Scenario 6
+- [x] T042 [P] [US7] In `_posts/2026-07-26-old-wine-in-a-new-bottle.md`, remove `loading="lazy"` from the **first** figure only and add `fetchpriority="high"` (FR-027, FR-028)
+- [x] T043 [P] [US7] In `journey.md`, the same for the portrait — it currently has neither attribute, so only `fetchpriority` is added
+- [x] T044 [US7] Verify every other image still carries `loading="lazy"`, and that every image on the site still carries `width` and `height` so nothing shifts (FR-029, FR-030)
+- [x] T045 [US7] Measure LCP on both pages against the T001 baseline; it must be no worse (SC-007)
+- [x] T046 [US7] Run quickstart Scenario 6
 
 ---
 
 ## Phase 11: User Story 10 — Breadcrumbs (Priority: P3)
 
-- [ ] T047 [US10] In `_includes/structured-data.html`, emit a `BreadcrumbList` on story and section pages, and **not** on the home page (FR-024)
-- [ ] T048 [US10] Verify every breadcrumb item's URL resolves 200 in one hop — which depends on US2 having shipped first (FR-025)
+- [x] T047 [US10] In `_includes/structured-data.html`, emit a `BreadcrumbList` on story and section pages, and **not** on the home page (FR-024)
+- [x] T048 [US10] Verify every breadcrumb item's URL resolves 200 in one hop — which depends on US2 having shipped first (FR-025)
 
 ---
 
 ## Phase 12: User Story 11 — The 404 (Priority: P3)
 
-- [ ] T049 [US11] In `_includes/head.html`, emit `noindex` on the 404 via T002's `page_robots`, and stop emitting `og:url` there — it currently advertises `/404.html` as a shareable address (FR-017)
-- [ ] T050 [US11] Verify the 404 returns 404, carries `noindex`, emits no canonical and no `og:url`, and is absent from the sitemap
-- [ ] T051 [US11] Run quickstart Scenario 7
+- [x] T049 [US11] In `_includes/head.html`, emit `noindex` on the 404 via T002's `page_robots`, and stop emitting `og:url` there — it currently advertises `/404.html` as a shareable address (FR-017)
+- [x] T050 [US11] Verify the 404 returns 404, carries `noindex`, emits no canonical and no `og:url`, and is absent from the sitemap
+- [x] T051 [US11] Run quickstart Scenario 7
 
 ---
 
 ## Phase 13: User Story 12 — The contact page (Priority: P3)
 
-- [ ] T052 [US12] In `contact.md`, add the ORCID `0009-0004-0716-4507` as a linked identifier and a link to her University of Alabama page, alongside the existing LinkedIn link (FR-A06). **No email address** — with nothing published to harvest, FR-034's obfuscation requirement does not arise
-- [ ] T053 [US12] Give `contact.md` the unique title and description US3 requires (FR-A06, FR-047 sibling)
+- [x] T052 [US12] In `contact.md`, add the ORCID `0009-0004-0716-4507` as a linked identifier and a link to her University of Alabama page, alongside the existing LinkedIn link (FR-A06). **No email address** — with nothing published to harvest, FR-034's obfuscation requirement does not arise
+- [x] T053 [US12] Give `contact.md` the unique title and description US3 requires (FR-A06, FR-047 sibling)
 
 ---
 
 ## Phase 14: Polish & Cross-Cutting Concerns
 
-- [ ] T054 In `tools/check-data.rb`, add a link check over the **built** site asserting every internal href resolves 200 in one hop (FR-009, FR-A02). It reads `_site`, so it belongs in the checker rather than the pre-commit hook, which stays fast
-- [ ] T055 [P] Verify feature 010's guarantee survives: canonical still equals `og:url` on every page
-- [ ] T056 [P] Verify no request goes to an external host at page load and `search.js` is still the only script
-- [ ] T057 [P] Update `README.md`: filter pages now carry a term-specific title, descriptions are derived, and the feed exists
-- [ ] T058 [P] Update `CLAUDE.md`: section `url` values are canonical with a trailing slash and `section-links.html` must not append one; empty filter pages are `noindex` by item count; the ProfilePage is derived from `_data/journey.yml`
-- [ ] T059 Mark spec 012 Implemented and record that US9 remains excluded pending the constitution amendment
-- [ ] T060 Run the full [quickstart.md](quickstart.md) end to end, including every regression check
+- [x] T054 In `tools/check-data.rb`, add a link check over the **built** site asserting every internal href resolves 200 in one hop (FR-009, FR-A02). It reads `_site`, so it belongs in the checker rather than the pre-commit hook, which stays fast
+- [x] T055 [P] Verify feature 010's guarantee survives: canonical still equals `og:url` on every page
+- [x] T056 [P] Verify no request goes to an external host at page load and `search.js` is still the only script
+- [x] T057 [P] Update `README.md`: filter pages now carry a term-specific title, descriptions are derived, and the feed exists
+- [x] T058 [P] Update `CLAUDE.md`: section `url` values are canonical with a trailing slash and `section-links.html` must not append one; empty filter pages are `noindex` by item count; the ProfilePage is derived from `_data/journey.yml`
+- [x] T059 Mark spec 012 Implemented and record that US9 remains excluded pending the constitution amendment
+- [x] T060 Run the full [quickstart.md](quickstart.md) end to end, including every regression check
 
 ---
 

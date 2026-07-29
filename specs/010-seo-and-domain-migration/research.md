@@ -109,10 +109,10 @@ equivalents. For a GitHub Pages *project* site given a custom domain, does
 
 **What was checked**: GitHub's own documentation on custom domains, on two pages. Neither
 states what happens to the default project URL after a custom domain is set. The only
-redirect behaviour documented is between apex and `www` variants of the *same* custom domain.
+redirect behavior documented is between apex and `www` variants of the *same* custom domain.
 
 **Status**: unverified. It is widely reported that GitHub does issue this redirect, and it is
-the behaviour the migration would like, but it is not documented and cannot be tested without
+the behavior the migration would like, but it is not documented and cannot be tested without
 owning the domain. **It is not treated as a promise.**
 
 **Decision**: do not build the migration on an assumed redirect. Rely on the canonical
@@ -183,7 +183,7 @@ already ships, and adds no dependency — the tools are the ones already used fo
 **Alternatives considered**:
 
 - *Crop the existing portrait* — faces draw clicks, and the photo is already in the
-  repository. Rejected by the author in favour of the mark.
+  repository. Rejected by the author in favor of the mark.
 - *Generate a per-page image with the page title on it* — richer previews, but needs an image
   built per page at deploy time, which is a build step. Rejected on Principle III.
 

@@ -62,7 +62,7 @@ This is a static Jekyll site with no application source tree. Every task touches
 
 - [X] T006 [US1] In `_includes/journey-timeline.html`, render `milestone.title` inside the detail container, omitting the element entirely when the field is empty
 - [X] T007 [US1] In `_includes/journey-timeline.html`, render `milestone.place` and `milestone.note` inside the detail container, each omitted entirely when empty, per the empty-field rules in [data-model.md](data-model.md)
-- [X] T008 [US1] In `assets/css/style.css`, style the detail panel: readable measure, muted body colour, spacing that separates it from the summary without shifting the badge
+- [X] T008 [US1] In `assets/css/style.css`, style the detail panel: readable measure, muted body color, spacing that separates it from the summary without shifting the badge
 - [X] T009 [US1] In `assets/css/style.css`, widen an open stop's column to a readable width on wide screens via `details[open]`, per decision 3 in [research.md](research.md); confirm closed stops keep their current narrow width
 - [X] T010 [US1] Verify the whole page still does not scroll sideways with a stop open at any width — the spec's horizontal-overflow edge case
 - [X] T011 [US1] Run quickstart Scenario 1 (read the story) and Scenario 2 (works with JavaScript disabled)
@@ -119,13 +119,13 @@ This is a static Jekyll site with no application source tree. Every task touches
 
 ## Phase 7: User Story 5 — Legible, consistent badges (Priority: P3)
 
-**Goal**: Uniform badge sizes, with category distinguishable without colour.
+**Goal**: Uniform badge sizes, with category distinguishable without color.
 
 **Independent Test**: First and last badges are the same size, the rail still brightens across the track, and academia and industry are tellable apart in a greyscale screenshot.
 
 - [X] T025 [US5] In `_includes/journey-timeline.html`, remove the `--badge` size interpolation and the `style` attribute it feeds, and delete the now-unused `last`/`grow`/`badge` Liquid assignments
 - [X] T026 [US5] In `assets/css/style.css`, set a single badge diameter chosen so every logo — including the wordmarks for Alabama and FGV — stays legible, and confirm the rail gradient still runs from muted to accent
-- [X] T027 [US5] In `assets/css/style.css`, give each category a distinct ring style in addition to its colour (solid for academia, dashed for industry) and mirror the same styles in the legend, per decision 4 in [research.md](research.md)
+- [X] T027 [US5] In `assets/css/style.css`, give each category a distinct ring style in addition to its color (solid for academia, dashed for industry) and mirror the same styles in the legend, per decision 4 in [research.md](research.md)
 - [X] T028 [US5] In `_includes/journey-timeline.html`, name the milestone's category in words inside the detail container, so the distinction is available as text and to screen readers
 - [X] T029 [US5] Run quickstart Scenario 7, including the greyscale check
 
@@ -144,12 +144,12 @@ This is a static Jekyll site with no application source tree. Every task touches
 
 ---
 
-## Phase 9: Follow-on — Organisation logos and links (after implementation)
+## Phase 9: Follow-on — Organization logos and links (after implementation)
 
 Requested by the author once the feature was live. Recorded here rather than
 edited into the phases above, so the original run stays readable as history.
 
-- [X] T036 Replace the Alabama, Tetra Pak, HelloFresh, ADP, FGV, Sicredi and Getnet logo files with author-supplied artwork; resize to the rendered badge size and strip the colour profiles the source files carried. `fgv.png`→`fgv.svg`, `tetrapak.svg`→`tetrapak.png`, `alabama.svg`→`alabama.png`
+- [X] T036 Replace the Alabama, Tetra Pak, HelloFresh, ADP, FGV, Sicredi and Getnet logo files with author-supplied artwork; resize to the rendered badge size and strip the color profiles the source files carried. `fgv.png`→`fgv.svg`, `tetrapak.svg`→`tetrapak.png`, `alabama.svg`→`alabama.png`
 - [X] T037 Make the Tetra Pak source's white JPEG background transparent and trim its margin, so it does not show as a white square inside the dark circular badge
 - [X] T038 Add an optional `url` field to each milestone in `_data/journey.yml`, documented in the file's header comment
 - [X] T039 In `_includes/journey-timeline.html`, wrap the badge logo in a link to `url` when one is set, and the org name in the detail likewise; both `target="_blank" rel="noopener"`. Keep the no-`url` path rendering plain content
@@ -158,7 +158,7 @@ edited into the phases above, so the original run stays readable as history.
 - [X] T042 Verify in a real browser that clicking a badge logo follows the link **without** toggling the stop, and that clicking the label still toggles without navigating — the whole design rests on this, and it must hold with no script
 - [X] T043 Record the amendments in [spec.md](spec.md), [research.md](research.md), [data-model.md](data-model.md) and [quickstart.md](quickstart.md), and update `CLAUDE.md` with the two new conventions
 
-**Checkpoint**: logos are the author's own artwork, each links to its organisation, and no stop names its category.
+**Checkpoint**: logos are the author's own artwork, each links to its organization, and no stop names its category.
 
 ---
 
@@ -201,6 +201,6 @@ Not parallelisable: anything in Phase 2, and any two tasks both editing `assets/
 
 **Recommended first release**: MVP plus Phase 4 (US2). Adding the detail view without the responsive work would make the page longer while still awkward on a phone, so these two P1 stories belong together.
 
-**Then, in any order**: US3 (framing copy), US5 (badges and colour cue), US4 (period slot, after US1).
+**Then, in any order**: US3 (framing copy), US5 (badges and color cue), US4 (period slot, after US1).
 
-**A note before starting Phase 7**: US5 reverses the badge growth built in feature 004, which the author saw and kept at the time. Confirm the change is wanted before doing T025–T026 — the spec records the supersession, but the earlier behaviour was a deliberate choice, not an oversight.
+**A note before starting Phase 7**: US5 reverses the badge growth built in feature 004, which the author saw and kept at the time. Confirm the change is wanted before doing T025–T026 — the spec records the supersession, but the earlier behavior was a deliberate choice, not an oversight.

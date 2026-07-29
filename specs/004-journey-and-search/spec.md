@@ -12,7 +12,7 @@
 
 ### User Story 1 - Journey Timeline (Priority: P1)
 
-A visitor opens the journey page and sees a portrait, a one-line introduction, and a tagline. Below it, a horizontal track runs left to right through career and education milestones, oldest first. Each stop shows the organization's logo in a circle, a country flag, a short label, and the organization name. Circles are colour-coded by category (academia, industry) and grow larger toward the end of the track, while the rail behind them brightens — the visual metaphor for a growing journey. No years appear anywhere.
+A visitor opens the journey page and sees a portrait, a one-line introduction, and a tagline. Below it, a horizontal track runs left to right through career and education milestones, oldest first. Each stop shows the organization's logo in a circle, a country flag, a short label, and the organization name. Circles are color-coded by category (academia, industry) and grow larger toward the end of the track, while the rail behind them brightens — the visual metaphor for a growing journey. No years appear anywhere.
 
 **Why this priority**: The journey page is the site's biography. It replaces a page that was empty apart from a heading.
 
@@ -69,7 +69,7 @@ A story can belong to more than one filter. A story about leadership in instruct
 - **FR-002**: Journey milestones MUST be stored as data, not markup, and render oldest first.
 - **FR-003**: Each milestone MUST show a logo (or initials fallback), a country flag, a short label, and an organization name.
 - **FR-004**: Milestone years MUST NOT be displayed. **Superseded**: the author
-  later chose to show a year range on the track in place of the organisation
+  later chose to show a year range on the track in place of the organization
   name. See the note in `specs/005-journey-storytelling/spec.md`.
 - **FR-005**: Badge size and rail brightness MUST increase along the track and MUST be derived from position, so adding or removing milestones re-spaces them automatically.
 - **FR-006**: Logo files MUST be committed to the repository; the page MUST NOT request assets from external hosts.

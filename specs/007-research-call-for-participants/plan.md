@@ -37,7 +37,7 @@ Add a call for participants to the research page, driven by a single study recor
 | I. Simplicity & Maintainability | ✅ Pass | One data file, one include, one toggle. No collection, no plugin, no scheduling machinery — the author flips a boolean |
 | II. Content as Data | ✅ Pass | Every word of the study lives in `_data/study.yml`; the include contains structure only. Feature 006 reads the same record rather than copying it |
 | III. GitHub Pages Compatibility | ✅ Pass | Stock Liquid, YAML and CSS; no plugins, no build step |
-| IV. Performance & Accessibility | ✅ Pass | Semantic `<section>` with an accessible name, a real heading, a descriptive link label, and no colour-only meaning. Nothing to download |
+| IV. Performance & Accessibility | ✅ Pass | Semantic `<section>` with an accessible name, a real heading, a descriptive link label, and no color-only meaning. Nothing to download |
 | V. Minimal JavaScript | ✅ Pass | None added. Toggling happens at build time |
 
 **Post-design re-check**: still passing. The design added no script, no dependency and no plugin.

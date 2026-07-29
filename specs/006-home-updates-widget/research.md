@@ -31,7 +31,7 @@ Six questions had to be settled before design. All are resolved; none remain mar
 - *A `limit` key inside `_data/updates.yml`* — keeps everything in one file, but it forces the data file into a map with the entries nested under an `items:` key. Every other data file on this site (`journey.yml`, `bookmarks.yml`, `story_keywords.yml`) is a plain top-level list, and adding an entry should not mean remembering to nest it. Rejected for consistency.
 - *A parameter passed at the call site* (`{% include updates-widget.html limit=4 %}`) — explicit and visible, but it puts a tuning value in the page rather than in configuration, and it would have to be repeated anywhere else the widget appears. Rejected.
 
-> **Worth knowing**: Jekyll reads `_config.yml` only at startup, so changing the limit locally requires restarting the server, not just a rebuild. That is a Jekyll behaviour, not a flaw in this design, but the author should be told — it will be documented alongside the setting.
+> **Worth knowing**: Jekyll reads `_config.yml` only at startup, so changing the limit locally requires restarting the server, not just a rebuild. That is a Jekyll behavior, not a flaw in this design, but the author should be told — it will be documented alongside the setting.
 
 ---
 

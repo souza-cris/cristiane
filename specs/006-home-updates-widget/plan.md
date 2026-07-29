@@ -37,7 +37,7 @@ Add a "what's new" area below the home page hero, populated from a hand-curated 
 | I. Simplicity & Maintainability | ✅ Pass | Ordering, filtering and the limit are stock Liquid filters. No type-label lookup table — the type string is the label, so an unfamiliar type needs no configuration |
 | II. Content as Data | ✅ Pass | Entries live in `_data/updates.yml`; the study is read from 007's record and never copied. The include holds structure only |
 | III. GitHub Pages Compatibility | ✅ Pass | Stock Liquid, YAML and CSS; no plugins, no build step |
-| IV. Performance & Accessibility | ✅ Pass | A real heading and a list, semantic markup, link text that says where it goes, and no colour-only meaning. Nothing to download |
+| IV. Performance & Accessibility | ✅ Pass | A real heading and a list, semantic markup, link text that says where it goes, and no color-only meaning. Nothing to download |
 | V. Minimal JavaScript | ✅ Pass | None added. Sorting, filtering and truncation happen at build time |
 
 **Post-design re-check**: still passing. No script, no dependency, no plugin.

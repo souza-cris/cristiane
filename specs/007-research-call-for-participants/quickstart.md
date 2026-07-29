@@ -13,7 +13,7 @@ bundle exec jekyll serve
 
 The research page is at <http://localhost:4000/cristiane/research/>.
 
-Reference: field-by-field behaviour is in [data-model.md](data-model.md); the authoring and include contracts are in [contracts/study-record.md](contracts/study-record.md).
+Reference: field-by-field behavior is in [data-model.md](data-model.md); the authoring and include contracts are in [contracts/study-record.md](contracts/study-record.md).
 
 ## Build check
 
@@ -68,7 +68,7 @@ This is the heart of the feature. Run it in both directions.
 1. Narrow the window to phone width. The callout wraps cleanly and does not hide the interests or the publications.
 2. Tab to the action link. The focus indicator is clearly visible and the link text says what it does — not "click here".
 3. Confirm the callout is announced as a named region by a screen reader, taking its name from the visible heading.
-4. Confirm nothing in the callout depends on colour alone to be understood.
+4. Confirm nothing in the callout depends on color alone to be understood.
 
 **Passes when**: the callout is usable at any width, by keyboard, and with assistive technology.
 

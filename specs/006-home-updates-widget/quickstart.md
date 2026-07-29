@@ -13,7 +13,7 @@ bundle exec jekyll serve
 
 The home page is at <http://localhost:4000/cristiane/>.
 
-Reference: field behaviour is in [data-model.md](data-model.md); the authoring and dependency contracts are in [contracts/update-record.md](contracts/update-record.md).
+Reference: field behavior is in [data-model.md](data-model.md); the authoring and dependency contracts are in [contracts/update-record.md](contracts/update-record.md).
 
 > **Restart, don't just rebuild**, if you change `updates_limit` — Jekyll reads `_config.yml` only at startup.
 
@@ -84,7 +84,7 @@ This is the end-to-end check feature 007 could not finish on its own.
 2. Confirm the hero and navigation are unchanged at every width.
 3. Tab through the widget. Focus indicators are visible and link text says where each link goes.
 4. Confirm the updates area is announced as a named region, taking its name from the visible heading.
-5. Confirm type labels are readable without relying on colour alone.
+5. Confirm type labels are readable without relying on color alone.
 
 **Passes when**: the widget is usable at any width, by keyboard, and with assistive technology.
 

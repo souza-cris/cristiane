@@ -85,4 +85,4 @@ Six questions had to be settled before design. All are resolved; none remain mar
 
 - *Reusing `description` on both surfaces* — no new field, but the home page inherits whatever length the research description happens to be, which is exactly the layout risk feature 006's edge cases warn about. Rejected.
 - *Truncating `description` to a fixed length* — automatic and needs no new field, but it cuts sentences mid-clause and produces awkward text on a landing page. Rejected; truncation is a poor substitute for the author's own summary.
-- *Making `summary` required* — guarantees a good home line, but forces a second piece of writing before the research page can go live at all. Rejected in favour of optional-with-fallback.
+- *Making `summary` required* — guarantees a good home line, but forces a second piece of writing before the research page can go live at all. Rejected in favor of optional-with-fallback.

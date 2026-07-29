@@ -136,7 +136,7 @@ does not shift the content beneath it once dismissed.
 - **The site adds an analytics tool later**: it MUST be gated by this consent, not loaded
   alongside it.
 - **A visitor in a jurisdiction with no such requirement**: the notice still appears. This is
-  accepted rather than solved; per-region behaviour is out of scope.
+  accepted rather than solved; per-region behavior is out of scope.
 
 ## Requirements *(mandatory)*
 
@@ -220,7 +220,7 @@ does not shift the content beneath it once dismissed.
 
 ## Out of Scope
 
-- Region-specific behaviour.
+- Region-specific behavior.
 - Writing the cookie policy or any other legal text.
 - Self-hosting the consent scripts. They are served by the provider and update independently;
   pinning a copy would defeat that.

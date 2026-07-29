@@ -34,7 +34,7 @@
 Two items deserve honesty rather than a tick.
 
 **Written before or after the build.** This specification was written from
-shipped behaviour, not ahead of it. Every requirement is therefore known to be
+shipped behavior, not ahead of it. Every requirement is therefore known to be
 satisfiable, which is a weaker guarantee than a spec that constrained the work.
 The value here is a record of *why* the decisions were made, so the next change
 does not undo them by accident — not a claim that the normal flow was followed.

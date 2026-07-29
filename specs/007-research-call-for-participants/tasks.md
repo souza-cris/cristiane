@@ -66,7 +66,7 @@ Static Jekyll site, no application source tree. Tasks touch these files:
 - [X] T008 [US1] In `_includes/study-callout.html`, render `deadline` when present and omit the element entirely when absent, per the empty-field rules in [data-model.md](data-model.md)
 - [X] T009 [US1] In `_includes/study-callout.html`, render the action as `action_label` linking to `action_url` used exactly as written — no scheme inferred, per decision 4 in [research.md](research.md). Add `target="_blank" rel="noopener"` only for `http`/`https` destinations, matching the bookmarks treatment; `mailto:` links get neither
 - [X] T010 [US1] In `research.md`, include the callout with `variant="full"`, positioned after the research interests and before the publications
-- [X] T011 [US1] In `assets/css/style.css`, style the callout so it reads as an invitation rather than another list item — distinct surface, clear heading, prominent action — using the site's existing dark-theme variables and no colour-only meaning
+- [X] T011 [US1] In `assets/css/style.css`, style the callout so it reads as an invitation rather than another list item — distinct surface, clear heading, prominent action — using the site's existing dark-theme variables and no color-only meaning
 - [X] T012 [US1] In `assets/css/style.css`, add a visible focus indicator for the action link consistent with the existing focus treatment
 - [X] T013 [US1] Run quickstart Scenario 1, using temporary sample content with `active: true`, then set `active: false` and clear the sample content again
 

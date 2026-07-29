@@ -131,14 +131,14 @@ regenerated identically if the artwork changes, rather than being unreproducible
 
 ---
 
-## 5. What colour to declare for the browser's own interface
+## 5. What color to declare for the browser's own interface
 
 **Decision**: leave `theme-color` at `#0d1117`, the site's background. Do not change it to
 the brand teal.
 
-**Rationale**: FR-011 requires that the colour the site declares for surrounding browser
+**Rationale**: FR-011 requires that the color the site declares for surrounding browser
 interface match what the visitor actually sees. The page is dark grey; the teal appears only
-inside a 40px mark. Declaring teal would tint a mobile browser's toolbar a colour that
+inside a 40px mark. Declaring teal would tint a mobile browser's toolbar a color that
 appears nowhere on the page behind it, which is the contradiction FR-011 exists to prevent.
 
 **Note on contrast**: this also keeps `#0B7E8A` — which measures 3.93:1 against the site
@@ -149,5 +149,5 @@ no text. See FR-012 and FR-015.
 
 - *Teal `theme-color`* — visually ties the browser chrome to the icon, and is what a brand
   guideline would suggest. Rejected because the page it frames is not teal.
-- *A `prefers-color-scheme` pair of theme colours* — the site has one theme, so there is
+- *A `prefers-color-scheme` pair of theme colors* — the site has one theme, so there is
   nothing to switch between. Rejected as machinery for a choice that does not exist.

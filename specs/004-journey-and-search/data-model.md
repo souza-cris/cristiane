@@ -10,7 +10,7 @@ One stop on the journey track. Stored in `_data/journey.yml` as a list, oldest f
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `category` | Yes | `academia` or `industry`; sets the ring colour |
+| `category` | Yes | `academia` or `industry`; sets the ring color |
 | `label` | Yes | Short line shown on the track — a few words |
 | `org` | Yes | School, company or community |
 | `short` | Yes | 1–3 letters shown in the circle when no logo file is set |

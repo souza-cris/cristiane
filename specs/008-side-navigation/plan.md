@@ -6,7 +6,7 @@
 
 ## Summary
 
-Add a vertical section menu pinned to the right edge and vertically centred, rendered on every page except home. Both it and the top navigation render the same list from `_data/sections.yml` through a shared include, so nothing is lost when the side menu hides and the two can never disagree. It hides below 1000px — the width at which it can no longer sit beside the 44rem content column without overlapping. The layout adds a body class naming the page as home or interior, which also drives dropping the rules above and below the content on home. No script, no new dependency.
+Add a vertical section menu pinned to the right edge and vertically centered, rendered on every page except home. Both it and the top navigation render the same list from `_data/sections.yml` through a shared include, so nothing is lost when the side menu hides and the two can never disagree. It hides below 1000px — the width at which it can no longer sit beside the 44rem content column without overlapping. The layout adds a body class naming the page as home or interior, which also drives dropping the rules above and below the content on home. No script, no new dependency.
 
 ## Technical Context
 
@@ -37,7 +37,7 @@ Add a vertical section menu pinned to the right edge and vertically centred, ren
 | I. Simplicity & Maintainability | ✅ Pass | One data file, one shared include, one layout line, one stylesheet section. `position: fixed` and a media query — no scroll listener, no observer, nothing to keep in sync |
 | II. Content as Data | ✅ Pass | The section list lives in `_data/sections.yml` and both navigations render it through `section-links.html`. The list is written once and appears twice |
 | III. GitHub Pages Compatibility | ✅ Pass | Stock Liquid and CSS; no plugins, no build step |
-| IV. Performance & Accessibility | ✅ Pass | A real `<nav>` with an accessible name and a `<ul>` of ordinary links. `aria-current="page"` marks the section, backed by a border as well as colour, so it is not colour-only. Focus ring preserved. Nothing to download |
+| IV. Performance & Accessibility | ✅ Pass | A real `<nav>` with an accessible name and a `<ul>` of ordinary links. `aria-current="page"` marks the section, backed by a border as well as color, so it is not color-only. Focus ring preserved. Nothing to download |
 | V. Minimal JavaScript | ✅ Pass | None added. Position, visibility and current-page marking are all CSS or build-time Liquid |
 
 **Post-design re-check**: passing on all five.

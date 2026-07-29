@@ -20,7 +20,7 @@ repository root by necessity. Head declarations in `_includes/head.html`.
 
 ## Phase 1: Setup
 
-- [X] T001 Place the author's icon artwork at `assets/img/icon.svg`, using her supplied file as-is — no redrawing, recolouring or re-cropping (FR-002). It is a file of its own, not a copy of the home mark, per decision 3 in [research.md](research.md)
+- [X] T001 Place the author's icon artwork at `assets/img/icon.svg`, using her supplied file as-is — no redrawing, recoloring or re-cropping (FR-002). It is a file of its own, not a copy of the home mark, per decision 3 in [research.md](research.md)
 - [X] T002 Confirm `rsvg-convert` and Pillow are available locally, per the regeneration section of [quickstart.md](quickstart.md). Neither is a site dependency — they author the raster files and are not needed to build or serve
 
 **Checkpoint**: the source artwork is in the repository; nothing is declared yet.
@@ -31,13 +31,13 @@ repository root by necessity. Head declarations in `_includes/head.html`.
 
 - [X] T003 Generate `assets/img/apple-touch-icon.png` at 180×180 from `assets/img/icon.svg`, flattened to RGB so it carries no alpha — iOS composites on black and would otherwise show black corners (see data-model validation rules)
 - [X] T004 Generate `favicon.ico` carrying 32×32 and 16×16, written to the **repository root** so it publishes to `/cristiane/favicon.ico`. It must not live under `assets/`, or a bare-root request stops resolving
-- [X] T005 Confirm no generated file carries an embedded colour profile, and that both are small — the `.ico` around 2KB, the PNG a few KB
+- [X] T005 Confirm no generated file carries an embedded color profile, and that both are small — the `.ico` around 2KB, the PNG a few KB
 
 **Checkpoint**: all three files exist and are committed. Still nothing declared, so no browser uses them yet.
 
 ---
 
-## Phase 3: User Story 1 — Recognise the site among many open tabs (Priority: P1) 🎯 MVP
+## Phase 3: User Story 1 — Recognize the site among many open tabs (Priority: P1) 🎯 MVP
 
 **Goal**: Every page offers the mark to the browser, so tabs, bookmarks and history stop showing the blank placeholder.
 
@@ -85,8 +85,8 @@ repository root by necessity. Head declarations in `_includes/head.html`.
 
 Delivered before this plan existed, in response to a direct request. Recorded for completeness.
 
-- [X] T017 [US4] Add the mark at `assets/img/logo.svg` and render it in `_layouts/default.html`, centred above the content on the home page only
-- [X] T018 [US4] Style `.site-logo` in `assets/css/style.css` at 2.5rem, centred
+- [X] T017 [US4] Add the mark at `assets/img/logo.svg` and render it in `_layouts/default.html`, centered above the content on the home page only
+- [X] T018 [US4] Style `.site-logo` in `assets/css/style.css` at 2.5rem, centered
 - [X] T019 [US4] Make it decorative — empty `alt`, `aria-hidden`, not a link — and emit it only on home rather than hiding it elsewhere with CSS
 - [X] T020 [US4] Verify it renders on home and on no other page, including 404
 

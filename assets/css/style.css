@@ -815,7 +815,7 @@ a.journey__detail-org:hover {
 
 /* ---- Site mark ---- */
 
-/* Centred above the content on every page. Sits between the nav and the
+/* Centered above the content on every page. Sits between the nav and the
    content column, so it needs its own centring rather than the container's. */
 .site-logo {
   display: block;

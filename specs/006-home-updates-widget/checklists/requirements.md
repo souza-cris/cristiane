@@ -38,7 +38,7 @@
 - FR-013 named the mechanism ("a reusable include"). Rewritten as "defined once and reusable rather than hardcoded into the home page".
 - FR-015 named GitHub Pages. Rewritten as "the site's existing static hosting".
 - SC-006 named the toolchain. Rewritten as "builds without errors and loads successfully when previewed locally".
-- The deadline edge case explained the limitation via GitHub Pages' rebuild trigger. Restated as behaviour.
+- The deadline edge case explained the limitation via GitHub Pages' rebuild trigger. Restated as behavior.
 - An Assumption specified the date format as `YYYY-MM-DD`. Restated as "the site's existing year-month-day convention", since the format is a content convention rather than a requirement of this feature.
 
 **Iteration 2 — the one open clarification was answered by the author:**

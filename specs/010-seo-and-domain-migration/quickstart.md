@@ -132,7 +132,7 @@ That is the whole edit. Everything absolute derives from those two values.
 2. Confirm `/sitemap.xml` and `/robots.txt` resolve at the new domain and name new addresses
    only.
 3. **Request each old address recorded earlier.** Note what actually happens — a redirect to
-   the new address, or an error. This is unverified behaviour; see decision 4 in
+   the new address, or an error. This is unverified behavior; see decision 4 in
    [research.md](research.md).
 4. If old addresses redirect: FR-020 is satisfied.
 5. If they do not: use Search Console's change-of-address notification, and record the

@@ -22,7 +22,7 @@ One featured item in the widget. A list entry in `_data/updates.yml`. This featu
 
 - **Visibility**: an entry renders unless it carries an explicit `active: false`. A missing `active` key means visible — see decision 4 in [research.md](research.md).
 - **Ordering**: visible entries sort by `date`, newest first; entries with `pinned: true` are promoted ahead of the rest, keeping date order within each group.
-- **Limit**: after ordering, only the first `updates_limit` entries render. Entries beyond it are silently dropped — that is the intended "old entries fall off" behaviour, not a truncation error.
+- **Limit**: after ordering, only the first `updates_limit` entries render. Entries beyond it are silently dropped — that is the intended "old entries fall off" behavior, not a truncation error.
 - **Links**: a `link` containing `://` is external and opens in a new tab with `rel="noopener"`. Anything else is an internal path and is passed through `relative_url` so it resolves under the site's base path. No link renders the title as plain text.
 - **Empty optionals** render nothing at all — no empty blurb element, no empty link.
 - **Unknown `type`** renders its own string as the label with the base pill style. It never fails the build.

@@ -7,7 +7,7 @@
 # ---------------------------------------------------------------------------
 
 - type: publication        # Also the visible label. Any word works.
-                           # publication, story and bookmark get their own colour.
+                           # publication, story and bookmark get their own color.
 
   title: "What it is called"
 

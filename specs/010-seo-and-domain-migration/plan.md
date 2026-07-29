@@ -24,7 +24,7 @@ Phase 2 changes those two values once the domain exists. Nothing else moves.
 
 Two findings from research change the work: the deploy workflow currently forces the base
 path on the command line, which would have silently defeated the migration; and GitHub's
-behaviour for old project addresses after a custom domain is set is undocumented, so the plan
+behavior for old project addresses after a custom domain is set is undocumented, so the plan
 leans on the canonical address rather than on an assumed redirect.
 
 ## Technical Context

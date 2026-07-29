@@ -126,12 +126,12 @@ Badge circles are a consistent, legible size across the track. The sense of a jo
 > **Amended (after implementation)**: the author subsequently removed the words
 > "academia" and "industry" from each stop — both the pill on the track and the
 > line in the expanded detail. FR-013 still holds: the badge ring style (solid
-> for academia, dashed for industry) remains the non-colour cue, and the legend
+> for academia, dashed for industry) remains the non-color cue, and the legend
 > above the track still spells both words out with the matching ring styles, so
 > the key is present once instead of on every stop.
 >
 > The same pass gave each milestone an optional `url`. When it is set the badge
-> logo becomes a link to that organisation's own site, and the organisation name
+> logo becomes a link to that organization's own site, and the organization name
 > in the expanded detail links to it too. Both open in a new tab. A link inside
 > a `<summary>` handles its own click, so following the logo does not also
 > toggle the stop — the disclosure still needs no script, and FR-015 holds
@@ -139,7 +139,7 @@ Badge circles are a consistent, legible size across the track. The sense of a jo
 
 ### Key Entities
 
-- **Milestone**: one stop on the journey track. Existing attributes: category, label, organization, logo, flag, place, title, note. New optional attribute: period (a year or range shown only in the expanded detail). Later addition: `url`, an optional link to the organisation's own site.
+- **Milestone**: one stop on the journey track. Existing attributes: category, label, organization, logo, flag, place, title, note. New optional attribute: period (a year or range shown only in the expanded detail). Later addition: `url`, an optional link to the organization's own site.
 - **Journey framing**: the throughline sentence and the geography line shown above the track, held as content or data.
 
 ## Success Criteria *(mandatory)*
@@ -157,10 +157,10 @@ Badge circles are a consistent, legible size across the track. The sense of a jo
 - The full title and description text already recorded for each milestone is the author's to correct and is treated as the source for the detail view; no new descriptions are invented.
 - The Chevron milestone has an intentionally empty description; the detail view is expected to handle that gracefully rather than prompt for invented content.
 > **Superseded (after implementation)**: the author subsequently chose to show a
-> year range on the always-visible track, replacing the organisation name under
+> year range on the always-visible track, replacing the organization name under
 > each label. FR-010 and User Story 4 below — which confine time to the expanded
 > detail and keep the collapsed track year-free — no longer describe the built
-> page. The organisation name moved into the expanded detail so it was not lost.
+> page. The organization name moved into the expanded detail so it was not lost.
 > The `period` field designed here is what carries the years; the mechanism was
 > reused rather than replaced.
 

@@ -97,9 +97,14 @@ Write your story here in Markdown.
 ```yaml
 description: "One sentence, 140-160 characters, plain text."
 image: "/assets/og/something.png"
+image_alt: "What the picture shows, for someone who cannot see it."
+image_width: 1200
+image_height: 630
 ```
 
-`description` is what a search engine shows and what a shared link's preview card says. Leave it out and a story falls back to its `tldr`, and anything else to the site description — so it is never blank, and no existing story needs editing. `image` overrides the default preview picture for that page.
+`description` is what a search engine shows and what a shared link's preview card says. Leave it out and a story falls back to its `tldr` cut to 160 characters — never blank, but a sentence written to open a story reads badly chopped, so the checker points it out.
+
+`image` overrides the default preview picture. If you set it, set the other three too: the alt text is read aloud where the preview appears, and the pixel size lets a service lay out the card before the picture arrives. The checker warns if you forget.
 
 **Adding pictures.** Put them in `assets/img/stories/<story-slug>/`, resized to about 1200 pixels wide before committing. Then in the story:
 
@@ -146,7 +151,7 @@ Current types: `paper`, `report`, `project`, `tool`, `course`, `organization`, `
 Add a block to `_data/journey.yml`, positioned where it belongs in the story — the file's order is the page's order, oldest first.
 
 ```yaml
-- category: industry       # or: academia — sets the badge ring colour and style
+- category: industry       # or: academia — sets the badge ring color and style
   label: "Short label"     # what shows on the track
   org: "Organization"      # shown when the stop is opened
   short: "OR"              # initials, shown until a logo is set
@@ -161,8 +166,8 @@ Add a block to `_data/journey.yml`, positioned where it belongs in the story —
 
 Three things to know:
 
-- **Select a stop to open it.** `title` and `note` are hidden until then, and only one stop is open at a time. That is the browser's own behaviour, not a script.
-- **The words "academia" and "industry" never appear on a stop.** The category shows as the badge's ring colour and style, explained once by the legend above the track.
+- **Select a stop to open it.** `title` and `note` are hidden until then, and only one stop is open at a time. That is the browser's own behavior, not a script.
+- **The words "academia" and "industry" never appear on a stop.** The category shows as the badge's ring color and style, explained once by the legend above the track.
 - **Logos are committed files, sized small.** Drop a new one in `assets/img/logos/` and resize it first — the badge renders it at about 42 pixels, so a 200-pixel image is already generous.
 
 ### Publication
@@ -265,7 +270,7 @@ Both steps are needed because Jekyll cannot generate pages from data files witho
 ```
 _config.yml                # Site settings, social links, post permalink
 _layouts/                  # default, page, story
-_includes/                 # head, nav, side-nav, section-links, footer
+_includes/                 # head, structured-data, nav, side-nav, section-links, footer
                            # story-filters, story-list
                            # bookmark-filters, bookmark-list
                            # search-box, journey-timeline
@@ -280,10 +285,13 @@ _data/bookmark_types.yml   # Bookmark filter slugs
 _data/research.yml         # Research interests and publications
 _data/updates.yml          # Home page "what's new" entries
 _data/study.yml            # Call for participants (one study, one switch)
-stories/                   # One thin page per story filter
-bookmarks/                 # One thin page per bookmark filter
+_data/profile.yml          # Name, role, affiliation, ORCID — for search engines
+stories/                   # One thin page per story filter, titled for its term
+bookmarks/                 # One thin page per bookmark filter, titled for its term
 assets/css/style.css       # All styles, plain CSS
 assets/js/search.js        # List filtering, the site's only script
+feed.xml                   # Stories feed (Atom), hand-written — no plugin
+sitemap.xml                # Page list for search engines
 favicon.ico                # Browser tab icon (root on purpose — see below)
 assets/img/icon.svg        # Site icon source; the .ico and touch icon come from it
 assets/img/apple-touch-icon.png  # iOS home screen tile, 180x180

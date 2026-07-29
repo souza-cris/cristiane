@@ -10,9 +10,9 @@ Five questions had to be settled before design. All are resolved; none remain ma
 
 **Decision**: Use `<details>` with a shared `name` attribute — `<details name="journey">` on every stop.
 
-**Rationale**: The `name` attribute groups disclosures so that opening one closes the others, which is exactly FR-003, with no script at all. `<details>`/`<summary>` is also keyboard-operable and announced by screen readers without any ARIA authoring, which serves FR-002 and Principle IV directly. MDN confirms the behaviour: "This attribute enables multiple `<details>` elements to be connected, with only one open at a time. This allows developers to easily create UI features such as accordions without scripting."
+**Rationale**: The `name` attribute groups disclosures so that opening one closes the others, which is exactly FR-003, with no script at all. `<details>`/`<summary>` is also keyboard-operable and announced by screen readers without any ARIA authoring, which serves FR-002 and Principle IV directly. MDN confirms the behavior: "This attribute enables multiple `<details>` elements to be connected, with only one open at a time. This allows developers to easily create UI features such as accordions without scripting."
 
-**Degradation**: `<details>` itself has been baseline since January 2020; the `name` attribute is newer. A browser that does not recognise it ignores it, and each stop then opens independently. The page still works — the only loss is exclusivity, which is a preference, not a function. Nothing breaks and no fallback script is warranted.
+**Degradation**: `<details>` itself has been baseline since January 2020; the `name` attribute is newer. A browser that does not recognize it ignores it, and each stop then opens independently. The page still works — the only loss is exclusivity, which is a preference, not a function. Nothing breaks and no fallback script is warranted.
 
 **Alternatives considered**:
 
@@ -50,11 +50,11 @@ Five questions had to be settled before design. All are resolved; none remain ma
 
 ---
 
-## 4. Distinguishing academia from industry without colour
+## 4. Distinguishing academia from industry without color
 
-**Decision**: Two cues in addition to colour — the badge ring style differs (solid for academia, dashed for industry), and the category is named in words inside the expanded detail. The legend carries the same ring styles.
+**Decision**: Two cues in addition to color — the badge ring style differs (solid for academia, dashed for industry), and the category is named in words inside the expanded detail. The legend carries the same ring styles.
 
-**Rationale**: FR-013 asks for more than colour. Ring style is visible at a glance on the collapsed track, where the distinction actually matters, and it costs one CSS declaration. The named category in the detail gives an unambiguous text answer for anyone who wants certainty, and it is read by screen readers.
+**Rationale**: FR-013 asks for more than color. Ring style is visible at a glance on the collapsed track, where the distinction actually matters, and it costs one CSS declaration. The named category in the detail gives an unambiguous text answer for anyone who wants certainty, and it is read by screen readers.
 
 > **Amended (after implementation)**: the per-stop category word was removed from
 > both surfaces — the pill that had been added to the track, and the line in the

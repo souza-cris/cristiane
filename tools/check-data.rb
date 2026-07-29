@@ -149,7 +149,7 @@ def check_journey
     category = entry['category']
     if category && !%w[academia industry].include?(category)
       err(file, where, "category #{category.inspect} is not academia or industry",
-          'the badge ring colour and style come from this')
+          'the badge ring color and style come from this')
     end
 
     logo = entry['logo']
@@ -268,6 +268,34 @@ def check_posts
     check_required(rel, 'front matter', front, %w[layout title date tldr])
     check_optional_prose(rel, 'front matter', front)
 
+    # A story with no `description` still gets one — head.html falls back to the
+    # tldr, truncated to 160 characters. That is a sentence written to open a
+    # story being cut mid-word in a search result, which is a silent downgrade
+    # rather than a failure. Say so, so it is a choice and not an accident.
+    if front['description'].to_s.strip.empty?
+      warn_at(rel, 'front matter', '`description` is missing',
+              'search results and link previews will use the tldr cut to 160 characters')
+    elsif front['description'].to_s.length > 160
+      warn_at(rel, 'front matter',
+              "`description` is #{front['description'].to_s.length} characters",
+              'over 160 and a search engine truncates it — write it to fit')
+    end
+
+    # An `image` is what a link preview shows. Its size and alt text travel with
+    # it, so they are checked together: a card cannot be laid out without the
+    # dimensions, and the alt text is what a screen reader announces.
+    if front['image']
+      file = File.join(ROOT, front['image'].to_s.sub(%r{\A/}, ''))
+      err(rel, 'front matter', "image #{front['image']} does not exist",
+          'the path is from the site root, e.g. /assets/img/stories/slug/pic.jpg') unless File.exist?(file)
+      %w[image_alt image_width image_height].each do |f|
+        next unless front[f].to_s.strip.empty?
+
+        warn_at(rel, 'front matter', "`image` is set but `#{f}` is missing",
+                'a link preview needs the alt text and the pixel size of its image')
+      end
+    end
+
     keywords = front['keywords']
     if keywords.nil?
       warn_at(rel, 'front matter', '`keywords` is missing',
@@ -353,8 +381,55 @@ CHECKS = {
   '_posts' => method(:check_posts)
 }.freeze
 
+# --------------------------------------------------------------- built site
+#
+# Everything above reads the source files. This one reads _site, so it only runs
+# when asked with --links, and only after a build. It is kept out of the default
+# run and out of the pre-commit hook because the hook must stay fast and must
+# not depend on _site being current — a stale build would report phantom
+# problems and block a good commit.
+#
+# What it proves: every internal link on the site lands on a file that exists,
+# in one hop. A link to /journey (no slash) resolves only via a redirect, which
+# costs a visitor a round trip and splits a search engine's view of the page.
+def check_links
+  site = File.join(ROOT, '_site')
+  unless Dir.exist?(site)
+    warn_at('_site', 'link check', 'no built site to check',
+            'run `bundle exec jekyll build` first, then re-run with --links')
+    return
+  end
+
+  Dir[File.join(site, '**', '*.html')].sort.each do |path|
+    rel = path.sub("#{site}/", '')
+    File.read(path).scan(/(?:href|src)="([^"]+)"/).flatten.uniq.each do |link|
+      # Only ours: skip other hosts, mail links, in-page anchors and data URIs.
+      next if link.start_with?('http', 'mailto:', '#', 'data:', '//')
+
+      target = link.split('#').first.split('?').first.to_s
+      next if target.empty?
+
+      # A directory address is served by the index.html inside it.
+      # File.file?, not File.exist? — a link to /journey with no trailing slash
+      # matches the _site/journey DIRECTORY, and File.exist? says true for a
+      # directory. That made this check pass every redirect it exists to catch.
+      candidate = target.end_with?('/') ? File.join(site, target, 'index.html') : File.join(site, target)
+      next if File.file?(candidate)
+
+      # Exists only with a slash appended → reachable, but via a redirect.
+      if File.file?(File.join(site, target, 'index.html'))
+        err(rel, "link to #{target}", 'resolves only after a redirect',
+            "write it as #{target}/ — with the trailing slash — so it lands in one hop")
+      else
+        err(rel, "link to #{target}", 'goes nowhere', 'no file is built at that address')
+      end
+    end
+  end
+end
+
 requested = ARGV.reject { |a| a.start_with?('-') }
 scoped = !requested.empty?
+check_links if ARGV.include?('--links')
 
 if scoped
   ran = CHECKS.select { |owned, _| requested.any? { |f| f.include?(owned) } }

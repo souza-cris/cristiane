@@ -49,8 +49,8 @@ The contract between `_layouts/default.html` and `_includes/side-nav.html`: what
 **Accessibility**
 
 - Reachable in the tab order in document order, with the site's standard focus ring.
-- The current link is distinguished by a right border as well as colour, so the state does not depend on colour perception.
-- Labelled "Section navigation", so assistive technology can tell it apart from the top navigation.
+- The current link is distinguished by a right border as well as color, so the state does not depend on color perception.
+- Labeled "Section navigation", so assistive technology can tell it apart from the top navigation.
 
 ---
 

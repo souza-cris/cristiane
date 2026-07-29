@@ -79,6 +79,6 @@ practice.
 - Editing `assets/img/icon.svg` without regenerating the `.ico` and the PNG — the tab would
   show new artwork while the home screen showed old.
 - Adding a web manifest without revisiting the spec — it changes which icon Android uses and
-  brings install behaviour the spec puts out of scope.
+  brings install behavior the spec puts out of scope.
 - Assuming `assets/img/logo.svg` (the home page mark) tracks this artwork. It is a separate
   file by design and does not follow.

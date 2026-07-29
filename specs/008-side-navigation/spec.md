@@ -7,7 +7,7 @@
 **Status**: Implemented
 
 **Note on sequence**: this feature was built before it was specified. The spec is
-written from the shipped behaviour rather than ahead of it, so it records what
+written from the shipped behavior rather than ahead of it, so it records what
 exists and why. Everything here is verifiable against the live site — nothing is
 aspirational. Future changes to the side navigation go through the normal flow.
 
@@ -52,7 +52,7 @@ A visitor landing on the home page sees the introduction with no menu alongside 
 
 A visitor on a phone or a narrow window sees only the existing top navigation. The side menu does not appear, does not overlap the text, and does not push the content sideways.
 
-**Why this priority**: A menu pinned to the edge of a narrow screen would sit on top of the words. The top navigation already covers small screens, so the correct behaviour is to yield entirely.
+**Why this priority**: A menu pinned to the edge of a narrow screen would sit on top of the words. The top navigation already covers small screens, so the correct behavior is to yield entirely.
 
 **Independent Test**: Narrow the window below the point where the content column and the menu can both fit, and confirm the side menu disappears with no layout shift or horizontal scrollbar.
 
@@ -104,7 +104,7 @@ A visitor on a phone or a narrow window sees only the existing top navigation. T
 - **SC-001**: From the bottom of the longest page on the site, a visitor can reach any other section without scrolling up.
 - **SC-002**: The side navigation is present on all six non-home pages and absent on home.
 - **SC-003**: At no viewport width does the page scroll horizontally or the menu overlap the content.
-- **SC-004**: Every link is reachable by keyboard with a visible focus ring, and the current section is conveyed by more than colour.
+- **SC-004**: Every link is reachable by keyboard with a visible focus ring, and the current section is conveyed by more than color.
 - **SC-005**: The site's JavaScript footprint is unchanged — the list search remains the only script.
 
 ## Assumptions

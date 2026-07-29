@@ -13,7 +13,7 @@ Search Console and submitting the sitemap, which needs her account.
 the site was ever indexed, there was nothing to move. User Story 4 and FR-019 to FR-022 stand
 superseded rather than delivered.
 
-**The two phases have collapsed into one.** Phase 1 (optimise on the GitHub Pages address)
+**The two phases have collapsed into one.** Phase 1 (optimize on the GitHub Pages address)
 and Phase 2 (migrate to a domain) existed only because no domain existed. It does now, and
 the site has never been indexed — no sitemap, no robots file, nothing submitted. There is
 therefore nothing to migrate: connect the domain first, and every address is
@@ -322,7 +322,7 @@ identity, article and publication descriptions are present and error-free.
   and a publication.
 - **SC-007**: On every page, the authoritative address, the preview address and the
   machine-readable address are identical.
-- **SC-008**: An automated site audit scores at least 95 on its search-optimisation measure.
+- **SC-008**: An automated site audit scores at least 95 on its search-optimization measure.
 - **SC-009**: The site's pages are present in a search engine's index within a month of
   submission.
 - **SC-010**: After the migration, every address that worked before leads to its new

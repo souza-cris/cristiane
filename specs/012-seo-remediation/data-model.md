@@ -116,4 +116,4 @@ site.posts ──▶ the Atom feed, and the sitemap
 ## Out of this model
 
 The analytics entities — property, data stream, consent state — belong to feature 011 and are
-not modelled here. See research decision 8.
+not modeled here. See research decision 8.
