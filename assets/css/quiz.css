@@ -1,0 +1,502 @@
+/* ---------------------------------------------------------------------------
+   Styles for the live review game on /teaching/ and /teaching/play/.
+
+   This is a separate stylesheet, not part of style.css, on purpose. It is
+   about 400 lines that exactly two pages use, and style.css is loaded by every
+   page on the site. The two pages that need this link it themselves.
+
+   Two surfaces are styled here:
+     .quiz-host  the screen at the front of the room, read from a distance
+     .quiz-play  a student's phone, thumbs only
+
+   Colors: the four option colors carry a letter and a shape as well, so the
+   page never asks anyone to tell options apart by color alone.
+--------------------------------------------------------------------------- */
+
+.quiz {
+  --opt-a: #d64545;
+  --opt-b: #3f7fc1;
+  --opt-c: #d99a1f;
+  --opt-d: #3f8f56;
+  --good: #3fb950;
+  --bad: #f85149;
+}
+
+/* A screen is one step of the game. Only one is ever visible; the script
+   toggles the `hidden` attribute. The !important is needed because the
+   display rules below would otherwise beat the browser's own hiding. */
+.quiz-screen[hidden] {
+  display: none !important;
+}
+
+/* ---- Host: the stage ---------------------------------------------------- */
+
+/* The site column is 44rem, which is right for reading and far too narrow for
+   a projector. This is the same full-bleed escape the journey track uses:
+   pull out to the viewport edges, then re-center at a width that suits a
+   room. body has overflow-x: hidden, so it cannot cause sideways scroll. */
+.quiz-host {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: 0 1rem;
+}
+
+.quiz-host__inner {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+/* Filling the screen for a projection. The stage keeps its own background
+   because in fullscreen it is the only thing on the display. */
+@media (min-width: 1000px) and (max-width: 1300px) {
+  .quiz-host__inner {
+    max-width: calc(100vw - 15rem);
+  }
+}
+
+.quiz-host:fullscreen {
+  background: var(--bg);
+  overflow-y: auto;
+  padding: 2rem 1rem;
+}
+
+.quiz-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.quiz-bar__label {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.quiz-btn {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 0.6rem 1.25rem;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.quiz-btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.quiz-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.quiz-btn--primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.quiz-btn--primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.quiz-btn--quiet {
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.quiz-btn--quiet:hover:not(:disabled) {
+  background: var(--surface);
+  color: var(--text);
+}
+
+/* ---- Host: lobby -------------------------------------------------------- */
+
+.quiz-lobby {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .quiz-lobby {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quiz-join__step {
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.quiz-join__url {
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 3vw, 1.9rem);
+  color: var(--text);
+  word-break: break-all;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-code {
+  font-family: var(--font-mono);
+  font-size: clamp(3rem, 12vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.1;
+  color: var(--accent);
+}
+
+/* The QR sits on white. A dark-on-dark QR does not scan. */
+.quiz-qr {
+  background: #fff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  width: 15rem;
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quiz-qr svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.quiz-players {
+  list-style: none;
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.quiz-player {
+  font-family: var(--font-mono);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  animation: quiz-pop 0.25s ease-out;
+}
+
+@keyframes quiz-pop {
+  from { transform: scale(0.6); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-player { animation: none; }
+}
+
+/* ---- Host: a question --------------------------------------------------- */
+
+.quiz-q__meta {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-q__prompt {
+  font-family: var(--font-sans);
+  font-size: clamp(1.4rem, 3.4vw, 2.5rem);
+  line-height: 1.3;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-timer {
+  height: 0.6rem;
+  background: var(--surface);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-timer__fill {
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  transition: width 0.25s linear;
+}
+
+.quiz-timer__fill.is-low {
+  background: var(--bad);
+}
+
+.quiz-counts {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+@media (max-width: 600px) {
+  .quiz-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quiz-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-align: left;
+  padding: 1.1rem 1.25rem;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: clamp(1rem, 1.9vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #fff;
+  cursor: default;
+}
+
+.quiz-opt--0 { background: var(--opt-a); }
+.quiz-opt--1 { background: var(--opt-b); }
+.quiz-opt--2 { background: var(--opt-c); color: #11161c; }
+.quiz-opt--3 { background: var(--opt-d); }
+.quiz-opt--4 { background: #7d5ba6; }
+
+/* The letter badge. It doubles as the shape cue, which is what makes the
+   options distinguishable without color. */
+.quiz-opt__key {
+  flex: none;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.28);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.quiz-opt--2 .quiz-opt__key {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* After the reveal: the right answer stays lit, the rest step back. */
+.quiz-opt.is-dim {
+  opacity: 0.3;
+}
+
+.quiz-opt.is-key {
+  outline: 4px solid var(--good);
+  outline-offset: 3px;
+}
+
+.quiz-opt__tally {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.quiz-hint {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--good);
+  background: var(--surface);
+  border-radius: 0 8px 8px 0;
+  font-size: 1.05rem;
+}
+
+/* ---- Ranking ------------------------------------------------------------ */
+
+.quiz-rank__title {
+  font-family: var(--font-mono);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 0.25rem;
+}
+
+.quiz-rank__sub {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.quiz-rank__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz-rank__row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+}
+
+.quiz-rank__row:nth-child(1) { border-color: #d9a441; }
+.quiz-rank__row:nth-child(2) { border-color: #9aa4ad; }
+.quiz-rank__row:nth-child(3) { border-color: #b3743a; }
+
+.quiz-rank__pos {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  min-width: 2.5ch;
+}
+
+.quiz-rank__name {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.quiz-rank__gain {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  color: var(--good);
+  font-size: 0.85em;
+}
+
+/* Nobody scored in that section: green would read as a gain. */
+.quiz-rank__gain.is-zero {
+  color: var(--text-muted);
+}
+
+.quiz-rank__score {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  min-width: 6ch;
+  text-align: right;
+}
+
+/* ---- Player: the phone -------------------------------------------------- */
+
+.quiz-play__screen {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.quiz-play__screen .quiz-options {
+  text-align: left;
+}
+
+.quiz-play__big {
+  font-family: var(--font-mono);
+  font-size: clamp(1.6rem, 8vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.quiz-play__big.is-good { color: var(--good); }
+.quiz-play__big.is-bad { color: var(--bad); }
+
+.quiz-play__note {
+  color: var(--text-muted);
+}
+
+.quiz-play__score {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.quiz-play .quiz-opt {
+  cursor: pointer;
+  width: 100%;
+  min-height: 4.5rem;
+}
+
+.quiz-play .quiz-opt:disabled {
+  cursor: not-allowed;
+}
+
+.quiz-play .quiz-opt:focus-visible {
+  outline: 3px solid var(--text);
+  outline-offset: 3px;
+}
+
+.quiz-play .quiz-opt.is-picked {
+  outline: 4px solid var(--text);
+  outline-offset: 3px;
+}
+
+/* ---- Forms and messages ------------------------------------------------- */
+
+.quiz-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 22rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.quiz-input {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  width: 100%;
+}
+
+.quiz-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.quiz-note {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.quiz-error {
+  border-left: 3px solid var(--bad);
+  background: var(--surface);
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.quiz-error__title {
+  font-weight: 700;
+  color: var(--bad);
+  margin-bottom: 0.35rem;
+}
+
+/* Read by screen readers only. style.css has no such utility of its own. */
+.quiz-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
