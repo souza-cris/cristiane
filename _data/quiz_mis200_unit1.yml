@@ -1,0 +1,311 @@
+# MIS200-322 Unit 1 Review Quiz, as played on /teaching/.
+#
+# The wording, the options and the answer key are transcribed from the
+# Microsoft Forms quiz of the same name (Sep 15, 2026). If the Forms version
+# changes, change it here too. Nothing on this page reads from Forms.
+#
+# Each entry:
+#   prompt   the question, written as a folded block so quotes and apostrophes
+#            need no escaping
+#   options  the choices, IN THE ORDER THEY APPEAR IN FORMS. The key below is
+#            an index into this list, so reordering options silently changes
+#            the right answer. Reorder nothing without changing `answer`
+#   answer   which option is correct, counting from 0. The first option is 0,
+#            the second is 1, and so on. Set it to `poll` for a question with
+#            no right answer: the game then scores nobody and just shows how
+#            the room voted
+#   hint     the one-line explanation shown on the big screen after the answer
+#            is revealed. Optional. These are the answer hints already written
+#            into the Forms quiz
+#
+# seconds_per_question is the clock every question runs on. Points are speed
+# weighted, so a fast correct answer is worth more than a slow one: the Forms
+# quiz's flat 0.5 points per question does not apply here.
+title: "MIS200-322 Unit 1 Review"
+course: "MIS200-322"
+seconds_per_question: 20
+
+sections:
+  - name: "Module 1"
+    questions:
+      - prompt: >-
+          A hospital hires someone whose job is to study patient-flow data and
+          recommend schedule changes. This person is best described as:
+        options:
+          - "A knowledge worker"
+          - "A traditional workers"
+          - "An operational worker"
+          - "A technical worker"
+        answer: 0
+        hint: >-
+          Their value comes from analyzing and applying information, not from
+          producing something tangible. Success is measured by the impact of
+          the insight.
+
+      - prompt: >-
+          A university library installs a self-service kiosk. Students scan
+          their own ID and check out books themselves, and staff step in when a
+          book will not scan. Which of the following best identifies the
+          HARDWARE component of this information system?
+        options:
+          - "The checkout application that records the loan"
+          - "The ID scanner and the receipt printer"
+          - "The students and staff who use the system"
+          - "The catalog records stored by the system"
+        answer: 1
+        hint: >-
+          Hardware is the physical device. The application is software, the
+          records are data, and the people are people.
+
+      - prompt: >-
+          Which of the following IS the "root" of any information system?
+        options:
+          - "The people who operate it day to day"
+          - "The data it collects and analyzes"
+          - "The hardware it runs on"
+          - "The procedures it enforces"
+        answer: 1
+        hint: >-
+          Every component matters, but data is what the system exists to turn
+          into competitive advantage.
+
+      - prompt: >-
+          A rural county has no broadband provider, so residents cannot
+          complete online job applications that people in the nearest city
+          finish in minutes. This gap is called:
+        options:
+          - "Digital density"
+          - "The Internet of Things"
+          - "The digital divide"
+          - "A network effect"
+        answer: 2
+        hint: >-
+          The advantage those with access to information systems hold over
+          those without it. It is about access, not ability.
+
+      - prompt: >-
+          A used-textbook app attracts new students because thousands at their
+          own school already list and buy books on it. Existing users
+          attracting more users is an example of:
+        options:
+          - "The digital divide"
+          - "Network effects"
+          - "Disintermediation"
+          - "Digital density"
+        answer: 1
+        hint: >-
+          The value of a network rises as more members join it, which is what
+          makes growth compound.
+
+  - name: "Module 2"
+    questions:
+      - prompt: >-
+          A hospital needs a particular patented drug. One pharmaceutical
+          company holds the patent and there is no generic version. Within
+          Porter's framework, this most directly gives the drug company:
+        options:
+          - "High buyer power"
+          - "High threat of new entrants"
+          - "High competitive rivalry"
+          - "High supplier power"
+        answer: 3
+        hint: >-
+          The supplier is the only source, so it sets the price. Supplier power
+          is high when the buyer has nowhere else to go.
+
+      - prompt: >-
+          Budget airlines flying the same routes constantly undercut each
+          other's fares and run heavy advertising campaigns. This is most
+          directly an example of the industry having:
+        options:
+          - "High supplier power"
+          - "High threat of substitution"
+          - "High competitive rivalry"
+          - "Low buyer power"
+        answer: 2
+        hint: >-
+          Low prices and high-impact marketing are the signs of intense rivalry
+          among existing firms.
+
+      - prompt: >-
+          A warehouse associate scans a pallet to confirm it arrived and update
+          the stock count for that item, and the system records it immediately.
+          This is IS implemented at which level?
+        options:
+          - "Tactical"
+          - "Strategic"
+          - "Operational"
+        answer: 2
+        hint: >-
+          One task, right now, well defined. That is the operational level,
+          which is exactly what makes it easy to automate.
+
+      - prompt: >-
+          A store manager reviews last quarter's foot-traffic report to decide
+          which two weekend hours to add staff. This is IS implementation at
+          the ______ level of a company.
+        options:
+          - "Operational"
+          - "Tactical"
+          - "Strategic"
+        answer: 1
+        hint: >-
+          A middle manager reading a pattern over time to allocate resources.
+
+      - prompt: >-
+          Cloud hosting means a new software company no longer has to buy
+          servers, so it can launch a competing product with very little
+          capital. Such a market would be described as having:
+        options:
+          - "Low competitive rivalry"
+          - "High threat of new entrants"
+          - "High supplier power"
+          - "Long Tail"
+        answer: 1
+        hint: >-
+          Anything that makes entry cheaper or faster raises the threat of new
+          entry.
+
+  - name: "Module 3"
+    questions:
+      - prompt: >-
+          Rover is a platform where dog owners find local people to board their
+          pets. When more owners sign up, the platform becomes more valuable to
+          the sitters on the other side, because more bookings are available to
+          them. This is an example of:
+        options:
+          - "Direct Network Effects"
+          - "Disintermediation"
+          - "Platform Chains"
+          - "Indirect Network Effects"
+        answer: 3
+        hint: >-
+          More users on one side create value for the other side. Direct
+          effects would benefit the same side they came from.
+
+      - prompt: >-
+          Spotify lets anyone listen free with ads between songs. Removing the
+          ads and downloading music for offline listening requires Spotify
+          Premium. This is an example of a ______ revenue model.
+        options:
+          - "Freemium"
+          - "Subscription"
+          - "Advertising"
+          - "Transaction"
+        answer: 0
+        hint: >-
+          Basic version free, premium features paid. Low barrier to entry, then
+          upsell.
+
+      - prompt: >-
+          Toast provides the system that lets a restaurant take a card payment
+          at the table. The diner pays, the card network authorizes it, the
+          restaurant receives the money. Toast cooks and sells none of the
+          food, and keeps a percentage of each transaction. Why is Toast a
+          platform company?
+        options:
+          - "It manufactures the payment terminals restaurants use"
+          - "It processes payments faster than a restaurant could on its own"
+          - "It connects restaurants, diners and card networks so transactions can happen, without producing what is sold"
+          - "It operates in many states at once"
+        answer: 2
+        hint: >-
+          A platform connects separate groups so they can transact, and does
+          not produce what is exchanged.
+
+      - prompt: >-
+          A tractor maker used to earn revenue when a machine was sold, and the
+          relationship ended there. Its machines now send performance data
+          back, receive software updates in the field, and the farmer can
+          subscribe to maintenance alerts. What does this most directly allow
+          the company to do?
+        options:
+          - "Stop manufacturing machines entirely"
+          - "Continue earning revenue from a customer long after the initial sale"
+          - "Shorten the customer relationship to the point of sale"
+          - "Reduce the data it collects from customers"
+        answer: 1
+        hint: >-
+          The product becomes a platform for an ongoing relationship: a product
+          ecosystem.
+
+      - prompt: >-
+          A neighborhood record shop stocks about 5,000 albums and must pick
+          the ones that sell. An online music retailer lists over 2 million.
+          Which of the following is NOT a benefit the online retailer gains
+          from selling online?
+        options:
+          - "It can reach customers in cities where it has no store"
+          - "It can profitably carry niche albums a shelf-limited shop cannot stock"
+          - "It can reach listeners without depending on physical shops to carry its inventory"
+          - "It and its customers avoid having to account for sales tax"
+        answer: 3
+        hint: >-
+          Online sellers have collected sales tax by destination state since
+          2018. The other three are access to new markets, the Long Tail, and
+          disintermediation.
+
+  - name: "Excel"
+    questions:
+      - prompt: >-
+          An exam question asks for the FUNCTION you would use to find the
+          highest value in a range. What should you write?
+        options:
+          - "MAX"
+          - "=MAX"
+          - "=MAX(C2:C27)"
+          - "MAX(C2:C27)"
+        answer: 0
+        hint: >-
+          A function is, in the exam, just the name. No equals sign, no
+          parentheses, no range. Section 17 of the full Excel guide.
+
+      - prompt: >-
+          A question asks for the result as a percentage, and your calculation
+          gives 0.15. What do you write?
+        options:
+          - "0.15"
+          - "15"
+          - "15%"
+          - "=C1/C2"
+        answer: 2
+        hint: >-
+          A result is the number itself, formatted the way the question asks.
+          If it says percentage, the % sign is part of the answer.
+
+      - prompt: >-
+          An exam question asks for the FORMULA you would use to get the
+          product of two values. What should you write?
+        options:
+          - "C1*C2"
+          - "C1/C2"
+          - "C1+C2"
+          - "=C1*C2"
+        answer: 0
+        hint: >-
+          A formula is cell references joined by an operator. B and C are
+          formulas but the wrong operation; D contains the equal sign.
+
+  - name: "Admin"
+    questions:
+      - prompt: >-
+          Exam 1 will take place in Bidgood Room 340 on September 17, from 5:00
+          to 6:15 pm.
+        options:
+          - "True"
+          - "False"
+        answer: 0
+
+      # Forms marks the last option as the key and gives it half a point. Kept
+      # that way so the game scores exactly what the Forms quiz scores. To make
+      # it the closing mood check instead, with no points and just the room's
+      # votes on screen, change the line below to `answer: poll`.
+      - prompt: >-
+          Where are you with Exam 1?
+        options:
+          - "Still tailgating on the Quad"
+          - "Made it into Bryant-Denny, still looking for my seat"
+          - "I know every player's name but couldn't call a single play"
+          - "Ready at every position except one. Excel is still on the injury report."
+          - "Suited up and on the field. Roll Tide!"
+        answer: 4

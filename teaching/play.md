@@ -1,0 +1,78 @@
+---
+layout: page
+title: "join the game"
+permalink: /teaching/play/
+description: "Join the live MIS200-322 review game. Enter the game code shown on the screen and play from your phone."
+---
+
+{%- comment -%}
+  THE PHONE. This is the page the QR code points at.
+
+  It deliberately contains no questions and no answer key. Everything it shows
+  arrives over the connection from the host screen while the game is running, so
+  a student who reads the source of this page finds nothing to read.
+{%- endcomment -%}
+
+<link rel="stylesheet" href="{{ '/assets/css/quiz.css' | relative_url }}">
+
+<div class="quiz quiz-play" id="quiz-play">
+
+  <section class="quiz-screen quiz-play__screen" id="play-start">
+    <form class="quiz-form" id="play-form">
+      <label class="quiz-sr" for="play-code">Game code</label>
+      <input class="quiz-input" id="play-code" name="code" type="text" inputmode="latin"
+             autocomplete="off" autocapitalize="characters" spellcheck="false"
+             maxlength="6" placeholder="Game code" required>
+      <label class="quiz-sr" for="play-name">Your name</label>
+      <input class="quiz-input" id="play-name" name="name" type="text"
+             autocomplete="off" maxlength="18" placeholder="Your name" required>
+      <button type="submit" class="quiz-btn quiz-btn--primary">Join</button>
+    </form>
+    <p class="quiz-note">The code is on the screen at the front of the room.</p>
+  </section>
+
+  <section class="quiz-screen quiz-play__screen" id="play-connecting" hidden aria-live="polite">
+    <p class="quiz-play__big">Joining</p>
+  </section>
+
+  <section class="quiz-screen quiz-play__screen" id="play-wait" hidden aria-live="polite">
+    <p class="quiz-play__big" id="play-you"></p>
+    <p class="quiz-play__note">You are in. Watch the big screen.</p>
+  </section>
+
+  <section class="quiz-screen quiz-play__screen" id="play-question" hidden>
+    <p class="quiz-play__note" id="play-clock" aria-live="off"></p>
+    <p id="play-prompt"></p>
+    <div class="quiz-options" id="play-options"></div>
+  </section>
+
+  <section class="quiz-screen quiz-play__screen" id="play-locked" hidden aria-live="polite">
+    <p class="quiz-play__big">Answer in</p>
+    <p class="quiz-play__note">Waiting for everyone else.</p>
+  </section>
+
+  <section class="quiz-screen quiz-play__screen" id="play-result" hidden aria-live="polite">
+    <p class="quiz-play__big" id="play-verdict"></p>
+    <p class="quiz-play__note" id="play-detail"></p>
+    <p class="quiz-play__score" id="play-score"></p>
+  </section>
+
+  <section class="quiz-screen quiz-play__screen" id="play-rank" hidden aria-live="polite">
+    <p class="quiz-play__big" id="play-rank-title"></p>
+    <p class="quiz-play__score" id="play-rank-line"></p>
+    <ol class="quiz-rank__list" id="play-rank-top"></ol>
+  </section>
+
+  <section class="quiz-screen quiz-play__screen quiz-error" id="play-error" hidden aria-live="polite">
+    <p class="quiz-error__title">Not connected</p>
+    <p id="play-error-text"></p>
+  </section>
+
+</div>
+
+<noscript>
+  <p class="quiz-error">This page needs JavaScript to join the game.</p>
+</noscript>
+
+<script src="{{ '/assets/js/vendor/peerjs.min.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/quiz.js' | relative_url }}"></script>
