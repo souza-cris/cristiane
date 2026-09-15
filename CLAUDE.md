@@ -221,11 +221,26 @@ what a student's phone gets. It has no spec directory; this is the record.
   is cleared when the game ends.
 - **A player is a token, never a name.** Matching a rejoin by name merged two
   students called Sarah into one player and silently stopped counting the
-  first one's answers — near-certain in a section of seventy. Duplicate names
-  are numbered for display only (`Sarah`, `Sarah (2)`).
+  first one's answers — near-certain in a section of seventy.
+- **Shared names get a letter, in join order: `Sarah_A`, `Sarah_B`.** A letter
+  is something the room can say out loud, where `Sarah (2)` reads as second
+  place. This is display only, and it is applied retroactively: the first Sarah
+  is plain `Sarah` until a second turns up, at which moment she becomes
+  `Sarah_A` and her phone is told so over the wire. Board and phone must never
+  disagree about a student's name.
+- **The name field asks for a *player* name, not a real one**, with examples on
+  the page. It goes up on a projector, so the examples do two jobs: they warn
+  that the leaderboard is public, and they get better names than twenty
+  variations of "asdf". Keep the examples current for a 19–22 year old US
+  cohort — they date fast.
 - **Anyone may join at any point.** Seventy phones do not all clear a QR scan
   before the first question ends, and locking the stragglers out of the review
-  is worse than starting them at zero.
+  is worse than starting them at zero. The join QR and code are therefore
+  repeated on every leaderboard: a board is the one moment in the game when the
+  screen is not a question and nobody is against a clock, which makes it the
+  only place a student who has not joined yet can actually catch up. The
+  address printed there drops the `?r=` the QR carries, because somebody
+  reading it off a projector is typing it.
 - **The connection is kept warm and repairs itself.** The host pings every phone
   every 20s and stops counting one silent for 95s; both ends redial with
   jittered backoff. A silent data channel across a 75-minute class is a channel

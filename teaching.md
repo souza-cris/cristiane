@@ -2,7 +2,7 @@
 layout: page
 title: "teaching"
 permalink: /teaching/
-description: "A live review game for MIS200-322. Students join from their phones with a QR code, answer on a timer, and the ranking is shown after every section."
+description: "A live review game for MIS200-322. Students join from their phones with a QR code, answer on a timer, and a top ten goes up after every section."
 ---
 
 {%- comment -%}
@@ -93,6 +93,23 @@ description: "A live review game for MIS200-322. Students join from their phones
       <h2 class="quiz-rank__title" id="host-rank-title"></h2>
       <p class="quiz-rank__sub" id="host-rank-sub"></p>
       <ol class="quiz-rank__list" id="host-rank-list"></ol>
+
+      {%- comment -%}
+        The way in, repeated on the board. A leaderboard is the one moment in
+        the game when the screen is not a question and nobody is against a
+        clock, so it is where a student who has not joined yet can actually
+        catch up. The script paints this the moment the room opens, not each
+        time a board goes up.
+      {%- endcomment -%}
+      <div class="quiz-rejoin">
+        <div class="quiz-rejoin__qr" id="host-rank-qr" role="img" aria-label="QR code to join the game"></div>
+        <p class="quiz-rejoin__text">
+          Not in yet? Scan this, or go to
+          <span class="quiz-rejoin__url" id="host-rank-url"></span>
+          and enter <span class="quiz-rejoin__code" id="host-rank-code"></span>
+        </p>
+      </div>
+
       <p><button type="button" class="quiz-btn quiz-btn--primary" id="host-rank-next">Next section</button></p>
     </section>
 

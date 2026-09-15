@@ -430,6 +430,60 @@
   text-align: right;
 }
 
+/* The way back in, sitting under the leaderboard. It is deliberately quiet:
+   the board is what the room is looking at, and this is for the two or three
+   students who still have not joined. On a narrow screen it stacks. */
+.quiz-rejoin {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+}
+
+/* The QR stays on a white tile whatever the page is doing. A scanner reads
+   dark-on-light, and this page is dark. */
+.quiz-rejoin__qr {
+  flex: none;
+  width: 5.5rem;
+  height: 5.5rem;
+  background: #fff;
+  border-radius: 4px;
+  padding: 0.25rem;
+}
+
+.quiz-rejoin__qr svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.quiz-rejoin__text {
+  margin: 0;
+}
+
+.quiz-rejoin__url,
+.quiz-rejoin__code {
+  font-family: var(--font-mono);
+  color: var(--text);
+}
+
+.quiz-rejoin__code {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 600px) {
+  .quiz-rejoin {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 /* ---- Player: the phone -------------------------------------------------- */
 
 .quiz-play__screen {
@@ -510,6 +564,24 @@
 .quiz-input:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 1px;
+}
+
+/* The nudge under the name field. Pulled up against the input it explains, so
+   it reads as part of that field rather than as a third thing in the form. */
+.quiz-hint-inline {
+  margin: -0.35rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+/* The example names carry the point of the sentence, so they are the only
+   thing in it at full contrast. */
+.quiz-hint-inline strong {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text);
 }
 
 .quiz-note {
