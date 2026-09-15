@@ -23,9 +23,25 @@ description: "Join the live MIS200-322 review game. Enter the game code shown on
       <input class="quiz-input" id="play-code" name="code" type="text" inputmode="latin"
              autocomplete="off" autocapitalize="characters" spellcheck="false"
              maxlength="6" placeholder="Game code" required>
-      <label class="quiz-sr" for="play-name">Your name</label>
+
+      {%- comment -%}
+        The name field asks for a player name rather than a real one. It is
+        what goes up on the projector, so a handful of examples does two jobs:
+        it tells students the leaderboard is public, and it gets better names
+        than twenty variations of "asdf". The hint is a real <label>, tied to
+        the input by aria-describedby, so it is read out rather than being
+        decoration a screen reader skips.
+      {%- endcomment -%}
+      <label class="quiz-sr" for="play-name">Player name</label>
       <input class="quiz-input" id="play-name" name="name" type="text"
-             autocomplete="off" maxlength="18" placeholder="Your name" required>
+             autocomplete="off" maxlength="18" placeholder="Player name"
+             aria-describedby="play-name-hint" required>
+      <p class="quiz-hint-inline" id="play-name-hint">
+        Pick something you will spot on the big screen —
+        <strong>Katniss</strong>, <strong>Grogu</strong>,
+        <strong>Shrek</strong>, <strong>Wednesday</strong>.
+      </p>
+
       <button type="submit" class="quiz-btn quiz-btn--primary">Join</button>
     </form>
     <p class="quiz-note">The code is on the screen at the front of the room.</p>

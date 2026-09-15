@@ -275,6 +275,9 @@
       code: el('host-code'),
       joinUrl: el('host-join-url'),
       qr: el('host-qr'),
+      rankCode: el('host-rank-code'),
+      rankUrl: el('host-rank-url'),
+      rankQr: el('host-rank-qr'),
       players: el('host-players'),
       count: el('host-player-count'),
       start: el('host-start'),
@@ -327,9 +330,27 @@
       peer.on('open', function () {
         openAttempt = 0;
         var url = location.origin + el('quiz-host').dataset.playUrl + '?r=' + code;
+        var plain = url.replace(/^https?:\/\//, '');
+
         nodes.code.textContent = code;
-        nodes.joinUrl.textContent = url.replace(/^https?:\/\//, '');
-        drawQr(url);
+        nodes.joinUrl.textContent = plain;
+        drawQr(nodes.qr, url);
+
+        /* The same code and QR are painted onto the leaderboard now, while the
+           room is opening, rather than each time a board goes up. A board is
+           the one moment in the game when the screen is not a question and
+           nobody is against a clock, which makes it the natural place for a
+           student who has not joined yet to catch up.
+
+           The address shown there drops the ?r= that the QR carries. Somebody
+           reading it off a projector is typing it, and telling them to type a
+           code that is already in the address they are typing is two ways of
+           saying the same thing, at the size where the screen has least room
+           for it. */
+        nodes.rankCode.textContent = code;
+        nodes.rankUrl.textContent = plain.replace(/\?.*$/, '');
+        drawQr(nodes.rankQr, url);
+
         if (phase === 'idle') { show(hostRoot, 'host-lobby'); }
         startHeartbeat();
       });
@@ -394,16 +415,17 @@
       show(hostRoot, 'host-error');
     }
 
-    function drawQr(url) {
-      clear(nodes.qr);
+    function drawQr(node, url) {
+      if (!node) { return; }
+      clear(node);
       try {
         var qr = qrcode(0, 'M');
         qr.addData(url);
         qr.make();
-        nodes.qr.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 1, scalable: true });
+        node.innerHTML = qr.createSvgTag({ cellSize: 4, margin: 1, scalable: true });
       } catch (e) {
         /* No QR is survivable: the code and the address are both on screen. */
-        nodes.qr.textContent = '';
+        node.textContent = '';
       }
     }
 
@@ -482,8 +504,10 @@
         player.conn = conn;
         player.stale = false;
         if (name !== player.name) {
+          var was = player.name;
           player.name = name;
-          player.label = labelFor(player);
+          relabel(was);          // the name being vacated may now be unique
+          relabel(name);
         }
       } else {
         player = {
@@ -499,9 +523,9 @@
           seen: 0,
           joinedAt: index
         };
-        player.label = labelFor(player);
         players.push(player);
         byToken[player.token] = player;
+        relabel(name);
       }
 
       player.seen = Date.now();
@@ -520,16 +544,34 @@
       return player;
     }
 
-    /* Two people really can be called Sarah. Both keep the name they typed;
-       the board numbers them so the room can tell which Sarah is which. */
-    function labelFor(player) {
-      var seen = 0;
-      players.forEach(function (p) {
-        if (p !== player && p.name.toLowerCase() === player.name.toLowerCase()) {
-          seen += 1;
-        }
+    /* Two people really can be called Sarah. Both keep the name they typed and
+       both get a letter, in the order they joined: Sarah_A, Sarah_B. A letter
+       is worth more than a number here — "Sarah_B" is something the room can
+       say out loud, where "Sarah (2)" reads as second place.
+
+       This runs over everybody sharing the name, not just the arrival, because
+       the first Sarah was plain "Sarah" until the second one turned up and has
+       to become Sarah_A at that moment. Her phone is told its new name, so the
+       board and the phone never disagree. A name that falls back to being
+       unique loses its letter again the same way. */
+    function relabel(name) {
+      var key = String(name).toLowerCase();
+      var sharing = players.filter(function (p) {
+        return p.name.toLowerCase() === key;
       });
-      return seen === 0 ? player.name : player.name + ' (' + (seen + 1) + ')';
+
+      sharing.forEach(function (p, i) {
+        var next = sharing.length === 1 ? p.name : p.name + '_' + suffix(i);
+        if (p.label === next) { return; }
+        p.label = next;
+        if (p.chip) { p.chip.textContent = next; }
+        send(p, { t: 'name', name: next });
+      });
+    }
+
+    /* A..Z covers any real room. Past that, stop inventing letters and count. */
+    function suffix(i) {
+      return i < 26 ? String.fromCharCode(65 + i) : String(i + 1);
     }
 
     function answerFrom(player, message) {
@@ -813,7 +855,6 @@
     var countdown = null;
     var attempt = 0;
     var finished = false;
-    var lastScreen = 'play-wait';
 
     var nodes = {
       form: el('play-form'),
@@ -850,7 +891,6 @@
     }
 
     function showPlay(id) {
-      if (id !== 'play-reconnecting') { lastScreen = id; }
       show(playRoot, id);
     }
 
@@ -962,6 +1002,14 @@
         /* Coming back mid-question: sit on the wait screen until the host
            sends the next thing, rather than flashing a stale question. */
         showPlay('play-wait');
+        return;
+      }
+
+      /* Somebody else turned up with the same name, so this phone is now
+         Sarah_B. Only the name changes — whatever screen the student is on
+         stays put, because this can land in the middle of a question. */
+      if (message.t === 'name') {
+        nodes.you.textContent = message.name;
         return;
       }
 
