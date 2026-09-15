@@ -173,12 +173,17 @@
   display: block;
 }
 
+/* Seventy names is a tall wall of chips. Capping the height keeps the join
+   code and the QR on screen, which is what the room actually needs to see,
+   and lets the list scroll for anyone checking they are in. */
 .quiz-players {
   list-style: none;
   margin-top: 2rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  max-height: 40vh;
+  overflow-y: auto;
 }
 
 .quiz-player {
@@ -188,6 +193,12 @@
   border-radius: 999px;
   padding: 0.35rem 0.9rem;
   animation: quiz-pop 0.25s ease-out;
+}
+
+/* A phone that has stopped answering the heartbeat. It is dimmed rather than
+   removed: the student still has a score, and is usually back in a moment. */
+.quiz-player.is-away {
+  opacity: 0.4;
 }
 
 @keyframes quiz-pop {
@@ -355,9 +366,39 @@
   font-size: clamp(1rem, 2vw, 1.4rem);
 }
 
-.quiz-rank__row:nth-child(1) { border-color: #d9a441; }
-.quiz-rank__row:nth-child(2) { border-color: #9aa4ad; }
-.quiz-rank__row:nth-child(3) { border-color: #b3743a; }
+/* The podium. Every board is a top ten, so the first three have to be legible
+   as first three from the back of a lecture hall rather than as three more
+   rows. They get the height, the weight and the metal; the position number is
+   the marker, so this never depends on telling gold from bronze at distance. */
+.quiz-rank__row.is-podium {
+  padding: 1rem 1.1rem;
+  font-size: clamp(1.15rem, 2.5vw, 1.75rem);
+  border-width: 2px;
+}
+
+.quiz-rank__row.is-podium .quiz-rank__pos,
+.quiz-rank__row.is-podium .quiz-rank__name {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.quiz-rank__row.is-place-1 {
+  border-color: #d9a441;
+  background: linear-gradient(90deg, rgba(217, 164, 65, 0.16), transparent 60%);
+}
+
+.quiz-rank__row.is-place-2 {
+  border-color: #9aa4ad;
+  background: linear-gradient(90deg, rgba(154, 164, 173, 0.14), transparent 60%);
+}
+
+/* The gap under third place is what separates the podium from the rest of the
+   ten, so the two read as two groups without needing a heading between them. */
+.quiz-rank__row.is-place-3 {
+  border-color: #b3743a;
+  background: linear-gradient(90deg, rgba(179, 116, 58, 0.14), transparent 60%);
+  margin-bottom: 0.6rem;
+}
 
 .quiz-rank__pos {
   font-family: var(--font-mono);

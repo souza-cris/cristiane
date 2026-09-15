@@ -21,9 +21,15 @@
 # seconds_per_question is the clock every question runs on. Points are speed
 # weighted, so a fast correct answer is worth more than a slow one: the Forms
 # quiz's flat 0.5 points per question does not apply here.
+#
+# Sixty seconds is a full minute of reading time per question, which is what a
+# large section needs: twenty questions plus the five leaderboards and the
+# reveal between them lands inside a seventy-five minute class with room to
+# talk through the answers. The host also ends a question early the moment
+# every connected phone has answered, so the clock is a ceiling, not a wait.
 title: "MIS200-322 Unit 1 Review"
 course: "MIS200-322"
-seconds_per_question: 20
+seconds_per_question: 60
 
 sections:
   - name: "Module 1"

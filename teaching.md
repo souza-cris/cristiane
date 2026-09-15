@@ -35,12 +35,16 @@ description: "A live review game for MIS200-322. Students join from their phones
       <p class="quiz-note">
         {{ site.data.quiz_mis200_unit1.sections | size }} sections,
         {% assign total = 0 %}{% for s in site.data.quiz_mis200_unit1.sections %}{% assign total = total | plus: s.questions.size %}{% endfor %}{{ total }} questions,
-        {{ site.data.quiz_mis200_unit1.seconds_per_question }} seconds each. Faster correct answers score more.
-        The ranking is shown after every section.
+        {{ site.data.quiz_mis200_unit1.seconds_per_question }} seconds each, and a question ends early once
+        every connected phone has answered. Faster correct answers score more.
+        A top ten goes up after every section, and again at the end; everyone
+        else reads their own placement off their own phone.
       </p>
       <p class="quiz-note">
         Open the room, put this screen on the projector, and have everyone scan
-        the code. Keep this tab open: it is running the game, and closing it
+        the code. Students who arrive late can still join once the game has
+        started, and a phone that locks or loses signal rejoins by itself with
+        its score. Keep this tab open: it is running the game, and closing it
         ends it for everyone.
       </p>
       <p><button type="button" class="quiz-btn quiz-btn--primary" id="host-open">Open the room</button></p>

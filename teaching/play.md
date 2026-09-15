@@ -35,6 +35,18 @@ description: "Join the live MIS200-322 review game. Enter the game code shown on
     <p class="quiz-play__big">Joining</p>
   </section>
 
+  {%- comment -%}
+    Dropping out is normal across a seventy-five minute class: a phone locks, a
+    student walks behind a pillar, the wifi hiccups. The script reconnects by
+    itself and this is what it shows while it does, so a wobble reads as a
+    wobble rather than as the end of the student's game. Their score is held on
+    the host and comes back with them.
+  {%- endcomment -%}
+  <section class="quiz-screen quiz-play__screen" id="play-reconnecting" hidden aria-live="polite">
+    <p class="quiz-play__big" id="play-retry-text">Reconnecting…</p>
+    <p class="quiz-play__note">Keep this page open. Your score is safe.</p>
+  </section>
+
   <section class="quiz-screen quiz-play__screen" id="play-wait" hidden aria-live="polite">
     <p class="quiz-play__big" id="play-you"></p>
     <p class="quiz-play__note">You are in. Watch the big screen.</p>

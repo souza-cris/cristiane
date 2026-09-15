@@ -4,7 +4,7 @@
 
    WHY THERE IS SCRIPT HERE AT ALL. The site's rule is no JavaScript without a
    clear reason, and the reason is that this page is a game: a room code, a
-   countdown, twenty phones answering at once and a leaderboard between
+   countdown, seventy phones answering at once and a leaderboard between
    sections. None of that can be done with markup and CSS.
 
    HOW IT WORKS WITHOUT A SERVER. The site is static, so there is nothing to run
@@ -24,9 +24,31 @@
    the wire, sends back a choice, and is told whether it was right. A student
    reading the source of the page they were sent finds no key in it.
 
-   NOTHING IS STORED. Scores live in the host tab's memory until the tab is
-   closed. No names, no answers and no scores are written anywhere, sent
-   anywhere, or kept after the game.
+   NOTHING IS STORED, except one thing. Scores live in the host tab's memory
+   until the tab is closed. No names, no answers and no scores are written
+   anywhere, sent anywhere, or kept after the game. The one exception is on the
+   student's own phone: it remembers its own player token and name for this one
+   room code, so that a phone that locks or drops rejoins as itself instead of
+   as a stranger. That never leaves the phone and is cleared when the game ends.
+
+   BUILT FOR A FULL SECTION, NOT A HANDFUL. Four things here exist only because
+   a room might hold seventy phones for seventy-five minutes:
+
+     IDENTITY IS A TOKEN, NOT A NAME. Two students called Sarah are two
+     players. Matching a rejoin by name merged them into one, and silently
+     stopped counting the first one's answers.
+
+     LATE ARRIVALS ARE LET IN. Getting seventy phones through a QR scan takes
+     longer than the first question does. Someone who joins mid-game starts at
+     zero and plays from wherever the room is.
+
+     THE CONNECTION IS KEPT WARM AND REPAIRS ITSELF. The host pings every
+     phone on a timer, and either end re-establishes the link, with backoff,
+     when it drops. A silent data channel across seventy-five minutes of
+     campus wifi is a data channel that quietly dies.
+
+     NEITHER SCREEN IS ALLOWED TO SLEEP. A locked phone loses its connection;
+     a sleeping host laptop ends the game for everyone.
 --------------------------------------------------------------------------- */
 
 (function () {
@@ -64,8 +86,28 @@
     }
   };
 
+  /* Keeping the link alive. The host pings on this interval; a phone that has
+     not been heard from in STALE_AFTER is assumed gone, which matters because
+     an open-looking connection to a phone in someone's pocket would otherwise
+     hold up "everyone has answered". STALE_AFTER is several missed pings, so a
+     slow network is never mistaken for a departure. */
+  var PING_EVERY = 20000;
+  var STALE_AFTER = 95000;
+
+  /* Reconnection backoff. Seventy phones re-dialing in the same second is the
+     thing that knocks the broker over, so each retry waits longer and adds a
+     random slice to spread the crowd out. */
+  var RETRY_BASE = 800;
+  var RETRY_MAX = 10000;
+  var RETRY_GIVE_UP = 40;
+
   var LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
   var MAX_NAME = 18;
+
+  /* How many rows a leaderboard shows. Ten is what fits on a projector and
+     stays readable from the back of a lecture hall — including the final one,
+     where the rest of the room reads its own placement off its own phone. */
+  var BOARD_SIZE = 10;
 
   function el(id) { return document.getElementById(id); }
 
@@ -95,6 +137,47 @@
     return out;
   }
 
+  /* A token that identifies one phone for one game. Long enough that two
+     phones never draw the same one. */
+  function makeToken() {
+    var out = '';
+    for (var i = 0; i < 16; i += 1) {
+      out += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
+    }
+    return out;
+  }
+
+  function backoff(attempt) {
+    var wait = Math.min(RETRY_BASE * Math.pow(1.6, attempt), RETRY_MAX);
+    return wait + Math.random() * wait * 0.5;
+  }
+
+  /* Keep the screen awake for the length of the game. A phone that locks drops
+     its connection; a host laptop that sleeps ends the game for the whole room.
+     The API is not everywhere and can be refused, so every call is guarded and
+     nothing depends on it working. */
+  function keepAwake() {
+    var lock = null;
+    if (!navigator.wakeLock || !navigator.wakeLock.request) { return; }
+
+    function take() {
+      if (document.visibilityState !== 'visible') { return; }
+      try {
+        navigator.wakeLock.request('screen').then(function (got) {
+          lock = got;
+          /* The browser drops the lock whenever the tab is hidden, so it has
+             to be taken again each time the page comes back. */
+          lock.addEventListener('release', function () { lock = null; });
+        }, function () { /* refused; the game still works */ });
+      } catch (e) { /* not supported here */ }
+    }
+
+    take();
+    document.addEventListener('visibilitychange', function () {
+      if (!lock) { take(); }
+    });
+  }
+
   /* One option tile. Used on both surfaces: clickable on a phone, a display
      tile on the projected screen. */
   function optionTile(index, label, clickable) {
@@ -116,13 +199,46 @@
     return node;
   }
 
+  /* One row of a leaderboard, on either surface. `place` is the position being
+     shown, counting from 1; the top three are marked so they read as a podium
+     rather than as three more rows. */
+  function rankRow(place, name, score, gain) {
+    var row = document.createElement('li');
+    row.className = 'quiz-rank__row';
+    if (place <= 3) { row.className += ' is-podium is-place-' + place; }
+
+    var pos = document.createElement('span');
+    pos.className = 'quiz-rank__pos';
+    pos.textContent = place + '.';
+    row.appendChild(pos);
+
+    var who = document.createElement('span');
+    who.className = 'quiz-rank__name';
+    who.textContent = name;
+    row.appendChild(who);
+
+    if (typeof gain === 'number') {
+      var up = document.createElement('span');
+      up.className = 'quiz-rank__gain' + (gain === 0 ? ' is-zero' : '');
+      up.textContent = '+' + gain;
+      row.appendChild(up);
+    }
+
+    var points = document.createElement('span');
+    points.className = 'quiz-rank__score';
+    points.textContent = score;
+    row.appendChild(points);
+
+    return row;
+  }
+
   /* =======================================================================
      THE HOST: the screen at the front of the room
      ======================================================================= */
 
   function startHost() {
     var data = JSON.parse(el('quiz-data').textContent);
-    var seconds = data.seconds_per_question || 20;
+    var seconds = data.seconds_per_question || 60;
 
     /* The sections flattened into one run of questions. Each one remembers
        which section it belongs to and whether it closes that section, which is
@@ -143,14 +259,17 @@
       });
     });
 
-    var players = [];          // { conn, name, score, sectionScore, answer, ms }
+    /* { token, conn, name, label, score, sectionScore, answer, ms, seen } */
+    var players = [];
+    var byToken = {};
     var peer = null;
     var code = null;
     var index = -1;            // which question is on screen
-    var phase = 'idle';        // idle | asking | revealed
+    var phase = 'idle';        // idle | asking | revealed | ranking
     var ticker = null;
+    var heartbeat = null;
     var deadline = 0;
-    var askedAt = 0;
+    var openAttempt = 0;
 
     var nodes = {
       code: el('host-code'),
@@ -176,8 +295,14 @@
       errorText: el('host-error-text')
     };
 
+    /* Everyone we still believe is holding a phone. A connection that reports
+       itself open but has gone quiet past STALE_AFTER does not count: without
+       this, one pocketed phone makes the room wait out every clock. */
     function live() {
-      return players.filter(function (p) { return p.conn && p.conn.open; });
+      var now = Date.now();
+      return players.filter(function (p) {
+        return p.conn && p.conn.open && (now - p.seen) < STALE_AFTER;
+      });
     }
 
     function send(player, message) {
@@ -186,14 +311,10 @@
       }
     }
 
-    function broadcast(message) {
-      live().forEach(function (p) { send(p, message); });
-    }
-
     function standings() {
       return players.slice().sort(function (a, b) {
         if (b.score !== a.score) { return b.score - a.score; }
-        return a.name.localeCompare(b.name);
+        return a.label.localeCompare(b.label);
       });
     }
 
@@ -204,29 +325,68 @@
       peer = new Peer(PEER_PREFIX + code, PEER_OPTIONS);
 
       peer.on('open', function () {
+        openAttempt = 0;
         var url = location.origin + el('quiz-host').dataset.playUrl + '?r=' + code;
         nodes.code.textContent = code;
         nodes.joinUrl.textContent = url.replace(/^https?:\/\//, '');
         drawQr(url);
-        show(hostRoot, 'host-lobby');
+        if (phase === 'idle') { show(hostRoot, 'host-lobby'); }
+        startHeartbeat();
       });
 
       peer.on('connection', function (conn) { welcome(conn); });
 
       peer.on('error', function (err) {
-        /* A code already in use somewhere in the world: take another one. */
-        if (err && err.type === 'unavailable-id') {
-          peer.destroy();
-          openRoom();
+        var type = err && err.type;
+
+        /* A code already in use somewhere in the world: take another one. But
+           only before anyone has joined — renaming the room mid-game would
+           strand every phone in it. */
+        if (type === 'unavailable-id') {
+          if (phase === 'idle' && players.length === 0) {
+            peer.destroy();
+            openRoom();
+          }
           return;
         }
-        if (err && err.type === 'peer-unavailable') { return; }
+
+        /* A phone that vanished between dialing and connecting. Not our
+           problem, and not worth a screen. */
+        if (type === 'peer-unavailable') { return; }
+
+        /* The broker went away. Seventy phones arriving at once can do this.
+           Keep retrying rather than ending the game: the phones already
+           connected are talking to us directly and are unaffected. */
+        if (type === 'network' || type === 'server-error' ||
+            type === 'socket-error' || type === 'socket-closed') {
+          retryRoom();
+          return;
+        }
+
         fail(err && err.message ? err.message : 'The connection failed.');
       });
 
       peer.on('disconnected', function () {
-        if (phase !== 'idle') { peer.reconnect(); }
+        /* Lost the broker, not the phones. Always reconnect — a room that
+           stops accepting arrivals while sitting in the lobby is a room
+           nobody can join. */
+        retryRoom();
       });
+    }
+
+    function retryRoom() {
+      if (openAttempt >= RETRY_GIVE_UP) {
+        fail('Lost contact with the connection service and could not get it back.');
+        return;
+      }
+      var wait = backoff(openAttempt);
+      openAttempt += 1;
+      setTimeout(function () {
+        if (!peer || peer.destroyed) { openRoom(); return; }
+        if (peer.disconnected) {
+          try { peer.reconnect(); } catch (e) { openRoom(); }
+        }
+      }, wait);
     }
 
     function fail(message) {
@@ -247,84 +407,181 @@
       }
     }
 
+    /* Ping every phone on a timer. This does two jobs: it keeps a data channel
+       that would otherwise sit silent through a sixty-second question from
+       being closed by something in the middle, and the replies are what tell
+       us who is still here. */
+    function startHeartbeat() {
+      if (heartbeat) { return; }
+      heartbeat = setInterval(function () {
+        var now = Date.now();
+        var changed = false;
+        players.forEach(function (p) {
+          if (p.conn && p.conn.open) {
+            send(p, { t: 'ping' });
+            if ((now - p.seen) >= STALE_AFTER && !p.stale) { p.stale = true; changed = true; }
+          } else if (!p.stale) {
+            p.stale = true;
+            changed = true;
+          }
+        });
+        if (changed) {
+          renderPresence();
+          if (phase === 'asking' && allAnswered()) { finishQuestion(); }
+        }
+      }, PING_EVERY);
+    }
+
     /* ---- players arriving ---- */
 
     function welcome(conn) {
-      conn.on('data', function (message) { fromPlayer(conn, message); });
-      conn.on('close', function () { renderPlayers(); });
-      conn.on('error', function () { renderPlayers(); });
-    }
+      /* Which player this connection belongs to, decided by the token in its
+         join message. Held here rather than looked up from the connection
+         later, because a reconnecting phone arrives on a brand new connection
+         object and the old one may still be sitting in the list. */
+      var owner = null;
 
-    function fromPlayer(conn, message) {
-      if (!message || typeof message !== 'object') { return; }
+      conn.on('data', function (message) {
+        if (!message || typeof message !== 'object') { return; }
 
-      if (message.t === 'join') {
-        var name = cleanName(message.name);
-        if (!name) { name = 'Player'; }
-
-        /* A phone that dropped and came back keeps the score it had. Matching
-           is by name, which is also how a student would expect it to work. */
-        var existing = null;
-        players.forEach(function (p) {
-          if (p.name.toLowerCase() === name.toLowerCase()) { existing = p; }
-        });
-
-        if (existing) {
-          existing.conn = conn;
-        } else {
-          if (phase !== 'idle') {
-            conn.send({ t: 'shut' });
-            return;
-          }
-          players.push({
-            conn: conn, name: name, score: 0, sectionScore: 0, answer: null, ms: 0
-          });
+        if (message.t === 'join') {
+          owner = admit(conn, message);
+          return;
         }
 
-        conn.send({ t: 'ok', name: name });
-        if (phase === 'asking') { sendQuestion(findPlayer(conn)); }
-        renderPlayers();
-        return;
-      }
+        if (!owner) { return; }
+        owner.seen = Date.now();
+        if (owner.stale) { owner.stale = false; renderPresence(); }
 
-      if (message.t === 'a') {
-        if (phase !== 'asking' || message.i !== index) { return; }
-        var player = findPlayer(conn);
-        if (!player || player.answer !== null) { return; }
+        if (message.t === 'pong') { return; }
+        if (message.t === 'a') { answerFrom(owner, message); }
+      });
 
-        player.answer = message.choice;
-        /* The phone reports how long it took from the moment the question
-           appeared on it, which is fairer than timing it here: this end cannot
-           tell a slow thinker from a slow connection. Clamped so a wrong clock
-           cannot buy points. */
-        player.ms = Math.max(0, Math.min(seconds * 1000, Number(message.ms) || 0));
-        renderAnswered();
-
-        if (allAnswered()) { finishQuestion(); }
-      }
+      conn.on('close', function () {
+        if (owner && owner.conn === conn) { owner.stale = true; }
+        renderPresence();
+      });
+      conn.on('error', function () { renderPresence(); });
     }
 
-    function findPlayer(conn) {
-      var found = null;
-      players.forEach(function (p) { if (p.conn === conn) { found = p; } });
-      return found;
+    /* A phone identifies itself by a token it generated and keeps. Two
+       students who both type "Sarah" hold two different tokens and are two
+       players; one student whose phone locked and came back holds the same
+       token and gets her score back. */
+    function admit(conn, message) {
+      var token = String(message.token || '').slice(0, 32);
+      var name = cleanName(message.name) || 'Player';
+      var player = token ? byToken[token] : null;
+
+      if (player) {
+        /* The same phone, back again. Drop the stale connection if one is
+           somehow still open, so nothing is sent down a dead pipe. */
+        if (player.conn && player.conn !== conn) {
+          try { player.conn.close(); } catch (e) { /* already gone */ }
+        }
+        player.conn = conn;
+        player.stale = false;
+        if (name !== player.name) {
+          player.name = name;
+          player.label = labelFor(player);
+        }
+      } else {
+        player = {
+          token: token || makeToken(),
+          conn: conn,
+          name: name,
+          label: name,
+          score: 0,
+          sectionScore: 0,
+          answer: null,
+          ms: 0,
+          stale: false,
+          seen: 0,
+          joinedAt: index
+        };
+        player.label = labelFor(player);
+        players.push(player);
+        byToken[player.token] = player;
+      }
+
+      player.seen = Date.now();
+
+      try {
+        conn.send({ t: 'ok', name: player.label, started: phase !== 'idle' });
+      } catch (e) { return player; }
+
+      /* Anybody may join at any point. Seventy phones do not all get through a
+         QR scan before the first question ends, and locking the stragglers out
+         of the whole review is worse than letting them start from zero. A
+         phone that arrives mid-question gets the time that is actually left. */
+      if (phase === 'asking') { sendQuestion(player); }
+
+      renderPlayers();
+      return player;
+    }
+
+    /* Two people really can be called Sarah. Both keep the name they typed;
+       the board numbers them so the room can tell which Sarah is which. */
+    function labelFor(player) {
+      var seen = 0;
+      players.forEach(function (p) {
+        if (p !== player && p.name.toLowerCase() === player.name.toLowerCase()) {
+          seen += 1;
+        }
+      });
+      return seen === 0 ? player.name : player.name + ' (' + (seen + 1) + ')';
+    }
+
+    function answerFrom(player, message) {
+      if (phase !== 'asking' || message.i !== index) { return; }
+      if (player.answer !== null) { return; }
+
+      player.answer = message.choice;
+      /* The phone reports how long it took from the moment the question
+         appeared on it, which is fairer than timing it here: this end cannot
+         tell a slow thinker from a slow connection. Clamped so a wrong clock
+         cannot buy points. */
+      player.ms = Math.max(0, Math.min(seconds * 1000, Number(message.ms) || 0));
+      renderAnswered();
+
+      if (allAnswered()) { finishQuestion(); }
     }
 
     function allAnswered() {
-      var waiting = live().filter(function (p) { return p.answer === null; });
-      return live().length > 0 && waiting.length === 0;
+      var here = live();
+      if (here.length === 0) { return false; }
+      return here.every(function (p) { return p.answer !== null; });
     }
 
+    /* The lobby list is appended to, not rebuilt. Rebuilding it re-ran the
+       arrival animation on every chip each time somebody joined, which with
+       seventy arrivals is several thousand animations and a lobby that never
+       stops twitching. */
     function renderPlayers() {
-      clear(nodes.players);
       players.forEach(function (p) {
+        if (p.chip) {
+          if (p.chip.textContent !== p.label) { p.chip.textContent = p.label; }
+          return;
+        }
         var chip = document.createElement('li');
         chip.className = 'quiz-player';
-        chip.textContent = p.name;
+        chip.textContent = p.label;
+        p.chip = chip;
         nodes.players.appendChild(chip);
       });
-      nodes.count.textContent = players.length === 1 ? '1 player' : players.length + ' players';
+      renderPresence();
+    }
+
+    function renderPresence() {
+      players.forEach(function (p) {
+        if (p.chip) { p.chip.classList.toggle('is-away', !!p.stale); }
+      });
+      var here = live().length;
+      nodes.count.textContent = players.length === 1
+        ? '1 player'
+        : players.length + ' players' + (here < players.length ? ', ' + here + ' connected' : '');
       nodes.start.disabled = players.length === 0;
+      if (phase === 'asking') { renderAnswered(); }
     }
 
     /* ---- asking ---- */
@@ -355,8 +612,7 @@
       show(hostRoot, 'host-question');
       renderAnswered();
 
-      askedAt = Date.now();
-      deadline = askedAt + seconds * 1000;
+      deadline = Date.now() + seconds * 1000;
       tick();
       ticker = setInterval(tick, 100);
 
@@ -388,8 +644,9 @@
     }
 
     function renderAnswered() {
-      var done = live().filter(function (p) { return p.answer !== null; }).length;
-      nodes.answered.textContent = done + ' of ' + live().length + ' answered';
+      var here = live();
+      var done = here.filter(function (p) { return p.answer !== null; }).length;
+      nodes.answered.textContent = done + ' of ' + here.length + ' answered';
     }
 
     /* ---- revealing ---- */
@@ -405,16 +662,15 @@
       var tally = q.options.map(function () { return 0; });
 
       players.forEach(function (p) {
+        p.lastGain = 0;
         if (p.answer === null) { return; }
-        tally[p.answer] += 1;
-        if (q.isPoll) { p.lastGain = 0; return; }
+        if (typeof tally[p.answer] === 'number') { tally[p.answer] += 1; }
+        if (q.isPoll) { return; }
         if (p.answer === q.answer) {
           /* Right is worth 600. Speed is worth up to 400 more, so knowing the
              answer always beats guessing quickly. */
           var speed = 1 - (p.ms / (seconds * 1000));
           p.lastGain = Math.round((600 + 400 * speed) / 10) * 10;
-        } else {
-          p.lastGain = 0;
         }
         p.score += p.lastGain;
         p.sectionScore += p.lastGain;
@@ -466,47 +722,25 @@
       var q = questions[index];
       var last = index === questions.length - 1;
       var order = standings();
+      phase = 'ranking';
 
       nodes.rankTitle.textContent = last ? 'Final ranking' : q.section + ' standings';
       nodes.rankSub.textContent = last
-        ? 'Where everyone finished'
-        : 'Points so far, with this section in green';
+        ? 'The top ten. Everyone else: your placement is on your phone.'
+        : 'Top ten so far, with this section in green';
 
+      /* Every board is a top ten, the last one included. Seventy rows do not
+         fit on a projector and cannot be read from the back row; the students
+         who are not on it are each told their own placement on their phone. */
       clear(nodes.rankList);
-      /* Every section shows a top ten, which is what fits on a projector. The
-         last one shows the whole room, because that is the result everybody
-         wants to find themselves in. */
-      (last ? order : order.slice(0, 10)).forEach(function (p, i) {
-        var row = document.createElement('li');
-        row.className = 'quiz-rank__row';
-
-        var pos = document.createElement('span');
-        pos.className = 'quiz-rank__pos';
-        pos.textContent = (i + 1) + '.';
-        row.appendChild(pos);
-
-        var name = document.createElement('span');
-        name.className = 'quiz-rank__name';
-        name.textContent = p.name;
-        row.appendChild(name);
-
-        if (!last) {
-          var gain = document.createElement('span');
-          gain.className = 'quiz-rank__gain' + (p.sectionScore === 0 ? ' is-zero' : '');
-          gain.textContent = '+' + p.sectionScore;
-          row.appendChild(gain);
-        }
-
-        var score = document.createElement('span');
-        score.className = 'quiz-rank__score';
-        score.textContent = p.score;
-        row.appendChild(score);
-
-        nodes.rankList.appendChild(row);
+      order.slice(0, BOARD_SIZE).forEach(function (p, i) {
+        nodes.rankList.appendChild(
+          rankRow(i + 1, p.label, p.score, last ? undefined : p.sectionScore)
+        );
       });
 
       var top = order.slice(0, 3).map(function (p) {
-        return { name: p.name, score: p.score };
+        return { name: p.label, score: p.score };
       });
 
       players.forEach(function (p) {
@@ -534,13 +768,20 @@
     el('host-open').addEventListener('click', function () {
       nodes.status.textContent = 'Opening the room';
       show(hostRoot, 'host-connecting');
+      keepAwake();
       openRoom();
     });
 
     nodes.start.addEventListener('click', function () { askNext(); });
     nodes.next.addEventListener('click', function () { afterQuestion(); });
     nodes.rankNext.addEventListener('click', function () {
-      if (index >= questions.length - 1) { location.reload(); return; }
+      if (index >= questions.length - 1) {
+        /* Tell the phones to forget this game before reloading, so nobody
+           rejoins the next round carrying the last round's identity. */
+        players.forEach(function (p) { send(p, { t: 'over' }); });
+        setTimeout(function () { location.reload(); }, 250);
+        return;
+      }
       askNext();
     });
 
@@ -564,9 +805,15 @@
   function startPlayer() {
     var conn = null;
     var peer = null;
+    var code = null;
+    var name = '';
+    var token = '';
     var current = -1;
     var shownAt = 0;
     var countdown = null;
+    var attempt = 0;
+    var finished = false;
+    var lastScreen = 'play-wait';
 
     var nodes = {
       form: el('play-form'),
@@ -582,55 +829,145 @@
       rankTitle: el('play-rank-title'),
       rankLine: el('play-rank-line'),
       rankTop: el('play-rank-top'),
-      errorText: el('play-error-text')
+      errorText: el('play-error-text'),
+      retryText: el('play-retry-text')
     };
 
+    /* The phone remembers its own token for one room code, so that locking the
+       screen, losing wifi in the stairwell or reloading the page all bring the
+       same player back rather than creating a new one. This never leaves the
+       phone. Storage can throw outright in a private window, so every touch is
+       guarded and the game works without it — a reload then simply joins as
+       somebody new. */
+    function remember(key, value) {
+      try { localStorage.setItem('crissouza-quiz-' + key, value); } catch (e) { /* fine */ }
+    }
+    function recall(key) {
+      try { return localStorage.getItem('crissouza-quiz-' + key) || ''; } catch (e) { return ''; }
+    }
+    function forget(key) {
+      try { localStorage.removeItem('crissouza-quiz-' + key); } catch (e) { /* fine */ }
+    }
+
+    function showPlay(id) {
+      if (id !== 'play-reconnecting') { lastScreen = id; }
+      show(playRoot, id);
+    }
+
     var fromUrl = (location.search.match(/[?&]r=([A-Za-z0-9]+)/) || [])[1];
-    if (fromUrl) { nodes.code.value = fromUrl.toUpperCase(); }
+    if (fromUrl) {
+      nodes.code.value = fromUrl.toUpperCase();
+      var saved = recall(nodes.code.value + '-name');
+      if (saved) { nodes.name.value = saved; }
+    }
 
     function fail(message) {
       nodes.errorText.textContent = message;
-      show(playRoot, 'play-error');
+      showPlay('play-error');
     }
 
     nodes.form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var code = nodes.code.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-      var name = cleanName(nodes.name.value);
+      code = nodes.code.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+      name = cleanName(nodes.name.value);
       if (!code || !name) { return; }
 
-      show(playRoot, 'play-connecting');
+      token = recall(code + '-token');
+      if (!token) { token = makeToken(); remember(code + '-token', token); }
+      remember(code + '-name', name);
+
+      keepAwake();
+      showPlay('play-connecting');
+      dial();
+    });
+
+    /* Open a peer, find the host, and say hello. Everything that can go wrong
+       between here and the host's lobby is temporary as far as this function
+       is concerned: it waits and tries again rather than ending the student's
+       game. Seventy phones dialing at the same moment is exactly the situation
+       the broker is worst at, and the backoff is what gets them all in. */
+    function dial() {
+      if (finished) { return; }
+
+      if (peer) {
+        try { peer.destroy(); } catch (e) { /* already gone */ }
+      }
       peer = new Peer(PEER_OPTIONS);
 
       peer.on('open', function () {
         conn = peer.connect(PEER_PREFIX + code, { reliable: true });
-        conn.on('open', function () { conn.send({ t: 'join', name: name }); });
-        conn.on('data', fromHost);
-        conn.on('close', function () {
-          fail('The connection to the game closed. Reload this page to rejoin with the same name and keep your score.');
+
+        conn.on('open', function () {
+          attempt = 0;
+          conn.send({ t: 'join', name: name, token: token });
         });
+        conn.on('data', fromHost);
+        conn.on('close', function () { retry('Reconnecting'); });
+        conn.on('error', function () { retry('Reconnecting'); });
+
+        /* A connection that never opens is as dead as one that closed, and it
+           does not always raise an error. Give it a window, then redial. */
+        setTimeout(function () {
+          if (conn && !conn.open && !finished) { retry('Still trying to join'); }
+        }, 12000);
+      });
+
+      peer.on('disconnected', function () {
+        if (!finished) { retry('Reconnecting'); }
       });
 
       peer.on('error', function (err) {
-        if (err && err.type === 'peer-unavailable') {
-          fail('No game is running under code ' + code + '. Check the code on the screen.');
+        var type = err && err.type;
+        if (type === 'peer-unavailable') {
+          /* Either the code is wrong, or the host is momentarily off the
+             broker. Both look identical from here, so try a few times before
+             telling a student their code is bad. */
+          if (attempt >= 4) {
+            fail('No game is running under code ' + code +
+                 '. Check the code on the screen, then reload this page.');
+            return;
+          }
+          retry('Looking for the game');
           return;
         }
-        fail('Could not reach the game. Check your connection and try again.');
+        retry('Reconnecting');
       });
-    });
+    }
+
+    function retry(label) {
+      if (finished) { return; }
+      if (attempt >= RETRY_GIVE_UP) {
+        fail('Lost the connection to the game and could not get it back. Reload this page to rejoin with your score.');
+        return;
+      }
+      if (nodes.retryText) { nodes.retryText.textContent = label + '…'; }
+      showPlay('play-reconnecting');
+      var wait = backoff(attempt);
+      attempt += 1;
+      setTimeout(dial, wait);
+    }
 
     function fromHost(message) {
       if (!message || typeof message !== 'object') { return; }
 
-      if (message.t === 'ok') {
-        nodes.you.textContent = message.name;
-        show(playRoot, 'play-wait');
+      /* Answering the host's heartbeat is what keeps this phone counted as
+         present, and keeps a silent channel from being closed underneath us. */
+      if (message.t === 'ping') {
+        if (conn && conn.open) { conn.send({ t: 'pong' }); }
         return;
       }
 
-      if (message.t === 'shut') {
-        fail('That game has already started, so it is not taking new players.');
+      if (message.t === 'ok') {
+        nodes.you.textContent = message.name;
+        /* Coming back mid-question: sit on the wait screen until the host
+           sends the next thing, rather than flashing a stale question. */
+        showPlay('play-wait');
+        return;
+      }
+
+      if (message.t === 'over') {
+        finished = true;
+        forget(code + '-token');
         return;
       }
 
@@ -645,7 +982,7 @@
           nodes.options.appendChild(tile);
         });
         runClock(message.seconds);
-        show(playRoot, 'play-question');
+        showPlay('play-question');
         return;
       }
 
@@ -670,7 +1007,7 @@
         }
         nodes.score.textContent = message.score + ' points, ' +
           ordinal(message.rank) + ' of ' + message.of;
-        show(playRoot, 'play-result');
+        showPlay('play-result');
         return;
       }
 
@@ -680,27 +1017,9 @@
           ', ' + message.score + ' points';
         clear(nodes.rankTop);
         message.top.forEach(function (p, i) {
-          var row = document.createElement('li');
-          row.className = 'quiz-rank__row';
-
-          var pos = document.createElement('span');
-          pos.className = 'quiz-rank__pos';
-          pos.textContent = (i + 1) + '.';
-          row.appendChild(pos);
-
-          var name = document.createElement('span');
-          name.className = 'quiz-rank__name';
-          name.textContent = p.name;
-          row.appendChild(name);
-
-          var score = document.createElement('span');
-          score.className = 'quiz-rank__score';
-          score.textContent = p.score;
-          row.appendChild(score);
-
-          nodes.rankTop.appendChild(row);
+          nodes.rankTop.appendChild(rankRow(i + 1, p.name, p.score));
         });
-        show(playRoot, 'play-rank');
+        showPlay('play-rank');
       }
     }
 
@@ -711,7 +1030,7 @@
       tile.classList.add('is-picked');
       conn.send({ t: 'a', i: current, choice: choice, ms: Date.now() - shownAt });
       stopClock();
-      show(playRoot, 'play-locked');
+      showPlay('play-locked');
     }
 
     function runClock(secondsLeft) {
