@@ -78,7 +78,7 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
 ## Key Conventions
 
 - All content lives in Markdown or YAML data files, never hardcoded in HTML templates. If you find yourself pasting the same markup into several pages, extract an include driven by a data file.
-- No JavaScript unless clearly justified, and any exception must be recorded in the relevant spec. Mobile nav is CSS-only `<details>`/`<summary>`; the list search is the one script, justified in `specs/004-journey-and-search/plan.md`.
+- No JavaScript unless clearly justified, and any exception must be recorded. Mobile nav is CSS-only `<details>`/`<summary>`. There are exactly two scripts: the list search, justified in `specs/004-journey-and-search/plan.md`, and the review game, justified in "The review game" below.
 - Only GitHub Pages-supported plugins. No custom build tools or npm. This is why filter pages are written by hand rather than generated from data.
 - Use `| relative_url` filter for all internal links (required because of `baseurl`).
 - Section `url` values in `_data/sections.yml` are canonical **with a trailing
@@ -196,6 +196,57 @@ in `_drafts/_doc/`. Jekyll ignores any directory whose name starts with `_`, so
 nothing there is published. Do NOT leave a `.docx` in `bookmarks/`, `stories/`
 or any other content directory — Jekyll copies unrecognized files through
 verbatim, so the draft becomes a public download at its own URL.
+
+## The review game
+
+`/teaching/` is the screen at the front of a classroom and `/teaching/play/` is
+what a student's phone gets. It has no spec directory; this is the record.
+
+- **Why there is script here.** A room code, a countdown, seventy phones
+  answering at once and a leaderboard between sections cannot be done with
+  markup and CSS. This is the site's second and last JavaScript exception.
+- **There is no server, and there must not be one.** The host's browser *is* the
+  server: it registers under a room code, every phone connects straight to it
+  over PeerJS, and scores live in the host tab's memory. The library is vendored
+  in `assets/js/vendor/` so no CDN has to be reachable during class. A public
+  broker still has to be, to introduce the two browsers; after that they talk
+  directly.
+- **The answer key is on the host page only**, because the host does the
+  scoring. `/teaching/play/` carries no questions and no answers: it is told a
+  question over the wire and told whether its choice was right. Never move quiz
+  content onto the player page, and never let the host send the key.
+- **Nothing is stored**, with one deliberate exception: the student's own phone
+  keeps its player token and name in `localStorage` for one room code, so a
+  phone that locks or drops rejoins as itself. That never leaves the phone and
+  is cleared when the game ends.
+- **A player is a token, never a name.** Matching a rejoin by name merged two
+  students called Sarah into one player and silently stopped counting the
+  first one's answers — near-certain in a section of seventy. Duplicate names
+  are numbered for display only (`Sarah`, `Sarah (2)`).
+- **Anyone may join at any point.** Seventy phones do not all clear a QR scan
+  before the first question ends, and locking the stragglers out of the review
+  is worse than starting them at zero.
+- **The connection is kept warm and repairs itself.** The host pings every phone
+  every 20s and stops counting one silent for 95s; both ends redial with
+  jittered backoff. A silent data channel across a 75-minute class is a channel
+  that quietly dies, and seventy phones redialing in the same second is what
+  knocks the broker over. Both screens also take a wake lock — a locked phone
+  loses its connection, and a sleeping host laptop ends the game for everyone.
+- **Every leaderboard is a top ten, the final one included.** Seventy rows do
+  not fit on a projector and cannot be read from the back row. Everyone off the
+  board is told their own placement on their own phone. The top three are marked
+  `is-place-1/2/3`; the position number carries the ranking, so nothing depends
+  on telling gold from bronze at that distance.
+- **Styles are `assets/css/quiz.css`, not `style.css`.** Roughly 400 lines that
+  exactly two pages use would otherwise load on every page of the site. The two
+  pages link it themselves.
+- Questions live in `_data/quiz_mis200_unit1.yml`, transcribed from the
+  Microsoft Forms quiz of the same name. `answer` is an index into `options`, so
+  reordering options silently changes the right answer. `seconds_per_question`
+  is a ceiling, not a wait: a question ends early once every connected phone has
+  answered.
+- The page is deliberately absent from `_data/sections.yml`, so it never appears
+  in the navigation.
 
 ## Authoring tools
 
