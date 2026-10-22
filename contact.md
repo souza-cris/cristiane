@@ -9,3 +9,6 @@ description: "Reach Cris Souza — PhD student and researcher in Management Info
 
 My permanent researcher identifier, if you are citing my work or looking for it:
 [ORCID {{ site.data.profile.orcid | remove: "https://orcid.org/" }}]({{ site.data.profile.orcid }})
+
+Headshot photo:
+[Download my headshot]({{ '/assets/img/cris-headshot.jpg' | relative_url }})
