@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal website for Cristiane — a Jekyll static site hosted on GitHub Pages. Sections: Home, Journey, Stories, Research, Bookmarks, Contact. Served at **https://crissouza.org**, at the domain root, so `baseurl` is `""` in `_config.yml`. It is still a project repo, so the custom domain is held by the `CNAME` file — do not delete it, and never pass `--baseurl` in the deploy workflow (a flag overrides the config, invisibly).
+Personal website for Cristiane — a Jekyll static site hosted on GitHub Pages. Sections: Home, Journey, Stories, Publications, Bookmarks, plus password-protected Research and Teaching. Served at **https://crissouza.org**, at the domain root, so `baseurl` is `""` in `_config.yml`. It is still a project repo, so the custom domain is held by the `CNAME` file — do not delete it, and never pass `--baseurl` in the deploy workflow (a flag overrides the config, invisibly).
 
 ## Build & Test
 
@@ -47,17 +47,17 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
     404, because Jekyll cannot generate a page from a data file without a
     plugin. Same rule for story keywords and `stories/`
   - Story filters: `_data/story_keywords.yml`
-  - Research: `_data/research.yml`
+  - Publications: `_data/research.yml`, each with a `summary` and a `tag`
+    (Research, Workshop, Talk, Other).
   - Sections: `_data/sections.yml` — the navigation list, with a `match` of
     `exact` or `prefix` per entry deciding whether child pages mark it as
     current. Adding a section is one edit here; no template changes
-  - Identity: `_data/profile.yml` — name, role, affiliation and ORCID, read by
+  - Identity: `_data/profile.yml` — name, role and affiliation, read by
     the structured data on BOTH the home page and the journey page. Two pages
     make machine-readable claims about the same person and a search engine
     merges them only if they agree exactly, so they are never typed twice. The
-    ORCID lives here rather than in `social.yml` by decision: everything in
-    `social.yml` draws a footer icon, and this identifier is for search engines
-    and citation, not for every page
+    ORCID is in `social.yml` with the other links, which the structured data
+    also reads
   - Social links: `_data/social.yml` — footer links. The icon *drawings* stay
     in `footer.html`, selected by each entry's `icon` value; a drawing is not
     content. These used to sit unread in `_config.yml` while the footer
@@ -67,18 +67,19 @@ Always test locally before pushing. Pushing to `main` triggers `.github/workflow
     bookmarks, and it reads feature 007's study record without owning it
   - Call for participants: `_data/study.yml` — a single study record with an
     `active` toggle, rendered by `_includes/study-callout.html` in two variants
-    (`full` on research, `compact` on home). It is the single source for both
+    (`full` on publications, `compact` on home). It is the single source for both
     surfaces; never copy study text anywhere else
-  - Pages: `index.md`, `journey.md`, `stories.md`, `research.md`, `bookmarks.md`, `contact.md`, `404.md`
+  - Pages: `index.md`, `journey.md`, `stories.md`, `publications.md`, `bookmarks.md`, `404.md`
   - Filter pages: `stories/*.md` and `bookmarks/*.md` — thin wrappers over the shared includes
 - **Config**: `_config.yml` holds site metadata, `updates_limit`, and the post permalink (`/stories/:year/:month/:day/:title/`). Content does not live here — Jekyll reads this file only at startup, so a rebuild will not pick up changes
 - **Styles**: Single file at `assets/css/style.css` (plain CSS, no preprocessor)
-- **Scripts**: `assets/js/search.js` — the only JavaScript on the site
+- **Scripts**: `assets/js/search.js`, `quiz.js` and `unlock.js`
 
 ## Key Conventions
 
 - All content lives in Markdown or YAML data files, never hardcoded in HTML templates. If you find yourself pasting the same markup into several pages, extract an include driven by a data file.
-- No JavaScript unless clearly justified, and any exception must be recorded. Mobile nav is CSS-only `<details>`/`<summary>`. There are exactly two scripts: the list search, justified in `specs/004-journey-and-search/plan.md`, and the review game, justified in "The review game" below.
+- No JavaScript unless clearly justified, and any exception must be recorded. Mobile nav is CSS-only `<details>`/`<summary>`. There are exactly three scripts: the list search, justified in `specs/004-journey-and-search/plan.md`, the review game, justified in "The review game" below, and
+  `unlock.js`, justified in "Private pages" below.
 - Only GitHub Pages-supported plugins. No custom build tools or npm. This is why filter pages are written by hand rather than generated from data.
 - Use `| relative_url` filter for all internal links (required because of `baseurl`).
 - Section `url` values in `_data/sections.yml` are canonical **with a trailing
@@ -204,7 +205,7 @@ what a student's phone gets. It has no spec directory; this is the record.
 
 - **Why there is script here.** A room code, a countdown, seventy phones
   answering at once and a leaderboard between sections cannot be done with
-  markup and CSS. This is the site's second and last JavaScript exception.
+  markup and CSS. This is the site's second JavaScript exception.
 - **There is no server, and there must not be one.** The host's browser *is* the
   server: it registers under a room code, every phone connects straight to it
   over PeerJS, and scores live in the host tab's memory. The library is vendored
@@ -260,8 +261,25 @@ what a student's phone gets. It has no spec directory; this is the record.
   reordering options silently changes the right answer. `seconds_per_question`
   is a ceiling, not a wait: a question ends early once every connected phone has
   answered.
-- The page is deliberately absent from `_data/sections.yml`, so it never appears
-  in the navigation.
+- The host screen is inside the password-protected `/teaching/` page; its markup
+  is `_includes/teaching-host.html`. `/teaching/play/` stays public. Re-run the
+  lock tool after changing questions or that include. The questions are still
+  readable in the public repository.
+
+## Private pages
+
+`/research/` and `/teaching/` need a password. GitHub Pages has no server to
+check one and the repository is public, so the text is encrypted before commit
+and `unlock.js` decrypts it in the browser; that is why the script exists.
+
+- Readable text lives in `_private/` (git-ignored). Never commit it, and never
+  copy project names or links from it into any committed file.
+- `bundle exec ruby tools/private-pages.rb lock` writes `_data/locked.json`
+  (PBKDF2-SHA256 + AES-256-GCM). `unlock` restores `_private/`. The author types
+  the password; never ask for it or store it.
+- Old versions stay in git history under their old password.
+- Locked pages are `noindex` and out of the sitemap, but shown in the menus with
+  a padlock (`locked: true` in `_data/sections.yml`).
 
 ## Authoring tools
 

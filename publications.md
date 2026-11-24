@@ -1,24 +1,20 @@
 ---
 layout: page
-title: "research"
-permalink: /research/
-description: "Research by Cris Souza on human-AI collaboration, the human side of information security, and how people adopt AI at work. Publications and current studies."
+title: "publications"
+permalink: /publications/
+description: "Publications by Cris Souza on human-AI collaboration, the human side of information security, and how people adopt technology, each with a short summary."
 ---
-
-<section class="research-section">
-  <h2>research interests</h2>
-  <p>{{ site.data.research.interests }}</p>
-</section>
 
 {% include study-callout.html variant="full" %}
 
 <section class="research-section">
-  <h2>publications</h2>
   {% for pub in site.data.research.publications %}
   <div class="publication">
     <p class="publication__title">{% if pub.link != "" %}<a href="{{ pub.link }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</p>
     <p class="publication__authors">{{ pub.authors }}</p>
     {% if pub.venue != "" %}<p class="publication__venue">{{ pub.venue }}</p>{% endif %}
+    {% if pub.summary and pub.summary != "" %}<p class="publication__summary">{{ pub.summary }}</p>{% endif %}
+    {% if pub.tag %}<p class="publication__tag">{{ pub.tag }}</p>{% endif %}
   </div>
   {% endfor %}
 </section>

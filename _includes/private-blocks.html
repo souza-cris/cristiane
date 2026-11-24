@@ -1,0 +1,17 @@
+{%- comment -%}
+  Renders the readable private content. Used only by tools/private-pages.rb,
+  before encryption — never include this from a page.
+{%- endcomment -%}
+{% if private.blocks.size > 0 %}
+{% for block in private.blocks %}
+<section class="private-block">
+  <h2>{{ block.title | escape }}</h2>
+  <ul>
+    {% for link in block.links %}<li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label | escape }}</a></li>{% endfor %}
+  </ul>
+</section>
+{% endfor %}
+{% else %}
+<p class="empty-state">Nothing here yet.</p>
+{% endif %}
+{% if private_page == 'teaching' %}{% include teaching-host.html %}{% endif %}

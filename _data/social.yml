@@ -3,7 +3,7 @@
 # label : the accessible name, read aloud by screen readers. Write it as the
 #         service is normally written — "Google Scholar", not "scholar"
 # url   : the full address, including https://
-# icon  : which icon to draw — one of: linkedin, scholar, github
+# icon  : which icon to draw — one of: linkedin, scholar, github, orcid, lattes
 #         The drawings live in _includes/footer.html, because a drawing is not
 #         content. This field only says which one to use.
 #
@@ -21,3 +21,11 @@
 - label: "GitHub"
   url: "https://github.com/souza-cris"
   icon: "github"
+
+- label: "ORCID"
+  url: "https://orcid.org/0009-0004-0716-4507"
+  icon: "orcid"
+
+- label: "Lattes CV"
+  url: "https://lattes.cnpq.br/3412671423676138"
+  icon: "lattes"

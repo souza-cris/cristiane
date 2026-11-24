@@ -6,3 +6,6 @@ _site/
 .bundle/
 vendor/bundle/
 .DS_Store
+
+# Readable text of the password-protected pages. Never commit.
+_private/

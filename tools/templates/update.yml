@@ -13,7 +13,7 @@
 
   date: 2026-07-26         # Orders the list, newest first. No quotes needed.
 
-  link: "/research/"       # A path on this site, written WITHOUT /cristiane —
+  link: "/publications/"       # A path on this site, written WITHOUT /cristiane —
                            # that is added for you. Or a full https:// address.
 
   blurb: "One line of context."

@@ -10,7 +10,7 @@
 #                    The word itself is the label, so a new type just works.
 # title    required  What it is called. Becomes the link text.
 # date     required  YYYY-MM-DD. Orders the list and is shown to visitors.
-# link     optional  Internal path like "/research/" — write it site-rooted and
+# link     optional  Internal path like "/publications/" — write it site-rooted and
 #                    leave the /cristiane prefix to the site. Or a full external
 #                    URL starting with https://. Omit for plain text.
 # blurb    optional  One line of context. Omit and nothing renders.
@@ -26,8 +26,8 @@
 - type: publication
   title: "Therapy Across Borders: The Search for Cultural Safety in Digital Mental Health"
   date: 2026-07-25
-  link: "/research/"
-  blurb: "AMCIS 2026 — accepted for presentation."
+  link: "/publications/"
+  blurb: "AMCIS 2026 — presented."
 
 - type: story
   title: "Old wine in a new bottle? Playing with spec-driven development"

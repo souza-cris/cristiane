@@ -25,14 +25,22 @@
   url: "/stories/"
   match: "prefix"
 
-- label: "research"
-  url: "/research/"
+- label: "publications"
+  url: "/publications/"
   match: "exact"
 
 - label: "bookmarks"
   url: "/bookmarks/"
   match: "prefix"
 
-- label: "contact"
-  url: "/contact/"
+# locked: true draws a padlock. These pages need a password; see
+# tools/private-pages.rb.
+- label: "research"
+  url: "/research/"
   match: "exact"
+  locked: true
+
+- label: "teaching"
+  url: "/teaching/"
+  match: "exact"
+  locked: true
