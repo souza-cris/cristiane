@@ -11,13 +11,9 @@
 # name        : the name to be known by, spelled as everywhere else on the site
 # job_title   : current role, in words a stranger would understand
 # affiliation : the institution she is currently at
-# orcid       : the full https:// address of the ORCID record, not the bare
-#               digits. It joins the social links in `sameAs`, which is the list
-#               of other places that are also her. Deliberately NOT in
-#               social.yml — everything there draws an icon in the footer, and
-#               this identifier belongs to search engines, not to the footer.
+#
+# The ORCID is in social.yml with the other links.
 
 name: "Cris Souza"
 job_title: "PhD student in Management Information Systems"
 affiliation: "The University of Alabama"
-orcid: "https://orcid.org/0009-0004-0716-4507"

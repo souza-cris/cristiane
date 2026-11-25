@@ -2,7 +2,7 @@
 
 Personal website built with [Jekyll](https://jekyllrb.com) and hosted on [GitHub Pages](https://pages.github.com).
 
-Six sections: **home**, **journey**, **stories**, **research**, **bookmarks**, **contact**.
+Seven sections: **home**, **journey**, **stories**, **publications**, **bookmarks**, plus **research** and **teaching**, which need a password (see `tools/private-pages.rb`).
 
 ## Run locally
 
@@ -172,7 +172,7 @@ Three things to know:
 
 ### Publication
 
-Add a block to `_data/research.yml`. Set `link: ""` to render the title as plain text instead of a link.
+Add a block to `_data/research.yml` with a `summary` and a `tag` (`Research`, `Workshop`, `Talk` or `Other`). Set `link: ""` to render the title as plain text instead of a link.
 
 ### Home page update
 
@@ -182,7 +182,7 @@ Add an entry to `_data/updates.yml`. The four most recent appear on the home pag
 - type: publication          # also the label — any word works
   title: "What it is called"
   date: 2026-07-25           # orders the list, newest first
-  link: "/research/"         # site-rooted internal path, or a full https:// URL
+  link: "/publications/"     # site-rooted internal path, or a full https:// URL
   blurb: "One line of context."
   active: false              # optional — hides it without deleting it
   pinned: true               # optional — puts it first regardless of date
@@ -277,15 +277,15 @@ _includes/                 # head, structured-data, nav, side-nav, section-links
                            # updates-widget, study-callout
 _posts/                    # Stories (Markdown)
 _data/sections.yml         # Navigation sections, shared by both menus
-_data/social.yml           # Footer links (LinkedIn, Scholar, GitHub)
+_data/social.yml           # Footer links (LinkedIn, Scholar, GitHub, ORCID, Lattes)
 _data/journey.yml          # Journey milestones
 _data/story_keywords.yml   # Story filter slugs
 _data/bookmarks.yml        # Bookmarks
 _data/bookmark_types.yml   # Bookmark filter slugs
-_data/research.yml         # Research interests and publications
+_data/research.yml         # Publications, each with a tag and summary
 _data/updates.yml          # Home page "what's new" entries
 _data/study.yml            # Call for participants (one study, one switch)
-_data/profile.yml          # Name, role, affiliation, ORCID — for search engines
+_data/profile.yml          # Name, role, affiliation — for search engines
 stories/                   # One thin page per story filter, titled for its term
 bookmarks/                 # One thin page per bookmark filter, titled for its term
 assets/css/style.css       # All styles, plain CSS

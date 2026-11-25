@@ -50,11 +50,11 @@ end
 
 # Fields that may legitimately be empty — leaving them blank is a real choice,
 # and the templates render nothing at all rather than an empty element.
-ALLOWED_EMPTY = %w[note logo url summary deadline tags period title].freeze
+ALLOWED_EMPTY = %w[note logo url venue summary deadline tags period title].freeze
 
 # Fields that hold sentences. Only these get the placeholder check: `short` is
 # initials and `flag` is a single emoji, so "shortness" means nothing there.
-PROSE = %w[note tldr whyItMatters keyTakeaway description blurb involves
+PROSE = %w[note summary tldr whyItMatters keyTakeaway description blurb involves
            eligibility title org place label].freeze
 
 # A prose value that is present but obviously unfinished — "." or "tbd".
@@ -225,8 +225,30 @@ def check_updates
     link = entry['link'].to_s
     if link.start_with?('/cristiane')
       err(file, where, "link #{link.inspect} includes the base path",
-          'write "/research/" — a leading slash, no domain and no base path')
+          'write "/publications/" — a leading slash, no domain and no base path')
     end
+  end
+end
+
+PUBLICATION_TAGS = %w[Research Workshop Talk Other].freeze
+
+def check_publications
+  file = '_data/research.yml'
+  data = load_yaml(file)
+  return unless data.is_a?(Hash) && data['publications'].is_a?(Array)
+
+  data['publications'].each_with_index do |entry, i|
+    where = entry['title'] ? "\"#{entry['title']}\"" : "entry #{i + 1}"
+    check_required(file, where, entry, %w[title authors venue tag summary])
+    err(file, where, '`link` is missing', 'use link: "" for plain text') unless entry.key?('link')
+    if entry['summary'].to_s.strip.empty? && entry.key?('summary')
+      err(file, where, '`summary` is empty', 'write one or two sentences')
+    end
+    check_link(file, where, entry['link'], 'link')
+    next if entry['tag'].nil? || PUBLICATION_TAGS.include?(entry['tag'])
+
+    err(file, where, "tag #{entry['tag'].inspect} is not a known tag",
+        "use one of: #{PUBLICATION_TAGS.join(', ')}")
   end
 end
 
@@ -377,6 +399,7 @@ CHECKS = {
   '_data/sections.yml' => method(:check_sections),
   '_data/social.yml' => method(:check_social),
   '_data/updates.yml' => method(:check_updates),
+  '_data/research.yml' => method(:check_publications),
   '_data/study.yml' => method(:check_study),
   '_posts' => method(:check_posts)
 }.freeze

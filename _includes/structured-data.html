@@ -11,7 +11,7 @@
     /journey  → a ProfilePage about that same Person, with her education and
                 employment derived from _data/journey.yml
     a story   → a BlogPosting, with its title, dates and image
-    /research → a list of ScholarlyArticles. Publications are entries in
+    /publications → a list of ScholarlyArticles. Publications are entries in
                 _data/research.yml, not pages, so each names its own external
                 record rather than an address on this site.
 
@@ -24,12 +24,11 @@
 {%- endcomment -%}
 
 {%- comment -%}
-  Everywhere that is also her, in one list: the footer links plus the ORCID.
+  Everywhere that is also her, in one list: the footer links.
   Built once here so the home Person and the journey Person quote the same one.
 {%- endcomment -%}
 {%- capture same_as -%}
-{%- for link in site.data.social %}{{ link.url | jsonify }},{% endfor -%}
-{{ site.data.profile.orcid | jsonify }}
+{%- for link in site.data.social %}{{ link.url | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor -%}
 {%- endcapture -%}
 
 {%- if page.url == '/' -%}
@@ -129,7 +128,7 @@
   }
 }
 </script>
-{%- elsif page.url == '/research/' and site.data.research.publications -%}
+{%- elsif page.url == '/publications/' and site.data.research.publications -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -139,7 +138,7 @@
   "hasPart": [
     {%- for pub in site.data.research.publications %}
     {
-      "@type": "ScholarlyArticle",
+      "@type": {% if pub.tag == "Talk" or pub.tag == "Other" %}"CreativeWork"{% else %}"ScholarlyArticle"{% endif %},
       "headline": {{ pub.title | jsonify }},
       "author": {{ pub.authors | jsonify }},
       "publication": {{ pub.venue | jsonify }}{% if pub.link and pub.link != "" %},

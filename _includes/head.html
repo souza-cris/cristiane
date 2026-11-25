@@ -49,7 +49,8 @@
   Whether this page should be indexed. Computed once here so the rule lives in
   one place rather than being restated wherever it is needed.
 
-  Two cases say no, and only two: the 404, and a filter page with nothing on it.
+  Three cases say no: the 404, a password-protected page, and a filter page with
+  nothing on it.
   An empty filter page is `follow` as well as `noindex` — it is a dead end for a
   search engine but its links still lead to real content.
 
@@ -66,6 +67,7 @@
 {%- endif -%}
 {%- assign page_noindex = false -%}
 {%- if page.url contains '404' -%}{%- assign page_noindex = true -%}{%- endif -%}
+{%- if page.locked -%}{%- assign page_noindex = true -%}{%- endif -%}
 {%- if page_items == 0 -%}{%- assign page_noindex = true -%}{%- endif -%}
 
 <title>{{ page_title }}</title>

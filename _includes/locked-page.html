@@ -1,0 +1,23 @@
+{%- comment -%}
+  A password-protected page. What is published is only the encrypted text from
+  _data/locked.json; unlock.js decrypts it in the visitor's browser. The
+  readable text lives in _private/, which git ignores. See
+  tools/private-pages.rb.
+{%- endcomment -%}
+{%- assign locked = site.data.locked[page.locked] -%}
+{% if locked %}
+<form class="lock" id="lock-form">
+  <p>This page is private. Enter the password to read it.</p>
+  <label for="lock-password">Password</label>
+  <input class="lock__input" id="lock-password" type="password" autocomplete="current-password" required>
+  <button class="lock__button" type="submit">Unlock</button>
+  <p id="lock-status" role="status"></p>
+</form>
+<div id="lock-content"></div>
+<script type="application/json" id="lock-data">{{ locked | jsonify }}</script>
+<noscript><p>Unlocking this page needs JavaScript.</p></noscript>
+<script src="{{ '/assets/js/unlock.js' | relative_url }}"></script>
+{% else %}
+<p class="empty-state">This page is private and is not available yet.</p>
+{% endif %}
+{% if page.locked == 'research' %}<p id="lock-hint">Looking for published work? See <a href="{{ '/publications/' | relative_url }}">publications</a>.</p>{% endif %}

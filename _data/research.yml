@@ -1,27 +1,41 @@
-interests: >
-  Human-computer interaction and human-AI collaboration; the human and
-  behavioral dimensions of information security; and how people adopt and work
-  with AI in information systems. Mixed-methods researcher across qualitative
-  and quantitative approaches.
+# The publications page.
+#
+# tag     : required. One of Research, Workshop, Talk, Other — spelled exactly.
+# summary : required. One or two sentences, true to the paper's own abstract.
 
 publications:
   - title: "Therapy Across Borders: The Search for Cultural Safety in Digital Mental Health"
     authors: "Cris Souza"
-    venue: "AMCIS 2026 (accepted for presentation)"
+    venue: "AMCIS 2026 (presented)"
     link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Zeajh2IAAAAJ&citation_for_view=Zeajh2IAAAAJ:Y0pCki6q_DkC"
+    tag: "Research"
+    summary: >-
+      Why do Brazilian immigrants choose online therapy with Brazilian therapists over local in-person care, despite higher costs and time-zone constraints? Proposes a framework that adds cultural congruence and trust to technology adoption, and outlines an interview study with Brazilians living abroad.
   - title: "You're Right to Worry: Toward an AI Affirmation Momentum Theory of Security Non-Compliance"
     authors: "Jenna Taer, Cris Souza, Marshia Mimm, Gabriela Mallmann, and Allen Johnston"
     venue: "ECIS 2026 (presented)"
     link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Zeajh2IAAAAJ&citation_for_view=Zeajh2IAAAAJ:Tyk-4Ss8FVUC"
+    tag: "Research"
+    summary: >-
+      Proposes AI affirmation momentum: how a run of agreeable confirmations from a generative AI assistant may lead employees toward breaking security policy over time. Studied through a simulated task, behavioral logs, and joint post-task interviews.
   - title: "The Role of Virtual Reality-Based Phishing Training in Mitigating Information Security Risks"
     authors: "Marshia Mimm, Cris Souza"
     venue: "ICIS 2025 (presented)"
     link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Zeajh2IAAAAJ&citation_for_view=Zeajh2IAAAAJ:UeHWp8X0CEIC"
+    tag: "Workshop"
+    summary: >-
+      Examines whether virtual reality training helps employees recognize and resist phishing. The study design compares rule-based, context-based, and immersive VR training, then tests all groups with simulated phishing emails a month later.
   - title: "Analysis of the Competencies Required for the Position of IT Project Manager"
     authors: "Cris Souza"
     venue: "Master's research, UFRGS, 2017"
     link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Zeajh2IAAAAJ&citation_for_view=Zeajh2IAAAAJ:qjMakFHDy7sC"
+    tag: "Research"
+    summary: >-
+      Interviews with project management professionals in the Porto Alegre metropolitan area on the competencies IT project managers need. Personal competencies mattered most, with communication, organization, negotiation, and professionalism the most emphasized.
   - title: "Customer Satisfaction at the Travel and Tourism Agency Casa de Turismo"
     authors: "Cris Souza"
     venue: "UFRGS, 2006"
     link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Zeajh2IAAAAJ&citation_for_view=Zeajh2IAAAAJ:9yKSN-GCB0IC"
+    tag: "Research"
+    summary: >-
+      A web survey of a Porto Alegre travel agency's customers. Respondents were satisfied overall, with service rated highest, while response speed, deadlines, and website promotion needed attention.

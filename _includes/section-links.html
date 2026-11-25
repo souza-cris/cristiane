@@ -23,6 +23,6 @@
   {%- else -%}
     {%- if page.url == section.url -%}{%- assign is_current = true -%}{%- endif -%}
   {%- endif %}
-  <li><a href="{{ section.url | relative_url }}"{% if is_current %} aria-current="page"{% endif %}>{{ section.label }}</a></li>
+  <li><a href="{{ section.url | relative_url }}"{% if is_current %} aria-current="page"{% endif %}>{{ section.label }}{% if section.locked %}<svg class="nav-lock" width="11" height="11" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="(password needed)"><path d="M6 10V7a6 6 0 1112 0v3h2v12H4V10zm3 0h6V7a3 3 0 10-6 0z"/></svg>{% endif %}</a></li>
   {%- endfor %}
 </ul>

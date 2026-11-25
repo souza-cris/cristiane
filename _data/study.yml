@@ -2,7 +2,7 @@
 #
 # ── The switch ───────────────────────────────────────────────────────────────
 # `active` is the ONLY control that opens and closes recruitment.
-#   active: true   → the callout appears on the research page and the home page
+#   active: true   → the callout appears on the publications page and the home page
 #   active: false  → it disappears from both, and everything below is preserved
 # Turning it off never deletes your text. Turn it back on and the same content
 # returns.
